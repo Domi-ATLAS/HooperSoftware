@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class estadisticasJugador {
+public class EstadisticasJugador {
 
     @Id
     Integer idEstJugador;

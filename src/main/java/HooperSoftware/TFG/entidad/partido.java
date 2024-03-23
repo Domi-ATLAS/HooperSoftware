@@ -1,11 +1,24 @@
 package HooperSoftware.TFG.entidad;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import HooperSoftware.TFG.entidad.Jugador;
+import HooperSoftware.TFG.entidad.Entrenador;
+import HooperSoftware.TFG.entidad.Equipo;
+import HooperSoftware.TFG.entidad.Playoff;
+
+
 
 
 
@@ -14,7 +27,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class partido {
+public class Partido {
 
     @Id
     Integer idPartido;
@@ -36,5 +49,16 @@ public class partido {
     Boolean playOff;
 
     Integer victoriaSerie;
-    
+
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Partidos")
+    List<Jugador> jugadores;
+
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Partidos")
+    List<Entrenador> entrenadores;
+
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Partidos")
+    List<Equipo> equipos;
+
+    @ManyToOne
+    Playoff playoff;
 }

@@ -2,12 +2,17 @@ package HooperSoftware.TFG.entidad;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import HooperSoftware.TFG.entidad.Usuario;
+import HooperSoftware.TFG.entidad.Jugador;
+import HooperSoftware.TFG.entidad.Entrenador;
 
 
 
@@ -16,7 +21,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class votacion {
+public class Votacion {
 
     @Id
     Integer idVotacion;
@@ -28,5 +33,14 @@ public class votacion {
     String categotiaVotacion;
 
     List<String> opcionesVotacion;
+
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Votaciones")
+    List<Usuario> usuarios;
+
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Votaciones")
+    List<Entrenador> entrenadores;
+
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Votaciones")
+    List<Jugador> jugadores;
     
 }

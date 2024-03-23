@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class playoff {
+public class Playoff {
 
     @Id
     Integer idPlayOff;

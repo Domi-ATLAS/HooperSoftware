@@ -39,8 +39,6 @@ public class Transferencia {
 
     String equipoDestino;
 
-    String jugador;
-
     String infoRondaDraft;
 
     @OneToMany

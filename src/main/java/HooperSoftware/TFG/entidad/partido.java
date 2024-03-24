@@ -46,7 +46,7 @@ public class Partido {
 
     String resultadoProrroga;
 
-    Boolean playOff;
+    Boolean playOffSiONo;
 
     Integer victoriaSerie;
 

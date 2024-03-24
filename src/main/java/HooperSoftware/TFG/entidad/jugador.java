@@ -35,7 +35,7 @@ public class Jugador {
 
     String trayectoriaJug;
 
-    String añoDraft;
+    Integer añoDraft;
 
     Integer edadJug;
 

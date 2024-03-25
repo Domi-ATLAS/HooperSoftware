@@ -2,6 +2,7 @@ package HooperSoftware.TFG.entidad;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
@@ -33,6 +34,16 @@ public class Equipo {
     @Id
     Integer idEquipo;
 
+    String nombreEquipo;
+
+    String ciudad;
+
+    String conferencia;
+
+    String division;
+
+    Integer añoFundacion;
+
     Integer añosNba;
 
     Integer titulosNba;
@@ -45,19 +56,15 @@ public class Equipo {
 
     String balanceTemporada;
 
+    String logoEquipo;
+
     @OneToMany
     List<Jugador> jugadores;
 
     @OneToMany
     List<Entrenador> entrenadores;
     
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Equipos")
+    @OneToMany(fetch = FetchType.EAGER)
     List<Transferencia> transferencias;
-
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Equipos")
-    List<Partido> partidos;
-
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Equipos")
-    List<Temporada> temporadas;
 
 }

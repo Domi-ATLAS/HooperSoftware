@@ -6,6 +6,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,13 +35,13 @@ public class Votacion {
 
     List<String> opcionesVotacion;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Votaciones")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "nombreUsuario")
     List<Usuario> usuarios;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Votaciones")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idEntrenador")
     List<Entrenador> entrenadores;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Votaciones")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idJugador")
     List<Jugador> jugadores;
     
 }

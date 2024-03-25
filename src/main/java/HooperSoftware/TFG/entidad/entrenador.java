@@ -42,11 +42,10 @@ public class Entrenador {
 
     Boolean aSidoJugador;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Entrenadores")
-    List<Votacion> votaciones;
+    String fotoEntrenador;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "entrenador",referencedColumnName = "entrenador")
+    @JoinColumn(name = "entrenador",referencedColumnName = "idEstEntrenador")
     EstadisticasEntrenador estadisticasEntr;
 
     

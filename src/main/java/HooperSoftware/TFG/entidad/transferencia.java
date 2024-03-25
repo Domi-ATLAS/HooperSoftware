@@ -44,7 +44,4 @@ public class Transferencia {
     @OneToMany
     List<Jugador> jugadores;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Transferencias")
-    List<Equipo> equipos;
-
 }

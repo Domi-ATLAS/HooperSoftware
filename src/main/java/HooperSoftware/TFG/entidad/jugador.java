@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,15 +46,11 @@ public class Jugador {
 
     Integer añosOtraLigaJug;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Jugadores")
-    List<Votacion> votaciones;
+    String fotoJugador;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "jugador",referencedColumnName = "jugador")
+    @JoinColumn(name = "jugador",referencedColumnName = "idEstJugador")
     EstadisticasJugador estadisticasJug;
-
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Jugadores")
-    List<Partido> partidos;
 
     
 }

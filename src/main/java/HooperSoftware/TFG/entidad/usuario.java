@@ -6,6 +6,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,9 @@ public class Usuario {
 
     String contraseña;
 
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "Usuarios")
+    String foto;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idVotacion")
     List<Votacion> votaciones;
     
 }

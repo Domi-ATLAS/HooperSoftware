@@ -34,6 +34,8 @@ public class Jugador {
 
     String posicion;
 
+    Integer dorsal;
+
     String trayectoriaJug;
 
     Integer añoDraft;
@@ -42,7 +44,7 @@ public class Jugador {
 
     Integer añosAllStarJug;
 
-    Integer añosNBAJug;
+    Integer añosNbaJug;
 
     Integer añosOtraLigaJug;
 

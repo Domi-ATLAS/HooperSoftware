@@ -30,6 +30,8 @@ public class Entrenador {
 
     String nombeEntrenador;
 
+    String equipoEntr;
+
     String trayectoriaEntr;
 
     Integer edadEntr;

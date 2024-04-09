@@ -54,7 +54,7 @@ public class Equipo {
 
     Integer partidosPerdidos;
 
-    String balanceTemporada;
+    Double balanceTemporada;
 
     String logoEquipo;
 

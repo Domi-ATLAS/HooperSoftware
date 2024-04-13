@@ -50,7 +50,7 @@ public class Temporada {
 
     String campeonEsteTemp;
 
-    String campeonNBATemp;
+    String campeonNbaTemp;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "temporada",referencedColumnName = "idEquipo")

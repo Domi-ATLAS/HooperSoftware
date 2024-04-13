@@ -1,5 +1,7 @@
 package HooperSoftware.TFG.entidad;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -19,19 +21,19 @@ public class Playoff {
     @Id
     Integer idPlayOff;
 
-    String campeonCuartosOeste;
+    List<String> campeonesCuartosOeste;
 
-    String campeonSemisOeste;
+    List<String> campeonesSemisOeste;
 
     String campeonFinalOeste;
 
-    String campeonCuartosEste;
+    List<String> campeonesCuartosEste;
 
-    String campeonSemisEste;
+    List<String> campeonesSemisEste;
 
     String campeonFinalEste;
 
-    String campeonFinalNBA;
+    String campeonFinalNba;
 
 
     

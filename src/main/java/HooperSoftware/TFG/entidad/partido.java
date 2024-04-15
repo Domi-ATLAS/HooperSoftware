@@ -63,6 +63,6 @@ public class Partido {
     List<Entrenador> entrenadores;
 
     @ManyToOne
-    @JoinColumn(name = "equipo",referencedColumnName = "idPlayOff")
+    @JoinColumn(name = "idPlayOff",referencedColumnName = "idPlayOff")
     Playoff playoff;
 }

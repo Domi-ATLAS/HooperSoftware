@@ -147,9 +147,75 @@ INSERT INTO playoff(id_play_off, campeones_cuartos_oeste, campeones_semis_oeste,
 
 
 
-INSERT INTO jornada(id_jornada, fecha_jornada, numero_partido, partido_cancelado) VALUES ('1', '2024-01-01', '1', 'false');
-INSERT INTO jornada(id_jornada, fecha_jornada, numero_partido, partido_cancelado) VALUES ('2', '2024-01-01', '2', 'false');
+INSERT INTO jornada(id_jornada, fecha_jornada, numero_partido, partido_cancelado) VALUES ('1', '2011-01-01', '1', 'false');
+INSERT INTO jornada(id_jornada, fecha_jornada, numero_partido, partido_cancelado) VALUES ('2', '1996-01-01', '2', 'false');
 
 
 
 INSERT INTO categoria(id_categoria, ganador, duracion_votacion, categotia_votacion, opciones_votacion) VALUES ('1', 'Michael Jordan', '1', 'Mejor jugador de la historia', 'Michael Jordan, LeBron James, Kobe Bryant, Magic Johnson, Larry Bird');
+
+INSERT INTO partido(idPartido, resultadoC1, resultadoC2, resultadoC3, resultadoC4, resultadoTotal, prorroga, resultadoProrroga, playOffSiONo, victoriaSerie, equipoLocal, equipoVisitante, id_play_off) VALUES ('1', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, 'Boston Celtics', 'Brooklyn Nets', null);
+INSERT INTO partido(idPartido, resultadoC1, resultadoC2, resultadoC3, resultadoC4, resultadoTotal, prorroga, resultadoProrroga, playOffSiONo, victoriaSerie, equipoLocal, equipoVisitante, id_play_off) VALUES ('2', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, 'Brooklyn Nets', 'New York Knicks', null);
+
+
+
+INSERT INTO transferencia_jugadores(transferencia_id_transferencia, jugadores_id_jugador) VALUES ('1', '1');
+INSERT INTO transferencia_jugadores(transferencia_id_transferencia, jugadores_id_jugador) VALUES ('2', '2');
+INSERT INTO transferencia_jugadores(transferencia_id_transferencia, jugadores_id_jugador) VALUES ('3', '3');
+INSERT INTO transferencia_jugadores(transferencia_id_transferencia, jugadores_id_jugador) VALUES ('4', '4');
+
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('1', '1');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('2', '2');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('1', '1');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('2', '2');
+
+INSERT INTO equipo_transferencia(equipo_id_equipo, transferencias_id_transferencia) VALUES ('1', '1');
+INSERT INTO equipo_transferencia(equipo_id_equipo, transferencias_id_transferencia) VALUES ('2', '2');
+INSERT INTO equipo_transferencia(equipo_id_equipo, transferencias_id_transferencia) VALUES ('3', '3');
+INSERT INTO equipo_transferencia(equipo_id_equipo, transferencias_id_transferencia) VALUES ('4', '4');
+
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '1');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '2');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '3');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '4');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '5');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '6');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '7');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '8');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '9');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '10');
+
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('1', '1');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('2', '2');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('3', '3');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('4', '4');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('5', '5');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('6', '6');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('7', '7');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('8', '8');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('9', '9');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('10', '10');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('11', '11');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('12', '12');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('13', '13');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('14', '14');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('15', '15');
+
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('16', '16');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('17', '17');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('18', '18');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('19', '19');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('20', '20');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('21', '21');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('22', '22');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('23', '23');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('24', '24');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('25', '25');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('26', '26');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('27', '27');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('28', '28');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('29', '29');
+INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('30', '30');
+
+

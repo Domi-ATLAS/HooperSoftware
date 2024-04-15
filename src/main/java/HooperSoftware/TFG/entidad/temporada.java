@@ -30,7 +30,7 @@ public class Temporada {
     @Id
     Integer idTemporada;
 
-    String añosTemporada;
+    String anosTemporada;
 
     String campeonTemporada;
 

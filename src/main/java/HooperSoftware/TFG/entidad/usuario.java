@@ -32,7 +32,7 @@ public class Usuario {
 
     String nickName;
 
-    String contraseña;
+    String contrasena;
 
     String foto;
 

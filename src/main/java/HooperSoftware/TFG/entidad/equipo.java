@@ -42,9 +42,9 @@ public class Equipo {
 
     String division;
 
-    Integer añoFundacion;
+    Integer anoFundacion;
 
-    Integer añosNba;
+    Integer anosNba;
 
     Integer titulosNba;
 

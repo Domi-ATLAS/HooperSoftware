@@ -31,7 +31,7 @@ public class Votacion {
 
     Integer duracionVotacion;
 
-    String categotiaVotacion;
+    Categoria categotiaVotacion;
 
     List<String> opcionesVotacion;
 

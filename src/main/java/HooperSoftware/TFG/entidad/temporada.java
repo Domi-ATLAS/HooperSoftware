@@ -30,7 +30,7 @@ public class Temporada {
     @Id
     Integer idTemporada;
 
-    String añosTemporada;
+    String anosTemporada;
 
     String campeonTemporada;
 
@@ -50,11 +50,11 @@ public class Temporada {
 
     String campeonEsteTemp;
 
-    String campeonNBATemp;
+    String campeonNbaTemp;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "temporada",referencedColumnName = "idEquipo")
-    Equipo equipo;
+    /* @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "idEquipo",referencedColumnName = "idEquipo")
+    Equipo equipo; */
 
     @OneToMany
     List<Jornada> jornadas;

@@ -30,22 +30,24 @@ public class Entrenador {
 
     String nombeEntrenador;
 
+    String equipoEntr;
+
     String trayectoriaEntr;
 
     Integer edadEntr;
 
-    Integer añosNbaEntr;
+    Integer anosNbaEntr;
     
-    Integer añosOtrasLigasEntr;
+    Integer anosOtrasLigasEntr;
 
-    Integer añosAllStarEntr;
+    Integer anosAllStarEntr;
 
     Boolean aSidoJugador;
 
     String fotoEntrenador;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "entrenador",referencedColumnName = "idEstEntrenador")
+    @JoinColumn(name = "estadisticasEntr",referencedColumnName = "idEstEntrenador")
     EstadisticasEntrenador estadisticasEntr;
 
     

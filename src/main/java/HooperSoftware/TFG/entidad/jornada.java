@@ -1,5 +1,6 @@
 package HooperSoftware.TFG.entidad;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -22,6 +23,8 @@ public class Jornada {
 
     @Id
     Integer idJornada;
+
+    Date fechaJornada;
 
     Integer numeroPartido;
 

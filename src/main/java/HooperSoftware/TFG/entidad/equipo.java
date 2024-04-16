@@ -42,9 +42,9 @@ public class Equipo {
 
     String division;
 
-    Integer añoFundacion;
+    Integer anoFundacion;
 
-    Integer añosNba;
+    Integer anosNba;
 
     Integer titulosNba;
 
@@ -54,7 +54,7 @@ public class Equipo {
 
     Integer partidosPerdidos;
 
-    String balanceTemporada;
+    Double balanceTemporada;
 
     String logoEquipo;
 

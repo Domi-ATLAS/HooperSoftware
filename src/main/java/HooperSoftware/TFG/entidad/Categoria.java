@@ -3,7 +3,7 @@ package HooperSoftware.TFG.entidad;
 
 
 public enum Categoria {
-    jugadorAño, entrenadorAño, equipoAño
+    jugadorAno, entrenadorAno, equipoAno
     
 }
 

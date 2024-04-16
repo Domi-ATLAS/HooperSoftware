@@ -152,19 +152,21 @@ INSERT INTO temporada(id_temporada, anos_temporada, campeon_temporada, mvp_tempo
 
 
 
-INSERT INTO playoff(id_play_off, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('1', '(Chicago Bulls, New York Knicks, Atlanta Hawks, Orlando Magic)', '(Chicago Bulls, Orlando Magic)', 'Chicago Bulls', '(Seattle SuperSonics, Houston Rockets, Utah Jazz, San Antonio Spurs)', '(Seattle SuperSonics, Utah Jazz)', 'Seattle SuperSonics', 'Chicago Bulls');
-INSERT INTO playoff(id_play_off, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('2', '(Dallas Mavericks, Los Angeles Lakers, Denver Nuggets, Utah Jazz)', '(Dallas Mavericks, Utah Jazz)', 'Dallas Mavericks', '(Miami Heat, Boston Celtics, Chicago Bulls, Indiana Pacers)', '(Miami Heat, Chicago Bulls)', 'Miami Heat', 'Dallas Mavericks');
+INSERT INTO playoff(id_play_off, temporada, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('1', '1995-1996', '(Chicago Bulls, New York Knicks, Atlanta Hawks, Orlando Magic)', '(Chicago Bulls, Orlando Magic)', 'Chicago Bulls', '(Seattle SuperSonics, Houston Rockets, Utah Jazz, San Antonio Spurs)', '(Seattle SuperSonics, Utah Jazz)', 'Seattle SuperSonics', 'Chicago Bulls');
+INSERT INTO playoff(id_play_off, temporada, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('2', '2010-2011', '(Dallas Mavericks, Los Angeles Lakers, Denver Nuggets, Utah Jazz)', '(Dallas Mavericks, Utah Jazz)', 'Dallas Mavericks', '(Miami Heat, Boston Celtics, Chicago Bulls, Indiana Pacers)', '(Miami Heat, Chicago Bulls)', 'Miami Heat', 'Dallas Mavericks');
 
 
 
-INSERT INTO jornada(id_jornada, fecha_jornada, numero_partido, partido_cancelado) VALUES ('1', '2011-01-01', '1', 'false');
-INSERT INTO jornada(id_jornada, fecha_jornada, numero_partido, partido_cancelado) VALUES ('2', '1996-01-01', '2', 'false');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado) VALUES ('1', '2010-2011', '2011-01-01', '1', '15', 'false');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado) VALUES ('2', '1995-1996', '1996-01-01', '25', '10', 'false');
 
 
 
 
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('1', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, 'Boston Celtics', 'Brooklyn Nets', null);
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('2', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, 'Brooklyn Nets', 'New York Knicks', null);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('3', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '3-2', 'Brooklyn Nets', 'New York Knicks', '1');
+
 
 -- VOTACIONES
 

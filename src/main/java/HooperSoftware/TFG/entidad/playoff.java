@@ -21,6 +21,8 @@ public class Playoff {
     @Id
     Integer idPlayOff;
 
+    String temporada;
+
     List<String> campeonesCuartosOeste;
 
     List<String> campeonesSemisOeste;

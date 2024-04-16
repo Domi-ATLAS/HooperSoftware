@@ -50,7 +50,7 @@ public class Partido {
 
     Boolean playOffSiONo;
 
-    Integer victoriaSerie;
+    String victoriaSerie;
 
     String equipoLocal;
 

@@ -26,6 +26,10 @@ public class Jornada {
 
     Date fechaJornada;
 
+    String temporada;
+
+    Integer numJornada;
+
     Integer numeroPartido;
 
     Boolean partidoCancelado;

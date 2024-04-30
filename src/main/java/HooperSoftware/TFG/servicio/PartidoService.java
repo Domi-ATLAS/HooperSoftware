@@ -36,5 +36,19 @@ public class PartidoService {
     public void deletePartido(Integer id){
         repository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Partido> findPlayOff24(){
+        return repository.findPartidosPlayOff2024();
+    }
     
+    @Transactional(readOnly = true)
+    public List<Partido> findPlayOff23(){
+        return repository.findPartidosPlayOff2023();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Partido> findAllPlayOffGames(){
+        return repository.findAllPlayOffGames();
+    }
 }

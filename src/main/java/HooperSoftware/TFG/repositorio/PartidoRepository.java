@@ -17,7 +17,7 @@ public interface PartidoRepository extends CrudRepository<Partido,Integer> {
     @Query("SELECT p FROM Partido p WHERE p.idPartido = ?1")
     Partido findPartidoById(Integer idPartido);
     
-    @Query("SELECT p FROM Partido p WHERE p.playoff = ?1")
+    @Query("SELECT p FROM Partido p WHERE p.playoff.idPlayOff = ?1")
     List<Partido> findPartidoByIdPlayOff(Integer idPlayOff);
 
     @Query("SELECT p FROM Partido p WHERE p.equipoLocal = ?1 AND p.equipoVisitante = ?2")
@@ -41,4 +41,12 @@ public interface PartidoRepository extends CrudRepository<Partido,Integer> {
     @Query("SELECT p FROM Partido p WHERE p.equipoLocal = ?1 AND p.equipoVisitante = ?2 AND p.playOffSiONo = True ")
     List<Partido> findPartidoByVictoriaSerieAndEquipoLocalAndEquipoVisitante(String equipoLocal, String equipoVisitante);
     
+    @Query("SELECT p FROM Partido p WHERE p.playOffSiONo = true AND p.playoff.temporada = '2023-2024'")
+    List<Partido> findPartidosPlayOff2024();
+
+    @Query("SELECT p FROM Partido p WHERE p.playOffSiONo = true AND p.playoff.temporada = '2022-2023'")
+    List<Partido> findPartidosPlayOff2023();
+
+    @Query("SELECT p FROM Partido p WHERE p.playOffSiONo = true")
+    List<Partido> findAllPlayOffGames();
 }

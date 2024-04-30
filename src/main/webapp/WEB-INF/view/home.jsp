@@ -1,9 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="CUPES" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
-<html>
+<!-- <html>
 <head>
     <title>Welcome</title>
 </head>
@@ -31,4 +26,7 @@
         </c:forEach>
     </div>
 </body>
-</html>
+</html> -->
+
+
+<h1>Hola</h1>

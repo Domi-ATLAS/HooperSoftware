@@ -56,7 +56,7 @@ INSERT INTO estadisticas_jugador(id_est_jugador, puntos_totales, asistencias_tot
 INSERT INTO estadisticas_jugador(id_est_jugador, puntos_totales, asistencias_totales, rebotes_totales, tapones_totales, robos_totales, partidos_jugados_jug, partidos_ganados_jug, partidos_perdidos_jug, triples_anotados, tiros_libres_anotados, tiros_de_campo_anotados, minutos_totales, titulos_ganado_nba_jug, titulos_perdidos_nba_jug, titulos_ganado_conferencia_jug, titulos_perdidos_conferencia_jug) VALUES ('8', '6000', '2000', '3000', '200', '200', '200', '100', '100', '200', '200', '400', '2000', '0', '0', '0', '0');
 INSERT INTO estadisticas_jugador(id_est_jugador, puntos_totales, asistencias_totales, rebotes_totales, tapones_totales, robos_totales, partidos_jugados_jug, partidos_ganados_jug, partidos_perdidos_jug, triples_anotados, tiros_libres_anotados, tiros_de_campo_anotados, minutos_totales, titulos_ganado_nba_jug, titulos_perdidos_nba_jug, titulos_ganado_conferencia_jug, titulos_perdidos_conferencia_jug) VALUES ('9', '4000', '1000', '2000', '100', '100', '100', '50', '50', '100', '100', '200', '1000', '0', '0', '0', '0');
 INSERT INTO estadisticas_jugador(id_est_jugador, puntos_totales, asistencias_totales, rebotes_totales, tapones_totales, robos_totales, partidos_jugados_jug, partidos_ganados_jug, partidos_perdidos_jug, triples_anotados, tiros_libres_anotados, tiros_de_campo_anotados, minutos_totales, titulos_ganado_nba_jug, titulos_perdidos_nba_jug, titulos_ganado_conferencia_jug, titulos_perdidos_conferencia_jug) VALUES ('10', '2000', '500', '1000', '50', '50', '50', '25', '25', '50', '50', '100', '500', '0', '0', '0', '0');
-
+INSERT INTO estadisticas_jugador(id_est_jugador, puntos_totales, asistencias_totales, rebotes_totales, tapones_totales, robos_totales, partidos_jugados_jug, partidos_ganados_jug, partidos_perdidos_jug, triples_anotados, tiros_libres_anotados, tiros_de_campo_anotados, minutos_totales, titulos_ganado_nba_jug, titulos_perdidos_nba_jug, titulos_ganado_conferencia_jug, titulos_perdidos_conferencia_jug) VALUES ('11', '32000', '10000', '15000', '1000', '3000', '2000', '1500', '500', '1000', '2000', '3000', '40000', '5', '3', '7', '3');
 
 
 INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('1', 'LeBron James', 'Alero', '6', 'Cleveland Cavaliers (2003-2010), Miami Heat (2010-2014), Cleveland Cavaliers (2014-2018), Los Angeles Lakers (2018-2024)', '2003', '40', '17', '18', '0', 'http', '1');
@@ -69,6 +69,7 @@ INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_ju
 INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('8', 'Luka Doncic', 'Base', '77', 'Dallas Mavericks (2018-2024)', '2018', '23', '3', '6', '0', 'http', '8');
 INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('9', 'Damian Lillard', 'Base', '0', 'Portland Trail Blazers (2012-2023), Milwaukee Bucks (2023-2024)', '2012', '32', '6', '9', '0', 'http', '9');
 INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('10', 'Nikola Jokic', 'Pivot', '15', 'Denver Nuggets (2015-2024)', '2015', '29', '4', '7', '0', 'http', '10');
+INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('11', 'Michael Jordan', 'Alero', '23', 'Chicago Bulls (1984-1993, 1995-1998), Whashington Wizards (2001-2003)', '1984', '61', '13', '15', '0', 'http', '11');
 
 -- ENTRENADORES
 
@@ -200,6 +201,7 @@ INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7'
 INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '8');
 INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '9');
 INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '10');
+INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '11');
 
 INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('1', '1');
 INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('2', '2');

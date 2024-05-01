@@ -4,13 +4,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import HooperSoftware.TFG.servicio.EquipoService;
+
 @Controller
 public class EquipoController {
 
+    private final EquipoService equipoService;
+
+    public EquipoController(EquipoService equipoService) {
+        this.equipoService = equipoService;
+    }
+    
     @GetMapping("/equipos/ChicagoBulls")
     public ModelAndView showBullsPage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("bulls");
+        mav.setViewName("equipos/bulls");
+        mav.addObject("chicagoBulls", equipoService.findEquipoById(6));
+        mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(6));
+        mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(6));
         return mav;
     }
 

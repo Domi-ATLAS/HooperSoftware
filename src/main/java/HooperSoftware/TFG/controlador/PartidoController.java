@@ -1,11 +1,11 @@
 package HooperSoftware.TFG.controlador;
 
 import HooperSoftware.TFG.servicio.PartidoService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class PartidoController {
 
     private final PartidoService partidoService;
@@ -17,7 +17,7 @@ public class PartidoController {
     @GetMapping("/allGames")
     public ModelAndView showAllGamesPage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("allGames");
+        mav.setViewName("partidos/allGames");
         mav.addObject("games", partidoService.findAll());
         return mav;
     }

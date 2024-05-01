@@ -56,4 +56,10 @@ public interface EquipoRepository extends CrudRepository<Equipo,Integer>{
     @Query("SELECT e.entrenadores FROM Equipo e WHERE e.id = ?1")
     List<Entrenador> findEntrenadoresByEquipoId(Integer equipoId);
 
+    @Query("SELECT e FROM Equipo e WHERE e.conferencia = 'Este' ORDER BY e.balanceTemporada")
+    List<Equipo> findEquiposConferenciaEsteOrdenadosPorBalance();
+
+    @Query("SELECT e FROM Equipo e WHERE e.conferencia = 'Oeste' ORDER BY e.balanceTemporada")
+    List<Equipo> findEquiposConferenciaOesteOrdenadosPorBalance();
+
 }

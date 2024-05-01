@@ -17,7 +17,7 @@ public class JornadaController {
     @GetMapping("/allGames/allJornadas")
     public ModelAndView showAllJornadasPage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("allJornada");
+        mav.setViewName("partidos/allJornada");
         mav.addObject("jornadas", jornadaService.findAll());
         return mav;
     }

@@ -50,4 +50,14 @@ public class EquipoService {
     }
 
 
+    @Transactional(readOnly = true)
+    public List<Equipo> findClasificacionEste(){
+        return repository.findEquiposConferenciaEsteOrdenadosPorBalance();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Equipo> findClasificacionOeste(){
+        return repository.findEquiposConferenciaOesteOrdenadosPorBalance();
+    }
+
 }

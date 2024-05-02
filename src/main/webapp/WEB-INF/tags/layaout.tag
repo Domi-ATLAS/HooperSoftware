@@ -13,7 +13,7 @@
 <body>
     <header>
         <div>
-            <button><img src="/images/bulls.png"></button>
+            <button><img src="/images/HS.png"></button>
             <button>Noticias</button>
             <button>Transferencias</button>
             <button onClick="window.location.href='/allGames'">Partidos</button>            <button>Play Offs</button>

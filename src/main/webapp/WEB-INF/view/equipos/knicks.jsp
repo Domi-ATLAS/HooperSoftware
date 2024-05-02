@@ -59,7 +59,7 @@
         <p>Balance de la temporada: ${team.balanceTemporada} en el ${team.conferencia}</p>
         <h2>Jugadores:</h2>
         <ul>
-    ¡        <c:forEach var="jugador" items="${jugadores}">
+            <c:forEach var="jugador" items="${jugadores}">
                 <li>${jugador.nombreJugador} - ${jugador.edadJug} años - ${jugador.posicion}</li>
             </c:forEach>
         </ul>

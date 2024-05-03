@@ -26,6 +26,11 @@ public class PlayoffService {
     public Playoff findPlayoffById(Integer idPlayoff){
         return repository.findPlayOffById(idPlayoff);
     }
+
+    @Transactional(readOnly = true)
+    public Playoff findPlayoffByTemporada(String temporada){
+        return repository.findPlayOffByTemporada(temporada);
+    }
     
     @Transactional(readOnly = true)
     public Playoff save (Playoff playoff){

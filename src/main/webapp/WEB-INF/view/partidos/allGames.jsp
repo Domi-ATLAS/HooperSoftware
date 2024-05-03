@@ -4,7 +4,7 @@
 
 
 <Layaout:layaout title="Partidos">
-    <h1>Todos los partidos</h1>
+    <h1>Partidos</h1>
 
     <button onClick="window.location.href='/allGames/allJornadas'">Vista Jornada</button>
 

@@ -15,4 +15,10 @@ public class WelcomeController {
         ModelAndView mv = new ModelAndView("home");
         return mv;
     }
+
+    @GetMapping("/noticias")
+    public ModelAndView noticias(Map<String, Object> model) {
+        ModelAndView mv = new ModelAndView("noticias");
+        return mv;
+    }
 }

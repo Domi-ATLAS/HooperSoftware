@@ -1,5 +1,8 @@
 package HooperSoftware.TFG.controlador;
 
+import HooperSoftware.TFG.entidad.Equipo;
+import HooperSoftware.TFG.entidad.Playoff;
+import HooperSoftware.TFG.servicio.EquipoService;
 import HooperSoftware.TFG.servicio.PartidoService;
 import HooperSoftware.TFG.servicio.PlayoffService;
 
@@ -12,17 +15,38 @@ public class PlayoffController {
 
     private final PartidoService partidoService;
     private final PlayoffService playoffService;
+    private final EquipoService equipoService;
 
-    public PlayoffController(PartidoService service, PlayoffService playoffService) {
+    public PlayoffController(PartidoService service, PlayoffService playoffService, EquipoService equipoService) {
         this.partidoService = service;
         this.playoffService = playoffService;
+        this.equipoService = equipoService;
     }
 
     @GetMapping("/playOffs23")
     public ModelAndView showPlayOffs23Page() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("playOffs23");
-        mav.addObject("playOffs23", partidoService.findPlayOff23());
+        mav.setViewName("partidos/playOffs23");
+        mav.addObject("partidosPlayOffs23", partidoService.findPlayOff23());
+        mav.addObject("equiposPlayOffs23", playoffService.findPlayoffByTemporada("2022-2023"));
+
+        mav.addObject("denver", equipoService.findEquipoById(16));
+        mav.addObject("timberwolves", equipoService.findEquipoById(17));
+        mav.addObject("phoenix", equipoService.findEquipoById(24));
+        mav.addObject("clippers", equipoService.findEquipoById(22));
+        mav.addObject("sacramento", equipoService.findEquipoById(25));
+        mav.addObject("goldenState", equipoService.findEquipoById(21));
+        mav.addObject("memphis", equipoService.findEquipoById(28));
+        mav.addObject("lakers", equipoService.findEquipoById(23));
+
+        mav.addObject("bucks", equipoService.findEquipoById(10));
+        mav.addObject("miami", equipoService.findEquipoById(13));
+        mav.addObject("cavs", equipoService.findEquipoById(7));
+        mav.addObject("nyk", equipoService.findEquipoById(3));
+        mav.addObject("sixters", equipoService.findEquipoById(4));
+        mav.addObject("nets", equipoService.findEquipoById(2));
+        mav.addObject("celtics", equipoService.findEquipoById(1));
+        mav.addObject("atlanta", equipoService.findEquipoById(11));
         return mav;
     }
 
@@ -37,7 +61,7 @@ public class PlayoffController {
     @GetMapping("/allPlayOffs")
     public ModelAndView showAllPlayOffsPage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("playOffs");
+        mav.setViewName("partidos/playOffs");
         mav.addObject("playOffsGames", playoffService.findAll());
         return mav;
     }

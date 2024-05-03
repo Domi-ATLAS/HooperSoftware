@@ -18,7 +18,7 @@ public interface PlayoffRepository extends CrudRepository<Playoff,Integer>{
     Playoff findPlayOffById(Integer idPlayOff);
 
     @Query("SELECT p FROM Playoff p WHERE p.temporada = ?1")
-    List<Playoff> findPlayOffByTemporada(String temporada);
+    Playoff findPlayOffByTemporada(String temporada);
 
     @Query("SELECT p FROM Playoff p WHERE p.campeonFinalNba = ?1")
     List<Playoff> findPlayOffByCampeonFinalNba(String campeonFinalNba);

@@ -14,7 +14,9 @@
     }
     </script>
 
-    <h1>Todas las jornadas</h1>
+    <h1>Jornadas</h1>
+    <button onClick="window.location.href='/allGames'">Vista Partidos</button>
+
 
     <c:forEach var="jornada" items="${jornadas}" varStatus="status">
         <div onClick="togglePartidos('partidos${status.index}')">

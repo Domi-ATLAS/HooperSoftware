@@ -1,11 +1,11 @@
 package HooperSoftware.TFG.controlador;
 
 import HooperSoftware.TFG.servicio.TransferenciaService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class TransferenciaController {
 
     private final TransferenciaService transferenciaService;
@@ -14,10 +14,10 @@ public class TransferenciaController {
         this.transferenciaService = transferenciaService;
     }
 
-    @GetMapping("/allTransferences")
+    @GetMapping("/allTranferences")
     public ModelAndView showAllTransferencesPage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("allTransferences");
+        mav.setViewName("tranferencias/allTranferences");
         mav.addObject("transferences", transferenciaService.findAll());
         return mav;
     }

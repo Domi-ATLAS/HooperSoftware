@@ -14,10 +14,11 @@
     <header>
         <div>
             <button><img src="/images/HS.png"></button>
-            <button>Noticias</button>
-            <button>Transferencias</button>
-            <button onClick="window.location.href='/allGames'">Partidos</button>            <button>Play Offs</button>
-            <button>Votaciones</button>
+            <button onClick="window.location.href='/noticias'">Noticias</button>
+            <button onClick="window.location.href='/allTranferences'">Transferencias</button>
+            <button onClick="window.location.href='/allGames'">Partidos</button>            
+            <button onClick="window.location.href='/allPlayOffs'">Play Offs</button>
+            <button onClick="window.location.href='/allVotes'">Votaciones</button>
             <button>Perfil</button>
             <button>Buscador</button>
             <button>Seccion 9</button>

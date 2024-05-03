@@ -1,11 +1,11 @@
 package HooperSoftware.TFG.controlador;
 
 import HooperSoftware.TFG.servicio.VotacionService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class VotacionController {
 
     private final VotacionService votacionService;
@@ -17,7 +17,7 @@ public class VotacionController {
     @GetMapping("/allVotes")
     public ModelAndView showAllVotesPage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("allVotes");
+        mav.setViewName("votaciones/allVotes");
         mav.addObject("votes", votacionService.findAll());
         return mav;
     }

@@ -50,6 +50,8 @@ public class Partido {
 
     Boolean playOffSiONo;
 
+    String temporada;
+
     String victoriaSerie;
 
     String equipoLocal;

@@ -1,13 +1,18 @@
 package HooperSoftware.TFG.controlador;
 
 import HooperSoftware.TFG.entidad.Equipo;
+import HooperSoftware.TFG.entidad.Partido;
 import HooperSoftware.TFG.entidad.Playoff;
 import HooperSoftware.TFG.servicio.EquipoService;
 import HooperSoftware.TFG.servicio.PartidoService;
 import HooperSoftware.TFG.servicio.PlayoffService;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -71,6 +76,15 @@ public class PlayoffController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("allPlayOffsGames");
         mav.addObject("playOffsGames", partidoService.findAllPlayOffGames());
+        return mav;
+    }
+
+
+    @GetMapping("/temporada/{temporadaPlayoff}/partidos/{equipoLocal}/{equipoVisitante}")
+    public ModelAndView getPartidos(@PathVariable String temporadaPlayoff, @PathVariable String equipoLocal, @PathVariable String equipoVisitante) {
+        ModelAndView mav = new ModelAndView("partidos/seriesPartidos");
+        List<Partido> partidos = partidoService.findSeriesPartidos(equipoLocal, equipoVisitante, temporadaPlayoff);
+        mav.addObject("partidos", partidos);
         return mav;
     }
 }

@@ -54,6 +54,7 @@
     <div class="container">
         <div class="section">
             <h2>Oeste</h2>
+            <!-- 1 vs 8 Oeste-->
             <div class="group">
                 <div class="team-info">
                     <p>${denver.nombreEquipo}: 1</p>
@@ -64,9 +65,10 @@
                 </div>
                 <div class="result">
                     <p>DEN wins 4-1</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Denver Nuggets/Minnesota Timberwolves'">Detalles</button>
                 </div>
             </div>
+            <!-- 4 vs 5 Oeste-->
             <div class="group">
                 <div class="team-info">
                     <p>${phoenix.nombreEquipo}: 4</p>
@@ -77,9 +79,10 @@
                 </div>
                 <div class="result">
                     <p>PHX wins 4-1</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Phoenix Suns/Los Angeles Clippers'">Detalles</button>
                 </div>
             </div>
+            <!-- 3 vs 6 Oeste-->
             <div class="group">
                 <div class="team-info">
                     <p>${sacramento.nombreEquipo}: 3</p>
@@ -90,9 +93,10 @@
                 </div>
                 <div class="result">
                     <p>GSW wins 4-3</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Sacramento Kings/Golden State Warriors'">Detalles</button>
                 </div>
             </div>
+            <!-- 2 vs 7 Oeste-->
             <div class="group">
                 <div class="team-info">
                     <p>${memphis.nombreEquipo}: 2</p>
@@ -103,11 +107,12 @@
                 </div>
                 <div class="result">
                     <p>LAL wins 4-2</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Memphis Grizzlies/Los Angeles Lakers'">Detalles</button>
                 </div>
             </div>
         </div>
         <div class="section">
+            <!-- 1 Semifinal Oeste-->
             <div class="group">
                 <div class="team-info">
                     <p>${denver.nombreEquipo}: 1</p>
@@ -118,9 +123,10 @@
                 </div>
                 <div class="result">
                     <p>DEN wins 4-2</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Denver Nuggets/Phoenix Suns'">Detalles</button>
                 </div>
             </div>
+            <!-- Final Oeste-->
             <div class="group">
                 <div class="team-info">
                     <p>${denver.nombreEquipo}: 1</p>
@@ -131,9 +137,10 @@
                 </div>
                 <div class="result">
                     <p>DEN wins 4-0</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Denver Nuggets/Los Angeles Lakers'">Detalles</button>
                 </div>
             </div>
+            <!-- 2 Semifinal Oeste-->
             <div class="group">
                 <div class="team-info">
                     <p>${goldenState.nombreEquipo}: 6</p>
@@ -144,11 +151,12 @@
                 </div>
                 <div class="result">
                     <p>LAL wins 4-2</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Golden State Warriors/Los Angeles Lakers'">Detalles</button>
                 </div>
             </div>
         </div>
         <div class="section">
+            <!-- Final NBA -->
             <div class="group">
                 <div class="team-info">
                     <p>${denver.nombreEquipo}: 1</p>
@@ -159,11 +167,12 @@
                 </div>
                 <div class="result">
                     <p>DEN wins 4-1</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Denver Nuggets/Miami Heat'">Detalles</button>
                 </div>
             </div>
         </div>
         <div class="section">
+            <!-- 1 Semifinal Este-->
             <div class="group">
                 <div class="team-info">
                     <p>${miami.nombreEquipo}: 8</p>
@@ -174,9 +183,10 @@
                 </div>
                 <div class="result">
                     <p>MIA wins 4-2</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Miami Heat/New York Knicks'">Detalles</button>
                 </div>
             </div>
+            <!-- Final Este-->
             <div class="group">
                 <div class="team-info">
                     <p>${miami.nombreEquipo}: 8</p>
@@ -187,9 +197,10 @@
                 </div>
                 <div class="result">
                     <p>MIA wins 4-3</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Miami Heat/Boston Celtics'">Detalles</button>
                 </div>
             </div>
+            <!-- 2 Semifinal Este-->
             <div class="group">
                 <div class="team-info">
                     <p>${sixters.nombreEquipo}: 3</p>
@@ -200,12 +211,13 @@
                 </div>
                 <div class="result">
                     <p>BOS wins 4-3</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Philadelphia 76ers/Boston Celtics'">Detalles</button>
                 </div>
             </div>
         </div>
         <div class="section">
             <h2>Este</h2>
+            <!-- 1 vs 8 Este-->
             <div class="group">
                 <div class="team-info">
                     <p>${bucks.nombreEquipo}: 1</p>
@@ -216,9 +228,10 @@
                 </div>
                 <div class="result">
                     <p>MIA wins 4-1</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Milwaukee Bucks/Miami Heat'">Detalles</button>
                 </div>
             </div>
+            <!-- 4 vs 5 Este-->
             <div class="group">
                 <div class="team-info">
                     <p>${cavs.nombreEquipo}: 4</p>
@@ -229,9 +242,10 @@
                 </div>
                 <div class="result">
                     <p>NYK wins 4-1</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Cleveland Cavaliers/New York Knicks'">Detalles</button>
                 </div>
             </div>
+            <!-- 3 vs 6 Este-->
             <div class="group">
                 <div class="team-info">
                     <p>${sixters.nombreEquipo}: 3</p>
@@ -242,9 +256,10 @@
                 </div>
                 <div class="result">
                     <p>PHI wins 4-0</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Philadelphia 76ers/Brooklyn Nets'">Detalles</button>
                 </div>
             </div>
+            <!-- 2 vs 7 Este-->
             <div class="group">
                 <div class="team-info">
                     <p>${celtics.nombreEquipo}: 2</p>
@@ -255,7 +270,7 @@
                 </div>
                 <div class="result">
                     <p>BOS wins 4-2</p>
-                    <button>Detalles</button>
+                    <button onClick="window.location.href='/temporada/2022-2023/partidos/Boston Celtics/Atlanta Hawks'">Detalles</button>
                 </div>
             </div>
         </div>

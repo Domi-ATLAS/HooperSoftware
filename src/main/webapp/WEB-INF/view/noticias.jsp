@@ -25,15 +25,15 @@
             <h1>Noticias</h1>
             
             <div>
-                <h2>Titulo de la Noticia 1</h2>
-                <p>Contenido de la Noticia 1...</p>
-                <p>Fecha: 01/01/2022</p>
+                <h2>Niveles de los playoffs de la NBA de 2024: ¿Cómo se comparan los ocho equipos restantes?</h2>
+                <p>Kevin Pelton, insider de la NBA de ESPN, coloca a los ocho equipos restantes de los playoffs en cinco niveles. ¿Cuántos están en el Nivel 1?</p>
+                <p>Fecha: 06/05/2024</p>
             </div>
 
             <div>
-                <h2>Titulo de la Noticia 2</h2>
-                <p>Contenido de la Noticia 2...</p>
-                <p>Fecha: 02/01/2022</p>
+                <h2>MVP de la NBA 2024: ¿Luke podrá ganarle el premio a Jokic y SGA?</h2>
+                <p>A medida que avanzan los playoffs de la NBA, se espera que pronto se anuncie premio al Jugador Más Valioso de la NBA 2023-24. Los finalistas de esta temporada son el pívot de los Denver Nuggets, Nikola Jokic, el base de los Dallas Mavericks, Luka Doncic, y el base de los Oklahoma City Thunder, Shai Gilgeous-Alexander.</p>
+                <p>Fecha: 02/05/2024</p>
             </div>
 
             <!-- Agrega más noticias de la misma manera -->

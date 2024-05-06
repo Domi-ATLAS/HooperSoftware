@@ -14,12 +14,15 @@
             <th>Equipo visitante</th>
             <th>Resultado</th>
             <th>Fecha</th>
+            <th></th>
         </tr>
         <c:forEach var="partido" items="${games}">
             <tr>
                 <td>${partido.equipoLocal}</td>
                 <td>${partido.equipoVisitante}</td>
                 <td>${partido.resultadoTotal}</td>
+                <td>fecha a implementar</td>
+                <td><button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button></td>
             </tr>
         </c:forEach>
     </table>

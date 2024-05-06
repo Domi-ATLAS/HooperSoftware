@@ -42,19 +42,21 @@
             <h2>Votaciones en activo</h2>
             <table>
                 <c:forEach var="vote" items="${votes}">
-                    <tr>
-                        <th>${vote.categotiaVotacion}</th>
-                    </tr>
-                    <c:forEach var="voto" items="${vote.opcionesVotacion}">
+                    <c:if test="${vote.enCurso}">
                         <tr>
-                            <td>${voto}</td>
+                            <th>${vote.categotiaVotacion}</th>
                         </tr>
-                    </c:forEach>
-                    <tr>
-                        <td>
-                            <button type="button" onclick="location.href=''">Votar</button>
+                        <c:forEach var="voto" items="${vote.opcionesVotacion}">
+                            <tr>
+                                <td>${voto}</td>
+                            </tr>
+                        </c:forEach>
+                        <tr>
+                            <td>
+                                <button type="button" onclick="location.href=''">Votar</button>
+                            </td>
                         </tr>
-                    </td>
+                    </c:if>
                 </c:forEach>
             </table>
         </div>

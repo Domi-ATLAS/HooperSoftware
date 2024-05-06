@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import HooperSoftware.TFG.entidad.Jugador;
 import HooperSoftware.TFG.entidad.Partido;
 import HooperSoftware.TFG.repositorio.PartidoRepository;
 
@@ -50,5 +51,20 @@ public class PartidoService {
     @Transactional(readOnly = true)
     public List<Partido> findAllPlayOffGames(){
         return repository.findAllPlayOffGames();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Partido> findSeriesPartidos(String equipoLocal, String equipoVisitante, String temporadaPlayoff) {
+        return repository.findSeriePartidoRepo(equipoLocal, equipoVisitante, temporadaPlayoff);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Jugador> findLocalTeamPlayersByPartidoId(Integer id){
+        return repository.findLocalTeamPlayersByPartidoId(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Jugador> findVisitTeamPlayersByPartidoId(Integer id){
+        return repository.findVisitTeamPlayersByPartidoId(id);
     }
 }

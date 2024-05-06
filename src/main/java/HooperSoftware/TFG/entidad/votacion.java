@@ -35,6 +35,8 @@ public class Votacion {
 
     List<String> opcionesVotacion;
 
+    Boolean enCurso;
+
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "nombreUsuario")
     List<Usuario> usuarios;
 

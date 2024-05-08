@@ -44,4 +44,7 @@ public class Transferencia {
     @OneToMany
     List<Jugador> jugadores;
 
+    @OneToMany
+    List<Equipo> equipos;
+
 }

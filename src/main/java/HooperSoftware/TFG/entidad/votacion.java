@@ -1,5 +1,6 @@
 package HooperSoftware.TFG.entidad;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -34,6 +35,16 @@ public class Votacion {
     Categoria categotiaVotacion;
 
     List<String> opcionesVotacion;
+
+    Boolean enCurso;
+
+    Boolean oficial;
+
+    String temporada;
+
+    String jornada;
+
+    Date fecha;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "nombreUsuario")
     List<Usuario> usuarios;

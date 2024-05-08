@@ -1,5 +1,6 @@
 package HooperSoftware.TFG.entidad;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -50,11 +51,17 @@ public class Partido {
 
     Boolean playOffSiONo;
 
+    String temporada;
+
     String victoriaSerie;
 
     String equipoLocal;
 
     String equipoVisitante;
+
+    Date fecha;
+
+    String ganador;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "idJugador")
     List<Jugador> jugadores;

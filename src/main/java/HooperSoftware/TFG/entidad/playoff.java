@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,10 @@ public class Playoff {
 
     String temporada;
 
+    List<String> oeste;
+
+    List<String> este;
+
     List<String> campeonesCuartosOeste;
 
     List<String> campeonesSemisOeste;
@@ -37,6 +43,7 @@ public class Playoff {
 
     String campeonFinalNba;
 
-
+    @ManyToMany
+    List<Equipo> equipos;
     
 }

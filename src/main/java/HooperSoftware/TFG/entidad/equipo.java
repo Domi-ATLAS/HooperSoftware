@@ -56,6 +56,12 @@ public class Equipo {
 
     Double balanceTemporada;
 
+    Integer posicion;
+
+    String siglas;
+
+    String estadio;
+
     String logoEquipo;
 
     @OneToMany

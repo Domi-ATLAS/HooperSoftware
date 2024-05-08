@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import HooperSoftware.TFG.entidad.Equipo;
 import HooperSoftware.TFG.entidad.Playoff;
 
 @Repository
@@ -28,5 +29,8 @@ public interface PlayoffRepository extends CrudRepository<Playoff,Integer>{
 
     @Query("SELECT p FROM Playoff p WHERE p.campeonFinalOeste = ?1")
     List<Playoff> findPlayOffByCampeonFinalOeste(String campeonFinalOeste);
+
+    @Query("SELECT p.equipos FROM Playoff p WHERE p.temporada = ?1")
+    List<Equipo> findEquiposByPlayOffs(String temporada);
 
 }

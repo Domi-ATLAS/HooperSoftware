@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import HooperSoftware.TFG.entidad.Equipo;
 import HooperSoftware.TFG.entidad.Playoff;
 import HooperSoftware.TFG.repositorio.PlayoffRepository;
 
@@ -40,6 +41,11 @@ public class PlayoffService {
     @Transactional
     public void deletePlayoff(Integer id){
         repository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Equipo> findEquiposByPlayOffs(String temporada) {
+        return repository.findEquiposByPlayOffs(temporada);
     }
     
 }

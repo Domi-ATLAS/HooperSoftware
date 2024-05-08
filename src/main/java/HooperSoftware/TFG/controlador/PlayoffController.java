@@ -6,8 +6,11 @@ import HooperSoftware.TFG.entidad.Playoff;
 import HooperSoftware.TFG.servicio.EquipoService;
 import HooperSoftware.TFG.servicio.PartidoService;
 import HooperSoftware.TFG.servicio.PlayoffService;
+import HooperSoftware.TFG.servicio.TemporadaService;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +24,16 @@ public class PlayoffController {
     private final PartidoService partidoService;
     private final PlayoffService playoffService;
     private final EquipoService equipoService;
+    private final TemporadaService temporadaService;
 
-    public PlayoffController(PartidoService service, PlayoffService playoffService, EquipoService equipoService) {
+    public PlayoffController(PartidoService service, PlayoffService playoffService, EquipoService equipoService, TemporadaService temporadaService) {
         this.partidoService = service;
         this.playoffService = playoffService;
         this.equipoService = equipoService;
+        this.temporadaService = temporadaService;
     }
 
-    @GetMapping("/playOffs23")
+    @GetMapping("/playOffsGames/2022-2023")
     public ModelAndView showPlayOffs23Page() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("partidos/playOffs23");
@@ -74,8 +79,29 @@ public class PlayoffController {
     @GetMapping("/playOffsGames")
     public ModelAndView showAllPlayOffsGamesPage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("allPlayOffsGames");
+        mav.setViewName("partidos/allPlayOffsGames");
         mav.addObject("playOffsGames", partidoService.findAllPlayOffGames());
+        mav.addObject("temporadas", temporadaService.findAll());
+        return mav;
+    }
+
+
+    @GetMapping("/playOffsGames/{temporada}")
+    public ModelAndView showAllPlayOffsGamesPage(@PathVariable String temporada) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("partidos/cuadrantePlayOffs");
+        List<Equipo> equipos = playoffService.findEquiposByPlayOffs(temporada);
+        List<Equipo> equiposOeste = equipos.stream()
+                                            .filter(e -> e.getConferencia().equals("Este"))
+                                            .sorted(Comparator.comparing(Equipo::getBalanceTemporada))
+                                            .collect(Collectors.toList());
+        List<Equipo> equiposEste = equipos.stream()
+                                            .filter(e -> e.getConferencia().equals("Oeste"))
+                                            .sorted(Comparator.comparing(Equipo::getBalanceTemporada))
+                                            .collect(Collectors.toList());
+        mav.addObject("playOffsGames", partidoService.findPlayOffGamesByTemporada(temporada));
+        mav.addObject("equiposEste", equiposEste);
+        mav.addObject("equiposOeste", equiposOeste);
         return mav;
     }
 

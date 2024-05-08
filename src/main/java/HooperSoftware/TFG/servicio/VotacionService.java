@@ -36,5 +36,15 @@ public class VotacionService {
     public void deleteVotacion(Integer id){
         repository.deleteById(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Votacion> findVotacionesEnCurso(){
+        return repository.findVotacionesEnCurso();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Votacion> findVotacionesOficiales(){
+        return repository.findVotacionesOficiales();
+    }
     
 }

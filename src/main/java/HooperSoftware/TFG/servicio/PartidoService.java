@@ -73,5 +73,9 @@ public class PartidoService {
         return repository.findLast10MatchesByTeam(nombreEquipo);
     }
 
+    public Object findPlayOffGamesByTemporada(String temporada) {
+        return repository.findPlayOffGamesByTemporada(temporada);
+    }
+
 
 }

@@ -21,13 +21,16 @@
     </style>
 
     <h1>Playoffs de la NBA</h1>
+
+    <button onClick="window.location.href='/playOffsGames'">Todos los partidos de PlayOff</button>
+
     <c:forEach var="playoff" items="${playOffsGames}">
         <div class="playoff-container">
             <p>Temporada: ${playoff.temporada}</p>
             <p>${playoff.campeonFinalOeste} VS ${playoff.campeonFinalEste}</p>
             <p>Campeón de la NBA: ${playoff.campeonFinalNba}</p>
             <c:set var="lastTwoDigits" value="${playoff.temporada.substring(playoff.temporada.length() - 2)}" />
-            <button class="details-button" onclick="window.location.href='playOffs${lastTwoDigits}'">Detalles</button>
+            <button class="details-button" onclick="window.location.href='/playOffsGames/${playoff.temporada}'">Detalles</button>
         </div>
     </c:forEach>
 </Layaout:layaout>

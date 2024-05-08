@@ -17,4 +17,9 @@ public interface VotacionRepository extends CrudRepository<Votacion,Integer>{
     @Query("SELECT v FROM Votacion v WHERE v.idVotacion = ?1")
     Votacion findVotacionById(Integer idVotacion);
 
+    @Query("SELECT v FROM Votacion v WHERE v.enCurso = true")
+    List<Votacion> findVotacionesEnCurso();
+
+    @Query("SELECT v FROM Votacion v WHERE v.oficial = true")
+    List<Votacion> findVotacionesOficiales();
 }

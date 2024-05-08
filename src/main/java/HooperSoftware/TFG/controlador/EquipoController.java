@@ -5,14 +5,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import HooperSoftware.TFG.servicio.EquipoService;
+import HooperSoftware.TFG.servicio.PartidoService;
 
 @Controller
 public class EquipoController {
 
     private final EquipoService equipoService;
+    private final PartidoService partidoService;
 
-    public EquipoController(EquipoService equipoService) {
+    public EquipoController(EquipoService equipoService, PartidoService partidoService) {
         this.equipoService = equipoService;
+        this.partidoService = partidoService;
     }
     
     @GetMapping("/equipos/ChicagoBulls")
@@ -23,6 +26,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(6));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(6));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Chicago Bulls"));
         return mav;
     }
 
@@ -34,6 +38,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(23));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(23));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Los Angeles Lakers"));
         return mav;
     }
 
@@ -45,6 +50,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(13));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(13));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Miami Heat"));
         return mav;
     }
 
@@ -56,6 +62,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(1));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(1));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Boston Celtics"));
         return mav;
     }
 
@@ -67,6 +74,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(21));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(21));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Golden State Warriors"));
         return mav;
     }
 
@@ -78,6 +86,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(27));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(27));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Houston Rockets"));
         return mav;
     }
 
@@ -89,6 +98,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(4));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(4));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Philadelphia 76ers"));
         return mav;
     }
 
@@ -100,6 +110,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(5));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(5));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Toronto Raptors"));
         return mav;
     }
 
@@ -111,6 +122,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(26));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(26));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Dallas Mavericks"));
         return mav;
     }
 
@@ -122,6 +134,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(19));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(19));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Portland Trail Blazers"));
         return mav;
     }
 
@@ -133,6 +146,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(16));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(16));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Denver Nuggets"));
         return mav;
     }
 
@@ -144,6 +158,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(20));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(20));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Utah Jazz"));
         return mav;
     }
 
@@ -155,6 +170,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(9));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(9));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Indiana Pacers"));
         return mav;
     }
 
@@ -166,6 +182,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(18));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(18));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Oklahoma City Thunder"));
         return mav;
     }
 
@@ -177,6 +194,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(10));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(10));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Milwaukee Bucks"));
         return mav;
     }
 
@@ -188,6 +206,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(28));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(28));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Memphis Grizzlies"));
         return mav;
     }
 
@@ -199,6 +218,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(24));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(24));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Phoenix Suns"));
         return mav;
     }
 
@@ -210,6 +230,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(30));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(30));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("San Antonio Spurs"));
         return mav;
     }
 
@@ -221,6 +242,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(25));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(25));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Sacramento Kings"));
         return mav;
     }
 
@@ -232,6 +254,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(29));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(29));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("New Orleans Pelicans"));
         return mav;
     }
 
@@ -243,6 +266,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(17));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(17));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Minnesota Timberwolves"));
         return mav;
     }
 
@@ -254,6 +278,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(11));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(11));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Atlanta Hawks"));
         return mav;
     }
 
@@ -265,6 +290,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(12));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(12));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Charlotte Hornets"));
         return mav;
     }
 
@@ -276,6 +302,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(7));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(7));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Cleveland Cavaliers"));
         return mav;
     }
 
@@ -287,6 +314,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(8));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(8));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Detroit Pistons"));
         return mav;
     }
 
@@ -298,6 +326,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(3));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(3));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("New York Knicks"));
         return mav;
     }
 
@@ -309,6 +338,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(14));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(14));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Orlando Magic"));
         return mav;
     }
 
@@ -320,6 +350,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(2));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(2));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Brooklyn Nets"));
         return mav;
     }
 
@@ -331,6 +362,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(15));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(15));
         mav.addObject("clasificacion", equipoService.findClasificacionEste());
+        mav.addObject("partidos", partidoService.findLast10Games("Washington Wizards"));
         return mav;
     }
 
@@ -342,6 +374,7 @@ public class EquipoController {
         mav.addObject("jugadores", equipoService.findJugadoresPorEquipo(22));
         mav.addObject("entrenadores", equipoService.findEntrenadoresPorEquipo(22));
         mav.addObject("clasificacion", equipoService.findClasificacionOeste());
+        mav.addObject("partidos", partidoService.findLast10Games("Los Angeles Clippers"));
         return mav;
     }
     

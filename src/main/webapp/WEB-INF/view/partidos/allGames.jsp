@@ -7,6 +7,8 @@
     <h1>Partidos</h1>
 
     <button onClick="window.location.href='/allGames/allJornadas'">Vista Jornada</button>
+    <button onClick="window.location.href='/allSeasons'">Vista Temporada</button>
+
 
     <table>
         <tr>
@@ -21,7 +23,7 @@
                 <td>${partido.equipoLocal}</td>
                 <td>${partido.equipoVisitante}</td>
                 <td>${partido.resultadoTotal}</td>
-                <td>fecha a implementar</td>
+                <td>${partido.fecha}</td>
                 <td><button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button></td>
             </tr>
         </c:forEach>

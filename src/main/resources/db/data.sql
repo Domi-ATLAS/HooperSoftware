@@ -1464,9 +1464,9 @@ INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_o
 
 -- TEMPORADAS, PARTIDOS, ETC.
 
-INSERT INTO temporada(id_temporada, anos_temporada, campeon_temporada, mvp_temporada, rookie_temporada, defensor_temporada, sexto_hombre_temporada, jugador_mas_mejorado_temporada, entrenador_temporada, campeon_oeste_temp, campeon_este_temp, campeon_nba_temp) VALUES ('1', '2011', 'Dallas Mavericks', 'Derrick Rose', 'Blake Griffin', 'Dwight Howard', 'Lamar Odom', 'Kevin Love', 'Tom Thibodeau', 'Dallas Mavericks', 'Miami Heat', 'Dallas Mavericks');
-INSERT INTO temporada(id_temporada, anos_temporada, campeon_temporada, mvp_temporada, rookie_temporada, defensor_temporada, sexto_hombre_temporada, jugador_mas_mejorado_temporada, entrenador_temporada, campeon_oeste_temp, campeon_este_temp, campeon_nba_temp) VALUES ('2', '1996', 'Chicago Bulls', 'Michael Jordan', 'Allen Iverson', 'Gary Payton', 'John Starks', 'Michael Jordan', 'Phil Jackson', 'Seattle SuperSonics', 'Chicago Bulls', 'Chicago Bulls');
-
+INSERT INTO temporada(id_temporada, anos_temporada, campeon_temporada, mvp_temporada, rookie_temporada, defensor_temporada, sexto_hombre_temporada, jugador_mas_mejorado_temporada, entrenador_temporada, campeon_oeste_temp, campeon_este_temp, campeon_nba_temp) VALUES ('1', '2010-2011', 'Dallas Mavericks', 'Derrick Rose', 'Blake Griffin', 'Dwight Howard', 'Lamar Odom', 'Kevin Love', 'Tom Thibodeau', 'Dallas Mavericks', 'Miami Heat', 'Dallas Mavericks');
+INSERT INTO temporada(id_temporada, anos_temporada, campeon_temporada, mvp_temporada, rookie_temporada, defensor_temporada, sexto_hombre_temporada, jugador_mas_mejorado_temporada, entrenador_temporada, campeon_oeste_temp, campeon_este_temp, campeon_nba_temp) VALUES ('2', '1995-1996', 'Chicago Bulls', 'Michael Jordan', 'Allen Iverson', 'Gary Payton', 'John Starks', 'Michael Jordan', 'Phil Jackson', 'Seattle SuperSonics', 'Chicago Bulls', 'Chicago Bulls');
+INSERT INTO temporada(id_temporada, anos_temporada, campeon_temporada, mvp_temporada, rookie_temporada, defensor_temporada, sexto_hombre_temporada, jugador_mas_mejorado_temporada, entrenador_temporada, campeon_oeste_temp, campeon_este_temp, campeon_nba_temp) VALUES ('3', '2022-2023', 'Denver Nuggets', 'Joel Embid', 'Paolo Banchero', 'Jaren Jackson Jr.', 'Malcolm Brogdon', 'Lauri Markkanen', 'Mike Brown', 'Denver Nuggets', 'Miami Heat', 'Denver Nuggets');
 
 
 INSERT INTO playoff(id_play_off, temporada, oeste, este, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('1', '1995-1996', '','','(Chicago Bulls, New York Knicks, Atlanta Hawks, Orlando Magic)', '(Chicago Bulls, Orlando Magic)', 'Chicago Bulls', '(Seattle SuperSonics, Houston Rockets, Utah Jazz, San Antonio Spurs)', '(Seattle SuperSonics, Utah Jazz)', 'Seattle SuperSonics', 'Chicago Bulls');
@@ -1474,8 +1474,40 @@ INSERT INTO playoff(id_play_off, temporada, oeste, este, campeones_cuartos_oeste
 INSERT INTO playoff(id_play_off, temporada, oeste, este, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('3', '2022-2023', '(Denver Nuggets, Minnesota Timberwolves, Phoenix Suns, Los Angeles Clippers, Sacramento Kings, Golden State Warriors, Memphis Grizzlies, Los Angeles Lakers)','(Milwaukee Bucks, Miami Heat, Cleveland Cavaliers, New York Knicks, Philadelphia 76ers, Brooklyn Nets, Boston Celtics, Atlanta Hawks)','(Denver Nuggets, Phoenix Suns, Golden State Warriors, Los Angeles Lakers)', '(Denver Nuggets, Los Angeles Lakers)', 'Denver Nuggets', '(Miami Heat, New York Knicks, Philadelphia 76ers, Boston Celtics)', '(Miami Heat, Boston Celtics)', 'Miami Heat', 'Denver Nuggets');
 
 
-INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado) VALUES ('1', '2010-2011', '2011-01-01', '1', '15', 'false');
-INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado) VALUES ('2', '1995-1996', '1996-01-01', '25', '10', 'false');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('1', '2010-2011', '2011-01-01', '1', '15', 'false', 'false');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('2', '1995-1996', '1996-01-01', '25', '10', 'false', 'false');
+
+-- Jornadas 2022-2023 playoffs
+
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('3', '2022-2023', '2023-04-15', '1', '8 ', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('4', '2022-2023', '2023-04-17', '2', '5', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('5', '2022-2023', '2023-04-19', '3', '6', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('6', '2022-2023', '2023-04-21', '4', '7', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('7', '2022-2023', '2023-04-23', '5', '6', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('8', '2022-2023', '2023-04-25', '6', '7', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('9', '2022-2023', '2023-04-27', '7', '3', 'false', 'true');     
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('10', '2022-2023', '2023-04-30', '8', '4', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('11', '2022-2023', '2023-05-02', '9', '3', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('12', '2022-2023', '2023-05-03', '10', '2', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('13', '2022-2023', '2023-05-05', '11', '4', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('14', '2022-2023', '2023-05-07', '12', '4', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('15', '2022-2023', '2023-05-09', '13', '4', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('16', '2022-2023', '2023-05-11', '14', '4', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('17', '2022-2023', '2023-05-16', '15', '2', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('18', '2022-2023', '2023-05-18', '16', '2', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('19', '2022-2023', '2023-05-20', '17', '2', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('20', '2022-2023', '2023-05-22', '18', '2', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('21', '2022-2023', '2023-05-24', '19', '2', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('22', '2022-2023', '2023-05-26', '20', '1', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('23', '2022-2023', '2023-05-28', '21', '1', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('24', '2022-2023', '2023-06-01', '22', '1', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('25', '2022-2023', '2023-06-04', '23', '1', 'false', 'true');
+INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('26', '2022-2023', '2023-06-07', '24', '1', 'false', 'true');
+
+
+
+
+
 
 
 
@@ -1539,7 +1571,7 @@ INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultado
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('41', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Denver Nuggets', 3);
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('42', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Denver Nuggets', 3);
 
--- serie bucks heat
+-- serie denver heat
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('43', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Miami Heat', 3);
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('44', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Miami Heat', 3);
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('45', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Denver Nuggets', 3);
@@ -1604,15 +1636,16 @@ INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultado
 
 -- VOTACIONES
 
-INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso) VALUES ('1', 'Stephen Curry', '1', 0, 'DeMar DeRozan, Shai Gilgeous-Alexander, Stephen Curry', 'false');
-INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso) VALUES ('2', 'Victor Wembayama', '1', 1, 'Victor Wembayama, Chet Holmgren, Brandon Miller', 'false');
-INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso) VALUES ('3', '', '1', 2, 'Nikola Jokic, Luka Doncic, Shai Gilgeous-Alexander', 'true');
-INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso) VALUES ('4', 'Naz Reid', '1', 3, 'Naz Reid, Malik Monk, Bobby Portis', 'false');
-INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso) VALUES ('5', 'Tyrese Maxey', '1', 4, 'Alperen Sengün, Tyrese Maxey, Coby White', 'false');
-INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso) VALUES ('6', 'Alex Caruso', '1', 5, 'Scottie Barnes, Brandin Podziemski, Alex Caruso', 'false');
-INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso) VALUES ('7', '', '1', 9, 'Bam Adebayo, Rudy Gobert, Victor Wembanyama', 'true');
-INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso) VALUES ('8', 'Mark Daigneault', '1', 21, 'Chris Finch, Mark Daigneault, Jamahl Mosley', 'false');
-INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso) VALUES ('9', 'Stephen Curry', '1', 29, 'Stephen Curry, Luka Doncic, Donte DiVincenzo, Klay Thompson', 'false');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('1', 'Stephen Curry', '1', 0, 'DeMar DeRozan, Shai Gilgeous-Alexander, Stephen Curry', 'false', 'true', '2023-2024', 'All Season', '2024-10-19');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('2', 'Victor Wembayama', '1', 1, 'Victor Wembayama, Chet Holmgren, Brandon Miller', 'false', 'true', '2023-2024', 'All Season', '2024-10-19');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('3', '', '1', 2, 'Nikola Jokic, Luka Doncic, Shai Gilgeous-Alexander', 'true', 'true', '2023-2024', 'All Season', '2024-10-19');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('4', 'Naz Reid', '1', 3, 'Naz Reid, Malik Monk, Bobby Portis', 'false', 'true', '2023-2024', 'All Season', '2024-10-19');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('5', 'Tyrese Maxey', '1', 4, 'Alperen Sengün, Tyrese Maxey, Coby White', 'false', 'true', '2023-2024', 'All Season', '2024-10-19');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('6', 'Alex Caruso', '1', 5, 'Scottie Barnes, Brandin Podziemski, Alex Caruso', 'false', 'true', '2023-2024', 'All Season', '2024-10-19');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('7', '', '1', 9, 'Bam Adebayo, Rudy Gobert, Victor Wembanyama', 'true', 'true', '2023-2024', 'All Season', '2024-10-19');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('8', 'Mark Daigneault', '1', 21, 'Chris Finch, Mark Daigneault, Jamahl Mosley', 'false', 'true', '2023-2024', 'All Season', '2024-10-19');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('9', 'Stephen Curry', '1', 29, 'Stephen Curry, Luka Doncic, Donte DiVincenzo, Klay Thompson', 'false', 'true', '2023-2024', 'All Season', '2024-10-19');
+INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion, opciones_votacion, en_curso, oficial, temporada, jornada, fecha) VALUES ('10', '', '1', 27, 'Ja Morant, Zach Lavine, Zion Williamson, Anthony Edwards', 'true', 'false', '2023-2024', '45', '2024-04-12');
 
 
 
@@ -1621,8 +1654,143 @@ INSERT INTO votacion(id_votacion, ganador, duracion_votacion, categotia_votacion
 INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('1', '1');
 INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('2', '2');
 
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '3');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '4');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '5');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '6');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '7');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '8');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '9');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '10');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '11');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '12');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '13');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '14');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '15');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '16');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '17');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '18');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '19');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '20');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '21');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '22');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '23');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '24');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '25');
+INSERT INTO temporada_jornadas(temporada_id_temporada, jornadas_id_jornada) VALUES ('3', '26');
+
+
+
 INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('1', '1');
 INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('2', '2');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('3', '4');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('3', '9');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('3', '14');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('3', '21');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('3', '48');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('3', '53');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('3', '57');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('3', '83');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('4', '58');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('4', '54');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('4', '49');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('4', '15');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('4', '10');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('5', '84');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('5', '55');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('5', '5');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('5', '22');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('5', '16');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('5', '11');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('6', '85');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('6', '59');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('6', '50');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('6', '56');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('6', '23');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('6', '12');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('6', '6');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('7', '86');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('7', '60');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('7', '51');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('7', '7');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('7', '24');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('7', '17');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('8', '87');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('8', '61');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('8', '52');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('8', '8');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('8', '25');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('8', '18');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('8', '13');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('9', '62');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('9', '26');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('9', '19');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('10', '63');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('10', '27');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('10', '20');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('10', '69');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('11', '64');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('11', '28');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('11', '33');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('12', '34');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('12', '70');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('13', '71');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('13', '35');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('13', '29');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('13', '65');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('14', '36');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('14', '72');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('14', '66');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('14', '30');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('15', '37');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('15', '73');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('15', '67');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('15', '31');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('16', '38');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('16', '74');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('16', '68');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('16', '32');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('17', '39');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('17', '75');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('18', '40');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('18', '76');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('19', '41');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('19', '77');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('20', '42');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('20', '78');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('21', '80');
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('21', '79');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('22', '43');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('23', '44');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('24', '45');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('25', '46');
+
+INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('26', '47');
+
+
 
 INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('1', '1');
 INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('2', '2');

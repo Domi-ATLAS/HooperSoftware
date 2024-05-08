@@ -58,6 +58,28 @@
         <p>Partidos ganados: ${team.partidosGanados}</p>
         <p>Partidos perdidos: ${team.partidosPerdidos}</p>
         <p>Balance de la temporada: ${team.balanceTemporada} en el ${team.conferencia}</p>
+        
+        <style>
+            .right-align {
+                float: right;
+                width: 53%; /* Ajusta este valor según tus necesidades */
+            }
+        </style>
+        
+        <div class="right-align">
+            <h2>Últimos 10 partidos:</h2>
+            <ul>
+                <c:forEach var="partido" items="${partidos}" varStatus="status">
+                    <c:if test="${status.index < 10}">
+                        <li>
+                            Partido: ${partido.equipoLocal} VS ${partido.equipoVisitante} | Resultado: ${partido.resultadoTotal} 
+                            <button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button>
+                        </li>
+                    </c:if>
+                </c:forEach>
+            </ul>
+        </div>
+        
         <h2>Jugadores:</h2>
         <ul>
             <c:forEach var="jugador" items="${jugadores}">

@@ -67,4 +67,11 @@ public class PartidoService {
     public List<Jugador> findVisitTeamPlayersByPartidoId(Integer id){
         return repository.findVisitTeamPlayersByPartidoId(id);
     }
+
+    @Transactional(readOnly = true)
+    public List<Partido> findLast10Games(String nombreEquipo){
+        return repository.findLast10MatchesByTeam(nombreEquipo);
+    }
+
+
 }

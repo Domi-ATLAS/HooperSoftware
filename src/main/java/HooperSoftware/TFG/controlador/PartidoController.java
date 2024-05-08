@@ -32,6 +32,6 @@ public class PartidoController {
         mav.addObject("localJug", partidoService.findLocalTeamPlayersByPartidoId(id));
         mav.addObject("visitJug", partidoService.findVisitTeamPlayersByPartidoId(id));
         return mav;
-}
+    }
 
 }

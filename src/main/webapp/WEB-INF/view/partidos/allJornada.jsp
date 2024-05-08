@@ -16,6 +16,7 @@
 
     <h1>Jornadas</h1>
     <button onClick="window.location.href='/allGames'">Vista Partidos</button>
+    <button onClick="window.location.href='/allSeasons'">Vista Temporada</button>
 
 
     <c:forEach var="jornada" items="${jornadas}" varStatus="status">
@@ -30,7 +31,7 @@
             <h3>Partidos:</h3>
             <ul>
                 <c:forEach var="partido" items="${jornada.partidos}">
-                    <li>${partido.equipoLocal} vs ${partido.equipoVisitante} : ${partido.resultadoTotal}</li>
+                    <li>${partido.equipoLocal} vs ${partido.equipoVisitante} : ${partido.resultadoTotal} <button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button></li>
                 </c:forEach>
             </ul>
         </div>

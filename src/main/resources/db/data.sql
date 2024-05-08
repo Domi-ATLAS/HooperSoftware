@@ -1632,6 +1632,9 @@ INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultado
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('86', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Milwaukee Bucks', 3);
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('87', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Milwaukee Bucks', 'Miami Heat', 3);
 
+-- PARTIDOS PLAYOFF 2010-2011
+
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('88', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'San Antonio Spurs', 'Memphis Grizzlies', 2);
 
 
 -- VOTACIONES

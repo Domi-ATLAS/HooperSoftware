@@ -24,13 +24,13 @@
             <p>Playoff: Sí</p>
             <p>Victoria de la serie: ${game.victoriaSerie}</p>
         </c:if>
-        <h2>Jugadores del equipo local</h2>
+        <h2>Jugadores del equipo local Actuales</h2>
         <ul>
             <c:forEach var="jugador" items="${localJug}">
                 <li>${jugador.nombreJugador}</li>
             </c:forEach>
         </ul>
-        <h2>Jugadores del equipo visitante</h2>
+        <h2>Jugadores del equipo visitante Actuales</h2>
         <ul>
             <c:forEach var="jugador" items="${visitJug}">
                 <li>${jugador.nombreJugador}</li>

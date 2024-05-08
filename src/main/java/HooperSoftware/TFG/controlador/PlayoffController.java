@@ -1,13 +1,5 @@
 package HooperSoftware.TFG.controlador;
 
-import HooperSoftware.TFG.entidad.Equipo;
-import HooperSoftware.TFG.entidad.Partido;
-import HooperSoftware.TFG.entidad.Playoff;
-import HooperSoftware.TFG.servicio.EquipoService;
-import HooperSoftware.TFG.servicio.PartidoService;
-import HooperSoftware.TFG.servicio.PlayoffService;
-import HooperSoftware.TFG.servicio.TemporadaService;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +7,15 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import HooperSoftware.TFG.entidad.Equipo;
+import HooperSoftware.TFG.entidad.Partido;
+import HooperSoftware.TFG.servicio.ClasificacionService;
+import HooperSoftware.TFG.servicio.EquipoService;
+import HooperSoftware.TFG.servicio.PartidoService;
+import HooperSoftware.TFG.servicio.PlayoffService;
+import HooperSoftware.TFG.servicio.TemporadaService;
 
 @Controller
 public class PlayoffController {
@@ -25,12 +24,14 @@ public class PlayoffController {
     private final PlayoffService playoffService;
     private final EquipoService equipoService;
     private final TemporadaService temporadaService;
+    private final ClasificacionService clasificacionService;
 
-    public PlayoffController(PartidoService service, PlayoffService playoffService, EquipoService equipoService, TemporadaService temporadaService) {
+    public PlayoffController(PartidoService service, PlayoffService playoffService, EquipoService equipoService, TemporadaService temporadaService, ClasificacionService clasificacionService) {
         this.partidoService = service;
         this.playoffService = playoffService;
         this.equipoService = equipoService;
         this.temporadaService = temporadaService;
+        this.clasificacionService = clasificacionService;
     }
 
     @GetMapping("/playOffsGames/2022-2023")
@@ -100,8 +101,11 @@ public class PlayoffController {
                                             .sorted(Comparator.comparing(Equipo::getBalanceTemporada))
                                             .collect(Collectors.toList());
         mav.addObject("playOffsGames", partidoService.findPlayOffGamesByTemporada(temporada));
+        mav.addObject("temporada", temporada);  
+        mav.addObject("clasificacion", clasificacionService.findClasificacionByTemporada(temporada));
         mav.addObject("equiposEste", equiposEste);
         mav.addObject("equiposOeste", equiposOeste);
+        mav.addObject("playoff", playoffService.findPlayoffByTemporada(temporada));
         return mav;
     }
 

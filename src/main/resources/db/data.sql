@@ -1470,7 +1470,7 @@ INSERT INTO temporada(id_temporada, anos_temporada, campeon_temporada, mvp_tempo
 
 
 INSERT INTO playoff(id_play_off, temporada, oeste, este, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('1', '1995-1996', '','','(Chicago Bulls, New York Knicks, Atlanta Hawks, Orlando Magic)', '(Chicago Bulls, Orlando Magic)', 'Chicago Bulls', '(Seattle SuperSonics, Houston Rockets, Utah Jazz, San Antonio Spurs)', '(Seattle SuperSonics, Utah Jazz)', 'Seattle SuperSonics', 'Chicago Bulls');
-INSERT INTO playoff(id_play_off, temporada, oeste, este, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('2', '2010-2011', '','','(Dallas Mavericks, Los Angeles Lakers, Denver Nuggets, Utah Jazz)', '(Dallas Mavericks, Utah Jazz)', 'Dallas Mavericks', '(Miami Heat, Boston Celtics, Chicago Bulls, Indiana Pacers)', '(Miami Heat, Chicago Bulls)', 'Miami Heat', 'Dallas Mavericks');
+INSERT INTO playoff(id_play_off, temporada, oeste, este, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('2', '2010-2011', '','','(Dallas Mavericks, Los Angeles Lakers, Oklahoma City Thunder, Memphis Grizzlies)', '(Dallas Mavericks, Oklahoma City Thunder)', 'Dallas Mavericks', '(Miami Heat, Boston Celtics, Chicago Bulls, Atlanta Hawks)', '(Miami Heat, Chicago Bulls)', 'Miami Heat', 'Dallas Mavericks');
 INSERT INTO playoff(id_play_off, temporada, oeste, este, campeones_cuartos_oeste, campeones_semis_oeste, campeon_final_oeste, campeones_cuartos_este, campeones_semis_este, campeon_final_este, campeon_final_nba) VALUES ('3', '2022-2023', '(Denver Nuggets, Minnesota Timberwolves, Phoenix Suns, Los Angeles Clippers, Sacramento Kings, Golden State Warriors, Memphis Grizzlies, Los Angeles Lakers)','(Milwaukee Bucks, Miami Heat, Cleveland Cavaliers, New York Knicks, Philadelphia 76ers, Brooklyn Nets, Boston Celtics, Atlanta Hawks)','(Denver Nuggets, Phoenix Suns, Golden State Warriors, Los Angeles Lakers)', '(Denver Nuggets, Los Angeles Lakers)', 'Denver Nuggets', '(Miami Heat, New York Knicks, Philadelphia 76ers, Boston Celtics)', '(Miami Heat, Boston Celtics)', 'Miami Heat', 'Denver Nuggets');
 
 
@@ -1505,9 +1505,9 @@ INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_pa
 INSERT INTO jornada(id_jornada, temporada, fecha_jornada, num_jornada, numero_partido, partido_cancelado, play_off) VALUES ('26', '2022-2023', '2023-06-07', '24', '1', 'false', 'true');
 
 
+-- CLASIFICACION
 
-
-
+INSERT INTO clasificacion(temporada, primero_este, segundo_este, tercero_este, cuarto_este, quinto_este, sexto_este, septimo_este, octavo_este, primero_oeste, segundo_oeste, tercero_oeste, cuarto_oeste, quinto_oeste, sexto_oeste, septimo_oeste, octavo_oeste) VALUES ('2010-2011', 'Chicago Bulls', 'Miami Heat', 'Boston Celtics', 'Orlando Magic', 'Atlanta Hawks', 'New York Knicks', 'Philadelphia 76ers', 'Indiana Pacers', 'San Antonio Spurs', 'Los Angeles Lakers', 'Dallas Mavericks', 'Oklahoma City Thunder', 'Denver Nuggets', 'Portland Trail Blazers', 'New Orleans Hornets', 'Memphis Grizzlies');
 
 
 

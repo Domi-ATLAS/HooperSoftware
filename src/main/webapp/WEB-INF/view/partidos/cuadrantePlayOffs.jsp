@@ -2,31 +2,106 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<Layaout:layaout title="Equipos Playoffs 23">
-    <!-- Estilos omitidos para brevedad -->
-
-    <h1>Equipos Playoffs 23</h1>
+<Layaout:layaout title="Playoffs Partidos">
+    <h1>Equipos Playoff ${temporada}</h1>
     <div class="container">
-        <c:forEach var="partido" items="${partidos}">
-            <div class="section">
-                <h2>${partido.nombre}</h2>
-                <div class="group">
-                    <c:forEach var="equipo" items="${equipos}">
-                        <c:if test="${equipo.partidoId == partido.id}">
-                            <div class="team-info">
-                                <p>${equipo.nombreEquipo}: ${equipo.posicion}</p>
-                            </div>
-                            <div class="vs">
-                                <p>VS</p>
-                            </div>
-                            <div class="result">
-                                <p>${partido.resultado}</p>
-                                <button onClick="window.location.href='/temporada/${partido.temporada}/partidos/${equipo.nombreEquipo}'">Detalles</button>
-                            </div>
-                        </c:if>
-                    </c:forEach>
+        <div class="section">
+            <h2>Oeste</h2>
+            <div class="group">
+                <div class="team-info">
+                    <p>${clasificacion.primeroOeste}: 1</p>
+                    <p>${clasificacion.octavoOeste}: 8</p>
+                </div>
+                <div class="vs">
+                    <p>VS</p>
+                </div>
+                <div class="result">
+                    <c:if test="${playoffs.campeonesCuartosOeste.contains(clasificacion.primeroOeste) || playoffs.campeonesCuartosOeste.contains(clasificacion.octavoOeste)}">
+                        <p> wins</p>
+                        <button onClick="window.location.href='/temporada/2022-2023/partidos/${clasificacion.primeroOeste}/${clasificacion.octavoOeste}'">Detalles</button>
+                    </c:if>
                 </div>
             </div>
-        </c:forEach>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div><div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="section">
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="section">
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="section">
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="section">
+            <h2>Este</h2>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+            <div class="group">
+                <c:forEach var="este" items="${equiposEste}">
+                    <h1>${este.nombreEquipo}</h1>
+                </c:forEach>
+            </div>
+        </div>
     </div>
+
+
 </Layaout:layaout>

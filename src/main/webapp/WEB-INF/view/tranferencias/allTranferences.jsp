@@ -14,9 +14,25 @@ function toggleTransferencia(id) {
 </script>
 
 <Layaout:layaout title="Transferencias">
+    <style>
+        body {
+            background-color: #0c7da3; /* Color de fondo azulado */
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+        .group {
+            background-color: #8cb8c7; /* Color de fondo azulado claro */
+            border: 4px;
+            border-style: outset;
+            border-color: black;
+            margin: 10px 0;
+            padding: 10px;
+        }
+    </style>
     <h1>Transferencias</h1>
     <c:forEach var="transferencia" items="${transferences}" varStatus="status">
-        <div onClick="toggleTransferencia('transferencia${status.index}')">
+        <div class="group" onClick="toggleTransferencia('transferencia${status.index}')">
             <p>${transferencia.equipoOrigen} &rarr; ${transferencia.equipoDestino}</p>
             <p>Fecha: ${transferencia.fecha}</p>
         </div>

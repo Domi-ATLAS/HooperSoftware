@@ -2,6 +2,14 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <Layaout:layaout title="Detalles Partido">
+    <style>
+        body {
+            background-color: #0c7da3; /* Color de fondo azulado */
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
     <!DOCTYPE html>
     <html>
     <head>

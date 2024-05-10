@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import HooperSoftware.TFG.entidad.Equipo;
 import HooperSoftware.TFG.entidad.Jugador;
 
 @Repository
@@ -56,6 +58,8 @@ public interface JugadorRepository extends CrudRepository<Jugador,Integer>{
     @Query("SELECT j FROM Jugador j WHERE j.trayectoriaJug LIKE ?1")
     List<Jugador> findJugadorByTrayectoriaJug(String trayectoriaJug);
 
+    @Query("SELECT e FROM Equipo e JOIN e.jugadores j WHERE j.nombreJugador = :nombreJugador")
+    Equipo findEquipoByNombreJugador(@Param("nombreJugador") String nombreJugador);
 
 
 }

@@ -18,6 +18,14 @@
         .marcador, .chat {
             padding: 10px;
         }
+        body {
+            background-color: #0c7da3; /* Color de fondo azulado */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
     </style>
 
     <div class="container">

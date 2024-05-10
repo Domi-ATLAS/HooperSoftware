@@ -3,6 +3,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Partidos">
+    <style>
+        body {
+            background-color: #0c7da3; /* Color de fondo azulado */
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
     <script>
     function togglePartidos(id) {
         var element = document.getElementById(id);

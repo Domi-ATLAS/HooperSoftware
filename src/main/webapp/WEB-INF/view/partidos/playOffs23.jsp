@@ -12,7 +12,7 @@
             border-color: black;
             margin: 10px 0;
             padding: 10px;
-            background-color: #8cb8c7;
+            background-color: #1D428A;
         }
         .section {
             width: 19%;
@@ -26,7 +26,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #0c7da3;
+            background-color: #C8102E;
             font-family: fantasy;
             font: Copperplate, Papyrus, fantasy;
         }
@@ -38,7 +38,7 @@
         }
         .vs {
             text-shadow: 2px 2px 5px #000000;
-            color: rgb(145, 224, 129);
+            color: #1D428A;
             width: 80%;
             text-align: left;
         }

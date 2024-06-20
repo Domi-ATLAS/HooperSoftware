@@ -4,7 +4,7 @@
 <Layaout:layaout title="Bienvenido">
     <style>
         body {
-            background-color: #0c7da3; /* Color de fondo azulado */
+            background-color: #ffffff; /* Color de fondo azulado */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,16 +18,28 @@
             gap: 20px;
         }
         button {
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
+            display: inline-block;
+            padding: 2px 2px;
+            font-size: 24px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #000000;
+            background-color: #1D428A;
+            border: 4px;
+            border-style: outset;
+            border-color: black;
+            font-family: fantasy;
+            font: Copperplate, Papyrus, fantasy;
+            text-shadow: 2px 2px 5px #C8102E;
         }
-        button:hover {
-            background-color: #6495ed;
-            color: white;
+        button:hover {background-color: #5276be}
+    
+        button:active {
+        background-color: #5276be;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
         }
     </style>
     <div class="button-group">

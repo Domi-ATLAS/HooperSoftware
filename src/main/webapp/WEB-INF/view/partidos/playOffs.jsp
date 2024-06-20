@@ -10,12 +10,12 @@
             border-color: black;
             margin: 10px 0;
             padding: 10px;
-            background-color: #8cb8c7;
+            background-color: #ffffff;
         }
         .details-button {
             margin-top: 10px;
             padding: 5px 10px;
-            background-color: #04AA6D;
+            background-color: #1D428A;
             color: #000000;
             border: 4px;
             border-style: outset;
@@ -25,6 +25,7 @@
             font: Copperplate, Papyrus, fantasy;
             
         }
+        
     </style>
 
     <h1>Playoffs de la NBA</h1>

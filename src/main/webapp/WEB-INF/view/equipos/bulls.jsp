@@ -21,7 +21,7 @@
                 <c:forEach var="equipo" items="${clasificacion}" varStatus="status">
                     <c:choose>
                         <c:when test="${equipo.nombreEquipo == chicagoBulls.nombreEquipo}">
-                            <li style="color: rgb(190, 0, 0);">
+                            <li style="color: rgb(101, 150, 241);">
                                 ${status.index + 1}. ${equipo.nombreEquipo} - 
                                 Partidos ganados: ${equipo.partidosGanados} - 
                                 Partidos perdidos: ${equipo.partidosPerdidos} - 

@@ -5,7 +5,7 @@
 <Layaout:layaout title="Serie">
     <style>
         body {
-            background-color: #0c7da3; /* Color de fondo azulado */
+            background-color: #ffffff; /* Color de fondo azulado */
             display: flex;
             height: 100vh;
             margin: 0;

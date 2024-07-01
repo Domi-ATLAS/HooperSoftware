@@ -5,7 +5,7 @@
 <Layaout:layaout title="Detalles Jugador">
     
 
-    <button onClick="window.location.href='/allPlayers'">Todos los Jugadores</button>
+    <button onClick="window.location.href='/allPlayers'">Volver a Jugadores y Entrenadores</button>
 
     <div class="container">
         <h1>Detalles del Jugador</h1>

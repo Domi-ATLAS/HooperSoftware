@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import HooperSoftware.TFG.entidad.Entrenador;
+import HooperSoftware.TFG.entidad.Equipo;
 
 @Repository
 public interface EntrenadorRepository extends CrudRepository<Entrenador,Integer>{
@@ -38,4 +39,6 @@ public interface EntrenadorRepository extends CrudRepository<Entrenador,Integer>
     @Query("SELECT e FROM Entrenador e WHERE e.aSidoJugador = ?1")
     List<Entrenador> findByASidoJugador(Boolean aSidoJugador);
 
+    @Query("SELECT e FROM Equipo e JOIN e.entrenadores j WHERE j.nombeEntrenador = ?1")
+    Equipo findEquipoByEntrenador(String e);
 }

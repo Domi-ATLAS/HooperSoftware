@@ -1,7 +1,10 @@
 package HooperSoftware.TFG.controlador;
 
 import HooperSoftware.TFG.entidad.Jugador;
+import HooperSoftware.TFG.entidad.Entrenador;
 import HooperSoftware.TFG.scraping.JugadorScraping;
+import HooperSoftware.TFG.servicio.EntrenadorService;
+import HooperSoftware.TFG.servicio.EstadisticasEntrenadorService;
 import HooperSoftware.TFG.servicio.EstadisticasJugadorService;
 import HooperSoftware.TFG.servicio.JugadorService;
 
@@ -19,11 +22,16 @@ public class JugadorController {
     private final JugadorService jugadorService;
     private final EstadisticasJugadorService estadisticasJugadorService;
     private final JugadorScraping jugadorScraping;
+    private final EntrenadorService entrenadorService;
+    private final EstadisticasEntrenadorService estadisticasEntrenadorService;
 
-    public JugadorController(JugadorService jugadorService, EstadisticasJugadorService estadisticasJugadorService, JugadorScraping jugadorScraping) {
+
+    public JugadorController(JugadorService jugadorService, EstadisticasJugadorService estadisticasJugadorService, JugadorScraping jugadorScraping, EntrenadorService entrenadorService, EstadisticasEntrenadorService estadisticasEntrenadorService) {
         this.jugadorService = jugadorService;
         this.estadisticasJugadorService = estadisticasJugadorService;
         this.jugadorScraping = jugadorScraping;
+        this.entrenadorService = entrenadorService;
+        this.estadisticasEntrenadorService = estadisticasEntrenadorService;
     }
 
     @GetMapping("/allPlayers")
@@ -31,6 +39,7 @@ public class JugadorController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("jugadores/allPlayers");
         mav.addObject("players", jugadorService.findAll());
+        mav.addObject("trainers", entrenadorService.findAll());
         return mav;
     }        
 
@@ -43,6 +52,18 @@ public class JugadorController {
         mav.addObject("player", jugador);
         mav.addObject("equipo", jugadorService.findEquipoByJugador(jugador.getNombreJugador()));
         mav.addObject("estadisticas", estadisticasJugadorService.findEstadisticasJugadorById(jugador.getEstadisticasJug().getIdEstJugador()));
+        return mav;
+    }
+
+
+    @GetMapping("/trainer/{idEntrenador}")
+    public ModelAndView showTrainerPage(@PathVariable("idEntrenador") Integer idEntrenador) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("jugadores/trainer");
+        Entrenador entrenador = entrenadorService.findEntrById(idEntrenador);
+        mav.addObject("trainer", entrenador);
+        mav.addObject("equipo", entrenadorService.findEquipoByEntrenador(entrenador.getNombeEntrenador()));
+        mav.addObject("estadisticas", estadisticasEntrenadorService.findEstadisticasEntrenadorById(entrenador.getEstadisticasEntr().getIdEstEntrenador()));
         return mav;
     }
 

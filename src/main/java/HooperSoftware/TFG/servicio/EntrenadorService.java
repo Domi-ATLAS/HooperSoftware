@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import HooperSoftware.TFG.entidad.Entrenador;
+import HooperSoftware.TFG.entidad.Equipo;
 import HooperSoftware.TFG.repositorio.EntrenadorRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,11 @@ public class EntrenadorService {
     @Transactional
     public void deleteEntrenador(Integer id){
         repository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Equipo findEquipoByEntrenador(String nombre){
+        return repository.findEquipoByEntrenador(nombre);
     }
     
 }

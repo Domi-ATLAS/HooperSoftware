@@ -32,7 +32,6 @@
             border-color: black;
             font-family: fantasy;
             font: Copperplate, Papyrus, fantasy;
-            text-shadow: 2px 2px 5px #C8102E;
         }
         button:hover {background-color: #5276be}
     

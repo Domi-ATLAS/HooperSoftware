@@ -1,8 +1,12 @@
 -- USUARIIOS
 
-INSERT INTO usuario(nombre_usuario, contrasena, correo, equipo_favorito, foto, nick_name, numero_telefono) VALUES ('Juan Lopez', 'string123', 'ju@ja.ji', 'Dallas Mavericks', 'http', 'juanito32', '62326742');
-INSERT INTO usuario(nombre_usuario, contrasena, correo, equipo_favorito, foto, nick_name, numero_telefono) VALUES ('Eduardo Pizarro', 'string123', 'edupriv2002@gmail.com', 'Chicago Bulls', 'http', 'pizarrock', '648068282');
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono, enabled) VALUES ('Juan Lopez', 'string123', 'ju@ja.ji', 'Dallas Mavericks', 'http', 'juanito32', '62326742', true);
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono, enabled) VALUES ('Eduardo Pizarro', 'string123', 'edupriv2002@gmail.com', 'Chicago Bulls', 'http', 'pizarrock', '648068282', true);
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono, enabled) VALUES ('Administrador', '$2a$10$v.w0enHO.I/FTi7QZs39kO1NxDQkS45CM.tIfMT7nnHEOISwU3N/.', 'HooperSoftwareContact@gmail.com', '', '', 'admin', '623126742', true);
 
+
+
+INSERT INTO authorities(id,username,authority) VALUES (1,'admin','admin');
 
 -- EQUIPOS
 

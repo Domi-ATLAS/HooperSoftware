@@ -25,14 +25,4 @@ public class WelcomeController {
         ModelAndView mv = new ModelAndView("noticias");
         return mv;
     }
-
-
-    @GetMapping("/login")
-    public String login(@PathParam("error") String error, Model model) {
-        if (error != null) {
-            List<String> errors = List.of("Lo sentimos pero el usuario y la contraseña no coinciden con los de ningún usuario registrado o habilitado");
-            model.addAttribute("errors", errors);
-        }
-        return "login";
-    }
 }

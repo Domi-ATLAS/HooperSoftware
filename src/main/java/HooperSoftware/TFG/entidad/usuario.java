@@ -21,7 +21,7 @@ import HooperSoftware.TFG.entidad.Votacion;
 @Entity
 public class Usuario {
 
-    @Id
+    
     String nombreUsuario;
 
     Integer numeroTelefono;
@@ -30,9 +30,12 @@ public class Usuario {
 
     String equipoFavorito;
 
-    String nickName;
+    @Id
+    String username;
 
-    String contrasena;
+    Boolean enabled;
+
+    String password;
 
     String foto;
 

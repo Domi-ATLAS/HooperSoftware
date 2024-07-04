@@ -15,5 +15,6 @@ public interface AuthoritiesRepository extends CrudRepository<Authorities, Integ
     Integer findMaxId();
 
     @Query("SELECT a FROM Authorities a WHERE a.usuario.username = ?1")
-    Authorities findByNickname(String nickName);
+    Authorities findByUsername(String nickName);
+
 }

@@ -31,7 +31,12 @@ public class AuthoritiesService {
 
     @Transactional(readOnly=true)
     public Authorities findByNickname(String username){
-        return authoritiesRepository.findByNickname(username);
+        return authoritiesRepository.findByUsername(username);
+    }
+
+    @Transactional(readOnly=true)
+    public Authorities findByUsername(String username){
+        return authoritiesRepository.findByUsername(username);
     }
 
     

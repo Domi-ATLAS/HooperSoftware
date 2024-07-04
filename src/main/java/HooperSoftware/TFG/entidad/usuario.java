@@ -1,5 +1,6 @@
 package HooperSoftware.TFG.entidad;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -36,6 +37,14 @@ public class Usuario {
     Boolean enabled;
 
     String password;
+
+    Date fechaNacimiento;
+
+    Date fechaRegistro;
+
+    Date fechaUltimoAcceso;
+
+    Date fechaUltimaModificacion;
 
     String foto;
 

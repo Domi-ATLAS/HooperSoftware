@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 
-<CUPES:layout title="Iniciar sesión">
+<Layaout:layaout title="Iniciar sesión">
     <div class="register">
         <h1 class="title">Iniciar sesión</h1>
         <c:if test="${not empty errors}">
@@ -16,34 +16,33 @@
                 </c:forEach>
             </div>
         </c:if>
-        <form:form modelAttribute="usuario">
+        <form:form modelAttribute="usuario" method="post">
             <div>
-                <label for="username">Usuario:</label>
+                <label for="nickName">Usuario:</label>
             </div>
             <div>
-                <input class="input-large" type="text" id="username" name="username" required>
+                <input class="input-large" type="text" id="nickName" name="nickName" required>
             </div>
             <div class="errors" style="color:red">
                 <c:out value="${existsError}"/>
-                <c:out value="${usernameError}"/>
+                <c:out value="${nickNameError}"/>
             </div>
             <br>
             <div>
-                <label for="password">Contraseña:</label>
+                <label for="contrasena">Contraseña:</label>
                 <i id="iconoMostrar" class="fas fa-eye"></i>
             </div>
             <div>
-                <input type="password" class="input-large" id="password" name="password">
+                <input type="password" class="input-large" id="contrasena" name="contrasena">
             </div>
             <div class="errors" style="color:red">
-                <c:out value="${passwordError}"/>
+                <c:out value="${contrasenaError}"/>
             </div>
             <br>
             <button class="buttom" type="submit">Iniciar Sesión</button>
         </form:form>
         <div>
-            <p class="game">¿Aún no tienes cuenta? <a href="/usuarios/new" class="buttom-positive">Registrate</a></p>
+            <p class="game">¿Aún no tienes cuenta? <a href="/new" class="buttom-positive">Registrate</a></p>
         </div>
     </div>
-    
-</CUPES:layout>
+</Layaout:layaout>

@@ -32,7 +32,7 @@ public class SecurityConfig {
             .requestMatchers("/administration/**").hasAuthority("admin")
             .requestMatchers("/players/profile/**","/players/edit","/players/changePassword").authenticated()
             .requestMatchers("/statistics/**").permitAll()
-			.anyRequest().denyAll()
+			.anyRequest().permitAll()
 		)
 		.formLogin(login -> login
                 .loginPage("/login")

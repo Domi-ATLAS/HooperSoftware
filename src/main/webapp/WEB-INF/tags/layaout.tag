@@ -65,7 +65,7 @@
             <button onClick="window.location.href='/allGames'">Partidos</button>            
             <button onClick="window.location.href='/allPlayOffs'">Play Offs</button>
             <button onClick="window.location.href='/allVotes'">Votaciones</button>
-            <button>Perfil</button>
+            <button onClick="window.location.href='/profile'">Perfil</button>
             <button>Buscador</button>
             <button onClick="window.location.href='/allPlayers'">Jugadores | Entrenadores</button>
         </div>

@@ -43,8 +43,8 @@
         }
     </style>
     <div class="button-group">
-        <button>Iniciar Sesion</button>
-        <button>Registrarse</button>
+        <button onClick="window.location.href='/login'">Iniciar Sesion</button>
+        <button onClick="window.location.href='/new'">Registrarse</button>
         <button onClick="window.location.href='/noticias'">Entrar sin cuenta</button>
     </div>
 </Layaout:layaout>

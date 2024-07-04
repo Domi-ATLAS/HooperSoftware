@@ -30,9 +30,11 @@ public class Usuario {
 
     String equipoFavorito;
 
-    String nickName;
+    String username;
 
-    String contrasena;
+    Boolean enabled;
+
+    String password;
 
     String foto;
 

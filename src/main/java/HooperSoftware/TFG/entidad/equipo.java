@@ -64,6 +64,8 @@ public class Equipo {
 
     String logoEquipo;
 
+    String dorsalesRetirados;
+
     @OneToMany
     List<Jugador> jugadores;
 

@@ -12,7 +12,7 @@
         <title>Denver Nuggets</title>
     </head>
     <body>
-        <img src="/images/bulls.png">
+        <img src="/images/nuggets.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

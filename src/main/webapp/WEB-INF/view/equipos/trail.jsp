@@ -12,7 +12,7 @@
         <title>Portland Trail Blazers</title>
     </head>
     <body>
-        <img src="/images/bulls.png">
+        <img src="/images/trail.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

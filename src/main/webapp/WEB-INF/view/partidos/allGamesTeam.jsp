@@ -2,7 +2,7 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<Layaout:layaout title="Partidos">
+<Layaout:layaout title="Partidos del Equipo">
     <style>
         body {
             background-color: #ffffff; /* Color de fondo azulado */
@@ -37,22 +37,20 @@
             margin-bottom: 20px;
         }
     </style>
-    <h1>Partidos</h1>
-
-    <button onClick="window.location.href='/allGames/allJornadas'">Vista Jornada</button>
-    <button onClick="window.location.href='/allSeasons'">Vista Temporada</button>
+    <h1>Partidos del Equipo</h1>
 
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
         <select id="teams" name="teams">
             <option value="">Todos los equipos</option>
             <c:forEach var="equipo" items="${equipos}">
-                <option value="${equipo.idEquipo}">${equipo.nombreEquipo}</option>
+                <option value="${equipo.idEquipo}" <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>${equipo.nombreEquipo}</option>
             </c:forEach>
         </select>
         <button type="submit">Filtrar</button>
     </form>
 
+    <h2>Partidos del Equipo</h2>
     <table>
         <tr>
             <th>Equipo local</th>
@@ -61,7 +59,7 @@
             <th>Fecha</th>
             <th></th>
         </tr>
-        <c:forEach var="partido" items="${games}">
+        <c:forEach var="partido" items="${gamesOfTheTeam}">
             <tr>
                 <td>${partido.equipoLocal}</td>
                 <td>${partido.equipoVisitante}</td>

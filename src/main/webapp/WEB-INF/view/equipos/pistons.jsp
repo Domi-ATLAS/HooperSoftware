@@ -12,7 +12,7 @@
         <title>Detroit Pistons</title>
     </head>
     <body>
-        <img src="/images/bulls.png">
+        <img src="/images/pistons.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

@@ -36,6 +36,22 @@ public class Jugador {
 
     Integer dorsal;
 
+    String dorsales;
+
+    Boolean retirado;
+
+    Boolean hallOfFame;
+
+    String universidad;
+
+    String paisNacimiento;
+
+    String ciudadNacimiento;
+
+    String alturaJug;
+
+    String pesoJug;
+
     String trayectoriaJug;
 
     Integer anoDraft;

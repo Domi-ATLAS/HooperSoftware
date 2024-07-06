@@ -12,7 +12,7 @@
         <title>New York Knicks</title>
     </head>
     <body>
-        <img src="/images/bulls.png">
+        <img src="/images/knicks.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

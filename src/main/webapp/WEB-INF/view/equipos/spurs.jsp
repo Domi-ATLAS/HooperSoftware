@@ -12,7 +12,7 @@
         <title>San Antonio Spurs</title>
     </head>
     <body>
-        <img src="/images/bulls.png">
+        <img src="/images/spurs.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

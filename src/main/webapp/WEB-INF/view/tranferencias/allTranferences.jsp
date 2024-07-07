@@ -56,7 +56,7 @@ function toggleTransferencia(id) {
     <h1>Transferencias</h1>
     <c:forEach var="transferencia" items="${transferences}" varStatus="status">
         <div class="group" onClick="toggleTransferencia('transferencia${status.index}')">
-            <p>${transferencia.equipoOrigen} &rarr; ${transferencia.equipoDestino}</p>
+            <p>${transferencia.equipoOrigenString} &rarr; ${transferencia.equipoDestinoString}</p>
             <p>Fecha: ${transferencia.fecha}</p>
         </div>
         <div id="transferencia${status.index}" style="display: none;">

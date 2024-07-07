@@ -12,7 +12,7 @@
             border-color: black;
             margin: 10px 0;
             padding: 10px;
-            background-color: #1D428A;
+            background-color: #ffffff;
         }
         .section {
             width: 19%;
@@ -26,7 +26,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #C8102E;
+            background-color: #5276be;
             font-family: fantasy;
             font: Copperplate, Papyrus, fantasy;
         }

@@ -49,6 +49,16 @@
     <button onClick="window.location.href='/allGames'">Vista Partidos</button>
     <button onClick="window.location.href='/allSeasons'">Vista Temporada</button>
 
+    <form class="filter-form" method="get" action="/allGames/jornadas">
+        <label for="teams">Filtra por equipo:</label>
+        <select id="teams" name="teamId">
+            <option value="">Todos los equipos</option>
+            <c:forEach var="equipo" items="${equipos}">
+                <option value="${equipo.idEquipo}">${equipo.nombreEquipo}</option>
+            </c:forEach>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
 
     <c:forEach var="jornada" items="${jornadas}" varStatus="status">
         <div onClick="togglePartidos('partidos${status.index}')">
@@ -62,7 +72,9 @@
             <h3>Partidos:</h3>
             <ul>
                 <c:forEach var="partido" items="${jornada.partidos}">
-                    <li>${partido.equipoLocal} vs ${partido.equipoVisitante} : ${partido.resultadoTotal} <button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button></li>
+                    <li>${partido.equipoLocal} vs ${partido.equipoVisitante} : ${partido.resultadoTotal} 
+                        <button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button>
+                    </li>
                 </c:forEach>
             </ul>
         </div>

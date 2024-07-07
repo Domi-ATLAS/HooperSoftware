@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import HooperSoftware.TFG.entidad.Jornada;
@@ -59,7 +60,7 @@ public interface JornadaRepository extends CrudRepository<Jornada,Integer>{
     @Query("SELECT j FROM Jornada j WHERE j.temporada = ?1 AND j.numJornada = ?2 AND j.partidoCancelado = false")
     List<Jornada> findJornadaByTemporadaAndNumJornadaAndNoCancelado(String temporada, Integer numJornada);
 
-    
-
+    @Query("SELECT j FROM Jornada j JOIN j.partidos p WHERE p.equipoLocalT.id = :teamId OR p.equipoVisitanteT.id = :teamId")
+    List<Jornada> findJornadasByTeamId(@Param("teamId") Integer teamId);
 
 }

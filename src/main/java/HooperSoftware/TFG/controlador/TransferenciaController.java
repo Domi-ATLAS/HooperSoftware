@@ -21,4 +21,6 @@ public class TransferenciaController {
         mav.addObject("transferences", transferenciaService.findAll());
         return mav;
     }
+
+    
 }

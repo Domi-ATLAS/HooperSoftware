@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ tag description="Global Layout" %>
 <%@ attribute name="title" required="true" rtexprvalue="true" description="Layaout to explore all, always" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 
 <!DOCTYPE html>
@@ -65,9 +66,12 @@
             <button onClick="window.location.href='/allGames'">Partidos</button>            
             <button onClick="window.location.href='/allPlayOffs'">Play Offs</button>
             <button onClick="window.location.href='/allVotes'">Votaciones</button>
-            <button>Perfil</button>
+            <button onClick="window.location.href='/profile'">Perfil</button>
             <button>Buscador</button>
             <button onClick="window.location.href='/allPlayers'">Jugadores | Entrenadores</button>
+              <sec:authorize access="hasAuthority('admin')">
+                <button onClick="window.location.href='/allPlayers'">Simulaciones</button>
+            </sec:authorize>
         </div>
     
 
@@ -86,7 +90,7 @@
             <button onClick="window.location.href='/equipos/CharlotteHornets'"><img src="/images/hornets.png" alt="CharlotteHornets"></button>
             <button onClick="window.location.href='/equipos/AtlantaHawks'"><img src="/images/atl.png" alt="AtlantaHawks"></button>
             <button onClick="window.location.href='/equipos/OrlandoMagic'"><img src="/images/orlando.png" alt="OrlandoMagic"></button>
-            <button onClick="window.location.href='/equipos/MiamiHeat'"><img src="/images/heats.png" alt="MiamiHeat"></button>
+            <button onClick="window.location.href='/equipos/MiamiHeat'"><img src="/images/heat.png" alt="MiamiHeat"></button>
             <button onClick="window.location.href='/equipos/SacramentoKings'"><img src="/images/kings.png" alt="SacramentoKings"></button>
             <button onClick="window.location.href='/equipos/GoldenStateWarriors'"><img src="/images/golden state.png" alt="GoldenStateWarriors"></button>
             <button onClick="window.location.href='/equipos/LosAngelesClippers'"><img src="/images/clippers.png" alt="LosAngelesClippers"></button>
@@ -116,6 +120,9 @@
     <footer>
         <div>
             <p>Correo de contacto: hooperSoftware@gmail.com Tlf: 623 126 742</p>
+            <sec:authorize access="isAuthenticated()">
+            <li><a class="cerrar-link" href="/logout"><i class="fas fa-sign-in-alt"></i> Cerrar sesi&oacute;n</a></li>
+            </sec:authorize>
         </div>
     </footer>
 </body>

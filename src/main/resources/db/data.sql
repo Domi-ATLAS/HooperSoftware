@@ -3,7 +3,7 @@
 INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono) VALUES ('Juan Lopez', 'string123', 'ju@ja.ji', 'Dallas Mavericks', 'http', 'juanito32', '62326742');
 INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono) VALUES ('Eduardo Pizarro', 'string123', 'edupriv2002@gmail.com', 'Chicago Bulls', 'http', 'pizarrock', '648068282');
 
-INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, enabled, username, numero_telefono) VALUES ('admin','$2a$10$v.w0enHO.I/FTi7QZs39kO1NxDQkS45CM.tIfMT7nnHEOISwU3N/.', 'admin@admin.es', '', '', true,'admin','623126742');
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, enabled, username, numero_telefono) VALUES ('admin','$2a$12$HBi9mqAheugvoehw0QNzcOtSl11G.2qDFZcqlKetZ552mXsTA.1Hq', 'admin@admin.es', '', '', true,'admin','623126742');
 
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin','admin');
 

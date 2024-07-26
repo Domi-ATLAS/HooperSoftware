@@ -54,7 +54,7 @@
                 <div class="registerInfo">
                     <p class="register">Regístrate por si quieres guardar informacion personal y poder conversar con otras personas</p>
                     <p class="register">Tambien puedes no hacerlo :|, y aunque no nos gustaria puedes tener acceso a toda la información de la web</p>
-                    <a class="buttom" href="/noticias">Acceso al portal</a>
+                    <a class="buttom" href="/noticias">Acceso a la web</a>
                 </div>
                 <p class="register">¿Ya tienes una cuenta?<a href="/login" class="buttom-positive">Iniciar sesión</a> </p>
             </div>

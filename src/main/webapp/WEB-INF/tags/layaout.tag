@@ -5,29 +5,35 @@
 
 
 <!DOCTYPE html>
-<style>
-    header {
-        position: fixed; /* Esto hace que el encabezado se mantenga en la misma posición incluso al desplazarse */
-        top: 0; /* Esto coloca el encabezado en la parte superior de la página */
-        left: 0; /* Esto alinea el encabezado a la izquierda */
-        width: 100%; /* Esto asegura que el encabezado se extienda a lo largo de toda la página */
-        z-index: 1000; /* Esto asegura que el encabezado siempre esté en la parte superior de otros elementos */
-    }
-    body {
-        font-family: fantasy;
-        font: Copperplate, Papyrus, fantasy;
-        padding-top: 260px; 
-        padding-bottom: 100px;
-        background-color: #ffffff; /* Color de fondo azulado */
-    }
-    footer {
-        position: fixed; /* Esto hace que el pie de página se mantenga en la misma posición incluso al desplazarse */
-        bottom: 0; /* Esto coloca el pie de página en la parte inferior de la página */
-        width: 100%; /* Esto asegura que el pie de página se extienda a lo largo de toda la página */
-        text-align: center; /* Esto centra el texto dentro del pie de página */
-        z-index: 1000; /* Esto asegura que el pie de página siempre esté en la parte superior de otros elementos */
-    }
-    button {
+ <style>
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        body {
+            font-family: fantasy;
+            font: Copperplate, Papyrus, fantasy;
+            padding-top: 260px; 
+            padding-bottom: 100px;
+            background-color: #ffffff;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 1000;
+        }
+        .logout{
+             background-color: #289EEA;
+        }
+        button {
             display: inline-block;
             padding: 2px 2px;
             font-size: 24px;
@@ -41,16 +47,21 @@
             border-style: outset;
             border-color: black;
             font-family: fantasy;
-            font: Copperplate, Papyrus, fantasy;
         }
         button:hover {background-color: #5276be}
-    
         button:active {
-        background-color: #5276be;
-        box-shadow: 0 5px #666;
-        transform: translateY(4px);
+            background-color: #5276be;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
         }
-</style>
+        .left-buttons, .right-buttons {
+            display: flex;
+            gap: 10px;
+        }
+         #secondary-header {
+            top: 70px; /* Adjust this value to match the height of your primary header */
+        }
+    </style>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
@@ -58,24 +69,38 @@
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-    <header>
-        <div>
+    <header id="primary-header">
+        <div class="left-buttons">
             <button><img src="/images/HS.png"></button>
             <button onClick="window.location.href='/noticias'">Noticias</button>
             <button onClick="window.location.href='/allTranferences'">Transferencias</button>
             <button onClick="window.location.href='/allGames'">Partidos</button>            
             <button onClick="window.location.href='/allPlayOffs'">Play Offs</button>
             <button onClick="window.location.href='/allVotes'">Votaciones</button>
-            <button onClick="window.location.href='/profile'">Perfil</button>
+            <sec:authorize access="isAuthenticated()">
+                <button onClick="window.location.href='/profile'">Perfil</button>
+            </sec:authorize>
             <button>Buscador</button>
             <button onClick="window.location.href='/allPlayers'">Jugadores | Entrenadores</button>
               <sec:authorize access="hasAuthority('admin')">
                 <button onClick="window.location.href='/allPlayers'">Simulaciones</button>
+            </sec:authorize>    
+        </div>
+        <div class="right-buttons">
+            <sec:authorize access="!isAuthenticated()">
+                <button onClick="window.location.href='/login'">Iniciar Sesion</button>
+                <button onClick="window.location.href='/new'">Registrarse</button>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+            <button class="logout"><a class="cerrar-link" href="/logout"><i class="fas fa-sign-in-alt"></i> Cerrar sesi&oacute;n</a></button>
             </sec:authorize>
         </div>
     
 
-        <div>
+        
+    </header>
+<header id="secondary-header">
+    <div >
             <button onClick="window.location.href='/equipos/ChicagoBulls'"><img src="/images/bulls.png" alt="ChicagoBulls"></button>
             <button onClick="window.location.href='/equipos/BostonCeltics'"><img src="/images/boston.png" alt="BostonCeltics"></button>
             <button onClick="window.location.href='/equipos/IndianaPacers'"><img src="/images/pacers.png" alt="IndianaPacers"></button>
@@ -107,8 +132,7 @@
             <button onClick="window.location.href='/equipos/HoustonRockets'"><img src="/images/rockets.png" alt="HoustonRockets"></button>
             <button onClick="window.location.href='/equipos/MemphisGrizzlies'"><img src="/images/memphs.png" alt="MemphisGrizzlies"></button>
         </div>
-    </header>
-
+</header>
     <div class="content">
         <div class="doBody">
           <div class="theBody">
@@ -120,9 +144,6 @@
     <footer>
         <div>
             <p>Correo de contacto: hooperSoftware@gmail.com Tlf: 623 126 742</p>
-            <sec:authorize access="isAuthenticated()">
-            <li><a class="cerrar-link" href="/logout"><i class="fas fa-sign-in-alt"></i> Cerrar sesi&oacute;n</a></li>
-            </sec:authorize>
         </div>
     </footer>
 </body>

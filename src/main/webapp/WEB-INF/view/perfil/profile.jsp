@@ -37,10 +37,10 @@
         <p class="perfil">Email: <c:out value="${usuario.getCorreo()}"/></p>
         <div class="block">
                 <c:if test="${usuario.getUsername()==principal.getName()}">
-                    <a href="/usuario/edit" class="buttom">Editar mi perfil</a>
+                    <a href="/edit" class="buttom">Editar mi perfil</a>
                 </c:if>
                 <c:if test="${usuario.getUsername()==principal.getName()}">
-                    <a href="/usuario/changePassword" class="buttom">Cambiar mi contraseña</a>
+                    <a href="/changePassword" class="buttom">Cambiar mi contraseña</a>
                 </c:if>
         </div>
     </div>

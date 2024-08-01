@@ -32,6 +32,25 @@
                         <div>
                             <input class="input-large" type="text" id="correo" name="correo" value=<c:out value='${usuario.getCorreo()}'/> required>
                         </div>
+                        <div>
+                            <label for="name">Numero de Telefono:</label>
+                        </div>
+                        <div>
+                            <input class="input-large" type="text" id="numeroTelefono" name="numeroTelefono" value=<c:out value='${usuario.getNumeroTelefono()}'/> required>
+                        </div>
+                        <div>
+                            <label for="name">Equipo Favorito:</label>
+                        </div>
+                        <div>
+                            <input class="input-large" type="text" id="equipoFavorito" name="equipoFavorito" value=<c:out value='${usuario.getEquipoFavorito()}'/> required>
+                        </div>
+                        <div>
+                            <label for="name">Cargar nueva foto:</label>
+                        </div>
+                        <div>
+                            <input class="input-large" type="text" id="foto" name="foto" value=<c:out value='${usuario.getFoto()}'/> required>
+                        </div>
+
                     </div>
                     <div class="block">
                         <button class="buttom" type="submit">Editar</button>

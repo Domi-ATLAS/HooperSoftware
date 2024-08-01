@@ -30,9 +30,6 @@
             text-align: center;
             z-index: 1000;
         }
-        .logout{
-             background-color: #289EEA;
-        }
         button {
             display: inline-block;
             padding: 2px 2px;
@@ -92,7 +89,7 @@
                 <button onClick="window.location.href='/new'">Registrarse</button>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
-            <button class="logout"><a class="cerrar-link" href="/logout"><i class="fas fa-sign-in-alt"></i> Cerrar sesi&oacute;n</a></button>
+            <button><a class="cerrar-link" href="/logout"><i class="fas fa-sign-in-alt"></i> Cerrar sesi&oacute;n</a></button>
             </sec:authorize>
         </div>
     

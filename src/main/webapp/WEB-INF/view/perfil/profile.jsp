@@ -22,6 +22,30 @@
         th {
             background-color: #f2f2f2;
         }
+        a{
+            display: inline-block;
+            padding: 2px 2px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #000000;
+            background-color: #1D428A;
+            border: 4px;
+            border-style: outset;
+            border-color: black;
+            font-family: fantasy;
+            font: Copperplate, Papyrus, fantasy;
+        }
+        a:active{
+            background-color: #5276be;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        a:hover{
+            background-color: #5276be;
+        }
     </style>
     <div class="left">
         <h1 class="title">Perfil de <c:out value="${usuario.getUsername()}"/></h1>
@@ -33,8 +57,12 @@
                 </div>
             </div>
         </c:if>
+        <p class="perfil"> <c:out value="${usuario.getFoto()}"/></p>
         <p class="perfil">Nombre: <c:out value="${usuario.getNombreUsuario()}"/></p>
         <p class="perfil">Email: <c:out value="${usuario.getCorreo()}"/></p>
+        <p class="perfil">Numero de Telefono: <c:out value="${usuario.getNumeroTelefono()}"/></p>
+        <p class="perfil">Equipo Favorito: <c:out value="${usuario.getEquipoFavorito()}"/></p>
+        
         <div class="block">
                 <c:if test="${usuario.getUsername()==principal.getName()}">
                     <a href="/edit" class="buttom">Editar mi perfil</a>

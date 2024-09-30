@@ -54,6 +54,18 @@ function toggleTransferencia(id) {
         }
     </style>
     <h1>Transferencias</h1>
+
+    <form class="filter-form" onsubmit="filterByTeam(event)">
+        <label for="teams">Filtra por equipos:</label>
+        <select id="teams" name="teams">
+            <option value="">Todos los equipos</option>
+            <c:forEach var="equipo" items="${equipos}">
+                <option value="${equipo.idEquipo}">${equipo.nombreEquipo}</option>
+            </c:forEach>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
     <c:forEach var="transferencia" items="${transferences}" varStatus="status">
         <div class="group" onClick="toggleTransferencia('transferencia${status.index}')">
             <p>${transferencia.equipoOrigenString} &rarr; ${transferencia.equipoDestinoString}</p>
@@ -67,3 +79,16 @@ function toggleTransferencia(id) {
         </div>
     </c:forEach>
 </Layaout:layaout>
+
+
+<script>
+    function filterByTeam(event) {
+        event.preventDefault();
+        var teamId = document.getElementById("teams").value;
+        if (teamId) {
+            window.location.href = '/allTranferences/' + encodeURIComponent(teamId);
+        } else {
+            window.location.href = '/allTranferences';
+        }
+    }
+    </script>

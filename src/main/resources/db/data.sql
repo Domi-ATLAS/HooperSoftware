@@ -1411,7 +1411,7 @@ INSERT INTO entrenador(id_entrenador, nombe_entrenador, equipo_entr, trayectoria
 
 -- TRANSFERENCIAS
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('1', '0', 'true', '2024-02-08', 'Boston Celtics', 'Portland Trail Blazers', 'Boston se lleva una segunda ronda protegida');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft, equipo_origen, equipo_destino) VALUES ('1', '0', 'true', '2024-02-08', 'Boston Celtics', 'Portland Trail Blazers', 'Boston se lleva una segunda ronda protegida', '1', '19');
 INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('2', '0', 'true', '2024-01-01', 'Philadelphia 76ers', 'Boston Celtics', 'Boston se lleva una segunda ronda');
 INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('3', '0', 'false', '2024-01-01', 'Milwaukee Bucks', 'Sacramento Kings', '');
 INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('4', '0', 'true', '2024-01-01', 'Indiana Pacers', 'San Antonio Spurs', 'Pacers se lleva una segunda ronda');
@@ -1519,7 +1519,7 @@ INSERT INTO clasificacion(temporada, primero_este, segundo_este, tercero_este, c
 
 
 
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off, fecha) VALUES ('1', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Boston Celtics', 'Brooklyn Nets', null, '2024-02-08');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off, fecha, equipo_local_ta, equipo_visitante_ta) VALUES ('1', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Boston Celtics', 'Brooklyn Nets', null, '2024-02-08', '1', '2');
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('2', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Brooklyn Nets', 'New York Knicks', null);
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('3', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '10-11','3-2', 'Brooklyn Nets', 'New York Knicks', '1');
 
@@ -1641,7 +1641,7 @@ INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultado
 
 -- PARTIDOS PLAYOFF 2010-2011
 
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('88', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'San Antonio Spurs', 'Memphis Grizzlies', 2);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('88', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2010-2011','3-2', 'San Antonio Spurs', 'Memphis Grizzlies', 2);
 
 
 -- VOTACIONES

@@ -46,4 +46,9 @@ public class TransferenciaService {
         }
         return null;
     }
+
+    @Transactional(readOnly = true)
+    public List<Transferencia> findAllTransferencesByTeamById(Integer teamId) {
+        return transferenciaRepository.findAllTransferencesByTeamById(teamId);
+    }
 }

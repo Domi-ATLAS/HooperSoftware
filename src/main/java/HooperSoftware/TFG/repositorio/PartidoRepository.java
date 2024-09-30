@@ -66,7 +66,7 @@ public interface PartidoRepository extends CrudRepository<Partido,Integer> {
     @Query("SELECT p FROM Partido p WHERE p.playOffSiONo = true AND p.temporada = ?1")
     List<Partido> findPlayOffGamesByTemporada(String temporada);
 
-    @Query("SELECT p FROM Partido p WHERE p.equipoLocal = ?1 OR p.equipoVisitante = ?1 ORDER BY p.fecha DESC")
+    @Query("SELECT p FROM Partido p WHERE p.equipoLocalTa.idEquipo = ?1 OR p.equipoVisitanteTa.idEquipo = ?1 ORDER BY p.fecha DESC")
     List<Partido> findAllGamesByTeamById(Integer id);
 
 }

@@ -75,10 +75,10 @@ public class Partido {
     Playoff playoff;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "equipoLocalT",referencedColumnName = "idEquipo")
-    Equipo equipoLocalT;
+    @JoinColumn(name = "equipoLocalTa",referencedColumnName = "idEquipo")
+    Equipo equipoLocalTa;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "equipoVisitanteT",referencedColumnName = "idEquipo")
-    Equipo equipoVisitanteT;
+    @JoinColumn(name = "equipoVisitanteTa",referencedColumnName = "idEquipo")
+    Equipo equipoVisitanteTa;
 }

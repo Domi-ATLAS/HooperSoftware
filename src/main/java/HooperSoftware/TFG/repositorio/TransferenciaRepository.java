@@ -33,5 +33,8 @@ public interface TransferenciaRepository extends CrudRepository<Transferencia,In
     @Query("SELECT t FROM Transferencia t WHERE t.equipoDestino = ?1")
     List<Transferencia> findTransferenciaByEquipoDestino(String equipoDestino);
 
+    @Query("SELECT t FROM Transferencia t WHERE t.equipoOrigen.idEquipo = ?1 OR t.equipoDestino.idEquipo = ?1")
+    List<Transferencia> findAllTransferencesByTeamById(Integer teamId);
+
 
 }

@@ -53,7 +53,7 @@
         <label for="teams">Filtra por equipo:</label>
         <select id="teams" name="teamId">
             <option value="">Todos los equipos</option>
-            <c:forEach var="equipo" items="${equipos}">
+            <c:forEach var="equipo" items="${game}">
                 <option value="${equipo.idEquipo}">${equipo.nombreEquipo}</option>
             </c:forEach>
         </select>

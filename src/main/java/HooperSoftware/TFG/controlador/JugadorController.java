@@ -1,13 +1,5 @@
 package HooperSoftware.TFG.controlador;
 
-import HooperSoftware.TFG.entidad.Jugador;
-import HooperSoftware.TFG.entidad.Entrenador;
-import HooperSoftware.TFG.scraping.JugadorScraping;
-import HooperSoftware.TFG.servicio.EntrenadorService;
-import HooperSoftware.TFG.servicio.EstadisticasEntrenadorService;
-import HooperSoftware.TFG.servicio.EstadisticasJugadorService;
-import HooperSoftware.TFG.servicio.JugadorService;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -15,6 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+
+import HooperSoftware.TFG.entidad.Entrenador;
+import HooperSoftware.TFG.entidad.Jugador;
+import HooperSoftware.TFG.scraping.JugadorScraping;
+import HooperSoftware.TFG.servicio.EntrenadorService;
+import HooperSoftware.TFG.servicio.EquipoService;
+import HooperSoftware.TFG.servicio.EstadisticasEntrenadorService;
+import HooperSoftware.TFG.servicio.EstadisticasJugadorService;
+import HooperSoftware.TFG.servicio.JugadorService;
 
 @Controller
 public class JugadorController {
@@ -24,14 +25,18 @@ public class JugadorController {
     private final JugadorScraping jugadorScraping;
     private final EntrenadorService entrenadorService;
     private final EstadisticasEntrenadorService estadisticasEntrenadorService;
+    private final EquipoService equipoService;
 
 
-    public JugadorController(JugadorService jugadorService, EstadisticasJugadorService estadisticasJugadorService, JugadorScraping jugadorScraping, EntrenadorService entrenadorService, EstadisticasEntrenadorService estadisticasEntrenadorService) {
+
+    public JugadorController(JugadorService jugadorService, EstadisticasJugadorService estadisticasJugadorService, JugadorScraping jugadorScraping, EntrenadorService entrenadorService, EstadisticasEntrenadorService estadisticasEntrenadorService, EquipoService equipoService) {
         this.jugadorService = jugadorService;
         this.estadisticasJugadorService = estadisticasJugadorService;
         this.jugadorScraping = jugadorScraping;
         this.entrenadorService = entrenadorService;
         this.estadisticasEntrenadorService = estadisticasEntrenadorService;
+        this.equipoService = equipoService;
+
     }
 
     @GetMapping("/allPlayers")
@@ -40,6 +45,8 @@ public class JugadorController {
         mav.setViewName("jugadores/allPlayers");
         mav.addObject("players", jugadorService.findAll());
         mav.addObject("trainers", entrenadorService.findAll());
+        mav.addObject("equipos", equipoService.findAll());
+
         return mav;
     }        
 

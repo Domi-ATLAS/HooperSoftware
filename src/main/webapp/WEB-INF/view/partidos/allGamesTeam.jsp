@@ -36,21 +36,56 @@
         .filter-form {
             margin-bottom: 20px;
         }
+        .row-container {
+            border: 4px solid black; /* Ajustado: borde claro */
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+        /* Aplicar borde y espaciado a las celdas */
+        td {
+            border: 1px solid #000000; /* Borde a las celdas */
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            border: 1px solid #000000; /* Borde a las cabeceras */
+            padding: 8px;
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(odd) {
+            background-color: #f2f2f2; /* Color de fondo para las filas impares */
+        }
+
+        /* Filas pares */
+        tr:nth-child(even) {
+            background-color: #ffffff; /* Color de fondo para las filas pares */
+        }
     </style>
+
     <h1>Partidos del Equipo</h1>
 
+    <!-- Formulario de filtro -->
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
         <select id="teams" name="teams">
             <option value="">Todos los equipos</option>
             <c:forEach var="equipo" items="${equipos}">
-                <option value="${equipo.idEquipo}" <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>${equipo.nombreEquipo}</option>
+                <option value="${equipo.idEquipo}" 
+                        <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>${equipo.nombreEquipo}</option>
             </c:forEach>
         </select>
         <button type="submit">Filtrar</button>
+        
+        <!-- Botón para limpiar los filtros -->
+        <button type="button" onclick="clearFilters()">Limpiar Filtros</button>
     </form>
 
     <h2>Partidos del Equipo</h2>
+
+    <!-- Tabla de partidos -->
     <table>
         <tr>
             <th>Equipo local</th>
@@ -69,9 +104,11 @@
             </tr>
         </c:forEach>
     </table>
+
 </Layaout:layaout>
 
 <script>
+// Función para filtrar los partidos por equipo
 function filterByTeam(event) {
     event.preventDefault();
     var teamId = document.getElementById("teams").value;
@@ -80,5 +117,11 @@ function filterByTeam(event) {
     } else {
         window.location.href = '/allGames';
     }
+}
+
+// Función para limpiar los filtros
+function clearFilters() {
+    // Redirige a la página sin ningún filtro aplicado
+    window.location.href = '/allGames';
 }
 </script>

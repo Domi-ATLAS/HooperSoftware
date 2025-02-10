@@ -36,6 +36,33 @@
         .filter-form {
             margin-bottom: 20px;
         }
+        .row-container {
+            border: 4px solid black; /* Ajustado: borde claro */
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+
+        /* Aplicar borde y espaciado a las celdas */
+        td {
+            border: 1px solid #000000; /* Borde a las celdas */
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            border: 1px solid #000000; /* Borde a las cabeceras */
+            padding: 8px;
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(odd) {
+            background-color: #f2f2f2; /* Color de fondo para las filas impares */
+        }
+
+        /* Filas pares */
+        tr:nth-child(even) {
+            background-color: #ffffff; /* Color de fondo para las filas pares */
+        }
     </style>
     <h1>Partidos</h1>
 

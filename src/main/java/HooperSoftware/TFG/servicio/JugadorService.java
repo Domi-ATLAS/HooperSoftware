@@ -43,5 +43,9 @@ public class JugadorService {
         return repository.findEquipoByNombreJugador(nombre);
     }
 
+    @Transactional(readOnly = true)
+    public List<Jugador> findJugadorByNombre(String nombre){
+        return repository.findJugadorByNombre(nombre);
+    }
     
 }

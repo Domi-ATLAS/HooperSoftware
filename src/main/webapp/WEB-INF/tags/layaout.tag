@@ -29,6 +29,7 @@
             width: 100%;
             text-align: center;
             z-index: 1000;
+            background-color: blue;
         }
         button {
             display: inline-block;
@@ -77,7 +78,7 @@
             <sec:authorize access="isAuthenticated()">
                 <button onClick="window.location.href='/profile'">Perfil</button>
             </sec:authorize>
-            <button>Buscador</button>
+            <button onClick="window.location.href='/buscador'">Buscador</button>
             <button onClick="window.location.href='/allPlayers'">Jugadores | Entrenadores</button>
               <sec:authorize access="hasAuthority('admin')">
                 <button onClick="window.location.href='/allPlayers'">Simulaciones</button>

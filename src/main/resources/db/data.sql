@@ -1411,61 +1411,30 @@ INSERT INTO entrenador(id_entrenador, nombe_entrenador, equipo_entr, trayectoria
 
 -- TRANSFERENCIAS
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft, equipo_origen, equipo_destino) VALUES ('1', '0', 'true', '2024-02-08', 'Boston Celtics', 'Portland Trail Blazers', 'Boston se lleva una segunda ronda protegida', '1', '19');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('2', '0', 'true', '2024-01-01', 'Philadelphia 76ers', 'Boston Celtics', 'Boston se lleva una segunda ronda');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('3', '0', 'false', '2024-01-01', 'Milwaukee Bucks', 'Sacramento Kings', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('4', '0', 'true', '2024-01-01', 'Indiana Pacers', 'San Antonio Spurs', 'Pacers se lleva una segunda ronda');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('5', '0', 'true', '2024-01-01', 'Brooklyn Nets', 'Phoenix Suns', 'Brooklyn se lleva tres segundas rondas');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('6', '0', 'false', '2024-01-01', 'Memphis Grizzlies', 'Phoenix Suns', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('7', '0', 'true', '2024-01-08', 'Milwaukee Bucks', 'Philadelphia 76ers', 'Philadelphia se lleva una segunda ronda de 2027');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('8', '0', 'false', '2024-01-08', 'Philadelphia 76ers', 'Milwaukee Bucks', '');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('9', '0', 'true', '2024-01-08', 'Dallas Mavericks', 'Charlotte Hornets', 'Hornets se lleva una primera ronda protegida de 2027');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('10', '0', 'false', '2024-01-08', 'Charlotte Hornets', 'Dallas Mavericks', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('1', '50', true, '2024-02-08', '1', '19', 'Boston se lleva una segunda ronda protegida');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('11', '0', 'false', '2024-01-08', 'Toronto Raptors', 'Brooklyn Nets', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('12', '0', 'false', '2024-01-08', 'Brooklyn Nets', 'Toronto Raptors', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('2', '0', true, '2024-01-01', '2', '1', 'Boston se lleva una segunda ronda');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('13', '0', 'false', '2024-01-08', 'Dallas Mavericks', 'Washington Wizards', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('14', '0', 'false', '2024-01-08', 'Washington Wizards', 'Washington Wizards', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('3', '0', false, '2024-01-01', '3', '4', '');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('15', '0', 'true', '2024-01-08', 'New York Knicks', 'Detroit Pistons', 'Detroit se lleva dos segundas rondas');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('16', '0', 'true', '2024-01-08', 'Detroit Pistons', 'New York Knicks', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('4', '0', true, '2024-01-01', '5', '6', 'Pacers se lleva una segunda ronda');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('17', '0', 'true', '2024-01-08', 'Philadelphia 76ers', 'Detroit Pistons', 'Detroit se lleva una segunda ronda de 2024 (vía Knicks)');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('18', '0', 'true', '2024-01-08', 'Oklahoma City Thunder', 'Charlotte Hornets', 'Hornets se lleva dos segundas rondas');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('19', '0', 'false', '2024-01-08', 'Charlotte Hornets', 'Oklahoma City Thunder', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('5', '0', true, '2024-01-01', '7', '8', 'Brooklyn se lleva tres segundas rondas');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('20', '0', 'true', '2024-01-08', 'Toronto Raptors', 'Utah Jazz', 'Jazh se lleva una primera ronda de 2024');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('21', '0', 'false', '2024-01-08', 'Utah Jazz', 'Toronto Raptors', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('6', '0', false, '2024-01-01', '9', '8', '');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('22', '0', 'true', '2024-01-08', 'Philadelphia 76ers', 'Indiana Pacers', 'Pacers se lleva tres segundas rondas');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('23', '0', 'false', '2024-01-08', 'Indiana Pacers', 'Philadelphia 76ers', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('7', '0', true, '2024-01-08', '3', '2', 'Philadelphia se lleva una segunda ronda de 2027');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('24', '0', 'true', '2024-02-07', 'Minnesota Timberwolves', 'Detroit Pistons', 'Detroit se lleva una segunda ronda de 2030');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('25', '0', 'false', '2024-02-07', 'Detroit Pistons', 'Minnesota Timberwolves', '');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('26', '0', 'true', '2024-02-07', 'Boston Celtics', 'Memphis Grizzlies', 'Memphis se lleva dos segundas rondas (2027 vía Hawks y 2030 vía Mavs)');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('27', '0', 'false', '2024-02-07', 'Memphis Grizzlies', 'Boston Celtics', '');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('28', '0', 'false', '2024-02-07', 'Utah Jazz', 'Detroit Pistons', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('29', '0', 'true', '2024-02-07', 'Detroit Pistons', 'Utah Jazz', 'Utah se lleva una segunda ronda de 2024 y los derechos del italiano Gabriele Procida');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('30', '0', 'false', '2024-02-01', 'Memphis Grizzlies', 'Houston Rockets', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('31', '0', 'true', '2024-02-01', 'Houston Rockets', 'Memphis Grizzlies', 'Memphis se lleva tres segundas rondas');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('32', '0', 'true', '2024-01-23', 'Miami Heat', 'Charlotte Hornets', 'Hornets se lleva una primera ronda de 2027');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('33', '0', 'false', '2024-01-23', 'Charlotte Hornets', 'Miami Heat', '');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('34', '0', 'true', '2024-01-17', 'Toronto Raptors ', 'Indiana Pacers', 'Pacers se lleva una segunda ronda');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('35', '0', 'true', '2024-01-17', 'New Orleans Pelicans', 'Toronto Raptors ', 'Toronto se lleva tres primeras rondas (dos de 2024 y un de 2026)');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('36', '0', 'true', '2024-01-14', 'Detroit Pistons', 'Washington Wizards', 'Wizards se lleva dos segundas rondas (2025 y 2026)');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('37', '0', 'false', '2024-01-14', 'Washington Wizards', 'Detroit Pistons', '');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('38', '0', 'true', '2023-12-30', 'New York Knicks', 'Toronto Raptors', 'Toronto se lleva una segunda ronda de 2024');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen_string, equipo_destino_string, info_ronda_draft) VALUES ('39', '0', 'false', '2023-12-30', 'Toronto Raptors', 'New York Knicks', '');
-
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('8', '0', false, '2024-01-08', '2', '3', '');
 
 
 
@@ -1520,7 +1489,7 @@ INSERT INTO clasificacion(temporada, primero_este, segundo_este, tercero_este, c
 
 
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off, fecha, equipo_local_ta, equipo_visitante_ta) VALUES ('1', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Boston Celtics', 'Brooklyn Nets', null, '2024-02-08', '1', '2');
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('2', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Brooklyn Nets', 'New York Knicks', null);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off, fecha, equipo_local_ta, equipo_visitante_ta) VALUES ('2', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Brooklyn Nets', 'New York Knicks', null, '2025-01-01', '2', '3');
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('3', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '10-11','3-2', 'Brooklyn Nets', 'New York Knicks', '1');
 
 -- PARTIDOS PLAYOFF 2023-2024
@@ -1810,10 +1779,7 @@ INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('2
 
 
 
-INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('1', '1');
-INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('2', '2');
-INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('3', '3');
-INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('4', '4');
+
 
 INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '1');
 INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '2');

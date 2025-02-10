@@ -49,6 +49,8 @@ public class TransferenciaService {
 
     @Transactional(readOnly = true)
     public List<Transferencia> findAllTransferencesByTeamById(Integer teamId) {
-        return transferenciaRepository.findAllTransferencesByTeamById(teamId);
+        List<Transferencia> res = transferenciaRepository.findAllTransferencesByTeamById(teamId);
+        System.out.println("Transferencias obtenidas: " + res);
+        return res;
     }
 }

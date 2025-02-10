@@ -2,7 +2,6 @@ package HooperSoftware.TFG.servicio;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,4 +93,12 @@ public class PartidoService {
     public List<Partido> findAllGamesByTeamById(Integer id){
         return repository.findAllGamesByTeamById(id);
     }
+
+    
+    @Transactional(readOnly = true)
+    public List<Partido> findPartidoByTeam(String equipo){
+        return repository.findPartidoByTeam(equipo);
+    }
+
+
 }

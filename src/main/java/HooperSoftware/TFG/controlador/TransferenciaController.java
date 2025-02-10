@@ -35,6 +35,7 @@ public class TransferenciaController {
     public ModelAndView showAllTransferencesPageByTeam(@PathVariable Integer teamId) {
         ModelAndView mav = new ModelAndView();
         List<Transferencia> transferencias = transferenciaService.findAllTransferencesByTeamById(teamId);
+        //System.out.println("Transferencias obtenidas: " + transferencias);
         mav.setViewName("tranferencias/allTransferencesTeam");
         mav.addObject("transferencesOfTheTeam", transferencias);
         mav.addObject("selectedTeamId", teamId);

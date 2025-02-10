@@ -72,7 +72,10 @@ public class Equipo {
     @OneToMany
     List<Entrenador> entrenadores;
     
-    @OneToMany(fetch = FetchType.EAGER)
-    List<Transferencia> transferencias;
+    @OneToMany(mappedBy = "equipoOrigen", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    List<Transferencia> transferenciasOrigen;
+
+    @OneToMany(mappedBy = "equipoDestino", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    List<Transferencia> transferenciasDestino;
 
 }

@@ -22,7 +22,7 @@ function toggleTransferencia(id) {
             margin: 0;
         }
         .group {
-            background-color: #1D428A   ; /* Color de fondo azulado claro */
+            background-color: #ffffff   ; /* Color de fondo azulado claro */
             border: 4px;
             border-style: outset;
             border-color: black;
@@ -53,26 +53,31 @@ function toggleTransferencia(id) {
         transform: translateY(4px);
         }
     </style>
+
     <h1>Transferencias</h1>
 
-
-    
+    <!-- Formulario de filtro -->
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
         <select id="teams" name="teams">
             <option value="">Todos los equipos</option>
             <c:forEach var="equipo" items="${equipos}">
-                <option value="${equipo.idEquipo}">${equipo.nombreEquipo}</option>
+                <option value="${equipo.idEquipo}" 
+                        <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>${equipo.nombreEquipo}</option>
             </c:forEach>
         </select>
         <button type="submit">Filtrar</button>
+        
+        <!-- Botón para limpiar los filtros -->
+        <button type="button" onclick="clearFilters()">Limpiar Filtros</button>
     </form>
 
-    
+    <!-- Mostrar transferencias -->
     <c:forEach var="transferencia" items="${transferencesOfTheTeam}" varStatus="status">
         <div class="group" onClick="toggleTransferencia('transferencia${status.index}')">
-            <p>${transferencia.equipoOrigenString} &rarr; ${transferencia.equipoDestinoString}</p>
+            <p>${transferencia.equipoOrigen.nombreEquipo} &rarr; ${transferencia.equipoDestino.nombreEquipo}</p>
             <p>Fecha: ${transferencia.fecha}</p>
+            <Button type="submit">Ver Detalles</Button>
         </div>
         <div id="transferencia${status.index}" style="display: none;">
             <p>Precio: ${transferencia.precio}</p>
@@ -81,9 +86,11 @@ function toggleTransferencia(id) {
             </c:if>
         </div>
     </c:forEach>
+
 </Layaout:layaout>
 
 <script>
+    // Función para filtrar las transferencias por equipo
     function filterByTeam(event) {
         event.preventDefault();
         var teamId = document.getElementById("teams").value;
@@ -93,4 +100,10 @@ function toggleTransferencia(id) {
             window.location.href = '/allTranferences';
         }
     }
-    </script>
+
+    // Función para limpiar los filtros
+    function clearFilters() {
+        // Redirige a la página sin ningún filtro aplicado
+        window.location.href = '/allTranferences';
+    }
+</script>

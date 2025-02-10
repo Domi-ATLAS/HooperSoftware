@@ -22,7 +22,7 @@ function toggleTransferencia(id) {
             margin: 0;
         }
         .group {
-            background-color: #1D428A   ; /* Color de fondo azulado claro */
+            background-color: #ffffff   ; /* Color de fondo azulado claro */
             border: 4px;
             border-style: outset;
             border-color: black;
@@ -68,8 +68,9 @@ function toggleTransferencia(id) {
 
     <c:forEach var="transferencia" items="${transferences}" varStatus="status">
         <div class="group" onClick="toggleTransferencia('transferencia${status.index}')">
-            <p>${transferencia.equipoOrigenString} &rarr; ${transferencia.equipoDestinoString}</p>
+            <p>${transferencia.equipoOrigen.nombreEquipo} &rarr; ${transferencia.equipoDestino.nombreEquipo}</p>
             <p>Fecha: ${transferencia.fecha}</p>
+            <Button type="submit">Ver Detalles</Button>
         </div>
         <div id="transferencia${status.index}" style="display: none;">
             <p>Precio: ${transferencia.precio}</p>

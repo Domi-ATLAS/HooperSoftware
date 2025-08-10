@@ -5,15 +5,17 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import HooperSoftware.TFG.entidad.Categoria;
 import HooperSoftware.TFG.entidad.Votacion;
 import HooperSoftware.TFG.repositorio.VotacionRepository;
+
 
 @Service
 public class VotacionService {
 
-    VotacionRepository repository;
+    private final VotacionRepository repository;
 
-    VotacionService(VotacionRepository repo){
+    public VotacionService(VotacionRepository repo){
         this.repository = repo;
     }
 
@@ -35,6 +37,21 @@ public class VotacionService {
     @Transactional
     public void deleteVotacion(Integer id){
         repository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Votacion> findVotacionesEnCurso(){
+        return repository.findVotacionesEnCurso();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Votacion> findVotacionesOficiales(){
+        return repository.findVotacionesOficiales();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Categoria> findAllCategorias(){
+        return List.of(Categoria.values()); 
     }
     
 }

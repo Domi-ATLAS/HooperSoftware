@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import HooperSoftware.TFG.entidad.Entrenador;
 import HooperSoftware.TFG.entidad.Equipo;
+import HooperSoftware.TFG.entidad.Jugador;
 
 @Repository
 public interface EquipoRepository extends CrudRepository<Equipo,Integer>{
@@ -46,5 +49,17 @@ public interface EquipoRepository extends CrudRepository<Equipo,Integer>{
 
     @Query("SELECT e FROM Equipo e WHERE e.balanceTemporada > ?1")
     List<Equipo> findEquipoByBalanceTemporada(Integer balanceTemporada);
+
+    @Query("SELECT e.jugadores FROM Equipo e WHERE e.id = ?1")
+    List<Jugador> findJugadoresByEquipoId(Integer equipoId);
+
+    @Query("SELECT e.entrenadores FROM Equipo e WHERE e.id = ?1")
+    List<Entrenador> findEntrenadoresByEquipoId(Integer equipoId);
+
+    @Query("SELECT e FROM Equipo e WHERE e.conferencia = 'Este' ORDER BY e.balanceTemporada")
+    List<Equipo> findEquiposConferenciaEsteOrdenadosPorBalance();
+
+    @Query("SELECT e FROM Equipo e WHERE e.conferencia = 'Oeste' ORDER BY e.balanceTemporada")
+    List<Equipo> findEquiposConferenciaOesteOrdenadosPorBalance();
 
 }

@@ -1,5 +1,6 @@
 package HooperSoftware.TFG.entidad;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -9,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -50,11 +52,17 @@ public class Partido {
 
     Boolean playOffSiONo;
 
+    String temporada;
+
     String victoriaSerie;
 
     String equipoLocal;
 
     String equipoVisitante;
+
+    Date fecha;
+
+    String ganador;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "idJugador")
     List<Jugador> jugadores;
@@ -65,4 +73,12 @@ public class Partido {
     @ManyToOne
     @JoinColumn(name = "idPlayOff",referencedColumnName = "idPlayOff")
     Playoff playoff;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "equipoLocalTa",referencedColumnName = "idEquipo")
+    Equipo equipoLocalTa;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "equipoVisitanteTa",referencedColumnName = "idEquipo")
+    Equipo equipoVisitanteTa;
 }

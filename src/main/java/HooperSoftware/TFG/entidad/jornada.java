@@ -34,6 +34,8 @@ public class Jornada {
 
     Boolean partidoCancelado;
 
+    Boolean playOff;
+
     @OneToMany
     List<Partido> partidos;
 

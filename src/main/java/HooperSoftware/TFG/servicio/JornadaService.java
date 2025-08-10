@@ -47,4 +47,8 @@ public class JornadaService {
         jornadaRepository.deleteById(id);
     }
 
+    public List<Jornada> findJornadasByTeam(Integer teamId) {
+        return jornadaRepository.findJornadasByTeamId(teamId);
+    }
+
 }

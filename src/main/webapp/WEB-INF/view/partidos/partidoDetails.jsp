@@ -2,6 +2,14 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <Layaout:layaout title="Detalles Partido">
+    <style>
+        body {
+            background-color: #ffffff; /* Color de fondo azulado */
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
     <!DOCTYPE html>
     <html>
     <head>
@@ -24,13 +32,13 @@
             <p>Playoff: Sí</p>
             <p>Victoria de la serie: ${game.victoriaSerie}</p>
         </c:if>
-        <h2>Jugadores del equipo local</h2>
+        <h2>Jugadores del equipo local Actuales</h2>
         <ul>
             <c:forEach var="jugador" items="${localJug}">
                 <li>${jugador.nombreJugador}</li>
             </c:forEach>
         </ul>
-        <h2>Jugadores del equipo visitante</h2>
+        <h2>Jugadores del equipo visitante Actuales</h2>
         <ul>
             <c:forEach var="jugador" items="${visitJug}">
                 <li>${jugador.nombreJugador}</li>

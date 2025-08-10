@@ -60,6 +60,9 @@ public class EquipoService {
         return repository.findEquiposConferenciaOesteOrdenadosPorBalance();
     }
 
-    
+    @Transactional(readOnly = true)
+    public List<Equipo> findEquipoByNombre(String nombre){
+        return repository.findEquipoByNombre(nombre);
+    }
 
 }

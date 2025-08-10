@@ -7,21 +7,28 @@
         .container {
             display: flex;
             justify-content: space-between;
-            border: 1px solid #000;
+            border: 4px;
+            border-style: outset;
+            border-color: black;
             margin: 10px 0;
             padding: 10px;
-            background-color: #f9f9f9;
+            background-color: #ffffff;
         }
         .section {
             width: 19%;
         }
         .group {
-            border: 1px solid #000;
-            padding: 10px;
-            margin-bottom: 10px;
+            border: 4px;
+            border-style: outset;
+            border-color: black;
+            padding: 20px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background-color: #5276be;
+            font-family: fantasy;
+            font: Copperplate, Papyrus, fantasy;
         }
         .team-info {
             width: 40%;
@@ -30,9 +37,10 @@
             align-items: flex-start;
         }
         .vs {
-            color: red;
+            text-shadow: 2px 2px 5px #000000;
+            color: #1D428A;
             width: 80%;
-            text-align: left    ;
+            text-align: left;
         }
         .details {
             width: 40%;

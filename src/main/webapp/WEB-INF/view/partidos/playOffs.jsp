@@ -5,19 +5,27 @@
 <Layaout:layaout title="Playoffs de la NBA">
     <style>
         .playoff-container {
-            border: 1px solid #000;
+            border: 4px;
+            border-style: outset;
+            border-color: black;
             margin: 10px 0;
             padding: 10px;
-            background-color: #f9f9f9;
+            background-color: #ffffff;
         }
         .details-button {
             margin-top: 10px;
             padding: 5px 10px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
+            background-color: #1D428A;
+            color: #000000;
+            border: 4px;
+            border-style: outset;
+            border-color: black;
             cursor: pointer;
+            font-family: fantasy;
+            font: Copperplate, Papyrus, fantasy;
+            
         }
+        
     </style>
 
     <h1>Playoffs de la NBA</h1>

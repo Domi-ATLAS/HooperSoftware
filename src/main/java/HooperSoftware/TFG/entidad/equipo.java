@@ -1,22 +1,16 @@
 package HooperSoftware.TFG.entidad;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
-import HooperSoftware.TFG.entidad.Jugador;
-import HooperSoftware.TFG.entidad.Entrenador;
-import HooperSoftware.TFG.entidad.Transferencia;
-import HooperSoftware.TFG.entidad.Partido;  
-import HooperSoftware.TFG.entidad.Temporada;  
 
 
 
@@ -64,13 +58,18 @@ public class Equipo {
 
     String logoEquipo;
 
-    @OneToMany
+    String dorsalesRetirados;
+
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
     List<Jugador> jugadores;
 
-    @OneToMany
+    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
     List<Entrenador> entrenadores;
     
-    @OneToMany(fetch = FetchType.EAGER)
-    List<Transferencia> transferencias;
+    @OneToMany(mappedBy = "equipoOrigen", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    List<Transferencia> transferenciasOrigen;
+
+    @OneToMany(mappedBy = "equipoDestino", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    List<Transferencia> transferenciasDestino;
 
 }

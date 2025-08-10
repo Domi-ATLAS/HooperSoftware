@@ -12,7 +12,7 @@
         <title>Toronto Raptors</title>
     </head>
     <body>
-        <img src="/images/bulls.png">
+        <img src="/images/raps.png">
         <h1>${team.nombreEquipo}</h1>
         <div style="float: right;">
             <h2>Clasificación:</h2>
@@ -20,7 +20,7 @@
                 <c:forEach var="equipo" items="${clasificacion}" varStatus="status">
                     <c:choose>
                         <c:when test="${equipo.nombreEquipo == team.nombreEquipo}">
-                            <li style="color: rgb(190, 0, 0);">
+                            <li style="color: rgb(101, 150, 241);">
                                 ${status.index + 1}. ${equipo.nombreEquipo} - 
                                 Partidos ganados: ${equipo.partidosGanados} - 
                                 Partidos perdidos: ${equipo.partidosPerdidos} - 

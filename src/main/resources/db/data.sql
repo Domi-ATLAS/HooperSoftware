@@ -1,7 +1,14 @@
 -- USUARIIOS
 
-INSERT INTO usuario(nombre_usuario, contrasena, correo, equipo_favorito, foto, nick_name, numero_telefono) VALUES ('Juan Lopez', 'string123', 'ju@ja.ji', 'Dallas Mavericks', 'http', 'juanito32', '62326742');
-INSERT INTO usuario(nombre_usuario, contrasena, correo, equipo_favorito, foto, nick_name, numero_telefono) VALUES ('Eduardo Pizarro', 'string123', 'edupriv2002@gmail.com', 'Chicago Bulls', 'http', 'pizarrock', '648068282');
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono) VALUES ('Juan Lopez', '$2a$12$mMj3IAm15GbUZx5Qgw51Lut1g38HoR5qoVHt/LsuwDJu32bwQbFJm', 'ju@ja.ji', 'Dallas Mavericks', 'http', 'juanito32', '62326742');
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono) VALUES ('Eduardo Pizarro', '$2a$12$HBi9mqAheugvoehw0QNzcOtSl11G.2qDFZcqlKetZ552mXsTA.1Hq', 'edupriv2002@gmail.com', 'Chicago Bulls', 'http', 'pizarrock', '648068282');
+
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, enabled, username, numero_telefono) VALUES ('admin','$2a$12$HBi9mqAheugvoehw0QNzcOtSl11G.2qDFZcqlKetZ552mXsTA.1Hq', 'admin@admin.es', '', '', true,'admin','623126742');
+
+INSERT INTO authorities(id,username,authority) VALUES (1,'admin','admin');
+INSERT INTO authorities(id,username,authority) VALUES (2,'pizarrock','usuario');
+INSERT INTO authorities(id,username,authority) VALUES (3,'juanito32','usuario');
+
 
 
 -- EQUIPOS
@@ -658,13 +665,13 @@ INSERT INTO estadisticas_jugador(id_est_jugador, puntos_totales, asistencias_tot
 
 
 
-INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('1', 'Moses Malone', 'Alero', '6', 'Cleveland Cavaliers (2003-2010), Miami Heat (2010-2014), Cleveland Cavaliers (2014-2018), Los Angeles Lakers (2018-2024)', '2003', '40', '17', '18', '0', 'http', '1');
-INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('2', 'Dr. J', 'Alero', '7', 'Seattle SuperSonics (2007-2008), Oklahoma City Thunder (2008-2016), Golden State Warriors (2016-2019), Brooklyn Nets (2019-2022), Phoenix Suns (2022-2024)', '2007', '33', '11', '14', '0', 'http', '2');
-INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('3', 'Charles Barkley', 'Base', '30', 'Golden State Warriors (2009-2024)', '2009', '35', '7', '13', '0', 'http', '3');
-INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('4', 'Gary Payton', 'Alero', '2', 'San Antonio Spurs (2011-2018), Toronto Raptors (2018-2019), Los Angeles Clippers (2019-2024)', '2011', '30', '5', '10', '0', 'http', '4');
-INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('5', 'Dirk Nowitzski', 'Alero', '34', 'Milwaukee Bucks (2013-2024)', '2013', '29', '6', '9', '0', 'http', '5');
-INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('6', 'Clyde Drexler', 'Pivot', '3', 'New Orleans Pelicans (2012-2019), Los Angeles Lakers (2019-2024)', '2012', '29', '8', '9', '0', 'http', '6');
-INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('7', 'Reggie Miller', 'Escolta', '13', 'Oklahoma City Thunder (2009-2012), Houston Rockets (2012-2021), Brooklyn Nets (2021-2022), Philadelphia 76ers (2022-2023), Los Angeles Clippers (2023-2024)', '2009', '33', '9', '13', '0', 'http', '7');
+INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug,ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug,foto_jugador, estadisticas_jug, id_equipo) VALUES ('1', 'Moses Malone', 'Alero', '6', 'Cleveland Cavaliers (2003-2010), Miami Heat (2010-2014), Cleveland Cavaliers (2014-2018), Los Angeles Lakers (2018-2024)','2003', '40', '17', '18', '0', 'http', '1', '1');
+INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug, id_equipo) VALUES ('2', 'Dr. J', 'Alero', '7', 'Seattle SuperSonics (2007-2008), Oklahoma City Thunder (2008-2016), Golden State Warriors (2016-2019), Brooklyn Nets (2019-2022), Phoenix Suns (2022-2024)', '2007', '33', '11', '14', '0', 'http', '2', '2');
+INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug, id_equipo) VALUES ('3', 'Charles Barkley', 'Base', '30', 'Golden State Warriors (2009-2024)', '2009', '35', '7', '13', '0', 'http', '3', '3');
+INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug, id_equipo) VALUES ('4', 'Gary Payton', 'Alero', '2', 'San Antonio Spurs (2011-2018), Toronto Raptors (2018-2019), Los Angeles Clippers (2019-2024)', '2011', '30', '5', '10', '0', 'http', '4', '4');
+INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug, id_equipo) VALUES ('5', 'Dirk Nowitzski', 'Alero', '34', 'Milwaukee Bucks (2013-2024)', '2013', '29', '6', '9', '0', 'http', '5', '5');
+INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug, id_equipo) VALUES ('6', 'Clyde Drexler', 'Pivot', '3', 'New Orleans Pelicans (2012-2019), Los Angeles Lakers (2019-2024)', '2012', '29', '8', '9', '0', 'http', '6', '6');
+INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug, id_equipo) VALUES ('7', 'Reggie Miller', 'Escolta', '13', 'Oklahoma City Thunder (2009-2012), Houston Rockets (2012-2021), Brooklyn Nets (2021-2022), Philadelphia 76ers (2022-2023), Los Angeles Clippers (2023-2024)', '2009', '33', '9', '13', '0', 'http', '7', '7');
 INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('8', 'Shaquille O neal', 'Base', '77', 'Dallas Mavericks (2018-2024)', '2018', '23', '3', '6', '0', 'http', '8');
 INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('9', 'Kobe Bryant', 'Base', '0', 'Portland Trail Blazers (2012-2023), Milwaukee Bucks (2023-2024)', '2012', '32', '6', '9', '0', 'http', '9');
 INSERT INTO jugador(id_jugador, nombre_jugador, posicion, dorsal, trayectoria_jug, ano_draft, edad_jug, anos_all_star_jug, anos_nba_jug, anos_otra_liga_jug, foto_jugador, estadisticas_jug) VALUES ('10', 'Drazen Petrovic', 'Pivot', '15', 'Denver Nuggets (2015-2024)', '2015', '29', '4', '7', '0', 'http', '10');
@@ -1404,61 +1411,30 @@ INSERT INTO entrenador(id_entrenador, nombe_entrenador, equipo_entr, trayectoria
 
 -- TRANSFERENCIAS
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('1', '0', 'true', '2024-02-08', 'Boston Celtics', 'Portland Trail Blazers', 'Boston se lleva una segunda ronda protegida');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('2', '0', 'true', '2024-01-01', 'Philadelphia 76ers', 'Boston Celtics', 'Boston se lleva una segunda ronda');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('3', '0', 'false', '2024-01-01', 'Milwaukee Bucks', 'Sacramento Kings', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('4', '0', 'true', '2024-01-01', 'Indiana Pacers', 'San Antonio Spurs', 'Pacers se lleva una segunda ronda');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('5', '0', 'true', '2024-01-01', 'Brooklyn Nets', 'Phoenix Suns', 'Brooklyn se lleva tres segundas rondas');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('6', '0', 'false', '2024-01-01', 'Memphis Grizzlies', 'Phoenix Suns', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('7', '0', 'true', '2024-01-08', 'Milwaukee Bucks', 'Philadelphia 76ers', 'Philadelphia se lleva una segunda ronda de 2027');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('8', '0', 'false', '2024-01-08', 'Philadelphia 76ers', 'Milwaukee Bucks', '');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('9', '0', 'true', '2024-01-08', 'Dallas Mavericks', 'Charlotte Hornets', 'Hornets se lleva una primera ronda protegida de 2027');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('10', '0', 'false', '2024-01-08', 'Charlotte Hornets', 'Dallas Mavericks', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('1', '50', true, '2024-02-08', '1', '19', 'Boston se lleva una segunda ronda protegida');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('11', '0', 'false', '2024-01-08', 'Toronto Raptors', 'Brooklyn Nets', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('12', '0', 'false', '2024-01-08', 'Brooklyn Nets', 'Toronto Raptors', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('2', '0', true, '2024-01-01', '2', '1', 'Boston se lleva una segunda ronda');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('13', '0', 'false', '2024-01-08', 'Dallas Mavericks', 'Washington Wizards', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('14', '0', 'false', '2024-01-08', 'Washington Wizards', 'Washington Wizards', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('3', '0', false, '2024-01-01', '3', '4', '');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('15', '0', 'true', '2024-01-08', 'New York Knicks', 'Detroit Pistons', 'Detroit se lleva dos segundas rondas');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('16', '0', 'true', '2024-01-08', 'Detroit Pistons', 'New York Knicks', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('4', '0', true, '2024-01-01', '5', '6', 'Pacers se lleva una segunda ronda');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('17', '0', 'true', '2024-01-08', 'Philadelphia 76ers', 'Detroit Pistons', 'Detroit se lleva una segunda ronda de 2024 (vía Knicks)');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('18', '0', 'true', '2024-01-08', 'Oklahoma City Thunder', 'Charlotte Hornets', 'Hornets se lleva dos segundas rondas');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('19', '0', 'false', '2024-01-08', 'Charlotte Hornets', 'Oklahoma City Thunder', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('5', '0', true, '2024-01-01', '7', '8', 'Brooklyn se lleva tres segundas rondas');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('20', '0', 'true', '2024-01-08', 'Toronto Raptors', 'Utah Jazz', 'Jazh se lleva una primera ronda de 2024');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('21', '0', 'false', '2024-01-08', 'Utah Jazz', 'Toronto Raptors', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('6', '0', false, '2024-01-01', '9', '8', '');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('22', '0', 'true', '2024-01-08', 'Philadelphia 76ers', 'Indiana Pacers', 'Pacers se lleva tres segundas rondas');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('23', '0', 'false', '2024-01-08', 'Indiana Pacers', 'Philadelphia 76ers', '');
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('7', '0', true, '2024-01-08', '3', '2', 'Philadelphia se lleva una segunda ronda de 2027');
 
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('24', '0', 'true', '2024-02-07', 'Minnesota Timberwolves', 'Detroit Pistons', 'Detroit se lleva una segunda ronda de 2030');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('25', '0', 'false', '2024-02-07', 'Detroit Pistons', 'Minnesota Timberwolves', '');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('26', '0', 'true', '2024-02-07', 'Boston Celtics', 'Memphis Grizzlies', 'Memphis se lleva dos segundas rondas (2027 vía Hawks y 2030 vía Mavs)');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('27', '0', 'false', '2024-02-07', 'Memphis Grizzlies', 'Boston Celtics', '');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('28', '0', 'false', '2024-02-07', 'Utah Jazz', 'Detroit Pistons', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('29', '0', 'true', '2024-02-07', 'Detroit Pistons', 'Utah Jazz', 'Utah se lleva una segunda ronda de 2024 y los derechos del italiano Gabriele Procida');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('30', '0', 'false', '2024-02-01', 'Memphis Grizzlies', 'Houston Rockets', '');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('31', '0', 'true', '2024-02-01', 'Houston Rockets', 'Memphis Grizzlies', 'Memphis se lleva tres segundas rondas');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('32', '0', 'true', '2024-01-23', 'Miami Heat', 'Charlotte Hornets', 'Hornets se lleva una primera ronda de 2027');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('33', '0', 'false', '2024-01-23', 'Charlotte Hornets', 'Miami Heat', '');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('34', '0', 'true', '2024-01-17', 'Toronto Raptors ', 'Indiana Pacers', 'Pacers se lleva una segunda ronda');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('35', '0', 'true', '2024-01-17', 'New Orleans Pelicans', 'Toronto Raptors ', 'Toronto se lleva tres primeras rondas (dos de 2024 y un de 2026)');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('36', '0', 'true', '2024-01-14', 'Detroit Pistons', 'Washington Wizards', 'Wizards se lleva dos segundas rondas (2025 y 2026)');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('37', '0', 'false', '2024-01-14', 'Washington Wizards', 'Detroit Pistons', '');
-
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('38', '0', 'true', '2023-12-30', 'New York Knicks', 'Toronto Raptors', 'Toronto se lleva una segunda ronda de 2024');
-INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) VALUES ('39', '0', 'false', '2023-12-30', 'Toronto Raptors', 'New York Knicks', '');
-
+INSERT INTO transferencia(id_transferencia, precio, ronda_draft, fecha, equipo_origen, equipo_destino, info_ronda_draft) 
+VALUES ('8', '0', false, '2024-01-08', '2', '3', '');
 
 
 
@@ -1512,126 +1488,129 @@ INSERT INTO clasificacion(temporada, primero_este, segundo_este, tercero_este, c
 
 
 
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('1', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Boston Celtics', 'Brooklyn Nets', null);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('2', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Brooklyn Nets', 'New York Knicks', null);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off, fecha, equipo_local_ta, equipo_visitante_ta) VALUES ('1', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Boston Celtics', 'Brooklyn Nets', null, '2024-02-08', '1', '2');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off, fecha, equipo_local_ta, equipo_visitante_ta) VALUES ('2', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '75-79', 'false', null, 'false', null, '10-11','Brooklyn Nets', 'New York Knicks', null, '2025-01-01', '2', '3');
 INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('3', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '10-11','3-2', 'Brooklyn Nets', 'New York Knicks', '1');
 
 -- PARTIDOS PLAYOFF 2023-2024
 
 -- serie nuggets wolves
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('4', '26-23 (26-23)', '29-21 (55-44)', '32-14 (87-58)', '22-22 (109-80)', '109-80', 'false', null, 'true', '2022-2023', '1-0','Denver Nuggets', 'Minnesota Timberwolves', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('5', '31-22 (31-22)', '33-27 (64-49)', '23-40 (87-89)', '35-24 (122-113)', '122-113', 'false', null, 'true', '2022-2023', '2-0','Denver Nuggets', 'Minnesota Timberwolves', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('6', '28-28 (28-28)', '27-33 (55-61)', '33-33 (88-94)', '23-26 (111-120)', '101-120', 'false', null, 'true', '2022-2023', '0-3','Minnesota Timberwolves', 'Denver Nuggets', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('7', '23-22 (23-22)', '25-30 (48-52)', '32-22 (80-74)', '16-22 (96-96)', '114-108', 'true', '18-12 (114-108)', 'true', '2022-2023', '1-3','Minnesota Timberwolves', 'Denver Nuggets', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('8', '22-29 (22-29)', '26-18 (48-47)', '29-30 (77-77)', '35-32 (112-109)', '112-109', 'false', null, 'true', '2022-2023', '4-1','Denver Nuggets', 'Minnesota Timberwolves', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('4', '26-23 (26-23)', '29-21 (55-44)', '32-14 (87-58)', '22-22 (109-80)', '109-80', 'false', null, 'true', '2022-2023', '1-0','Denver Nuggets', 'Minnesota Timberwolves', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('5', '31-22 (31-22)', '33-27 (64-49)', '23-40 (87-89)', '35-24 (122-113)', '122-113', 'false', null, 'true', '2022-2023', '2-0','Denver Nuggets', 'Minnesota Timberwolves', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('6', '28-28 (28-28)', '27-33 (55-61)', '33-33 (88-94)', '23-26 (111-120)', '101-120', 'false', null, 'true', '2022-2023', '0-3','Minnesota Timberwolves', 'Denver Nuggets', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('7', '23-22 (23-22)', '25-30 (48-52)', '32-22 (80-74)', '16-22 (96-96)', '114-108', 'true', '18-12 (114-108)', 'true', '2022-2023', '1-3','Minnesota Timberwolves', 'Denver Nuggets', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('8', '22-29 (22-29)', '26-18 (48-47)', '29-30 (77-77)', '35-32 (112-109)', '112-109', 'false', null, 'true', '2022-2023', '4-1','Denver Nuggets', 'Minnesota Timberwolves', '3');
 
 -- serie suns clippers
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('9', '26-23 (26-23)', '29-21 (55-44)', '32-14 (87-58)', '22-22 (109-80)', '109-80', 'false', null, 'true', '2022-2023', '1-0','Phoenix Suns', 'Los Angeles Clippers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('10', '31-22 (31-22)', '33-27 (64-49)', '23-40 (87-89)', '35-24 (122-113)', '122-113', 'false', null, 'true', '2022-2023', '2-0','Phoenix Suns', 'Los Angeles Clippers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('11', '28-28 (28-28)', '27-33 (55-61)', '33-33 (88-94)', '23-26 (111-120)', '101-120', 'false', null, 'true', '2022-2023', '0-3','Los Angeles Clippers', 'Phoenix Suns', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('12', '23-22 (23-22)', '25-30 (48-52)', '32-22 (80-74)', '16-22 (96-96)', '114-108', 'true', '18-12 (114-108)', 'true', '2022-2023', '1-3','Los Angeles Clippers', 'Phoenix Suns', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('13', '22-29 (22-29)', '26-18 (48-47)', '29-30 (77-77)', '35-32 (112-109)', '112-109', 'false', null, 'true', '2022-2023', '4-1','Phoenix Suns', 'Los Angeles Clippers', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('9', '26-23 (26-23)', '29-21 (55-44)', '32-14 (87-58)', '22-22 (109-80)', '109-80', 'false', null, 'true', '2022-2023', '1-0','Phoenix Suns', 'Los Angeles Clippers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('10', '31-22 (31-22)', '33-27 (64-49)', '23-40 (87-89)', '35-24 (122-113)', '122-113', 'false', null, 'true', '2022-2023', '2-0','Phoenix Suns', 'Los Angeles Clippers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('11', '28-28 (28-28)', '27-33 (55-61)', '33-33 (88-94)', '23-26 (111-120)', '101-120', 'false', null, 'true', '2022-2023', '0-3','Los Angeles Clippers', 'Phoenix Suns', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('12', '23-22 (23-22)', '25-30 (48-52)', '32-22 (80-74)', '16-22 (96-96)', '114-108', 'true', '18-12 (114-108)', 'true', '2022-2023', '1-3','Los Angeles Clippers', 'Phoenix Suns', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('13', '22-29 (22-29)', '26-18 (48-47)', '29-30 (77-77)', '35-32 (112-109)', '112-109', 'false', null, 'true', '2022-2023', '4-1','Phoenix Suns', 'Los Angeles Clippers', '3');
 
 -- serie kings warriors
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('14', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Sacramento Kings', 'Golden State Warriors', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('15', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Sacramento Kings', 'Golden State Warriors', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('16', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Sacramento Kings', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('17', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Sacramento Kings', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('18', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Sacramento Kings', 'Golden State Warriors', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('19', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Sacramento Kings', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('20', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Sacramento Kings', 'Golden State Warriors', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('14', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Sacramento Kings', 'Golden State Warriors', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('15', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Sacramento Kings', 'Golden State Warriors', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('16', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Sacramento Kings', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('17', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Sacramento Kings', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('18', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Sacramento Kings', 'Golden State Warriors', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('19', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Sacramento Kings', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('20', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Sacramento Kings', 'Golden State Warriors', '3');
 
 -- serie grizzlies lakers
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('21', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Memphis Grizzlies', 'Los Angeles Lakers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('22', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Memphis Grizzlies', 'Los Angeles Lakers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('23', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Memphis Grizzlies', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('24', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Memphis Grizzlies', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('25', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Memphis Grizzlies', 'Los Angeles Lakers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('26', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Memphis Grizzlies', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('21', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Memphis Grizzlies', 'Los Angeles Lakers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('22', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Memphis Grizzlies', 'Los Angeles Lakers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('23', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Memphis Grizzlies', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('24', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Memphis Grizzlies', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('25', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Memphis Grizzlies', 'Los Angeles Lakers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('26', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Memphis Grizzlies', '3');
 
 -- serie nuggets suns
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('27', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Phoenix Suns', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('28', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Phoenix Suns', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('29', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Phoenix Suns', 'Denver Nuggets', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('30', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Phoenix Suns', 'Denver Nuggets', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('31', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Phoenix Suns', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('32', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Phoenix Suns', 'Denver Nuggets', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('27', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Phoenix Suns', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('28', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Phoenix Suns', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('29', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Phoenix Suns', 'Denver Nuggets', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('30', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Phoenix Suns', 'Denver Nuggets', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('31', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Phoenix Suns', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('32', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Phoenix Suns', 'Denver Nuggets', '3');
 
 -- serie warriors lakers
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('33', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Los Angeles Lakers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('34', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Los Angeles Lakers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('35', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Golden State Warriors', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('36', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Golden State Warriors', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('37', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Los Angeles Lakers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('38', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Golden State Warriors', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('33', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Los Angeles Lakers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('34', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Los Angeles Lakers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('35', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Golden State Warriors', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('36', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Golden State Warriors', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('37', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Golden State Warriors', 'Los Angeles Lakers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('38', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Golden State Warriors', '3');
 
 -- serie nuggets lakers
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('39', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Los Angeles Lakers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('40', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Los Angeles Lakers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('41', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Denver Nuggets', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('42', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Denver Nuggets', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('39', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Los Angeles Lakers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('40', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Los Angeles Lakers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('41', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Denver Nuggets', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('42', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Los Angeles Lakers', 'Denver Nuggets', '3');
 
 -- serie denver heat
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('43', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('44', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('45', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Denver Nuggets', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('46', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Denver Nuggets', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('47', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Miami Heat', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('43', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('44', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('45', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Denver Nuggets', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('46', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Denver Nuggets', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('47', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Denver Nuggets', 'Miami Heat', '3');
 
 -- serie cavs nyk
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('48', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Cleveland Cavaliers', 'New York Knicks', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('49', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Cleveland Cavaliers', 'New York Knicks', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('50', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Cleveland Cavaliers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('51', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Cleveland Cavaliers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('52', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Cleveland Cavaliers', 'New York Knicks', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('48', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Cleveland Cavaliers', 'New York Knicks', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('49', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Cleveland Cavaliers', 'New York Knicks', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('50', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Cleveland Cavaliers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('51', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Cleveland Cavaliers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('52', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Cleveland Cavaliers', 'New York Knicks', '3');
 
 -- serie 76 nets
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('53', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Brooklyn Nets', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('54', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Brooklyn Nets', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('55', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Brooklyn Nets', 'Philadelphia 76ers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('56', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Brooklyn Nets', 'Philadelphia 76ers', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('53', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Brooklyn Nets', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('54', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Brooklyn Nets', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('55', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Brooklyn Nets', 'Philadelphia 76ers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('56', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Brooklyn Nets', 'Philadelphia 76ers', '3');
 
 -- serie celtics hawks
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('57', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Atlanta Hawks', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('58', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Atlanta Hawks', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('59', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Atlanta Hawks', 'Boston Celtics', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('60', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Atlanta Hawks', 'Boston Celtics', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('61', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Atlanta Hawks', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('62', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Atlanta Hawks', 'Boston Celtics', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('57', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Atlanta Hawks', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('58', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Atlanta Hawks', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('59', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Atlanta Hawks', 'Boston Celtics', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('60', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Atlanta Hawks', 'Boston Celtics', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('61', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Atlanta Hawks', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('62', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Atlanta Hawks', 'Boston Celtics', '3');
 
 -- serie heat nyk
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('63', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('64', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('65', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'New York Knicks', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('66', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'New York Knicks', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('67', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('68', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'New York Knicks', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('63', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('64', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('65', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'New York Knicks', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('66', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'New York Knicks', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('67', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'New York Knicks', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('68', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'New York Knicks', '3');
 
 -- serie 76 boston
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('69', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Philadelphia 76ers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('70', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Philadelphia 76ers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('71', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Boston Celtics', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('72', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Boston Celtics', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('73', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Philadelphia 76ers', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('74', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Boston Celtics', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('75', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Philadelphia 76ers', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('69', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Philadelphia 76ers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('70', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Philadelphia 76ers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('71', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Boston Celtics', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('72', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Boston Celtics', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('73', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Philadelphia 76ers', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('74', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Philadelphia 76ers', 'Boston Celtics', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('75', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Philadelphia 76ers', '3');
 
 -- serie boston heat
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('76', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('77', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('78', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Boston Celtics', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('79', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Boston Celtics', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('80', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('81', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Boston Celtics', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('82', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Miami Heat', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('76', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('77', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('78', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Boston Celtics', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('79', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Boston Celtics', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('80', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('81', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Boston Celtics', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('82', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Boston Celtics', 'Miami Heat', '3');
 
 -- serie milwaukee heat
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('83', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Milwaukee Bucks', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('84', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Milwaukee Bucks', 'Miami Heat', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('85', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Milwaukee Bucks', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('86', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Milwaukee Bucks', 3);
-INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('87', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Milwaukee Bucks', 'Miami Heat', 3);
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('83', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Milwaukee Bucks', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('84', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Milwaukee Bucks', 'Miami Heat', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('85', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Milwaukee Bucks', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('86', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Miami Heat', 'Milwaukee Bucks', '3');
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('87', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2022-2023','3-2', 'Milwaukee Bucks', 'Miami Heat', '3');
 
+-- PARTIDOS PLAYOFF 2010-2011
+
+INSERT INTO partido(id_partido, resultadoc1, resultadoc2, resultadoc3, resultadoc4, resultado_total, prorroga, resultado_prorroga, play_off_siono, temporada, victoria_serie, equipo_local, equipo_visitante, id_play_off) VALUES ('88', '15-22 (15-22)', '15-30 (30-52)', '35-17 (65-69)', '10-10 (75-79)', '85-89', 'true', '10-10 (85-89)', 'true', '2010-2011','3-2', 'San Antonio Spurs', 'Memphis Grizzlies', 2);
 
 
 -- VOTACIONES
@@ -1799,603 +1778,6 @@ INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('2
 INSERT INTO jornada_partidos(jornada_id_jornada, partidos_id_partido) VALUES ('26', '47');
 
 
-
-INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('1', '1');
-INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('2', '2');
-INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('3', '3');
-INSERT INTO equipo_transferencias(equipo_id_equipo, transferencias_id_transferencia) VALUES ('4', '4');
-
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '1');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '2');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '3');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '4');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '5');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '6');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '7');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '8');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '9');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '10');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '11');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '12');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '13');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '14');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '15');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '16');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '17');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '18');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '19');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '20');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '21');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '22');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '23');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '24');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '25');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '26');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '27');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '28');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('11', '29');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '30');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '31');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '32');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '33');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '34');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '35');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '36');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '37');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '38');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '39');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '40');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '41');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '42');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '43');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '44');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '45');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('1', '46');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '47');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '48');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '49');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '50');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '51');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '52');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '53');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '54');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '55');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '56');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '57');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '58');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '59');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '60');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '61');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '62');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '63');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('2', '64');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '65');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '66');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '67');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '68');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '69');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '70');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '71');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '72');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '73');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '74');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '75');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '76');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '77');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '78');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '79');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '80');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '81');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('12', '82');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '83');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '84');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '85');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '86');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '87');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '88');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '89');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '90');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '91');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '92');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '93');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '94');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '95');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '96');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '97');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '98');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '99');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('6', '100');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '101');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '102');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '103');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '104');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '105');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '106');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '107');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '108');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '109');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '110');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '111');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '112');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '113');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '114');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '115');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '116');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '117');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('7', '118');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '119');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '120');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '121');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '122');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '123');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '124');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '125');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '126');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '127');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '128');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '129');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '130');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '131');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '132');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '133');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '134');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '135');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('26', '136');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '137');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '138');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '139');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '140');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '141');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '142');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '143');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '144');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '145');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '146');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '147');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '148');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '149');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '150');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '151');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '152');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '153');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('16', '154');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '155');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '156');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '157');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '158');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '159');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '160');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '161');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '162');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '163');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '164');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '165');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '166');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '167');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '168');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '169');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '170');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '171');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('8', '172');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '173');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '174');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '175');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '176');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '177');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '178');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '179');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '180');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '181');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '182');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '183');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '184');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '185');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '186');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '187');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '188');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '189');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('21', '190');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '191');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '192');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '193');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '194');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '195');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '196');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '197');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '198');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '199');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '200');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '201');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '202');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '203');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '204');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '205');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '206');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '207');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('27', '208');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '209');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '210');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '211');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '212');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '213');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '214');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '215');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '216');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '217');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '218');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '219');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '220');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '221');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '222');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '223');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '224');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('9', '225');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '226');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '227');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '228');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '229');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '230'); 
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '231');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '232');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '233');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '234');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '235');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '236');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '237');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '238');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '239');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '240');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '241');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '242');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('23', '243');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '244');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '245');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '246');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '247');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '248');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '249');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '250');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '251');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '252');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '253');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '254');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '255');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '256');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '257');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '258');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '259');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '260');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('13', '261');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '262');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '263');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '264');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '265');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '266');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '267');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '268');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '269');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '270');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '271');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '272');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '273');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '274');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '275');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('4', '276');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '277');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '278');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '279');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '280');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '281');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '282');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '283');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '284');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '285');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '286');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '287');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '288');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '289');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '290');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '291');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '292');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '293');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('30', '294');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '295');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '296');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '297');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '298');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '299');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '300');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '301');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '302');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '303');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '304');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '305');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '306');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '307');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '308');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '309');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '310');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('15', '311');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '312');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '313');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '314');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '315');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '316');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '317');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '318');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '319');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '320');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '321');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '322');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '323');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '324');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '325');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '326');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '327');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '328');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('20', '329');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '330');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '331');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '332');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '333');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '334');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '335');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '336');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '337');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '338');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '339');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '340');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '341');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '342');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '343');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '344');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '345');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '346');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('22', '347');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '348');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '349');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '350');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '351');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '352');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '353');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '354');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '355');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '356');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '357');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '358');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '359');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '360');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '361');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '362');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '363');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '364');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('24', '365');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '366');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '367');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '368');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '369');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '370');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '371');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '372');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '373');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '374');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '375');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '376');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '377');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '378');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '379');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '380');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '381');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '382');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('17', '383');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '384');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '385');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '386');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '387');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '388');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '389');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '390');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '391');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '392');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '393');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '394');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '395');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '396');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '397');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '398');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '399');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '400');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('3', '401');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '402');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '403');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '404');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '405');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '406');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '407');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '408');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '409');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '410');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '411');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '412');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '413');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '414');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '415');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '416');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '417');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '418');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('18', '419');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '420');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '421');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '422');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '423');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '424');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '425');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '426');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '427');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '428');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '429');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '430');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '431');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '432');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '433');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '434');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '435');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '436');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('14', '437');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '438');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '439');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '440');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '441');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '442');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '443');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '444');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '445');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '446');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '447');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '448');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '449');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '450');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '451');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '452');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '453');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '454');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('28', '455');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '456');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '457');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '458');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '459');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '460');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '461');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '462');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '463');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '464');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '465');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '466');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '467');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '468');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '469');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '470');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '471');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '472');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('29', '473');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '474');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '475');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '476');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '477');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '478');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '479');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '480');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '481');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '482');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '483');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '484');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '485');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '486');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '487');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '488');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '489');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '490');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('25', '491');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '492');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '493');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '494');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '495');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '496');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '497');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '498');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '499');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '500');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '501');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '502');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '503');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '504');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '505');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '506');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '507');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '508');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('19', '509');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '510');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '511');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '512');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '513');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '514');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '515');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '516');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '517');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '518');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '519');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '520');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '521');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '522');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '523');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '524');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '525');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '526');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('5', '527');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '528');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '529');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '530');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '531');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '532');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '533');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '534');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '535');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '536');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '537');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '538');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '539');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '540');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '541');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '542');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '543');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '544');
-INSERT INTO equipo_jugadores(equipo_id_equipo, jugadores_id_jugador) VALUES ('10', '545');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('1', '1');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('2', '2');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('3', '3');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('4', '4');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('5', '5');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('6', '6');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('7', '7');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('8', '8');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('9', '9');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('10', '10');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('11', '11');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('12', '12');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('13', '13');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('14', '14');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('15', '15');
-
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('16', '16');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('17', '17');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('18', '18');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('19', '19');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('20', '20');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('21', '21');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('22', '22');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('23', '23');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('24', '24');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('25', '25');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('26', '26');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('27', '27');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('28', '28');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('29', '29');
-INSERT INTO equipo_entrenadores(equipo_id_equipo, entrenadores_id_entrenador) VALUES ('30', '30');
-
 INSERT INTO playoff_equipos(equipos_id_equipo, playoff_id_play_off) VALUES ('16', '3');
 INSERT INTO playoff_equipos(equipos_id_equipo, playoff_id_play_off) VALUES ('10', '3');
 INSERT INTO playoff_equipos(equipos_id_equipo, playoff_id_play_off) VALUES ('7', '3');
@@ -2432,7 +1814,6 @@ INSERT INTO playoff_equipos(equipos_id_equipo, playoff_id_play_off) VALUES ('30'
 
 
 
-INSERT INTO transferencia_equipos(equipos_id_equipo, transferencia_id_transferencia) VALUES ('1', '1');
 
 
 

@@ -4,14 +4,18 @@ import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import HooperSoftware.TFG.entidad.Jugador;
 import HooperSoftware.TFG.entidad.Equipo;
 
@@ -35,16 +39,21 @@ public class Transferencia {
 
     LocalDate fecha;
 
-    String equipoOrigen;
+    String equipoOrigenString;
 
-    String equipoDestino;
+    String equipoDestinoString;
 
     String infoRondaDraft;
 
     @OneToMany
     List<Jugador> jugadores;
 
-    @OneToMany
-    List<Equipo> equipos;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "equipoOrigen", referencedColumnName = "idEquipo")
+    Equipo equipoOrigen;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "equipoDestino", referencedColumnName = "idEquipo")
+    Equipo equipoDestino;
 
 }

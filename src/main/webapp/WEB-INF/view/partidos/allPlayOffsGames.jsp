@@ -21,10 +21,11 @@
                     <c:forEach var="game" items="${playOffsGames}">
                         <c:if test="${game.temporada == temporada.anosTemporada}">
                             <div class="game">
-                                <h3>${game.nombrePartido}</h3>
-                                <p>Jornada: ${game.jornada}</p>
+                                <p>Equipo Local:${game.equipoLocal}</p>
+                                <p>Equipo Visitante: ${game.equipoVisitante}</p>
+                                <p>Resultado Final: ${game.resultadoTotal}</p>
                                 <p>Fecha: ${game.fecha}</p>
-                                <p>Resultado: ${game.resultado}</p>
+                                <p><button onClick="window.location.href='/partido/${game.idPartido}'">Detalles</button></p>
                             </div>
                         </c:if>
                     </c:forEach>

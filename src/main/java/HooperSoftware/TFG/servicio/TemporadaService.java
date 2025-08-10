@@ -13,8 +13,8 @@ public class TemporadaService {
     
     TemporadaRepository repository;
 
-    TemporadaService(TemporadaRepository repo){
-        this.repository = repo;
+    TemporadaService(TemporadaRepository repository){
+        this.repository = repository;
     }
 
     @Transactional(readOnly = true)
@@ -25,6 +25,11 @@ public class TemporadaService {
     @Transactional(readOnly = true)
     public Temporada findTemporadaById(Integer idTemporada){
         return repository.findTemporadaById(idTemporada);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Temporada> findTemporadasByTeam(Integer idEquipo){
+        return repository.findTemporadasByTeam(idEquipo);
     }
 
 }

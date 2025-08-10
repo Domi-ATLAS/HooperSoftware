@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import HooperSoftware.TFG.entidad.Transferencia;
@@ -32,6 +33,9 @@ public interface TransferenciaRepository extends CrudRepository<Transferencia,In
 
     @Query("SELECT t FROM Transferencia t WHERE t.equipoDestino = ?1")
     List<Transferencia> findTransferenciaByEquipoDestino(String equipoDestino);
+
+    @Query("SELECT t FROM Transferencia t WHERE t.equipoOrigen.idEquipo = :teamId OR t.equipoDestino.idEquipo = :teamId")
+    List<Transferencia> findAllTransferencesByTeamById(@Param("teamId") Integer teamId);
 
 
 }

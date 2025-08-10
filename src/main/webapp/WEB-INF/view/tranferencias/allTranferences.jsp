@@ -14,11 +14,63 @@ function toggleTransferencia(id) {
 </script>
 
 <Layaout:layaout title="Transferencias">
+    <style>
+        body {
+            background-color: #ffffff; /* Color de fondo azulado */
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+        .group {
+            background-color: #ffffff   ; /* Color de fondo azulado claro */
+            border: 4px;
+            border-style: outset;
+            border-color: black;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        button {
+            display: inline-block;
+            padding: 2px 2px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #000000;
+            background-color: #1D428A;
+            border: 4px;
+            border-style: outset;
+            border-color: black;
+            font-family: fantasy;
+            font: Copperplate, Papyrus, fantasy;
+        }
+        button:hover {background-color: #5276be}
+    
+        button:active {
+        background-color: #5276be;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+        }
+    </style>
     <h1>Transferencias</h1>
+
+    <form class="filter-form" onsubmit="filterByTeam(event)">
+        <label for="teams">Filtra por equipos:</label>
+        <select id="teams" name="teams">
+            <option value="">Todos los equipos</option>
+            <c:forEach var="equipo" items="${equipos}">
+                <option value="${equipo.idEquipo}">${equipo.nombreEquipo}</option>
+            </c:forEach>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
     <c:forEach var="transferencia" items="${transferences}" varStatus="status">
-        <div onClick="toggleTransferencia('transferencia${status.index}')">
-            <p>${transferencia.equipoOrigen} &rarr; ${transferencia.equipoDestino}</p>
+        <div class="group" onClick="toggleTransferencia('transferencia${status.index}')">
+            <p>${transferencia.equipoOrigen.nombreEquipo} &rarr; ${transferencia.equipoDestino.nombreEquipo}</p>
             <p>Fecha: ${transferencia.fecha}</p>
+            <Button type="submit">Ver Detalles</Button>
         </div>
         <div id="transferencia${status.index}" style="display: none;">
             <p>Precio: ${transferencia.precio}</p>
@@ -28,3 +80,16 @@ function toggleTransferencia(id) {
         </div>
     </c:forEach>
 </Layaout:layaout>
+
+
+<script>
+    function filterByTeam(event) {
+        event.preventDefault();
+        var teamId = document.getElementById("teams").value;
+        if (teamId) {
+            window.location.href = '/allTranferences/' + encodeURIComponent(teamId);
+        } else {
+            window.location.href = '/allTranferences';
+        }
+    }
+    </script>

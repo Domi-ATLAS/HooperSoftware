@@ -77,5 +77,28 @@ public class PartidoService {
         return repository.findPlayOffGamesByTemporada(temporada);
     }
 
+    @Transactional(readOnly = true)
+    public List<Partido> findPartidoEquipoLocal(String equipoLocal){
+        return repository.findPartidoByEquipoLocal(equipoLocal);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Partido> findPartidoEquipoVisitante(String equipoVisitante){
+        return repository.findPartidoByEquipoVisitante(equipoVisitante);
+    }
+
+
+
+    @Transactional(readOnly = true)
+    public List<Partido> findAllGamesByTeamById(Integer id){
+        return repository.findAllGamesByTeamById(id);
+    }
+
+    
+    @Transactional(readOnly = true)
+    public List<Partido> findPartidoByTeam(String equipo){
+        return repository.findPartidoByTeam(equipo);
+    }
+
 
 }

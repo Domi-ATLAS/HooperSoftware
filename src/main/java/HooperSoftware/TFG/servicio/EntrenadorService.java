@@ -4,11 +4,11 @@ package HooperSoftware.TFG.servicio;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import HooperSoftware.TFG.entidad.Entrenador;
 import HooperSoftware.TFG.entidad.Equipo;
 import HooperSoftware.TFG.repositorio.EntrenadorRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class EntrenadorService {
@@ -45,4 +45,8 @@ public class EntrenadorService {
         return repository.findEquipoByEntrenador(nombre);
     }
     
+    @Transactional(readOnly = true)
+    public List<Entrenador> findByEquipoEntr(Integer equipoId) {
+    return repository.findByEquipoId(equipoId);
+}
 }

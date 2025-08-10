@@ -1,11 +1,12 @@
 package HooperSoftware.TFG.controlador;
 
-import HooperSoftware.TFG.servicio.EquipoService;
-import HooperSoftware.TFG.servicio.JornadaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+
+import HooperSoftware.TFG.servicio.EquipoService;
+import HooperSoftware.TFG.servicio.JornadaService;
 
 @Controller
 public class JornadaController {
@@ -27,7 +28,7 @@ public class JornadaController {
         return mav;
     }
 
-    @GetMapping("/allGames/jornadas/{teamId}")
+    @GetMapping("/allGames/allJornadas/{teamId}")
     public ModelAndView showJornadasByTeam(@PathVariable Integer teamId) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("partidos/allJornadaTeam");

@@ -1,11 +1,13 @@
 package HooperSoftware.TFG.controlador;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import HooperSoftware.TFG.entidad.Entrenador;
@@ -51,6 +53,32 @@ public class JugadorController {
     }        
 
 
+    @GetMapping("/allPlayers/{teamId}")
+    public ModelAndView showAllPlayersPageTeam(
+            @PathVariable Integer teamId,
+            @RequestParam(required = false, defaultValue = "true") boolean jugadores,
+            @RequestParam(required = false, defaultValue = "true") boolean entrenadores) {
+
+        ModelAndView mav = new ModelAndView("jugadores/allPlayersTeam");
+
+        if (jugadores) {
+            mav.addObject("players", jugadorService.findByEquipo(teamId));
+        } else {
+            mav.addObject("players", Collections.emptyList());
+        }
+
+        if (entrenadores) {
+            mav.addObject("trainers", entrenadorService.findByEquipoEntr(teamId));
+        } else {
+            mav.addObject("trainers", Collections.emptyList());
+        }
+
+        mav.addObject("equipos", equipoService.findAll());
+        
+        return mav;
+    }
+
+
     @GetMapping("/player/{idJugador}")
     public ModelAndView showPlayerPage(@PathVariable("idJugador") Integer idJugador) {
         ModelAndView mav = new ModelAndView();
@@ -87,4 +115,6 @@ public class JugadorController {
         }
         return mav;
     }
+
+
 }

@@ -195,6 +195,7 @@
                 </c:forEach>
             </select>
             <button type="submit">Filtrar</button>
+            <button type="button" onclick="clearFilters()">Limpiar Filtros</button>
         </form>
 
         <!-- Contenedor para las temporadas -->
@@ -249,5 +250,11 @@
         } else {
             window.location.href = '/allSeasons';
         }
+    }
+
+    // Función para limpiar los filtros
+    function clearFilters() {
+        // Redirige a la página sin ningún filtro aplicado
+        window.location.href = '/allSeasons';
     }
 </script>

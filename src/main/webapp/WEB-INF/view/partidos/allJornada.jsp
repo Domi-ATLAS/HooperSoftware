@@ -192,12 +192,13 @@
     </div>
 
     <!-- Formulario de filtro -->
-    <form class="filter-form" method="get" action="/allGames/jornadas">
-        <label for="teams">Filtra por equipo:</label>
-        <select id="teams" name="teamId">
+    <form class="filter-form" onsubmit="filterByTeam(event)">
+        <label for="teams">Filtra por equipos:</label>
+        <select id="teams" name="teams">
             <option value="">Todos los equipos</option>
-            <c:forEach var="equipo" items="${game}">
-                <option value="${equipo.idEquipo}">${equipo.nombreEquipo}</option>
+            <c:forEach var="equipo" items="${equipos}">
+                <option value="${equipo.idEquipo}" 
+                        <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>${equipo.nombreEquipo}</option>
             </c:forEach>
         </select>
         <button type="submit">Filtrar</button>
@@ -229,3 +230,15 @@
     </div>
 
 </Layaout:layaout>
+<script>
+    function filterByTeam(event) {
+        event.preventDefault();
+        var teamId = document.getElementById("teams").value;
+        if (teamId) {
+            window.location.href = '/allGames/allJornadas/' + encodeURIComponent(teamId);
+        } else {
+            window.location.href = '/allGames/allJornadas';
+        }
+    }
+</script>
+    

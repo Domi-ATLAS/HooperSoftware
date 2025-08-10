@@ -60,6 +60,18 @@
     <h1>Jugadores y Entrenadores</h1>
     <div class="container">
         <div class="left">
+            <form class="filter-form" onsubmit="filterByTeam(event)">
+                <label for="teams">Filtra por equipos:</label>
+                <select id="teams" name="teams">
+                    <option value="">Todos los equipos</option>
+                    <c:forEach var="equipo" items="${equipos}">
+                        <option value="${equipo.idEquipo}" 
+                                <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>${equipo.nombreEquipo}</option>
+                    </c:forEach>
+                </select>
+                <button type="submit">Filtrar</button>
+            </form>
+            
             <h2>Todos los jugadores</h2>
             <div class="search-container">
                 <input type="text" id="searchPlayer" placeholder="Buscar jugador...">
@@ -85,6 +97,17 @@
 
         
         <div class="right">
+            <form class="filter-form" onsubmit="filterByTeam(event)">
+                <label for="teams">Filtra por equipos:</label>
+                <select id="teams" name="teams">
+                    <option value="">Todos los equipos</option>
+                    <c:forEach var="equipo" items="${equipos}">
+                        <option value="${equipo.idEquipo}" 
+                                <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>${equipo.nombreEquipo}</option>
+                    </c:forEach>
+                </select>
+                <button type="submit">Filtrar</button>
+            </form>
             <h2>Todos los Entrenadores</h2>
 
             <div class="search-container">

@@ -61,5 +61,6 @@ public interface JugadorRepository extends CrudRepository<Jugador,Integer>{
     @Query("SELECT e FROM Equipo e JOIN e.jugadores j WHERE j.nombreJugador = :nombreJugador")
     Equipo findEquipoByNombreJugador(@Param("nombreJugador") String nombreJugador);
 
-
+    @Query("SELECT j FROM Jugador j WHERE j.equipo.id = :equipoId")
+    List<Jugador> findByEquipoId(@Param("equipoId") Integer equipoId);
 }

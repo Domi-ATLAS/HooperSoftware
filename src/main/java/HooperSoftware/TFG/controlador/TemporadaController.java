@@ -1,20 +1,24 @@
 package HooperSoftware.TFG.controlador;
 
 import org.springframework.stereotype.Controller;
-
-import HooperSoftware.TFG.servicio.TemporadaService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+
+import HooperSoftware.TFG.servicio.EquipoService;
+import HooperSoftware.TFG.servicio.TemporadaService;
 
 
 @Controller
 public class TemporadaController {
 
-    private TemporadaService temporadaService;
+    private final TemporadaService temporadaService;
+    private final EquipoService equipoService;
 
-    public TemporadaController(TemporadaService temporadaService) {
+
+    public TemporadaController(TemporadaService temporadaService, EquipoService equipoService) {
         this.temporadaService = temporadaService;
+        this.equipoService = equipoService;
     }
 
     @GetMapping("/allSeasons")
@@ -22,8 +26,18 @@ public class TemporadaController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("partidos/allSeasons");
         mav.addObject("temporadas", temporadaService.findAll());
+        mav.addObject("equipos", equipoService.findAll());
         return mav;
     }
     
+    @GetMapping("/allSeasons/{teamId}")
+    public ModelAndView showSeasonsByTeam(@PathVariable Integer teamId) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("partidos/allSeasonsTeam");
+        mav.addObject("temporadas", temporadaService.findTemporadasByTeam(teamId));
+        mav.addObject("equipos", equipoService.findAll());
+        mav.addObject("selectedTeamId", teamId);
+        return mav;
+    }
     
 }

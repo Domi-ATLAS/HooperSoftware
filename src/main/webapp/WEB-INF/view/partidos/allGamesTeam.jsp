@@ -78,8 +78,6 @@
             </c:forEach>
         </select>
         <button type="submit">Filtrar</button>
-        
-        <!-- Botón para limpiar los filtros -->
         <button type="button" onclick="clearFilters()">Limpiar Filtros</button>
     </form>
 

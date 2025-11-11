@@ -2,86 +2,199 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Noticias de Baloncesto">
-    <style>
-        .container {
-            display: flex;
-        }
-        .noticias {
-            flex: 70%;
-            padding: 10px;
-        }
-        .derecha {
-            flex: 30%;
-            padding: 10px;
-            border-left: 1px solid #000;
-        }
-        .marcador, .chat {
-            padding: 10px;
-        }
-        body {
-            background-color: #ffffff; /* Color de fondo azulado */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        button {
-            display: inline-block;
-            padding: 2px 2px;
-            font-size: 24px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            outline: none;
-            color: #000000;
-            background-color: #1D428A;
-            border: 4px;
-            border-style: outset;
-            border-color: black;
-            font-family: fantasy;
-            font: Copperplate, Papyrus, fantasy;
-        }
-        button:hover {background-color: #5276be}
-    
-        button:active {
-        background-color: #5276be;
-        box-shadow: 0 5px #666;
-        transform: translateY(4px);
-        }
-    </style>
-
-    <div class="container">
-        <div class="noticias">
-            <h1>Noticias</h1>
-            
-            <div>
-                <h2>Niveles de los playoffs de la NBA de 2024: ¿Cómo se comparan los ocho equipos restantes?</h2>
-                <p>Kevin Pelton, insider de la NBA de ESPN, coloca a los ocho equipos restantes de los playoffs en cinco niveles. ¿Cuántos están en el Nivel 1?</p>
-                <p>Fecha: 06/05/2024</p>
-            </div>
-
-            <div>
-                <h2>MVP de la NBA 2024: ¿Luke podrá ganarle el premio a Jokic y SGA?</h2>
-                <p>A medida que avanzan los playoffs de la NBA, se espera que pronto se anuncie premio al Jugador Más Valioso de la NBA 2023-24. Los finalistas de esta temporada son el pívot de los Denver Nuggets, Nikola Jokic, el base de los Dallas Mavericks, Luka Doncic, y el base de los Oklahoma City Thunder, Shai Gilgeous-Alexander.</p>
-                <p>Fecha: 02/05/2024</p>
-            </div>
-
-            <!-- Agrega más noticias de la misma manera -->
-        </div>
-
-        <div class="derecha">
-            <div class="marcador">
-                <!-- Aquí irá el marcador en el futuro -->
-                <h2>Marcador</h2>
-                <p>Marcador en construcción...</p>
-            </div>
-
-            <div class="chat">
-                <!-- Aquí irá el chat en el futuro -->
-                <h2>Chat</h2>
-                <p>Chat en construcción...</p>
-            </div>
-        </div>
+  <div class="container">
+    <div class="noticias">
+      <h1>Noticias</h1>
+      <div>
+        <h2>Niveles de los playoffs de la NBA de 2024</h2>
+        <p>Resumen y artículos destacados sobre los equipos que siguen en la carrera por el anillo.</p>
+      </div>
     </div>
+
+    <div class="derecha">
+      <div class="marcador">
+        <h2>Marcador</h2>
+        <p>Marcador en construcción...</p>
+      </div>
+
+      <div class="chat">
+        <h2>Chat</h2>
+        <p>Chat en construcción...</p>
+      </div>
+
+      <!-- VISOR ÚNICO -->
+      <div class="embed-card" style="margin-top:18px; padding:12px;">
+        <div class="embed-header" style="align-items:center; gap:12px;">
+          <h3 style="margin:0;">Visor — Fuentes externas</h3>
+
+          <!-- botones para cambiar la fuente -->
+          <div style="margin-left:12px; display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn embed-switch" data-src="https://www.basketball-reference.com/">Basketball-Reference</button>
+            <button class="btn embed-switch" data-src="https://es.wikipedia.org/wiki/National_Basketball_Association">Wikipedia (NBA)</button>
+            <button class="btn embed-switch" data-src="https://www.eurohoops.net/es/">Eurohoops</button>
+            <button class="btn embed-reload" title="Recargar fuente actual">Recargar</button>
+            <a class="btn" id="open-new-tab" href="#" target="_blank" rel="noopener">Abrir en nueva pestaña</a>
+          </div>
+        </div>
+
+        <!-- visor (cuerpo) -->
+        <div id="single-embed-body" class="embed-body" aria-hidden="true"
+             style="max-height:0; overflow:hidden; transition: max-height 320ms ease, opacity 220ms ease; opacity:0; margin-top:8px;">
+          <div class="embed-frame-wrap" style="width:100%; height:100%; min-height:360px; border-radius:6px; overflow:hidden; background:#f8f8f8;">
+            <iframe id="single-embed-iframe"
+                    class="embed-iframe"
+                    src=""
+                    data-src="https://www.basketball-reference.com/"
+                    loading="lazy"
+                    frameborder="0"
+                    sandbox="allow-same-origin allow-scripts allow-forms"
+                    style="width:100%; height:100%; border:0; display:block;"></iframe>
+          </div>
+
+          <div id="single-embed-fallback" class="embed-fallback" style="display:none; margin-top:8px; background:#fff7c2; border-radius:6px; padding:8px; border:1px solid #f0e68c; color:#333;">
+            <p id="single-embed-fallback-text">La web no se puede mostrar embebida. <a id="single-embed-openlink" href="#" target="_blank" rel="noopener">Abrir en nueva pestaña</a></p>
+          </div>
+        </div>
+      </div>
+      <!-- /VISOR ÚNICO -->
+
+    </div>
+  </div>
+
+  <!-- JS: controlador del visor único -->
+  <script>
+    (function () {
+      document.addEventListener('DOMContentLoaded', () => {
+        const iframe = document.getElementById('single-embed-iframe');
+        const body = document.getElementById('single-embed-body');
+        const fallback = document.getElementById('single-embed-fallback');
+        const fallbackText = document.getElementById('single-embed-fallback-text');
+        const openNewTab = document.getElementById('open-new-tab');
+
+        // botones para cambiar fuente
+        const switches = document.querySelectorAll('.embed-switch');
+        const reloadBtn = document.querySelector('.embed-reload');
+
+        // ajustes de altura
+        const vhRatio = 0.85;
+        const reservedPx = 64;
+        function computePx() {
+          return Math.max(Math.floor(window.innerHeight * vhRatio) - reservedPx, 260);
+        }
+
+        // abre el body (fuerza altura en px)
+        function openBody() {
+          const h = computePx();
+          body.style.maxHeight = h + 'px';
+          body.style.height = h + 'px';
+          body.style.opacity = '1';
+          body.classList.add('open');
+          body.setAttribute('aria-hidden', 'false');
+        }
+        function closeBody() {
+          body.style.maxHeight = null;
+          body.style.height = null;
+          body.style.opacity = '0';
+          body.classList.remove('open');
+          body.setAttribute('aria-hidden', 'true');
+        }
+
+        function showFallback(msg, src) {
+          if (msg) {
+            fallbackText.innerHTML = msg + ' <a id="single-embed-openlink" href="' + src + '" target="_blank" rel="noopener">Abrir en nueva pestaña</a>';
+          } else {
+            fallbackText.innerHTML = 'La web no se puede mostrar embebida. <a id="single-embed-openlink" href="' + src + '" target="_blank" rel="noopener">Abrir en nueva pestaña</a>';
+          }
+          fallback.classList.add('visible');
+          fallback.style.display = 'block';
+        }
+        function hideFallback() {
+          fallback.classList.remove('visible');
+          fallback.style.display = 'none';
+        }
+
+        // función para cargar una nueva URL en el iframe (no recarga si misma URL)
+        function loadSrc(src) {
+          // abrir el contenedor
+          openBody();
+          // actualizar link "abrir en nueva pestaña"
+          openNewTab.href = src;
+
+          // si el iframe ya está con la misma src (o data-src igual), no forzamos recarga,
+          // pero si no estaba cargado lo cargamos
+          if (iframe.dataset.loaded && iframe.src === src) {
+            hideFallback();
+            return;
+          }
+
+          // asignamos src y marcamos cargado
+          iframe.dataset.loaded = '1';
+          iframe.src = src;
+
+          // ocultar fallback hasta que haya verdadera señal de error o comprobación same-origin
+          hideFallback();
+
+          // manejar error de carga (red/registro)
+          iframe.addEventListener('error', function onErr() {
+            showFallback('Error al cargar la página. Puedes abrirla en una pestaña nueva.', src);
+            iframe.removeEventListener('error', onErr);
+          }, { once: true });
+
+          // si same-origin: comprobamos si el cuerpo está vacío
+          iframe.addEventListener('load', function onLoad() {
+            try {
+              const doc = iframe.contentDocument || iframe.contentWindow.document;
+              if (doc && doc.body) {
+                const textLen = doc.body.innerText.trim().length;
+                if (textLen === 0) {
+                  showFallback('La página cargó pero aparece vacía en este contexto.', src);
+                } else {
+                  hideFallback();
+                }
+              } else {
+                hideFallback();
+              }
+            } catch (e) {
+              // cross-origin -> no forzamos fallback automático
+              hideFallback();
+            } finally {
+              iframe.removeEventListener('load', onLoad);
+            }
+          }, { once: true });
+        }
+
+        // inicial: cargar basketball-reference por defecto
+        const defaultSrc = iframe.dataset.src || 'https://www.basketball-reference.com/';
+        loadSrc(defaultSrc);
+
+        // manejadores de botones
+        switches.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const src = btn.dataset.src;
+            if (!src) return;
+            loadSrc(src);
+          });
+        });
+
+        // recargar
+        reloadBtn.addEventListener('click', () => {
+          const current = iframe.src || iframe.dataset.src;
+          if (current) {
+            // forzamos recarga
+            iframe.src = current;
+            hideFallback();
+          }
+        });
+
+        // resize -> si body está abierto, recomputar altura
+        window.addEventListener('resize', () => {
+          if (body.classList.contains('open')) {
+            const newH = computePx();
+            body.style.maxHeight = newH + 'px';
+            body.style.height = newH + 'px';
+          }
+        });
+      });
+    })();
+  </script>
 </Layaout:layaout>

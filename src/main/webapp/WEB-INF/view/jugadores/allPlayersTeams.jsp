@@ -6,18 +6,6 @@
 <html>
 <head>
     <title>Jugadores y Entrenadores</title>
-    <style>
-        .container { display: flex; }
-        .left, .right { width: 50%; padding: 10px; }
-        .left { border-right: 1px solid #ccc; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .search-container { display: flex; margin-bottom: 10px; }
-        .search-container input { flex: 1; padding: 8px; border: 1px solid #ccc; margin-right: 8px; }
-        .search-container button { padding: 8px; background-color: #1D428A; color: white; border: none; cursor: pointer; }
-        .search-container button:hover { background-color: #5276be; }
-    </style>
 </head>
 <body>
     <h1>Jugadores y Entrenadores</h1>

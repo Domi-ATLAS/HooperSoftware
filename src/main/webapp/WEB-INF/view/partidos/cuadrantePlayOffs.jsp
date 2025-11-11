@@ -3,52 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Playoffs Partidos">
-    <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-            border: 1px solid #000;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #f9f9f9;
-        }
-        .section {
-            width: 19%;
-        }
-        .group {
-            border: 1px solid #000;
-            padding: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .team-info {
-            width: 40%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .vs {
-            color: red;
-            width: 80%;
-            text-align: left    ;
-        }
-        .details {
-            width: 40%;
-            text-align: right;
-        }
-        .section {
-            width: 19%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .group p:nth-child(2) {
-            text-align: right;
-        }
-    </style>
 
 
     <h1>Equipos Playoff ${temporada}</h1>

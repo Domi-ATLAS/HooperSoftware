@@ -3,54 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Votaciones en Curso">
-    <style>
-        .container {
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        .vote {
-            background-color: white;
-            color: black;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 10px;
-            border: 2px solid black;
-            text-align: left;
-        }
-
-        .season-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #1D428A;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-
-        .toggle-button {
-            background-color: #ffcc00;
-            color: black;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .toggle-button:hover {
-            background-color: #e6b800;
-        }
-
-       
-
-        .filter-form {
-            margin-top: 20px;
-        }
-    </style>
 
     <h1>Votaciones en Curso</h1>
 

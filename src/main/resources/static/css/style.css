@@ -198,3 +198,19 @@ a:focus, button:focus { outline: 3px solid rgba(29,66,138,0.18); outline-offset:
   margin-right: 6px;
   vertical-align: middle;
 }
+
+.live-pill {
+  display: inline-block;
+  padding: 2px 6px;
+  margin-left: 6px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #dc2626;   /* rojo */
+  color: #fff;
+}
+
+.live-row {
+  background: #fee2e2;
+}
+

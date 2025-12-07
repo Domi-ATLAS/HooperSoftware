@@ -31,106 +31,131 @@
       </div>
 
       <script>
-        (function(){
-          const endpoint = '/api/nba/scores';
-          const container = document.getElementById('scores-content');
-          const lastEl = document.getElementById('scores-last');
-          const refreshBtn = document.getElementById('refresh-scores');
+  (function(){
+    const endpoint = '/api/nba/scores';
+    const container = document.getElementById('scores-content');
+    const lastEl = document.getElementById('scores-last');
+    const refreshBtn = document.getElementById('refresh-scores');
 
-          function friendlyDate(iso) {
-            try {
-              const dt = new Date(iso);
-              return dt.toLocaleString('es-ES', {
-                hour: '2-digit',
-                minute: '2-digit',
-                day: '2-digit',
-                month: '2-digit'
-              });
-            } catch(e) { return iso; }
-          }
+    function friendlyDate(iso) {
+      try {
+        const dt = new Date(iso);
+        return dt.toLocaleString('es-ES', {
+          hour: '2-digit',
+          minute: '2-digit',
+          day: '2-digit',
+          month: '2-digit'
+        });
+      } catch(e) { return iso; }
+    }
 
-          function render(games) {
-            if (!games || games.length === 0) {
-              container.innerHTML = '<p>No hay partidos para hoy / próximas horas.</p>';
-              return;
-            }
+    // Si ambos son 0 -> "vs", si no -> "XX — YY"
+    function formatScore(g) {
+      var hs = g.home_score || 0;
+      var vs = g.visitor_score || 0;
+      if (hs === 0 && vs === 0) {
+        return 'vs';
+      }
+      return hs + ' — ' + vs;
+    }
 
-            const live = games.filter(function(g){ return /in progress/i.test(g.status); });
-            const finished = games.filter(function(g){ return /final/i.test(g.status); });
-            const scheduled = games.filter(function(g){
-              return live.indexOf(g) === -1 && finished.indexOf(g) === -1;
-            });
+    function render(games) {
+      if (!games || games.length === 0) {
+        container.innerHTML = '<p>No hay partidos para hoy / próximas horas.</p>';
+        return;
+      }
 
-            let html = '';
+      // ahora consideramos más estados como "en juego"
+      const live = games.filter(function(g){
+        return /in progress|1st qtr|2nd qtr|3rd qtr|4th qtr|ot/i.test(g.status);
+      });
+      const finished = games.filter(function(g){
+        return /final/i.test(g.status);
+      });
+      const scheduled = games.filter(function(g){
+        return live.indexOf(g) === -1 && finished.indexOf(g) === -1;
+      });
 
-            if (live.length) {
-              html += '<div class="panel"><h3 class="section-title">En directo</h3><ul class="list">';
-              live.forEach(function(g){
-                html += '<li class="row">' +
-                        '<strong>' + g.home_team + '</strong> ' +
-                        g.home_score + ' — ' + g.visitor_score + ' ' +
-                        '<strong>' + g.visitor_team + '</strong> ' +
-                        '<span class="small-muted">(' + g.status + ')</span>' +
-                        '</li>';
-              });
-              html += '</ul></div>';
-            }
+      let html = '';
 
-            if (scheduled.length) {
-              html += '<div class="panel" style="margin-top:8px;"><h3 class="section-title">Programados</h3><ul class="list">';
-              scheduled.forEach(function(g){
-                html += '<li class="row">' +
-                        '<span>' + friendlyDate(g.date) + '</span> ' +
-                        '<strong>' + g.home_team + '</strong> vs <strong>' + g.visitor_team + '</strong> ' +
-                        '<span class="small-muted">(' + g.status + ')</span>' +
-                        '</li>';
-              });
-              html += '</ul></div>';
-            }
+      // EN DIRECTO
+      if (live.length) {
+        html += '<div class="panel"><h3 class="section-title">En directo</h3><ul class="list">';
+        live.forEach(function(g){
+          html += '<li class="row live-row">' +
+                    '<div>' +
+                      '<strong>' + g.home_team + '</strong> ' +
+                      formatScore(g) + ' ' +
+                      '<strong>' + g.visitor_team + '</strong> ' +
+                      '<span class="live-pill">LIVE</span>' +
+                    '</div>' +
+                    '<span class="small-muted">' + g.status + '</span>' +
+                  '</li>';
+        });
+        html += '</ul></div>';
+      }
 
-            if (finished.length) {
-              html += '<div class="panel" style="margin-top:8px;"><h3 class="section-title">Finalizados</h3><ul class="list">';
-              finished.forEach(function(g){
-                html += '<li class="row">' +
-                        '<strong>' + g.home_team + '</strong> ' +
-                        g.home_score + ' — ' + g.visitor_score + ' ' +
-                        '<strong>' + g.visitor_team + '</strong> ' +
-                        '<span class="small-muted">(' + g.status + ')</span>' +
-                        '</li>';
-              });
-              html += '</ul></div>';
-            }
+      // PROGRAMADOS (ahora también muestran marcador si lo hay)
+      if (scheduled.length) {
+        html += '<div class="panel" style="margin-top:8px;"><h3 class="section-title">Programados</h3><ul class="list">';
+        scheduled.forEach(function(g){
+          html += '<li class="row">' +
+                    '<span>' + friendlyDate(g.date) + '</span> ' +
+                    '<strong>' + g.home_team + '</strong> ' +
+                    formatScore(g) + ' ' +
+                    '<strong>' + g.visitor_team + '</strong> ' +
+                    '<span class="small-muted">(' + g.status + ')</span>' +
+                  '</li>';
+        });
+        html += '</ul></div>';
+      }
 
-            container.innerHTML = html;
-          }
+      // FINALIZADOS
+      if (finished.length) {
+        html += '<div class="panel" style="margin-top:8px;"><h3 class="section-title">Finalizados</h3><ul class="list">';
+        finished.forEach(function(g){
+          html += '<li class="row">' +
+                    '<strong>' + g.home_team + '</strong> ' +
+                    formatScore(g) + ' ' +
+                    '<strong>' + g.visitor_team + '</strong> ' +
+                    '<span class="small-muted">(' + g.status + ')</span>' +
+                  '</li>';
+        });
+        html += '</ul></div>';
+      }
 
-          async function fetchAndRender() {
-            try {
-              const res = await fetch(endpoint, { cache: 'no-store' });
-              if (!res.ok) throw new Error('Error ' + res.status);
-              const data = await res.json();
-              render(data);
-              lastEl.textContent = new Date().toLocaleTimeString('es-ES');
-            } catch (err) {
-              container.innerHTML =
-                '<p style="color:crimson">No se pudieron cargar los marcadores: ' +
-                err.message + '</p>';
-            }
-          }
+      container.innerHTML = html;
+    }
 
-          let timer = setInterval(fetchAndRender, 10000);
+    async function fetchAndRender() {
+      try {
+        const res = await fetch(endpoint, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Error ' + res.status);
+        const data = await res.json();
+        render(data);
+        lastEl.textContent = new Date().toLocaleTimeString('es-ES');
+      } catch (err) {
+        container.innerHTML =
+          '<p style="color:crimson">No se pudieron cargar los marcadores: ' +
+          err.message + '</p>';
+      }
+    }
 
-          refreshBtn.addEventListener('click', function() {
-            fetchAndRender();
-          });
+    // refresco cada 10s
+    let timer = setInterval(fetchAndRender, 10000);
 
-          fetchAndRender();
+    refreshBtn.addEventListener('click', function() {
+      fetchAndRender();
+    });
 
-          window.addEventListener('beforeunload', function() {
-            clearInterval(timer);
-          });
-        })();
-      </script>
+    fetchAndRender();
+
+    window.addEventListener('beforeunload', function() {
+      clearInterval(timer);
+    });
+  })();
+</script>
+
       <!-- ===== FIN MARCADOR ===== -->
 
       <div class="chat">

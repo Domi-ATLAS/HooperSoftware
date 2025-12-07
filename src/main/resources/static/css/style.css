@@ -173,4 +173,28 @@ a:focus, button:focus { outline: 3px solid rgba(29,66,138,0.18); outline-offset:
 /* small print */
 .footer-note { font-size:0.9rem; color:var(--muted); text-align:center; padding:12px 0; }
 
-/* end of single CSS */
+/* ===== Marcador: estilos extra ===== */
+.badge-live {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  margin-left: 6px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #e02424;
+  color: #fff;
+}
+
+.row-live {
+  background: rgba(224, 36, 36, 0.06);
+}
+
+.team-logo-small {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  object-fit: contain;
+  margin-right: 6px;
+  vertical-align: middle;
+}

@@ -16,6 +16,30 @@
   <!-- CSS global -->
   <link rel="stylesheet" href="<c:url value='/css/style.css'/>">
 </head>
+<script>
+  function runNbaScraping() {
+    if (!confirm('Esto actualizará los datos NBA desde fuentes externas.\n¿Deseas continuar?')) {
+      return;
+    }
+
+    fetch('/admin/scrape/nba/full', {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('Error ' + res.status);
+      return res.text();
+    })
+    .then(msg => {
+      alert('Scraping iniciado correctamente.\n\n' + msg);
+    })
+    .catch(err => {
+      alert('Error al ejecutar el scraping:\n' + err.message);
+    });
+  }
+</script>
 <body>
   <!-- Header principal -->
   <header class="site-header">
@@ -34,6 +58,13 @@
         <button class="btn" onclick="location.href='/allPlayers'">Jugadores | Entrenadores</button>
         <sec:authorize access="hasAuthority('admin')">
           <button class="btn" onclick="location.href='/allPlayers'">Simulaciones</button>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('admin')">
+          <button class="btn btn-admin"
+                  onclick="runNbaScraping()"
+                  title="Actualizar datos NBA desde Basketball Reference">
+             Actualizar datos NBA
+          </button>
         </sec:authorize>
       </div>
       <div class="nav-right">

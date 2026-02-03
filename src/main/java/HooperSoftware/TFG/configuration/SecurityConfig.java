@@ -23,6 +23,11 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
+            
+        .csrf(csrf -> csrf
+            .ignoringRequestMatchers("/admin/scrape/**")
+        )
+
 		.authorizeHttpRequests((authorize) -> authorize
                 // .requestMatchers("/welcome").permitAll() 
                 // .requestMatchers("/login").permitAll() 

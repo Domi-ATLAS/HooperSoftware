@@ -214,3 +214,12 @@ a:focus, button:focus { outline: 3px solid rgba(29,66,138,0.18); outline-offset:
   background: #fee2e2;
 }
 
+.btn-admin {
+  background: #8b0000;
+  color: #fff;
+  border: 1px solid #600;
+}
+
+.btn-admin:hover {
+  background: #a40000;
+}

@@ -16,27 +16,48 @@
   <!-- CSS global -->
   <link rel="stylesheet" href="<c:url value='/css/style.css'/>">
 </head>
+<!-- CSRF (necesario con Spring Security) -->
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
+
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
+
 <script>
   function runNbaScraping() {
-    if (!confirm('Esto actualizará los datos NBA desde fuentes externas.\n¿Deseas continuar?')) {
-      return;
-    }
 
-    fetch('/admin/scrape/nba/full', {
+    if (!confirm('Actualizar datos NBA?')) return;
+
+    const token = document.querySelector('meta[name="_csrf"]').content;
+    const header = document.querySelector('meta[name="_csrf_header"]').content;
+
+    // 🔵 TEAMS
+    fetch('/admin/sync/teams', {
       method: 'POST',
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      }
+      headers: { [header]: token }
     })
-    .then(res => {
-      if (!res.ok) throw new Error('Error ' + res.status);
-      return res.text();
+    .then(() => {
+
+      // 🟢 PLAYERS
+      return fetch('/admin/sync/players', {
+        method: 'POST',
+        headers: { [header]: token }
+      });
+
     })
-    .then(msg => {
-      alert('Scraping iniciado correctamente.\n\n' + msg);
+    .then(() => {
+
+      // 🔴 GAMES (LO EJECUTAMOS PERO SIN ESPERAR RESPUESTA LARGA)
+      fetch('/admin/sync/games', {
+        method: 'POST',
+        headers: { [header]: token }
+      });
+
+      alert("✅ Equipos y jugadores OK\n\n⏳ Partidos cargando en background...");
+
     })
     .catch(err => {
-      alert('Error al ejecutar el scraping:\n' + err.message);
+      alert("❌ Error: " + err.message);
     });
   }
 </script>

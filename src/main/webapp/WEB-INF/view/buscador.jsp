@@ -1,74 +1,323 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+        <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
+            <%@ page contentType="text/html;charset=UTF-8" %>
 
-<Layaout:layaout title="Buscador">
+                <Layaout:layaout title="Buscador NBA">
+
+                    <div class="search-page">
+
+                        <h1>Buscador Global NBA</h1>
+
+                        <div class="search-container">
+
+                            <form action="/buscador" method="get">
+
+                                <input type="text" name="query" value="${query}" class="search-box"
+                                    placeholder="Busca jugadores, equipos, entrenadores o partidos..."
+                                    autocomplete="off" />
+                                <div id="autocomplete-results"></div>
+                                <button type="submit" class="search-btn">
+                                    Buscar
+                                </button>
+
+                            </form>
+
+                        </div>
 
 
-    <h1>Buscador</h1>
+                        <c:if test="${not searched}">
+                            <div class="search-empty">
+                                <h3>¿Qué puedes buscar?</h3>
 
-    <div class="search-container">
-        <form action="/buscador" method="get">
-            <input type="text" name="query" value="${query}" class="search-box" placeholder="Busca equipos, jugadores, partidos o entrenadores...">
-            <button type="submit" class="search-btn">Buscar</button>
-        </form>
-    </div>
+                                <ul>
+                                    <li>Jugadores (Ej: LeBron, Jordan)</li>
+                                    <li>Equipos (Ej: Lakers, Miami)</li>
+                                    <li>Entrenadores (Ej: Spoelstra)</li>
+                                    <li>Partidos relacionados por equipo</li>
+                                </ul>
 
-    <div class="result-section">
+                            </div>
+                        </c:if>
 
-        <!-- Entrenadores -->
-        <c:if test="${not empty entrenadores}">
-            <div class="result-group">
-                <h3>Entrenadores</h3>
-                <c:forEach var="entrenador" items="${entrenadores}">
-                    <div class="result-item">
-                        <p><strong>${entrenador.nombre}</strong> - ${entrenador.equipo.nombreEquipo}</p>
+
+
+                        <c:if test="${searched}">
+
+                            <h3 class="query-title">
+                                Resultados para "<strong>${query}</strong>"
+                            </h3>
+
+                            <div class="results-wrapper">
+
+                                <!-- EQUIPOS -->
+
+                                <c:if test="${not empty equipos}">
+                                    <div class="result-group">
+
+                                        <h2>
+                                            Equipos (${fn:length(equipos)})
+                                        </h2>
+
+                                        <c:forEach var="equipo" items="${equipos}">
+
+                                            <div class="result-card">
+
+                                                <a href="/equipos/${fn:replace(equipo.nombreEquipo,' ','')}">
+                                                    🏀 ${equipo.nombreEquipo}
+                                                </a>
+
+                                            </div>
+
+                                        </c:forEach>
+
+                                    </div>
+                                </c:if>
+
+
+
+
+                                <!-- JUGADORES -->
+
+                                <c:if test="${not empty jugadores}">
+                                    <div class="result-group">
+
+                                        <h2>
+                                            Jugadores (${fn:length(jugadores)})
+                                        </h2>
+
+                                        <c:forEach var="jugador" items="${jugadores}">
+
+                                            <div class="result-card">
+
+                                                <a href="/player/${jugador.idJugador}">
+                                                    ⛹ ${jugador.nombreJugador}
+                                                </a>
+
+                                                <c:if test="${not empty jugador.equipo}">
+                                                    <span class="meta">
+                                                        - ${jugador.equipo.nombreEquipo}
+                                                    </span>
+                                                </c:if>
+
+                                            </div>
+
+                                        </c:forEach>
+
+                                    </div>
+                                </c:if>
+
+
+
+
+
+                                <!-- ENTRENADORES -->
+
+                                <c:if test="${not empty entrenadores}">
+                                    <div class="result-group">
+
+                                        <h2>
+                                            Entrenadores (${fn:length(entrenadores)})
+                                        </h2>
+
+                                        <c:forEach var="entrenador" items="${entrenadores}">
+
+                                            <div class="result-card">
+
+                                                <a href="/trainer/${entrenador.idEntrenador}">
+                                                    🎯 ${entrenador.nombeEntrenador}
+                                                </a>
+
+                                                <c:if test="${not empty entrenador.equipo}">
+                                                    <span class="meta">
+                                                        - ${entrenador.equipo.nombreEquipo}
+                                                    </span>
+                                                </c:if>
+
+                                            </div>
+
+                                        </c:forEach>
+
+                                    </div>
+                                </c:if>
+
+
+
+
+
+
+                                <!-- PARTIDOS -->
+
+                                <c:if test="${not empty partidos}">
+                                    <div class="result-group">
+
+                                        <h2>
+                                            Partidos (${fn:length(partidos)})
+                                        </h2>
+
+                                        <c:forEach var="partido" items="${partidos}" begin="0" end="7">
+
+                                            <div class="result-card">
+
+                                                <a href="/partido/${partido.idPartido}">
+                                                    🏆
+                                                    ${partido.equipoLocal}
+                                                    vs
+                                                    ${partido.equipoVisitante}
+                                                </a>
+
+                                                <c:if test="${not empty partido.fecha}">
+                                                    <span class="meta">
+                                                        - ${partido.fecha}
+                                                    </span>
+                                                </c:if>
+
+                                            </div>
+
+                                        </c:forEach>
+
+                                        <c:if test="${fn:length(partidos) > 8}">
+                                            <p class="more-results">
+                                                Mostrando 8 partidos de ${fn:length(partidos)} resultados
+                                            </p>
+                                        </c:if>
+
+                                    </div>
+                                </c:if>
+
+
+
+
+                                <!-- SIN RESULTADOS -->
+
+                                <c:if test="
+empty entrenadores
+and empty equipos
+and empty jugadores
+and empty partidos">
+
+                                    <div class="search-empty">
+                                        No se encontraron resultados para
+                                        <strong>${query}</strong>
+                                    </div>
+
+                                </c:if>
+
+
+                            </div>
+
+                        </c:if>
+
                     </div>
-                </c:forEach>
-            </div>
-        </c:if>
+                    <script>
 
-        <!-- Equipos -->
-        <c:if test="${not empty equipos}">
-            <div class="result-group">
-                <h3>Equipos</h3>
-                <c:forEach var="equipo" items="${equipos}">
-                    <div class="result-item">
-                        <p><strong>${equipo.nombreEquipo}</strong></p>
-                    </div>
-                </c:forEach>
-            </div>
-        </c:if>
+                        const input = document.querySelector(".search-box");
+                        const box = document.getElementById("autocomplete-results");
 
-        <!-- Partidos -->
-        <c:if test="${not empty partidos}">
-            <div class="result-group">
-                <h3>Partidos</h3>
-                <c:forEach var="partido" items="${partidos}">
-                    <div class="result-item">
-                        <p><strong>${partido.equipoLocal}</strong> vs <strong>${partido.equipoVisitante}</strong> - ${partido.fecha}</p>
-                    </div>
-                </c:forEach>
-            </div>
-        </c:if>
+                        let currentFocus = -1;
 
-        <!-- Jugadores -->
-        <c:if test="${not empty jugadores}">
-            <div class="result-group">
-                <h3>Jugadores</h3>
-                <c:forEach var="jugador" items="${jugadores}">
-                    <div class="result-item">
-                        <p><strong>${jugador.nombre}</strong> - ${jugador.equipo.nombreEquipo}</p>
-                    </div>
-                </c:forEach>
-            </div>
-        </c:if>
+                        input.addEventListener("keyup", function (e) {
 
-        <!-- Mensaje si no se encuentran resultados -->
-        <c:if test="${empty entrenadores && empty equipos && empty partidos && empty jugadores}">
-            <p>No se encontraron resultados para "<strong>${query}</strong>". Intenta con otro término.</p>
-        </c:if>
+                            if (["ArrowDown", "ArrowUp", "Enter"].includes(e.key)) {
+                                return;
+                            }
 
-    </div>
+                            let q = this.value;
 
-</Layaout:layaout>
+                            if (q.length < 2) {
+                                box.innerHTML = "";
+                                return;
+                            }
+
+                            fetch("/buscador/autocomplete?term=" + q)
+                                .then(r => r.json())
+                                .then(data => {
+
+                                    box.innerHTML = "";
+                                    currentFocus = -1;
+
+                                    data.forEach(item => {
+
+                                        let div = document.createElement("div");
+
+                                        div.className = "autocomplete-item";
+                                        div.innerText = item;
+
+                                        div.onclick = function () {
+
+                                            input.value = item.split(" (")[0];
+                                            box.innerHTML = "";
+
+                                        };
+
+                                        box.appendChild(div);
+
+                                    });
+
+                                });
+
+                        });
+
+                        input.addEventListener("keydown", function (e) {
+
+                            let items = document.querySelectorAll(".autocomplete-item");
+
+                            if (e.key === "ArrowDown") {
+                                currentFocus++;
+                                addActive(items);
+                            }
+
+                            if (e.key === "ArrowUp") {
+                                currentFocus--;
+                                addActive(items);
+                            }
+
+                            if (e.key === "Enter" && currentFocus > -1) {
+
+                                e.preventDefault();
+
+                                if (items[currentFocus]) {
+                                    items[currentFocus].click();
+                                }
+
+                            }
+
+                        });
+
+                        function addActive(items) {
+
+                            if (!items.length) return;
+
+                            removeActive(items);
+
+                            if (currentFocus >= items.length) {
+                                currentFocus = 0;
+                            }
+
+                            if (currentFocus < 0) {
+                                currentFocus = items.length - 1;
+                            }
+
+                            items[currentFocus].classList.add("autocomplete-active");
+
+                        }
+
+                        function removeActive(items) {
+
+                            items.forEach(
+                                i => i.classList.remove("autocomplete-active")
+                            );
+
+                        }
+
+                        document.addEventListener("click", function (e) {
+
+                            if (e.target !== input) {
+                                box.innerHTML = "";
+                            }
+
+                        });
+
+                    </script>
+
+                </Layaout:layaout>

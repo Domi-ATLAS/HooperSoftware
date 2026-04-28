@@ -11,15 +11,15 @@ import HooperSoftware.TFG.entidad.Entrenador;
 import HooperSoftware.TFG.entidad.Equipo;
 
 @Repository
-public interface EntrenadorRepository extends CrudRepository<Entrenador,Integer>{
-    
+public interface EntrenadorRepository extends CrudRepository<Entrenador, Integer> {
+
     @Query("SELECT e FROM Entrenador e")
     List<Entrenador> findAll();
 
     @Query("SELECT e FROM Entrenador e WHERE e.idEntrenador = ?1")
     Entrenador findEntrById(Integer idEntrenador);
 
-    @Query("SELECT e FROM Entrenador e WHERE e.nombeEntrenador = ?1")
+    @Query("SELECT e FROM Entrenador e WHERE lower(e.nombeEntrenador) LIKE lower(?1)")
     List<Entrenador> findEntrByNombre(String nombre);
 
     @Query("SELECT e FROM Entrenador e WHERE e.equipoEntr = ?1")

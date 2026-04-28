@@ -11,9 +11,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -61,11 +58,30 @@ public class Jugador {
     String fotoJugador;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "estadisticasJug",referencedColumnName = "idEstJugador")
+    @JoinColumn(name = "estadisticasJug", referencedColumnName = "idEstJugador")
     EstadisticasJugador estadisticasJug;
 
     @ManyToOne
-    @JoinColumn(name = "idEquipo", referencedColumnName="idEquipo") // Nombre de la columna en la BD
+    @JoinColumn(name = "idEquipo", referencedColumnName = "idEquipo") // Nombre de la columna en la BD
     private Equipo equipo;
-    
+
+    public String getNombreJugador() {
+        return nombreJugador;
+    }
+
+    public Integer getAnosNbaJug() {
+        return anosNbaJug;
+    }
+
+    public Integer getAnosAllStarJug() {
+        return anosAllStarJug;
+    }
+
+    public Integer getEdadJug() {
+        return edadJug;
+    }
+
+    public String getPosicion() {
+        return posicion;
+    }
 }

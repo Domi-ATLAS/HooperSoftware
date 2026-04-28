@@ -1,34 +1,33 @@
 package HooperSoftware.TFG.controlador;
 
 import HooperSoftware.TFG.external.service.BalldontlieSyncService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/sync")
 public class AdminSyncController {
 
-    private final BalldontlieSyncService syncService;
+    private final BalldontlieSyncService service;
 
-    public AdminSyncController(BalldontlieSyncService syncService) {
-        this.syncService = syncService;
+    public AdminSyncController(BalldontlieSyncService service) {
+        this.service = service;
     }
 
-    @PostMapping("/sync/teams")
-    public ResponseEntity<String> syncTeams() {
-        int total = syncService.syncTeams();
-        return ResponseEntity.ok("Equipos: " + total);
-    }
+    @PostMapping("/all")
+    public String syncAll(@RequestParam int season) {
 
-    @PostMapping("/sync/players")
-    public ResponseEntity<String> syncPlayers() {
-        int total = syncService.syncPlayers();
-        return ResponseEntity.ok("Jugadores: " + total);
-    }
+        try {
+            int teams = service.syncTeams();
+            int players = service.syncPlayersBySeason(season);
+            int games = service.syncGamesBySeason(season);
 
-    @PostMapping("/sync/games")
-    public ResponseEntity<String> syncGames() {
-        int total = syncService.syncGames();
-        return ResponseEntity.ok("Partidos: " + total);
+            return "✅ Equipos: " + teams
+                    + " | Jugadores: " + players
+                    + " | Partidos (" + season + "): " + games;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "❌ ERROR: " + e.getMessage();
+        }
     }
 }

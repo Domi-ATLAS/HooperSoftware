@@ -6,6 +6,8 @@ import HooperSoftware.TFG.external.entity.ExternalTeam;
 import HooperSoftware.TFG.external.repository.ExternalGameRepository;
 import HooperSoftware.TFG.external.repository.ExternalPlayerRepository;
 import HooperSoftware.TFG.external.repository.ExternalTeamRepository;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +17,8 @@ import java.util.*;
 @Service
 public class BalldontlieSyncService {
 
-    private static final String API_KEY = "c23ce05e-4f8c-4ef7-89c8-5e92822fdb16";
+    @Value("${balldontlie.api-key}")
+    private String apiKey;
 
     private final RestTemplate rest = new RestTemplate();
     private final ExternalTeamRepository teamRepo;
@@ -31,6 +34,16 @@ public class BalldontlieSyncService {
         this.gameRepo = gameRepo;
     }
 
+    private HttpEntity<String> getEntity() {
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new RuntimeException("❌ API KEY no configurada");
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", apiKey);
+        return new HttpEntity<>(headers);
+    }
+
     // =========================
     // 🔵 TEAMS
     // =========================
@@ -38,22 +51,14 @@ public class BalldontlieSyncService {
 
         String url = "https://api.balldontlie.io/v1/teams";
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", API_KEY);
-
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
         ResponseEntity<Map> response = rest.exchange(
                 url,
                 HttpMethod.GET,
-                entity,
+                getEntity(),
                 Map.class
         );
 
-        Map<String, Object> body = response.getBody();
-
-        List<Map<String, Object>> data
-                = (List<Map<String, Object>>) body.get("data");
+        List<Map<String, Object>> data = (List<Map<String, Object>>) response.getBody().get("data");
 
         int count = 0;
 
@@ -81,173 +86,146 @@ public class BalldontlieSyncService {
     }
 
     // =========================
-    // 🟢 PLAYERS
+    // 🟢 PLAYERS (PAGINADO)
     // =========================
-    public int syncPlayers() {
+    public int syncPlayersBySeason(int season) throws InterruptedException {
 
         int totalSaved = 0;
         int page = 1;
         boolean hasNext = true;
 
         while (hasNext) {
-            try {
 
-                String url = "https://api.balldontlie.io/v1/players?page=" + page + "&per_page=100";
+            System.out.println("🟢 PLAYERS página " + page);
 
-                HttpHeaders headers = new HttpHeaders();
-                headers.set("Authorization", API_KEY);
+            String url = "https://api.balldontlie.io/v1/players?seasons[]="
+                    + season + "&per_page=100&page=" + page;
 
-                HttpEntity<String> entity = new HttpEntity<>(headers);
+            ResponseEntity<Map> response = rest.exchange(
+                    url,
+                    HttpMethod.GET,
+                    getEntity(),
+                    Map.class
+            );
 
-                ResponseEntity<Map> response = rest.exchange(
-                        url,
-                        HttpMethod.GET,
-                        entity,
-                        Map.class
-                );
+            Map<String, Object> body = response.getBody();
+            List<Map<String, Object>> data = (List<Map<String, Object>>) body.get("data");
+            Map<String, Object> meta = (Map<String, Object>) body.get("meta");
 
-                Map<String, Object> body = response.getBody();
+            for (Map<String, Object> p : data) {
 
-                List<Map<String, Object>> data
-                        = (List<Map<String, Object>>) body.get("data");
-
-                Map<String, Object> meta
-                        = (Map<String, Object>) body.get("meta");
-
-                for (Map<String, Object> p : data) {
-
-                    Long playerId = Long.valueOf(p.get("id").toString());
-
-                    if (playerRepo.existsById(playerId)) {
-                        continue;
-                    }
-
-                    Map<String, Object> teamMap
-                            = (Map<String, Object>) p.get("team");
-
-                    Long teamId = Long.valueOf(teamMap.get("id").toString());
-
-                    Optional<ExternalTeam> teamOpt = teamRepo.findById(teamId);
-                    if (teamOpt.isEmpty()) {
-                        continue;
-                    }
-
-                    ExternalPlayer player = new ExternalPlayer();
-                    player.setId(playerId);
-                    player.setFirstName((String) p.get("first_name"));
-                    player.setLastName((String) p.get("last_name"));
-                    player.setPosition((String) p.get("position"));
-                    player.setTeam(teamOpt.get());
-
-                    playerRepo.save(player);
-                    totalSaved++;
+                Long playerId = Long.valueOf(p.get("id").toString());
+                if (playerRepo.existsById(playerId)) {
+                    continue;
                 }
 
-                Number nextPageNum = (Number) meta.get("next_page");
-                Integer nextPage = nextPageNum != null ? nextPageNum.intValue() : null;
+                Map<String, Object> teamMap = (Map<String, Object>) p.get("team");
 
-                hasNext = nextPage != null;
-                page = hasNext ? nextPage : 0;
+                if (teamMap == null) {
+                    continue; // evita jugadores sin equipo
+                }
+                Long teamId = Long.valueOf(teamMap.get("id").toString());
 
-                Thread.sleep(1000);
+                Optional<ExternalTeam> teamOpt = teamRepo.findById(teamId);
+                if (teamOpt.isEmpty()) {
+                    continue;
+                }
 
-            } catch (Exception e) {
-                System.out.println("Error en página: " + page);
-                e.printStackTrace();
-                hasNext = false;
+                ExternalPlayer player = new ExternalPlayer();
+                player.setId(playerId);
+                player.setFirstName((String) p.get("first_name"));
+                player.setLastName((String) p.get("last_name"));
+                player.setPosition((String) p.get("position"));
+                player.setTeam(teamOpt.get());
+
+                playerRepo.save(player);
+                totalSaved++;
             }
+
+            Integer nextPage = meta.get("next_page") != null
+                    ? ((Number) meta.get("next_page")).intValue()
+                    : null;
+
+            hasNext = nextPage != null;
+            page = hasNext ? nextPage : 0;
+
+            Thread.sleep(1200);
         }
 
         return totalSaved;
     }
 
     // =========================
-    // 🔴 GAMES
+    // 🔴 GAMES (PAGINADO)
     // =========================
-    public int syncGames() {
+    public int syncGamesBySeason(int season) throws InterruptedException {
 
         int totalSaved = 0;
         int page = 1;
         boolean hasNext = true;
 
         while (hasNext) {
-            try {
 
-                String url = "https://api.balldontlie.io/v1/games?page=" + page + "&per_page=100";
+            System.out.println("🔴 GAMES página " + page);
 
-                HttpHeaders headers = new HttpHeaders();
-                headers.set("Authorization", API_KEY);
+            String url = "https://api.balldontlie.io/v1/games?seasons[]="
+                    + season + "&per_page=100&page=" + page;
 
-                HttpEntity<String> entity = new HttpEntity<>(headers);
+            ResponseEntity<Map> response = rest.exchange(
+                    url,
+                    HttpMethod.GET,
+                    getEntity(),
+                    Map.class
+            );
 
-                ResponseEntity<Map> response = rest.exchange(
-                        url,
-                        HttpMethod.GET,
-                        entity,
-                        Map.class
-                );
+            Map<String, Object> body = response.getBody();
+            List<Map<String, Object>> data = (List<Map<String, Object>>) body.get("data");
+            Map<String, Object> meta = (Map<String, Object>) body.get("meta");
 
-                Map<String, Object> body = response.getBody();
+            for (Map<String, Object> g : data) {
 
-                List<Map<String, Object>> data
-                        = (List<Map<String, Object>>) body.get("data");
-
-                Map<String, Object> meta
-                        = (Map<String, Object>) body.get("meta");
-
-                for (Map<String, Object> g : data) {
-
-                    Long gameId = Long.valueOf(g.get("id").toString());
-
-                    if (gameRepo.existsById(gameId)) {
-                        continue;
-                    }
-
-                    Map<String, Object> homeTeamMap
-                            = (Map<String, Object>) g.get("home_team");
-
-                    Map<String, Object> visitorTeamMap
-                            = (Map<String, Object>) g.get("visitor_team");
-
-                    Long homeTeamId = Long.valueOf(homeTeamMap.get("id").toString());
-                    Long visitorTeamId = Long.valueOf(visitorTeamMap.get("id").toString());
-
-                    Optional<ExternalTeam> homeTeamOpt = teamRepo.findById(homeTeamId);
-                    Optional<ExternalTeam> visitorTeamOpt = teamRepo.findById(visitorTeamId);
-
-                    if (homeTeamOpt.isEmpty() || visitorTeamOpt.isEmpty()) {
-                        continue;
-                    }
-
-                    ExternalGame game = new ExternalGame();
-                    game.setId(gameId);
-
-                    String dateStr = (String) g.get("date");
-                    game.setDate(java.time.LocalDate.parse(dateStr.substring(0, 10)));
-
-                    game.setHomeScore((Integer) g.get("home_team_score"));
-                    game.setVisitorScore((Integer) g.get("visitor_team_score"));
-
-                    game.setHomeTeam(homeTeamOpt.get());
-                    game.setVisitorTeam(visitorTeamOpt.get());
-
-                    gameRepo.save(game);
-                    totalSaved++;
+                Long gameId = Long.valueOf(g.get("id").toString());
+                if (gameRepo.existsById(gameId)) {
+                    continue;
                 }
 
-                Number nextPageNum = (Number) meta.get("next_page");
-                Integer nextPage = nextPageNum != null ? nextPageNum.intValue() : null;
+                Map<String, Object> homeTeamMap = (Map<String, Object>) g.get("home_team");
+                Map<String, Object> visitorTeamMap = (Map<String, Object>) g.get("visitor_team");
 
-                hasNext = nextPage != null;
-                page = hasNext ? nextPage : 0;
+                Long homeTeamId = Long.valueOf(homeTeamMap.get("id").toString());
+                Long visitorTeamId = Long.valueOf(visitorTeamMap.get("id").toString());
 
-                Thread.sleep(1000);
+                Optional<ExternalTeam> homeTeamOpt = teamRepo.findById(homeTeamId);
+                Optional<ExternalTeam> visitorTeamOpt = teamRepo.findById(visitorTeamId);
 
-            } catch (Exception e) {
-                System.out.println("Error en página: " + page);
-                e.printStackTrace();
-                hasNext = false;
+                if (homeTeamOpt.isEmpty() || visitorTeamOpt.isEmpty()) {
+                    continue;
+                }
+
+                ExternalGame game = new ExternalGame();
+                game.setId(gameId);
+
+                String dateStr = (String) g.get("date");
+                game.setDate(java.time.LocalDate.parse(dateStr.substring(0, 10)));
+
+                game.setHomeScore((Integer) g.get("home_team_score"));
+                game.setVisitorScore((Integer) g.get("visitor_team_score"));
+
+                game.setHomeTeam(homeTeamOpt.get());
+                game.setVisitorTeam(visitorTeamOpt.get());
+
+                gameRepo.save(game);
+                totalSaved++;
             }
+
+            Integer nextPage = meta.get("next_page") != null
+                    ? ((Number) meta.get("next_page")).intValue()
+                    : null;
+
+            hasNext = nextPage != null;
+            page = hasNext ? nextPage : 0;
+
+            Thread.sleep(1200);
         }
 
         return totalSaved;

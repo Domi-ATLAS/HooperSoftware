@@ -130,4 +130,17 @@ public String simularPlayoffs(
 
     return "simulaciones";
 }
+
+@PostMapping("/simulaciones/bracket")
+public String simularBracket(Model model) {
+
+    var bracket = simulacionService.simularBracketNBA();
+
+    model.addAttribute("jugadores", jugadorService.findAll());
+    model.addAttribute("equipos", equipoService.findAll());
+
+    model.addAttribute("bracket", bracket);
+
+    return "simulaciones";
+}
 }

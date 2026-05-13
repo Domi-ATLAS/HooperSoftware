@@ -12,7 +12,7 @@
         <title>Boston Celtics</title>
     </head>
     <body>
-        <img src="/images/boston.png">
+        <img src="/images/BOS.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

@@ -1,293 +1,440 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+    <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
+        <%@ page contentType="text/html;charset=UTF-8" %>
+            <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<Layaout:layaout title="Simulador NBA">
+                <Layaout:layaout title="Simulador NBA">
 
-<div class="sim-container">
+                    <div class="sim-container">
 
-<h1>Simulador de Traspasos NBA</h1>
+                        <h1>Simulador de Traspasos NBA</h1>
 
-<c:if test="${not empty error}">
-<p style="color:red;font-weight:bold;">${error}</p>
-</c:if>
+                        <c:if test="${not empty error}">
+                            <p style="color:red;font-weight:bold;">${error}</p>
+                        </c:if>
 
-<!-- ================= TRADE ================= -->
+                        <!-- ================= TRADE ================= -->
 
-<form action="/simulaciones" method="post">
+                        <form action="/simulaciones" method="post">
 
-<h2>Jugador que entregas</h2>
+                            <h2>Jugador que entregas</h2>
 
-<select name="jugadorSaleId">
-<c:forEach var="sale" items="${jugadores}">
-<option value="${sale.idJugador}"
-<c:if test="${sale.idJugador == param.jugadorSaleId}">selected</c:if>>
-${sale.nombreJugador}
-<c:if test="${not empty sale.equipo}">
-(${sale.equipo.nombreEquipo})
-</c:if>
-</option>
-</c:forEach>
-</select>
+                            <select name="jugadorSaleId">
+                                <c:forEach var="sale" items="${jugadores}">
+                                    <option value="${sale.idJugador}" <c:if
+                                        test="${sale.idJugador == param.jugadorSaleId}">
+                                        selected</c:if>>
+                                        ${sale.nombreJugador}
+                                        <c:if test="${not empty sale.equipo}">
+                                            (${sale.equipo.nombreEquipo})
+                                        </c:if>
+                                    </option>
+                                </c:forEach>
+                            </select>
 
-<h2>Jugador que recibes</h2>
+                            <h2>Jugador que recibes</h2>
 
-<select name="jugadorLlegaId">
-<c:forEach var="llega" items="${jugadores}">
-<option value="${llega.idJugador}"
-<c:if test="${llega.idJugador == param.jugadorLlegaId}">selected</c:if>>
-${llega.nombreJugador}
-<c:if test="${not empty llega.equipo}">
-(${llega.equipo.nombreEquipo})
-</c:if>
-</option>
-</c:forEach>
-</select>
+                            <select name="jugadorLlegaId">
+                                <c:forEach var="llega" items="${jugadores}">
+                                    <option value="${llega.idJugador}" <c:if
+                                        test="${llega.idJugador == param.jugadorLlegaId}">selected</c:if>>
+                                        ${llega.nombreJugador}
+                                        <c:if test="${not empty llega.equipo}">
+                                            (${llega.equipo.nombreEquipo})
+                                        </c:if>
+                                    </option>
+                                </c:forEach>
+                            </select>
 
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-<br><br>
+                            <br><br>
 
-<button type="submit" class="search-btn">
-Simular Traspaso
-</button>
+                            <button type="submit" class="search-btn">
+                                Simular Traspaso
+                            </button>
 
-</form>
+                        </form>
 
-<!-- ================= RESULTADO ================= -->
+                        <!-- ================= RESULTADO ================= -->
 
-<c:if test="${not empty resultado}">
+                        <c:if test="${not empty resultado}">
 
-<hr>
+                            <hr>
 
-<h2>Resultado</h2>
+                            <h2>Resultado</h2>
 
-<div class="trade-box">
+                            <div class="trade-box">
 
-<p>Entregas: <strong>${sale.nombreJugador}</strong></p>
-<p>Recibes: <strong>${llega.nombreJugador}</strong></p>
+                                <p>Entregas: <strong>${sale.nombreJugador}</strong></p>
+                                <p>Recibes: <strong>${llega.nombreJugador}</strong></p>
 
-<div class="score-box ${resultado.color}">
-    <div class="score-number">${resultado.score}</div>
-    <div>/100</div>
-</div>
+                                <div class="score-box ${resultado.color}">
+                                    <div class="score-number">${resultado.score}</div>
+                                    <div>/100</div>
+                                </div>
 
-<p>${resultado.evaluacion}</p>
+                                <p>${resultado.evaluacion}</p>
 
-<c:if test="${resultado.score >= 70}">
-<p style="color:green;">🔥 Gran trade</p>
-</c:if>
+                                <c:if test="${resultado.score >= 70}">
+                                    <p style="color:green;">🔥 Gran trade</p>
+                                </c:if>
 
-<c:if test="${resultado.score >= 40 && resultado.score < 70}">
-<p style="color:orange;">⚖️ Trade equilibrado</p>
-</c:if>
+                                <c:if test="${resultado.score >= 40 && resultado.score < 70}">
+                                    <p style="color:orange;">⚖️ Trade equilibrado</p>
+                                </c:if>
 
-<c:if test="${resultado.score < 40}">
-<p style="color:red;">❌ Mala decisión</p>
-</c:if>
+                                <c:if test="${resultado.score < 40}">
+                                    <p style="color:red;">❌ Mala decisión</p>
+                                </c:if>
 
-</div>
+                            </div>
 
-</c:if>
+                        </c:if>
 
-<!-- ================= IMPACTO ================= -->
+                        <!-- ================= IMPACTO ================= -->
 
-<c:if test="${not empty impacto}">
+                        <c:if test="${not empty impacto}">
 
-<h2>Impacto del traspaso</h2>
+                            <h2>Impacto del traspaso</h2>
 
-<div class="impact-box">
+                            <div class="impact-box">
 
-<p>Rating antes: ${impacto.ratingAntes}</p>
-<p>Rating después: ${impacto.ratingDespues}</p>
+                                <p>Rating antes: ${impacto.ratingAntes}</p>
+                                <p>Rating después: ${impacto.ratingDespues}</p>
 
-<p>Victorias antes: ${impacto.victoriasAntes}</p>
-<p>Victorias después: ${impacto.victoriasDespues}</p>
+                                <p>Victorias antes: ${impacto.victoriasAntes}</p>
+                                <p>Victorias después: ${impacto.victoriasDespues}</p>
 
-<p>
-Diferencia:
-<strong style="color:${impacto.diferencia > 0 ? 'green' : 'red'};">
-${impacto.diferencia > 0 ? '+' : ''}${impacto.diferencia}
-</strong>
-</p>
+                                <p>
+                                    Diferencia:
+                                    <strong style="color:${impacto.diferencia > 0 ? 'green' : 'red'};">
+                                        ${impacto.diferencia > 0 ? '+' : ''}${impacto.diferencia}
+                                    </strong>
+                                </p>
 
-</div>
+                            </div>
 
-</c:if>
+                        </c:if>
 
-<!-- ================= WINS PREDICTION ================= -->
+                        <!-- ================= WINS PREDICTION ================= -->
 
-<c:if test="${not empty wins}">
+                        <c:if test="${not empty wins}">
 
-<h2>Predicción de temporada</h2>
+                            <h2>Predicción de temporada</h2>
 
-<div class="impact-box">
+                            <div class="impact-box">
 
-<p>
-Antes:
-<strong>${wins.winsAntes} wins</strong>
-(${wins.tierAntes})
-</p>
+                                <p>
+                                    Antes:
+                                    <strong>${wins.winsAntes} wins</strong>
+                                    (${wins.tierAntes})
+                                </p>
 
-<p>
-Después:
-<strong>${wins.winsDespues} wins</strong>
-(${wins.tierDespues})
-</p>
+                                <p>
+                                    Después:
+                                    <strong>${wins.winsDespues} wins</strong>
+                                    (${wins.tierDespues})
+                                </p>
 
-<p style="font-size:22px;">
-Cambio:
-<strong style="color:${wins.diferencia > 0 ? 'green' : 'red'};">
-${wins.diferencia > 0 ? '+' : ''}${wins.diferencia}
-wins
-</strong>
-</p>
+                                <p style="font-size:22px;">
+                                    Cambio:
+                                    <strong style="color:${wins.diferencia > 0 ? 'green' : 'red'};">
+                                        ${wins.diferencia > 0 ? '+' : ''}${wins.diferencia}
+                                        wins
+                                    </strong>
+                                </p>
 
-<hr>
+                                <hr>
 
-<p style="font-size:20px;">
-${wins.mensajeIA}
-</p>
+                                <p style="font-size:20px;">
+                                    ${wins.mensajeIA}
+                                </p>
 
-</div>
+                            </div>
 
-</c:if>
+                        </c:if>
 
-<!-- ================= SUGERENCIAS JUGADOR ================= -->
+                        <!-- ================= SUGERENCIAS JUGADOR ================= -->
 
-<hr>
+                        <hr>
 
-<h2>IA: Mejores traspasos</h2>
+                        <h2>IA: Mejores traspasos</h2>
 
-<form action="/simulaciones/sugerir" method="post">
+                        <form action="/simulaciones/sugerir" method="post">
 
-<select name="jugadorBaseId">
-<c:forEach var="j" items="${jugadores}">
-<option value="${j.idJugador}">
-${j.nombreJugador}
-</option>
-</c:forEach>
-</select>
+                            <select name="jugadorBaseId">
+                                <c:forEach var="j" items="${jugadores}">
+                                    <option value="${j.idJugador}">
+                                        ${j.nombreJugador}
+                                    </option>
+                                </c:forEach>
+                            </select>
 
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-<button class="search-btn">Buscar</button>
+                            <button class="search-btn">Buscar</button>
 
-</form>
+                        </form>
 
-<c:if test="${not empty sugerencias}">
+                        <c:if test="${not empty sugerencias}">
 
-<h3>Top sugerencias</h3>
+                            <h3>Top sugerencias</h3>
 
-<c:forEach var="s" items="${sugerencias}" varStatus="i">
+                            <c:forEach var="s" items="${sugerencias}" varStatus="i">
 
-<div class="result-card ${i.index == 0 ? 'top1' : ''}">
+                                <div class="result-card ${i.index == 0 ? 'top1' : ''}">
 
-<strong>${s.jugador.nombreJugador}</strong>
+                                    <strong>${s.jugador.nombreJugador}</strong>
 
-<p>Score: ${s.score}</p>
+                                    <p>Score: ${s.score}</p>
 
-<c:if test="${i.index == 0}">
-🔥 Mejor opción
-</c:if>
+                                    <c:if test="${i.index == 0}">
+                                        🔥 Mejor opción
+                                    </c:if>
 
-</div>
+                                </div>
 
-</c:forEach>
+                            </c:forEach>
 
-</c:if>
+                        </c:if>
 
-<!-- ================= SUGERENCIAS EQUIPO ================= -->
+                        <!-- ================= SUGERENCIAS EQUIPO ================= -->
 
-<hr>
+                        <hr>
 
-<h2>IA: Qué necesita un equipo</h2>
+                        <h2>IA: Qué necesita un equipo</h2>
 
-<form action="/simulaciones/equipo" method="post">
+                        <form action="/simulaciones/equipo" method="post">
 
-<select name="equipoId">
-<c:forEach var="e" items="${equipos}">
-<option value="${e.idEquipo}">
-${e.nombreEquipo}
-</option>
-</c:forEach>
-</select>
+                            <select name="equipoId">
+                                <c:forEach var="e" items="${equipos}">
+                                    <option value="${e.idEquipo}">
+                                        ${e.nombreEquipo}
+                                    </option>
+                                </c:forEach>
+                            </select>
 
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-<button class="search-btn">Analizar</button>
+                            <button class="search-btn">Analizar</button>
 
-</form>
+                        </form>
 
-<c:if test="${not empty sugerenciasEquipo}">
+                        <c:if test="${not empty sugerenciasEquipo}">
 
-<h3>Mejores fichajes</h3>
+                            <h3>Mejores fichajes</h3>
 
-<c:forEach var="s" items="${sugerenciasEquipo}">
+                            <c:forEach var="s" items="${sugerenciasEquipo}">
 
-<div class="result-card">
+                                <div class="result-card">
 
-<strong>${s.jugador.nombreJugador}</strong>
+                                    <strong>${s.jugador.nombreJugador}</strong>
 
-<p>Fit: ${s.score}</p>
+                                    <p>Fit: ${s.score}</p>
 
-</div>
+                                </div>
 
-</c:forEach>
+                            </c:forEach>
 
-</c:if>
+                        </c:if>
 
-<!-- ================= PLAYOFF SIMULATION ================= -->
+                        <!-- ================= PLAYOFF SIMULATION ================= -->
 
-<hr style="margin:60px 0;">
+                        <hr style="margin:60px 0;">
 
-<h2>Simulación de Playoffs</h2>
+                        <h2>Simulación de Playoffs</h2>
 
-<form action="/simulaciones/playoffs" method="post">
+                        <form action="/simulaciones/playoffs" method="post">
 
-<select name="equipoId">
-<c:forEach var="e" items="${equipos}">
-<option value="${e.idEquipo}">
-${e.nombreEquipo}
-</option>
-</c:forEach>
-</select>
+                            <select name="equipoId">
+                                <c:forEach var="e" items="${equipos}">
+                                    <option value="${e.idEquipo}">
+                                        ${e.nombreEquipo}
+                                    </option>
+                                </c:forEach>
+                            </select>
 
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-<button class="search-btn">Simular Playoffs</button>
+                            <button class="search-btn">Simular Playoffs</button>
 
-</form>
+                        </form>
 
-<c:if test="${not empty playoff}">
+                        <c:if test="${not empty playoff}">
 
-<h3>Resultados para ${equipoSeleccionado.nombreEquipo}</h3>
+                            <h3>Resultados para ${equipoSeleccionado.nombreEquipo}</h3>
 
-<div class="impact-box">
+                            <div class="impact-box">
 
-<p>Probabilidad Playoffs:
-<strong>${playoff.probPlayoffs}%</strong></p>
+                                <p>Probabilidad Playoffs:
+                                    <strong>${playoff.probPlayoffs}%</strong>
+                                </p>
 
-<p>Probabilidad Finales:
-<strong>${playoff.probFinales}%</strong></p>
+                                <p>Probabilidad Finales:
+                                    <strong>${playoff.probFinales}%</strong>
+                                </p>
 
-<p>Probabilidad Campeón:
-<strong>${playoff.probCampeon}%</strong></p>
+                                <p>Probabilidad Campeón:
+                                    <strong>${playoff.probCampeon}%</strong>
+                                </p>
 
-<hr>
+                                <hr>
 
-<p style="font-size:22px;">
-${playoff.tier}
-</p>
+                                <p style="font-size:22px;">
+                                    ${playoff.tier}
+                                </p>
 
-<p style="font-size:18px;">
-${playoff.mensaje}
-</p>
+                                <p style="font-size:18px;">
+                                    ${playoff.mensaje}
+                                </p>
 
-</div>
+                            </div>
 
-</c:if>
+                        </c:if>
 
-</div>
+                        <!-- ================= BRACKET PLAYOFFS ================= -->
 
-</Layaout:layaout>
+                        <hr style="margin:70px 0;">
+
+                        <h2>Simulación completa Playoffs (Bracket)</h2>
+
+                        <form action="/simulaciones/bracket" method="post">
+
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                            <button class="search-btn">
+                                Simular Playoffs completos
+                            </button>
+
+                        </form>
+
+                        <c:if test="${not empty bracket}">
+
+                            <div class="bracket">
+
+                                <!-- CUARTOS -->
+                                <div class="round">
+                                    <h3>Cuartos</h3>
+
+                                    <c:forEach var="p" items="${bracket.primeraRonda}">
+
+                                        <div class="match">
+
+                                            <div class="team">
+                                                <img src="/images/${empty p.team1Siglas ? 'HS' : p.team1Siglas}.png">
+                                                <span>${p.team1}</span>
+                                            </div>
+
+                                            <div class="vs">VS</div>
+
+                                            <div class="series-score">
+                                                ${p.wins1} - ${p.wins2}
+                                            </div>
+
+                                            <div class="team">
+                                                <img src="/images/${empty p.team2Siglas ? 'HS' : p.team2Siglas}.png">
+                                                <span>${p.team2}</span>
+                                            </div>
+
+                                            <div class="winner">
+                                                🏆 ${p.winner}
+                                            </div>
+
+                                        </div>
+
+                                    </c:forEach>
+
+                                </div>
+
+                                <!-- SEMIS -->
+                                <div class="round">
+                                    <h3>Semifinales</h3>
+
+                                    <c:forEach var="p" items="${bracket.semifinales}">
+
+                                        <div class="match">
+
+                                            <div class="team">
+                                                <img src="/images/${empty p.team1Siglas ? 'HS' : p.team1Siglas}.png">
+                                                <span>${p.team1}</span>
+                                            </div>
+
+                                            <div class="vs">VS</div>
+
+                                            <div class="series-score">
+                                                ${p.wins1} - ${p.wins2}
+                                            </div>
+
+                                            <div class="team">
+                                                <img src="/images/${empty p.team2Siglas ? 'HS' : p.team2Siglas}.png">
+                                                <span>${p.team2}</span>
+                                            </div>
+
+                                            <div class="winner">
+                                                🏆 ${p.winner}
+                                            </div>
+
+                                        </div>
+
+                                    </c:forEach>
+
+                                </div>
+
+                                <!-- FINAL -->
+                                <div class="round">
+                                    <h3>Final</h3>
+
+                                    <c:forEach var="p" items="${bracket.finales}">
+
+                                        <div class="match">
+
+                                            <div class="team">
+                                                <img src="/images/${empty p.team1Siglas ? 'HS' : p.team1Siglas}.png">
+                                                <span>${p.team1}</span>
+                                            </div>
+
+                                            <div class="vs">VS</div>
+
+                                            <div class="series-score">
+                                                ${p.wins1} - ${p.wins2}
+                                            </div>
+
+                                            <div class="team">
+                                                <img src="/images/${empty p.team2Siglas ? 'HS' : p.team2Siglas}.png">
+                                                <span>${p.team2}</span>
+                                            </div>
+
+                                            <div class="winner">
+                                                🏆 ${p.winner}
+                                            </div>
+
+                                        </div>
+
+                                    </c:forEach>
+
+                                </div>
+
+                                <!-- CAMPEÓN -->
+                                <div class="round champion">
+
+                                    <h3>🏆 Campeón</h3>
+
+                                    <div class="champion-box">
+                                        <img src="/images/${empty bracket.campeonSiglas ? 'HS' : bracket.campeonSiglas}.png">
+                                        <span>${bracket.campeon}</span>
+                                    </div>
+
+                                    <p class="mvp">
+                                        MVP: ${bracket.mvpFinals}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </c:if>
+
+                    </div>
+
+                </Layaout:layaout>

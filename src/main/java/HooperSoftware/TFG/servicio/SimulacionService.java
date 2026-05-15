@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import HooperSoftware.TFG.dto.MatchDTO;
 import HooperSoftware.TFG.dto.PlayoffBracketDTO;
 import HooperSoftware.TFG.dto.PlayoffPredictionDTO;
+import HooperSoftware.TFG.dto.SeasonSimulationDTO;
 import HooperSoftware.TFG.dto.SeriesResultDTO;
+import HooperSoftware.TFG.dto.TeamStandingDTO;
 import HooperSoftware.TFG.entidad.Equipo;
 import HooperSoftware.TFG.entidad.Jugador;
 
@@ -344,7 +346,7 @@ public class SimulacionService {
             SeriesResultDTO serie = simularSerie(g1, g2);
             Equipo ganador = serie.getGanador();
 
-            semifinales.add(new MatchDTO( g1.getNombreEquipo(),
+            semifinales.add(new MatchDTO(g1.getNombreEquipo(),
                     g1.getSiglas(),
 
                     g2.getNombreEquipo(),
@@ -425,5 +427,50 @@ public class SimulacionService {
                 ganador,
                 winsA,
                 winsB);
+    }
+
+    // ================= TEMPORADA COMPLETA NBA =================
+
+    public SeasonSimulationDTO simularTemporadaNBA() {
+
+        List<Equipo> equipos = jugadorService.findAll().stream()
+                .map(Jugador::getEquipo)
+                .filter(e -> e != null)
+                .distinct()
+                .collect(Collectors.toList());
+
+        List<TeamStandingDTO> standings = new ArrayList<>();
+
+        Equipo mejorEquipo = null;
+        double mejorRating = 0;
+
+        for (Equipo equipo : equipos) {
+
+            double rating = calcularRatingEquipo(equipo.getJugadores());
+
+            int victorias = (int) (20 + (rating * 62));
+            int derrotas = 82 - victorias;
+
+            standings.add(new TeamStandingDTO(
+                    equipo.getNombreEquipo(),
+                    equipo.getSiglas(),
+                    victorias,
+                    derrotas));
+
+            if (rating > mejorRating) {
+                mejorRating = rating;
+                mejorEquipo = equipo;
+            }
+        }
+
+        standings.sort((a, b) -> Integer.compare(b.getVictorias(), a.getVictorias()));
+
+        String mvp = "Superstar de " + mejorEquipo.getNombreEquipo();
+
+        return new SeasonSimulationDTO(
+                standings,
+                mejorEquipo.getNombreEquipo(),
+                mejorEquipo.getSiglas(),
+                mvp);
     }
 }

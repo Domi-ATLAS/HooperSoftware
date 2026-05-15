@@ -421,7 +421,8 @@
                                     <h3>🏆 Campeón</h3>
 
                                     <div class="champion-box">
-                                        <img src="/images/${empty bracket.campeonSiglas ? 'HS' : bracket.campeonSiglas}.png">
+                                        <img
+                                            src="/images/${empty bracket.campeonSiglas ? 'HS' : bracket.campeonSiglas}.png">
                                         <span>${bracket.campeon}</span>
                                     </div>
 
@@ -430,6 +431,75 @@
                                     </p>
 
                                 </div>
+
+                            </div>
+
+                        </c:if>
+
+                        <hr style="margin:70px 0;">
+
+                        <h2>Simulación Temporada NBA</h2>
+
+                        <form action="/simulaciones/temporada" method="post">
+
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                            <button class="search-btn">
+                                Simular temporada completa
+                            </button>
+
+                        </form>
+
+                        <c:if test="${not empty seasonSimulation}">
+
+                            <div class="season-sim-container">
+
+                                <div class="season-champion">
+
+                                    <img src="/images/${seasonSimulation.campeonSiglas}.png">
+
+                                    <h3>
+                                        🏆 Campeón:
+                                        ${seasonSimulation.campeon}
+                                    </h3>
+
+                                    <p>
+                                        MVP: ${seasonSimulation.mvp}
+                                    </p>
+
+                                </div>
+
+                                <table class="season-table">
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Equipo</th>
+                                        <th>Record</th>
+                                    </tr>
+
+                                    <c:forEach var="team" items="${seasonSimulation.standings}" varStatus="loop">
+
+                                        <tr>
+
+                                            <td>${loop.index + 1}</td>
+
+                                            <td class="team-cell">
+
+                                                <img src="/images/${team.siglas}.png">
+
+                                                ${team.nombre}
+
+                                            </td>
+
+                                            <td>
+                                                ${team.victorias}-${team.derrotas}
+                                            </td>
+
+                                        </tr>
+
+                                    </c:forEach>
+
+                                </table>
 
                             </div>
 

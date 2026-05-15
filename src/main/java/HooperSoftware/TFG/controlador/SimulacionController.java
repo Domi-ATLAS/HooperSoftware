@@ -13,6 +13,7 @@ import HooperSoftware.TFG.servicio.JugadorService;
 import HooperSoftware.TFG.servicio.SimulacionService;
 
 @Controller
+@RequestMapping("/simulaciones")
 public class SimulacionController {
 
     private final JugadorService jugadorService;
@@ -29,7 +30,7 @@ public class SimulacionController {
         this.simulacionService = simulacionService;
     }
 
-    @GetMapping("/simulaciones")
+    @GetMapping("")
     public String vistaSimulador(Model model) {
 
         model.addAttribute("jugadores", jugadorService.findAll());
@@ -38,7 +39,7 @@ public class SimulacionController {
         return "simulaciones";
     }
 
-    @PostMapping("/simulaciones")
+    @PostMapping("")
     public String ejecutarTrade(
             @RequestParam Integer jugadorSaleId,
             @RequestParam Integer jugadorLlegaId,
@@ -75,7 +76,7 @@ public class SimulacionController {
         return "simulaciones";
     }
 
-    @PostMapping("/simulaciones/sugerir")
+    @PostMapping("/sugerir")
     public String sugerenciasJugador(
             @RequestParam Integer jugadorBaseId,
             Model model) {
@@ -92,7 +93,7 @@ public class SimulacionController {
         return "simulaciones";
     }
 
-    @PostMapping("/simulaciones/equipo")
+    @PostMapping("/equipo")
     public String sugerenciasEquipo(
             @RequestParam Integer equipoId,
             Model model) {
@@ -113,34 +114,44 @@ public class SimulacionController {
 
     // ================= PLAYOFF SIMULATION =================
 
-@PostMapping("/simulaciones/playoffs")
-public String simularPlayoffs(
-        @RequestParam Integer equipoId,
-        Model model) {
+    @PostMapping("/playoffs")
+    public String simularPlayoffs(
+            @RequestParam Integer equipoId,
+            Model model) {
 
-    Equipo equipo = equipoService.findEquipoById(equipoId);
+        Equipo equipo = equipoService.findEquipoById(equipoId);
 
-    var prediccion = simulacionService.predecirPlayoffs(equipo);
+        var prediccion = simulacionService.predecirPlayoffs(equipo);
 
-    model.addAttribute("jugadores", jugadorService.findAll());
-    model.addAttribute("equipos", equipoService.findAll());
+        model.addAttribute("jugadores", jugadorService.findAll());
+        model.addAttribute("equipos", equipoService.findAll());
 
-    model.addAttribute("equipoSeleccionado", equipo);
-    model.addAttribute("playoff", prediccion);
+        model.addAttribute("equipoSeleccionado", equipo);
+        model.addAttribute("playoff", prediccion);
 
-    return "simulaciones";
-}
+        return "simulaciones";
+    }
 
-@PostMapping("/simulaciones/bracket")
-public String simularBracket(Model model) {
+    @PostMapping("/bracket")
+    public String simularBracket(Model model) {
 
-    var bracket = simulacionService.simularBracketNBA();
+        var bracket = simulacionService.simularBracketNBA();
 
-    model.addAttribute("jugadores", jugadorService.findAll());
-    model.addAttribute("equipos", equipoService.findAll());
+        model.addAttribute("jugadores", jugadorService.findAll());
+        model.addAttribute("equipos", equipoService.findAll());
 
-    model.addAttribute("bracket", bracket);
+        model.addAttribute("bracket", bracket);
 
-    return "simulaciones";
-}
+        return "simulaciones";
+    }
+
+    @PostMapping("/temporada")
+    public String simularTemporada(Model model) {
+
+        model.addAttribute(
+                "seasonSimulation",
+                simulacionService.simularTemporadaNBA());
+
+        return "simulaciones";
+    }
 }

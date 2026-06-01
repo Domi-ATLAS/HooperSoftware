@@ -113,7 +113,6 @@ public class SimulacionController {
     }
 
     // ================= PLAYOFF SIMULATION =================
-
     @PostMapping("/playoffs")
     public String simularPlayoffs(
             @RequestParam Integer equipoId,
@@ -151,6 +150,27 @@ public class SimulacionController {
         model.addAttribute(
                 "seasonSimulation",
                 simulacionService.simularTemporadaNBA());
+
+        return "simulaciones";
+    }
+
+    @PostMapping("/live")
+    public String simularPartidoLive(
+            @RequestParam Integer equipo1Id,
+            @RequestParam Integer equipo2Id,
+            Model model) {
+
+        model.addAttribute(
+                "liveGame",
+                simulacionService.simularPartidoLive(
+                        equipo1Id,
+                        equipo2Id));
+
+        model.addAttribute("equipos", equipoService.findAll());
+        model.addAttribute("jugadores", jugadorService.findAll());
+
+        System.out.println("ID1 = " + equipo1Id);
+        System.out.println("ID2 = " + equipo2Id);
 
         return "simulaciones";
     }

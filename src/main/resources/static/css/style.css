@@ -1101,3 +1101,87 @@ height:70px;
     height:38px;
     object-fit:contain;
 }
+
+.season-champion img{
+    width:140px;
+    height:140px;
+}
+
+.live-game-container{
+    margin-top:40px;
+    background:#111827;
+    border-radius:20px;
+    padding:40px;
+    border:1px solid #2563eb;
+}
+
+.live-teams{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    margin-bottom:40px;
+}
+
+.live-team{
+    text-align:center;
+}
+
+.live-team img{
+    width:110px;
+    height:110px;
+    object-fit:contain;
+}
+
+.live-team h3{
+    color:white;
+    margin-top:15px;
+}
+
+.live-score{
+    font-size:48px;
+    font-weight:bold;
+    color:#60a5fa;
+}
+
+.live-vs{
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.quarters{
+    display:flex;
+    justify-content:space-around;
+    margin-top:30px;
+    color:white;
+    font-size:18px;
+}
+
+.live-result{
+    margin-top:40px;
+    text-align:center;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.win-probability{
+
+    margin-top:25px;
+    padding:20px;
+
+    background:#111827;
+    border-radius:15px;
+
+    text-align:center;
+}
+
+.momentum-box{
+
+    margin-top:15px;
+
+    font-size:18px;
+    font-weight:bold;
+
+    color:#facc15;
+}

@@ -505,6 +505,130 @@
 
                         </c:if>
 
+                        <hr style="margin:70px 0;">
+
+<h2>Simulación LIVE NBA</h2>
+
+<form action="/simulaciones/live" method="post">
+
+    <input type="hidden"
+           name="${_csrf.parameterName}"
+           value="${_csrf.token}" />
+
+    <select name="equipo1Id">
+
+        <c:forEach var="e" items="${equipos}">
+            <option value="${e.idEquipo}">
+                ${e.nombreEquipo}
+            </option>
+        </c:forEach>
+
+    </select>
+
+    <select name="equipo2Id">
+
+        <c:forEach var="e" items="${equipos}">
+            <option value="${e.idEquipo}">
+                ${e.nombreEquipo}
+            </option>
+        </c:forEach>
+
+    </select>
+
+    <button class="search-btn">
+        Simular partido
+    </button>
+
+</form>
+
+<c:if test="${not empty liveGame}">
+
+    <div class="live-game-container">
+
+        <div class="live-teams">
+
+            <div class="live-team">
+
+                <img src="/images/${liveGame.siglas1}.png">
+
+                <h3>${liveGame.equipo1}</h3>
+
+                <span class="live-score">
+                    ${liveGame.finalA}
+                </span>
+
+            </div>
+
+            <div class="live-vs">
+                VS
+            </div>
+
+            <div class="live-team">
+
+                <img src="/images/${liveGame.siglas2}.png">
+
+                <h3>${liveGame.equipo2}</h3>
+
+                <span class="live-score">
+                    ${liveGame.finalB}
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="quarters">
+
+            <div>Q1 → ${liveGame.q1a} - ${liveGame.q1b}</div>
+
+            <div>HALF → ${liveGame.q2a} - ${liveGame.q2b}</div>
+
+            <div>Q3 → ${liveGame.q3a} - ${liveGame.q3b}</div>
+
+            <div>FINAL → ${liveGame.finalA} - ${liveGame.finalB}</div>
+
+        </div>
+
+        <div class="live-result">
+
+            🏆 Ganador:
+            ${liveGame.ganador}
+
+            <br><br>
+
+            ⭐ MVP:
+            ${liveGame.mvp}
+
+        </div>
+
+        <div class="win-probability">
+
+    <h3>Win Probability</h3>
+
+    <div>
+        ${liveGame.equipo1}
+        →
+        ${liveGame.probabilidadA}%
+    </div>
+
+    <div>
+        ${liveGame.equipo2}
+        →
+        ${liveGame.probabilidadB}%
+    </div>
+
+    <br>
+
+    <div class="momentum-box">
+        ${liveGame.momentum}
+    </div>
+
+</div>
+
+    </div>
+
+</c:if>
+
                     </div>
 
                 </Layaout:layaout>

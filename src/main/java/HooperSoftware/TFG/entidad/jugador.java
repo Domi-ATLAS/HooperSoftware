@@ -84,4 +84,13 @@ public class Jugador {
     public String getPosicion() {
         return posicion;
     }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public Integer getIdJugador() {
+        return idJugador;
+    }
+
 }

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import HooperSoftware.TFG.dto.LiveGameSimulationDTO;
 import HooperSoftware.TFG.dto.MatchDTO;
 import HooperSoftware.TFG.dto.PlayoffBracketDTO;
 import HooperSoftware.TFG.dto.PlayoffPredictionDTO;
@@ -21,13 +22,14 @@ import HooperSoftware.TFG.entidad.Jugador;
 public class SimulacionService {
 
     private final JugadorService jugadorService;
+    private final EquipoService equipoService;
 
-    public SimulacionService(JugadorService jugadorService) {
+    public SimulacionService(JugadorService jugadorService, EquipoService equipoService) {
         this.jugadorService = jugadorService;
+        this.equipoService = equipoService;
     }
 
     // ================= TRADE =================
-
     public TradeResultDTO evaluarTrade(Jugador sale, Jugador llega) {
 
         int score = 50;
@@ -35,8 +37,9 @@ public class SimulacionService {
         score += (llega.getAnosAllStarJug() - sale.getAnosAllStarJug()) * 5;
         score += (llega.getAnosNbaJug() - sale.getAnosNbaJug()) * 2;
 
-        if (llega.getEdadJug() < sale.getEdadJug())
+        if (llega.getEdadJug() < sale.getEdadJug()) {
             score += 10;
+        }
 
         if (llega.getPosicion().equalsIgnoreCase(sale.getPosicion())) {
             score += 10;
@@ -62,7 +65,6 @@ public class SimulacionService {
     }
 
     // ================= IMPACTO =================
-
     public TeamImpactDTO calcularImpactoTrade(Jugador sale, Jugador llega) {
 
         Equipo equipo = sale.getEquipo();
@@ -85,6 +87,40 @@ public class SimulacionService {
 
         int diferencia = victoriasDespues - victoriasAntes;
 
+        int probabilidadA;
+        int probabilidadB;
+
+        if (victoriasDespues > victoriasAntes) {
+
+            probabilidadA = 50 + diferencia;
+            probabilidadB = 100 - probabilidadA;
+
+        } else {
+
+            probabilidadB = 50 + diferencia;
+            probabilidadA = 100 - probabilidadB;
+        }
+
+        probabilidadA = Math.max(1, Math.min(99, probabilidadA));
+        probabilidadB = Math.max(1, Math.min(99, probabilidadB));
+
+        String momentum;
+
+        if (diferencia >= 20) {
+
+            momentum = "🔥 Dominio absoluto";
+
+        } else if (diferencia >= 10) {
+
+            momentum = "📈 Equipo en gran momento";
+
+        } else {
+
+            momentum = "⚖ Partido muy igualado";
+        }
+
+        
+
         return new TeamImpactDTO(
                 ratingAntes,
                 ratingDespues,
@@ -94,7 +130,6 @@ public class SimulacionService {
     }
 
     // ================= WINS PREDICTION =================
-
     public WinsPredictionDTO calcularWins(Jugador sale, Jugador llega) {
 
         Equipo equipo = sale.getEquipo();
@@ -132,30 +167,37 @@ public class SimulacionService {
     }
 
     // ================= IA =================
-
     private String generarMensajeIA(int diff, String antes, String despues) {
 
-        if (diff >= 8)
+        if (diff >= 8) {
             return "🚀 Trade élite: cambia completamente el equipo";
-        if (diff >= 4)
+        }
+        if (diff >= 4) {
             return "📈 Mejora clara: el equipo sube de nivel";
-        if (diff >= 1)
+        }
+        if (diff >= 1) {
             return "👍 Ligera mejora";
-        if (diff == 0)
+        }
+        if (diff == 0) {
             return "⚖️ No cambia el rendimiento";
-        if (diff >= -3)
+        }
+        if (diff >= -3) {
             return "⚠️ Riesgo leve";
+        }
         return "❌ Empeora claramente el equipo";
     }
 
     private String calcularTier(int wins) {
 
-        if (wins >= 55)
+        if (wins >= 55) {
             return "🏆 Contender";
-        if (wins >= 45)
+        }
+        if (wins >= 45) {
             return "🔥 Playoff";
-        if (wins >= 35)
+        }
+        if (wins >= 35) {
             return "⚖️ Medio";
+        }
         return "❌ Tanking";
     }
 
@@ -165,11 +207,11 @@ public class SimulacionService {
     }
 
     // ================= HELPERS =================
-
     private double calcularRatingEquipo(List<Jugador> jugadores) {
 
-        if (jugadores.isEmpty())
+        if (jugadores.isEmpty()) {
             return 0;
+        }
 
         double total = 0;
 
@@ -186,7 +228,6 @@ public class SimulacionService {
     }
 
     // ================= SUGERENCIAS =================
-
     public List<TradeSuggestionDTO> sugerirMejorTrade(Jugador base) {
 
         List<Jugador> todos = jugadorService.findAll();
@@ -210,8 +251,8 @@ public class SimulacionService {
         List<TradeSuggestionDTO> sugerencias = new ArrayList<>();
 
         for (Jugador j : todos) {
-            if (j.getEquipo() != null &&
-                    !j.getEquipo().getIdEquipo().equals(equipo.getIdEquipo())) {
+            if (j.getEquipo() != null
+                    && !j.getEquipo().getIdEquipo().equals(equipo.getIdEquipo())) {
 
                 int score = calcularFitEquipo(equipo, j);
                 sugerencias.add(new TradeSuggestionDTO(j, score));
@@ -226,8 +267,9 @@ public class SimulacionService {
     private int calcularFit(Jugador a, Jugador b) {
         int score = 50;
 
-        if (!a.getPosicion().equalsIgnoreCase(b.getPosicion()))
+        if (!a.getPosicion().equalsIgnoreCase(b.getPosicion())) {
             score += 15;
+        }
 
         score += (b.getAnosAllStarJug() - a.getAnosAllStarJug()) * 5;
         score -= Math.abs(b.getEdadJug() - a.getEdadJug());
@@ -238,8 +280,9 @@ public class SimulacionService {
     private int calcularFitEquipo(Equipo equipo, Jugador j) {
         int score = 50;
 
-        if (j.getEdadJug() < 28)
+        if (j.getEdadJug() < 28) {
             score += 10;
+        }
 
         score += j.getAnosAllStarJug() * 4;
         score += j.getAnosNbaJug();
@@ -248,7 +291,6 @@ public class SimulacionService {
     }
 
     // ================= PLAYOFF PREDICTION =================
-
     public PlayoffPredictionDTO predecirPlayoffs(Equipo equipo) {
 
         if (equipo == null || equipo.getJugadores() == null) {
@@ -287,7 +329,6 @@ public class SimulacionService {
     }
 
     // ================= BRACKET PLAYOFFS =================
-
     public PlayoffBracketDTO simularBracketNBA() {
 
         List<Equipo> equipos = jugadorService.findAll().stream()
@@ -319,13 +360,10 @@ public class SimulacionService {
             primeraRonda.add(new MatchDTO(
                     e1.getNombreEquipo(),
                     e1.getSiglas(),
-
                     e2.getNombreEquipo(),
                     e2.getSiglas(),
-
                     ganador.getNombreEquipo(),
                     ganador.getSiglas(),
-
                     serie.getWinsA(),
                     serie.getWinsB()));
             ganadoresR1.add(ganador);
@@ -337,9 +375,9 @@ public class SimulacionService {
 
         for (int i = 0; i < ganadoresR1.size(); i += 2) {
 
-            if (i + 1 >= ganadoresR1.size())
+            if (i + 1 >= ganadoresR1.size()) {
                 break; // ✅ FIX
-
+            }
             Equipo g1 = ganadoresR1.get(i);
             Equipo g2 = ganadoresR1.get(i + 1);
 
@@ -348,13 +386,10 @@ public class SimulacionService {
 
             semifinales.add(new MatchDTO(g1.getNombreEquipo(),
                     g1.getSiglas(),
-
                     g2.getNombreEquipo(),
                     g2.getSiglas(),
-
                     ganador.getNombreEquipo(),
                     ganador.getSiglas(),
-
                     serie.getWinsA(),
                     serie.getWinsB()));
 
@@ -399,7 +434,6 @@ public class SimulacionService {
     }
 
     // ================= SIMULACIÓN DE SERIE =================
-
     private SeriesResultDTO simularSerie(Equipo a, Equipo b) {
 
         double ratingA = calcularRatingEquipo(a.getJugadores());
@@ -430,7 +464,6 @@ public class SimulacionService {
     }
 
     // ================= TEMPORADA COMPLETA NBA =================
-
     public SeasonSimulationDTO simularTemporadaNBA() {
 
         List<Equipo> equipos = jugadorService.findAll().stream()
@@ -448,7 +481,8 @@ public class SimulacionService {
 
             double rating = calcularRatingEquipo(equipo.getJugadores());
 
-            int victorias = (int) (20 + (rating * 62));
+            int victorias = (int) ((rating / 100.0) * 82);
+            victorias = Math.max(15, Math.min(70, victorias));
             int derrotas = 82 - victorias;
 
             standings.add(new TeamStandingDTO(
@@ -472,5 +506,76 @@ public class SimulacionService {
                 mejorEquipo.getNombreEquipo(),
                 mejorEquipo.getSiglas(),
                 mvp);
+    }
+
+    // ================= LIVE GAME SIMULATION =================
+    public LiveGameSimulationDTO simularPartidoLive(
+            Integer equipo1Id,
+            Integer equipo2Id) {
+
+        Equipo a = equipoService.findEquipoById(equipo1Id);
+        Equipo b = equipoService.findEquipoById(equipo2Id);
+
+        System.out.println("Equipo A = " + a);
+        System.out.println("Equipo B = " + b);
+        Random random = new Random();
+
+        int q1a = 20 + random.nextInt(16);
+        int q1b = 20 + random.nextInt(16);
+
+        int q2a = q1a + 20 + random.nextInt(16);
+        int q2b = q1b + 20 + random.nextInt(16);
+
+        int q3a = q2a + 20 + random.nextInt(16);
+        int q3b = q2b + 20 + random.nextInt(16);
+
+        int finalA = q3a + 20 + random.nextInt(16);
+        int finalB = q3b + 20 + random.nextInt(16);
+
+        String ganador
+                = finalA >= finalB
+                        ? a.getNombreEquipo()
+                        : b.getNombreEquipo();
+
+        String mvp
+                = "Superstar de " + ganador;
+
+                double ratingA = calcularRatingEquipo(a.getJugadores());
+double ratingB = calcularRatingEquipo(b.getJugadores());
+
+int probabilidadA = (int)
+        ((ratingA / (ratingA + ratingB)) * 100);
+
+int probabilidadB = 100 - probabilidadA;
+
+int diferenciaMarcador = Math.abs(finalA - finalB);
+
+String momentum;
+
+if (diferenciaMarcador >= 20) {
+    momentum = "🔥 Dominio absoluto";
+} else if (diferenciaMarcador >= 10) {
+    momentum = "💪 Partido controlado";
+} else {
+    momentum = "⚡ Final ajustado";
+}
+        return new LiveGameSimulationDTO(
+        a.getNombreEquipo(),
+        a.getSiglas(),
+        b.getNombreEquipo(),
+        b.getSiglas(),
+        q1a,
+        q1b,
+        q2a,
+        q2b,
+        q3a,
+        q3b,
+        finalA,
+        finalB,
+        ganador,
+        mvp,
+        probabilidadA,
+        probabilidadB,
+        momentum);
     }
 }

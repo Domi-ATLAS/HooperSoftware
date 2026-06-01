@@ -69,4 +69,17 @@ public class Equipo {
     public String getNombreEquipo() {
         return nombreEquipo;
     }
+
+    public String getSiglas() {
+        return siglas;
+    }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public Integer getIdEquipo() {
+        return idEquipo;
+    }
+
 }

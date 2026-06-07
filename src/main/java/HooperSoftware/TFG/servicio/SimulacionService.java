@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import HooperSoftware.TFG.dto.DynastyResultDTO;
+import HooperSoftware.TFG.dto.GMTradeDTO;
 import HooperSoftware.TFG.dto.LiveGameSimulationDTO;
 import HooperSoftware.TFG.dto.MatchDTO;
 import HooperSoftware.TFG.dto.PlayoffBracketDTO;
@@ -118,8 +120,6 @@ public class SimulacionService {
 
             momentum = "⚖ Partido muy igualado";
         }
-
-        
 
         return new TeamImpactDTO(
                 ratingAntes,
@@ -532,50 +532,138 @@ public class SimulacionService {
         int finalA = q3a + 20 + random.nextInt(16);
         int finalB = q3b + 20 + random.nextInt(16);
 
-        String ganador
-                = finalA >= finalB
-                        ? a.getNombreEquipo()
-                        : b.getNombreEquipo();
+        String ganador = finalA >= finalB
+                ? a.getNombreEquipo()
+                : b.getNombreEquipo();
 
-        String mvp
-                = "Superstar de " + ganador;
+        String mvp = "Superstar de " + ganador;
 
-                double ratingA = calcularRatingEquipo(a.getJugadores());
-double ratingB = calcularRatingEquipo(b.getJugadores());
+        double ratingA = calcularRatingEquipo(a.getJugadores());
+        double ratingB = calcularRatingEquipo(b.getJugadores());
 
-int probabilidadA = (int)
-        ((ratingA / (ratingA + ratingB)) * 100);
+        int probabilidadA = (int) ((ratingA / (ratingA + ratingB)) * 100);
 
-int probabilidadB = 100 - probabilidadA;
+        int probabilidadB = 100 - probabilidadA;
 
-int diferenciaMarcador = Math.abs(finalA - finalB);
+        int diferenciaMarcador = Math.abs(finalA - finalB);
 
-String momentum;
+        String momentum;
 
-if (diferenciaMarcador >= 20) {
-    momentum = "🔥 Dominio absoluto";
-} else if (diferenciaMarcador >= 10) {
-    momentum = "💪 Partido controlado";
-} else {
-    momentum = "⚡ Final ajustado";
-}
+        if (diferenciaMarcador >= 20) {
+            momentum = "🔥 Dominio absoluto";
+        } else if (diferenciaMarcador >= 10) {
+            momentum = "💪 Partido controlado";
+        } else {
+            momentum = "⚡ Final ajustado";
+        }
         return new LiveGameSimulationDTO(
-        a.getNombreEquipo(),
-        a.getSiglas(),
-        b.getNombreEquipo(),
-        b.getSiglas(),
-        q1a,
-        q1b,
-        q2a,
-        q2b,
-        q3a,
-        q3b,
-        finalA,
-        finalB,
-        ganador,
-        mvp,
-        probabilidadA,
-        probabilidadB,
-        momentum);
+                a.getNombreEquipo(),
+                a.getSiglas(),
+                b.getNombreEquipo(),
+                b.getSiglas(),
+                q1a,
+                q1b,
+                q2a,
+                q2b,
+                q3a,
+                q3b,
+                finalA,
+                finalB,
+                ganador,
+                mvp,
+                probabilidadA,
+                probabilidadB,
+                momentum);
+    }
+    // ================= GM TRADE SIMULATION =================
+
+    public List<GMTradeDTO> buscarMejoresTrades(
+            Integer jugadorId) {
+
+        Jugador base = jugadorService.findJugadorById(jugadorId);
+
+        return jugadorService.findAll().stream()
+
+                .filter(j -> !j.getIdJugador()
+                        .equals(base.getIdJugador()))
+
+                .filter(j -> j.getEquipo() != null)
+
+                .map(j -> {
+
+                    int mejora = new Random().nextInt(10);
+
+                    return new GMTradeDTO(
+                            j.getNombreJugador(),
+                            j.getEquipo().getNombreEquipo(),
+                            mejora);
+                })
+
+                .sorted((a, b) -> b.getMejoraWins()
+                        .compareTo(a.getMejoraWins()))
+
+                .limit(5)
+
+                .toList();
+    }
+
+    public DynastyResultDTO simularDinastia(
+            Integer equipoId) {
+
+        Equipo equipo = equipoService.findEquipoById(equipoId);
+
+        Random random = new Random();
+
+        List<String> temporadas = new ArrayList<>();
+
+        int titulos = 0;
+        int victorias = 0;
+
+        for (int ano = 1; ano <= 5; ano++) {
+
+            int wins = 35 + random.nextInt(31);
+
+            victorias += wins;
+
+            if (wins >= 60) {
+
+                temporadas.add(
+                        "Año " + ano +
+                                " → Campeón NBA");
+
+                titulos++;
+
+            } else if (wins >= 55) {
+
+                temporadas.add(
+                        "Año " + ano +
+                                " → Final Conferencia");
+
+            } else if (wins >= 50) {
+
+                temporadas.add(
+                        "Año " + ano +
+                                " → Semifinal Conferencia");
+
+            } else {
+
+                temporadas.add(
+                        "Año " + ano +
+                                " → " + wins + "-82");
+            }
+        }
+
+        int dynastyScore = Math.min(
+                100,
+                titulos * 30 +
+                        victorias / 5);
+
+        return new DynastyResultDTO(
+                equipo.getNombreEquipo(),
+                equipo.getSiglas(),
+                temporadas,
+                titulos,
+                victorias,
+                dynastyScore);
     }
 }

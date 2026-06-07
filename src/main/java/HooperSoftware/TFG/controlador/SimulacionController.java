@@ -159,7 +159,16 @@ public class SimulacionController {
             @RequestParam Integer equipo1Id,
             @RequestParam Integer equipo2Id,
             Model model) {
+        if (equipo1Id.equals(equipo2Id)) {
 
+            model.addAttribute("errorLive",
+                    "No puedes enfrentar el mismo equipo");
+
+            model.addAttribute("equipos", equipoService.findAll());
+            model.addAttribute("jugadores", jugadorService.findAll());
+
+            return "simulaciones";
+        }
         model.addAttribute(
                 "liveGame",
                 simulacionService.simularPartidoLive(
@@ -171,6 +180,48 @@ public class SimulacionController {
 
         System.out.println("ID1 = " + equipo1Id);
         System.out.println("ID2 = " + equipo2Id);
+
+        return "simulaciones";
+    }
+
+    @PostMapping("/gm")
+    public String gmAssistant(
+            @RequestParam Integer jugadorId,
+            Model model) {
+
+        model.addAttribute(
+                "gmTrades",
+                simulacionService.buscarMejoresTrades(
+                        jugadorId));
+
+        model.addAttribute(
+                "jugadores",
+                jugadorService.findAll());
+
+        model.addAttribute(
+                "equipos",
+                equipoService.findAll());
+
+        return "simulaciones";
+    }
+
+    @PostMapping("/dynasty")
+    public String dynasty(
+            @RequestParam Integer equipoId,
+            Model model) {
+
+        model.addAttribute(
+                "dynasty",
+                simulacionService.simularDinastia(
+                        equipoId));
+
+        model.addAttribute(
+                "equipos",
+                equipoService.findAll());
+
+        model.addAttribute(
+                "jugadores",
+                jugadorService.findAll());
 
         return "simulaciones";
     }

@@ -507,127 +507,234 @@
 
                         <hr style="margin:70px 0;">
 
-<h2>Simulación LIVE NBA</h2>
+                        <h2>Simulación LIVE NBA</h2>
 
-<form action="/simulaciones/live" method="post">
+                        <form action="/simulaciones/live" method="post">
 
-    <input type="hidden"
-           name="${_csrf.parameterName}"
-           value="${_csrf.token}" />
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
-    <select name="equipo1Id">
+                            <select name="equipo1Id">
 
-        <c:forEach var="e" items="${equipos}">
-            <option value="${e.idEquipo}">
-                ${e.nombreEquipo}
-            </option>
-        </c:forEach>
+                                <c:forEach var="e" items="${equipos}">
+                                    <option value="${e.idEquipo}">
+                                        ${e.nombreEquipo}
+                                    </option>
+                                </c:forEach>
 
-    </select>
+                            </select>
 
-    <select name="equipo2Id">
+                            <select name="equipo2Id">
 
-        <c:forEach var="e" items="${equipos}">
-            <option value="${e.idEquipo}">
-                ${e.nombreEquipo}
-            </option>
-        </c:forEach>
+                                <c:forEach var="e" items="${equipos}">
+                                    <option value="${e.idEquipo}">
+                                        ${e.nombreEquipo}
+                                    </option>
+                                </c:forEach>
 
-    </select>
+                            </select>
 
-    <button class="search-btn">
-        Simular partido
-    </button>
+                            <button class="search-btn">
+                                Simular partido
+                            </button>
 
-</form>
+                        </form>
 
-<c:if test="${not empty liveGame}">
+                        <c:if test="${not empty liveGame}">
 
-    <div class="live-game-container">
+                            <div class="live-game-container">
 
-        <div class="live-teams">
+                                <div class="live-teams">
 
-            <div class="live-team">
+                                    <div class="live-team">
 
-                <img src="/images/${liveGame.siglas1}.png">
+                                        <img src="/images/${liveGame.siglas1}.png">
 
-                <h3>${liveGame.equipo1}</h3>
+                                        <h3>${liveGame.equipo1}</h3>
 
-                <span class="live-score">
-                    ${liveGame.finalA}
-                </span>
+                                        <span class="live-score">
+                                            ${liveGame.finalA}
+                                        </span>
 
-            </div>
+                                    </div>
 
-            <div class="live-vs">
-                VS
-            </div>
+                                    <div class="live-vs">
+                                        VS
+                                    </div>
 
-            <div class="live-team">
+                                    <div class="live-team">
 
-                <img src="/images/${liveGame.siglas2}.png">
+                                        <img src="/images/${liveGame.siglas2}.png">
 
-                <h3>${liveGame.equipo2}</h3>
+                                        <h3>${liveGame.equipo2}</h3>
 
-                <span class="live-score">
-                    ${liveGame.finalB}
-                </span>
+                                        <span class="live-score">
+                                            ${liveGame.finalB}
+                                        </span>
 
-            </div>
+                                    </div>
 
-        </div>
+                                </div>
 
-        <div class="quarters">
+                                <div class="quarters">
 
-            <div>Q1 → ${liveGame.q1a} - ${liveGame.q1b}</div>
+                                    <div>Q1 → ${liveGame.q1a} - ${liveGame.q1b}</div>
 
-            <div>HALF → ${liveGame.q2a} - ${liveGame.q2b}</div>
+                                    <div>HALF → ${liveGame.q2a} - ${liveGame.q2b}</div>
 
-            <div>Q3 → ${liveGame.q3a} - ${liveGame.q3b}</div>
+                                    <div>Q3 → ${liveGame.q3a} - ${liveGame.q3b}</div>
 
-            <div>FINAL → ${liveGame.finalA} - ${liveGame.finalB}</div>
+                                    <div>FINAL → ${liveGame.finalA} - ${liveGame.finalB}</div>
 
-        </div>
+                                </div>
 
-        <div class="live-result">
+                                <div class="live-result">
 
-            🏆 Ganador:
-            ${liveGame.ganador}
+                                    🏆 Ganador:
+                                    ${liveGame.ganador}
 
-            <br><br>
+                                    <br><br>
 
-            ⭐ MVP:
-            ${liveGame.mvp}
+                                    ⭐ MVP:
+                                    ${liveGame.mvp}
 
-        </div>
+                                </div>
 
-        <div class="win-probability">
+                                <div class="win-probability">
 
-    <h3>Win Probability</h3>
+                                    <h3>Win Probability</h3>
 
-    <div>
-        ${liveGame.equipo1}
-        →
-        ${liveGame.probabilidadA}%
-    </div>
+                                    <div>
+                                        ${liveGame.equipo1}
+                                        →
+                                        ${liveGame.probabilidadA}%
+                                    </div>
 
-    <div>
-        ${liveGame.equipo2}
-        →
-        ${liveGame.probabilidadB}%
-    </div>
+                                    <div>
+                                        ${liveGame.equipo2}
+                                        →
+                                        ${liveGame.probabilidadB}%
+                                    </div>
 
-    <br>
+                                    <br>
 
-    <div class="momentum-box">
-        ${liveGame.momentum}
-    </div>
+                                    <div class="momentum-box">
+                                        ${liveGame.momentum}
+                                    </div>
 
-</div>
+                                </div>
 
-    </div>
+                            </div>
 
-</c:if>
+                        </c:if>
+
+                        <hr style="margin:70px 0;">
+
+                        <h2>GM Assistant IA</h2>
+
+                        <form action="/simulaciones/gm" method="post">
+
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                            <select name="jugadorId">
+
+                                <c:forEach var="j" items="${jugadores}">
+                                    <option value="${j.idJugador}">
+                                        ${j.nombreJugador}
+                                    </option>
+                                </c:forEach>
+
+                            </select>
+
+                            <button class="search-btn">
+                                Buscar mejores trades
+                            </button>
+
+                        </form>
+
+                        <c:if test="${not empty gmTrades}">
+
+                            <div class="gm-results">
+
+                                <h3>
+                                    Mejores opciones de trade
+                                </h3>
+
+                                <c:forEach var="t" items="${gmTrades}">
+
+                                    <div class="gm-card">
+
+                                        <b>${t.jugador}</b>
+
+                                        <br>
+
+                                        ${t.equipo}
+
+                                        <br>
+
+                                        +${t.mejoraWins} victorias
+
+                                    </div>
+
+                                </c:forEach>
+
+                            </div>
+
+                        </c:if>
+
+                        <hr style="margin:70px 0;">
+
+                        <h2>Dynasty Simulator</h2>
+
+                        <form action="/simulaciones/dynasty" method="post">
+
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                            <select name="equipoId">
+
+                                <c:forEach var="e" items="${equipos}">
+                                    <option value="${e.idEquipo}">
+                                        ${e.nombreEquipo}
+                                    </option>
+                                </c:forEach>
+
+                            </select>
+
+                            <button class="search-btn">
+                                Simular 5 temporadas
+                            </button>
+
+                        </form>
+
+                        <c:if test="${not empty dynasty}">
+
+                            <div class="dynasty-container">
+
+                                <img src="/images/${dynasty.siglas}.png">
+
+                                <h2>${dynasty.equipo}</h2>
+
+                                <c:forEach var="t" items="${dynasty.temporadas}">
+                                    <div>${t}</div>
+                                </c:forEach>
+
+                                <br>
+
+                                <h3>
+                                    🏆 ${dynasty.titulos} títulos
+                                </h3>
+
+                                <h3>
+                                    📈 ${dynasty.victoriasTotales} victorias
+                                </h3>
+
+                                <h3>
+                                    ⭐ Dynasty Score:
+                                    ${dynasty.dynastyScore}/100
+                                </h3>
+
+                            </div>
+
+                        </c:if>
 
                     </div>
 

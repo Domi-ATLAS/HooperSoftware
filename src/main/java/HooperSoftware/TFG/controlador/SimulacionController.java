@@ -20,6 +20,12 @@ public class SimulacionController {
     private final EquipoService equipoService;
     private final SimulacionService simulacionService;
 
+    @GetMapping("")
+    public String homeSimulaciones() {
+
+        return "simulaciones/home";
+    }
+
     public SimulacionController(
             JugadorService jugadorService,
             EquipoService equipoService,
@@ -30,15 +36,68 @@ public class SimulacionController {
         this.simulacionService = simulacionService;
     }
 
-    @GetMapping("")
+    @GetMapping("/trade")
+    public String trade(Model model) {
+
+        model.addAttribute("jugadores", jugadorService.findAll());
+        model.addAttribute("equipos", equipoService.findAll());
+
+        return "simulaciones/trade";
+    }
+
+    @GetMapping("/playoffs")
+    public String playoffs(Model model) {
+
+        model.addAttribute("equipos", equipoService.findAll());
+
+        return "simulaciones/playoffs";
+    }
+
+    @GetMapping("/bracket")
+    public String bracket(Model model) {
+
+        return "simulaciones/bracket";
+    }
+
+    @GetMapping("/season")
+    public String season() {
+
+        return "simulaciones/season";
+    }
+
+    @GetMapping("/live")
+    public String live(Model model) {
+
+        model.addAttribute("equipos", equipoService.findAll());
+
+        return "simulaciones/live";
+    }
+
+    @GetMapping("/gm")
+    public String gm(Model model) {
+
+        model.addAttribute("jugadores", jugadorService.findAll());
+
+        return "simulaciones/gm";
+    }
+
+    @GetMapping("/dynasty")
+    public String dynasty(Model model) {
+
+        model.addAttribute("equipos", equipoService.findAll());
+
+        return "simulaciones/dynasty";
+    }
+
+    //ANTIGUO TRADE SIMULATOR
+    /*  @GetMapping("")
     public String vistaSimulador(Model model) {
 
         model.addAttribute("jugadores", jugadorService.findAll());
         model.addAttribute("equipos", equipoService.findAll());
 
         return "simulaciones";
-    }
-
+    } */
     @PostMapping("")
     public String ejecutarTrade(
             @RequestParam Integer jugadorSaleId,
@@ -58,7 +117,7 @@ public class SimulacionController {
             model.addAttribute("error", "No puedes tradear el mismo jugador");
             model.addAttribute("jugadores", jugadores);
             model.addAttribute("equipos", equipoService.findAll());
-            return "simulaciones";
+            return "simulaciones/trade";
         }
 
         var resultado = simulacionService.evaluarTrade(sale, llega);
@@ -73,7 +132,7 @@ public class SimulacionController {
         model.addAttribute("resultado", resultado);
         model.addAttribute("impacto", impacto);
 
-        return "simulaciones";
+        return "simulaciones/trade";
     }
 
     @PostMapping("/sugerir")
@@ -90,7 +149,7 @@ public class SimulacionController {
         model.addAttribute("sugerencias", sugerencias);
         model.addAttribute("jugadorBaseId", jugadorBaseId);
 
-        return "simulaciones";
+        return "simulaciones/trade";
     }
 
     @PostMapping("/equipo")
@@ -109,7 +168,7 @@ public class SimulacionController {
         model.addAttribute("sugerenciasEquipo", sugerencias);
         model.addAttribute("equipoId", equipoId);
 
-        return "simulaciones";
+        return "simulaciones/trade";
     }
 
     // ================= PLAYOFF SIMULATION =================
@@ -128,7 +187,7 @@ public class SimulacionController {
         model.addAttribute("equipoSeleccionado", equipo);
         model.addAttribute("playoff", prediccion);
 
-        return "simulaciones";
+        return "simulaciones/playoffs";
     }
 
     @PostMapping("/bracket")
@@ -141,7 +200,7 @@ public class SimulacionController {
 
         model.addAttribute("bracket", bracket);
 
-        return "simulaciones";
+        return "simulaciones/bracket";
     }
 
     @PostMapping("/temporada")
@@ -151,7 +210,7 @@ public class SimulacionController {
                 "seasonSimulation",
                 simulacionService.simularTemporadaNBA());
 
-        return "simulaciones";
+        return "simulaciones/season";
     }
 
     @PostMapping("/live")
@@ -167,7 +226,7 @@ public class SimulacionController {
             model.addAttribute("equipos", equipoService.findAll());
             model.addAttribute("jugadores", jugadorService.findAll());
 
-            return "simulaciones";
+            return "simulaciones/live";
         }
         model.addAttribute(
                 "liveGame",
@@ -181,7 +240,7 @@ public class SimulacionController {
         System.out.println("ID1 = " + equipo1Id);
         System.out.println("ID2 = " + equipo2Id);
 
-        return "simulaciones";
+        return "simulaciones/live";
     }
 
     @PostMapping("/gm")
@@ -202,7 +261,7 @@ public class SimulacionController {
                 "equipos",
                 equipoService.findAll());
 
-        return "simulaciones";
+        return "simulaciones/gm";
     }
 
     @PostMapping("/dynasty")
@@ -223,6 +282,6 @@ public class SimulacionController {
                 "jugadores",
                 jugadorService.findAll());
 
-        return "simulaciones";
+        return "simulaciones/dynasty";
     }
 }

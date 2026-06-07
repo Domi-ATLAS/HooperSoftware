@@ -15,12 +15,17 @@
                 </c:forEach>
             </div>
         </c:if>
+        <c:if test="${registered}">
+            <div class="success-notification">
+                ✅ Cuenta creada correctamente. Ya puedes iniciar sesión.
+            </div>
+        </c:if>
         <form:form modelAttribute="usuario" method="post">
             <div>
                 <label for="username">Usuario:</label>
             </div>
             <div>
-                <input class="input-large" type="text" id="username" name="username" required>
+                <input class="input-large" type="text" id="username" name="username" value="${username}" required>
             </div>
             <div class="errors" style="color:red">
                 <c:out value="${existsError}"/>

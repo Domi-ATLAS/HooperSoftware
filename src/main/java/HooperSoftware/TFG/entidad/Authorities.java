@@ -13,14 +13,37 @@ import lombok.Setter;
 @Entity
 @Table(name = "authorities")
 public class Authorities {
-	
-    @Id
-	Integer id;
 
-	@ManyToOne
-	@JoinColumn(name = "username")
-	Usuario usuario;
-	
-	String authority;
-	
+    @Id
+    Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "username")
+    Usuario usuario;
+
+    String authority;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
 }

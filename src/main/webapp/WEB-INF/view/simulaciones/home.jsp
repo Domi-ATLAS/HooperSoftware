@@ -1,0 +1,51 @@
+<%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
+<Layaout:layaout title="Simulation Center">
+
+<div class="simulation-center">
+
+    <h1>🏀 NBA Simulation Center</h1>
+
+    <div class="simulation-grid">
+
+        <a href="/simulaciones/trade" class="sim-card">
+            <h2>🔄 Trade Simulator</h2>
+            <p>Analiza intercambios entre jugadores.</p>
+        </a>
+
+        <a href="/simulaciones/playoffs" class="sim-card">
+            <h2>🏆 Playoff Predictor</h2>
+            <p>Probabilidades de playoffs.</p>
+        </a>
+
+        <a href="/simulaciones/bracket" class="sim-card">
+            <h2>🎯 Playoff Bracket</h2>
+            <p>Simulación completa del cuadro.</p>
+        </a>
+
+        <a href="/simulaciones/season" class="sim-card">
+            <h2>📊 Season Simulator</h2>
+            <p>Temporada completa NBA.</p>
+        </a>
+
+        <a href="/simulaciones/live" class="sim-card">
+            <h2>⏱ Live Game</h2>
+            <p>Partido en directo.</p>
+        </a>
+
+        <a href="/simulaciones/gm" class="sim-card">
+            <h2>🤖 GM Assistant</h2>
+            <p>IA para encontrar trades.</p>
+        </a>
+
+        <a href="/simulaciones/dynasty" class="sim-card">
+            <h2>👑 Dynasty Simulator</h2>
+            <p>Simula una dinastía NBA.</p>
+        </a>
+
+    </div>
+
+</div>
+
+</Layaout:layaout>

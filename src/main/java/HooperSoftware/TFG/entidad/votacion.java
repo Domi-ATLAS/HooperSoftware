@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -15,8 +16,6 @@ import lombok.Setter;
 import HooperSoftware.TFG.entidad.Usuario;
 import HooperSoftware.TFG.entidad.Jugador;
 import HooperSoftware.TFG.entidad.Entrenador;
-
-
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,7 +33,8 @@ public class Votacion {
 
     Categoria categotiaVotacion;
 
-    List<String> opcionesVotacion;
+    /*     @ElementCollection
+     */    String opcionesVotacion;
 
     Boolean enCurso;
 
@@ -46,13 +46,20 @@ public class Votacion {
 
     Date fecha;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "nombreUsuario")
+    Integer totalVotos;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreUsuario")
     List<Usuario> usuarios;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idEntrenador")
-    List<Entrenador> entrenadores;
+    public String getOpcionesVotacion() {
+        return opcionesVotacion;
+    }
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "idJugador")
-    List<Jugador> jugadores;
-    
+    public Integer getTotalVotos() {
+        return totalVotos;
+    }
+
+    public void setTotalVotos(Integer totalVotos) {
+        this.totalVotos = totalVotos;
+    }
 }

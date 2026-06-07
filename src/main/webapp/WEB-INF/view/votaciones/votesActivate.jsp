@@ -53,7 +53,13 @@
                                         <li>${voto}</li>
                                     </c:forEach>
                                 </ul>
-                                <button type="button" onclick="location.href='rutaVotar'">Votar</button>
+                                <button
+                                    type="button"
+                                    onclick="location.href='/vote/${vote.idVotacion}'">
+
+                                    Votar
+
+                                </button>
                             </div>
                         </c:if>
                     </c:forEach>

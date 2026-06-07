@@ -1,9 +1,9 @@
 -- USUARIIOS
 
-INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono) VALUES ('Juan Lopez', '$2a$12$mMj3IAm15GbUZx5Qgw51Lut1g38HoR5qoVHt/LsuwDJu32bwQbFJm', 'ju@ja.ji', 'Dallas Mavericks', 'http', 'juanito32', '62326742');
-INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono) VALUES ('Eduardo Pizarro', '$2a$12$HBi9mqAheugvoehw0QNzcOtSl11G.2qDFZcqlKetZ552mXsTA.1Hq', 'edupriv2002@gmail.com', 'Chicago Bulls', 'http', 'pizarrock', '648068282');
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono) VALUES ('Juan Lopez', '$2a$12$mMj3IAm15GbUZx5Qgw51Lut1g38HoR5qoVHt/LsuwDJu32bwQbFJm', 'ju@ja.ji', 'Dallas Mavericks', 'default-avatar.png', 'juanito32', '62326742');
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, username, numero_telefono) VALUES ('Eduardo Pizarro', '$2a$12$HBi9mqAheugvoehw0QNzcOtSl11G.2qDFZcqlKetZ552mXsTA.1Hq', 'edupriv2002@gmail.com', 'Chicago Bulls', 'default-avatar.png', 'pizarrock', '648068282');
 
-INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, enabled, username, numero_telefono) VALUES ('admin','$2a$12$HBi9mqAheugvoehw0QNzcOtSl11G.2qDFZcqlKetZ552mXsTA.1Hq', 'admin@admin.es', '', '', true,'admin','623126742');
+INSERT INTO usuario(nombre_usuario, password, correo, equipo_favorito, foto, enabled, username, numero_telefono) VALUES ('admin','$2a$12$HBi9mqAheugvoehw0QNzcOtSl11G.2qDFZcqlKetZ552mXsTA.1Hq', 'admin@admin.es', '', 'admin.png', true,'admin','623126742');
 
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin','admin');
 INSERT INTO authorities(id,username,authority) VALUES (2,'pizarrock','usuario');

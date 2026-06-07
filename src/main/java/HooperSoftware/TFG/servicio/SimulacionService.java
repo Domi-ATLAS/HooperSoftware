@@ -209,7 +209,7 @@ public class SimulacionService {
     // ================= HELPERS =================
     private double calcularRatingEquipo(List<Jugador> jugadores) {
 
-        if (jugadores.isEmpty()) {
+        if (jugadores == null || jugadores.isEmpty()) {
             return 0;
         }
 
@@ -583,12 +583,9 @@ public class SimulacionService {
         Jugador base = jugadorService.findJugadorById(jugadorId);
 
         return jugadorService.findAll().stream()
-
                 .filter(j -> !j.getIdJugador()
-                        .equals(base.getIdJugador()))
-
+                .equals(base.getIdJugador()))
                 .filter(j -> j.getEquipo() != null)
-
                 .map(j -> {
 
                     int mejora = new Random().nextInt(10);
@@ -598,12 +595,9 @@ public class SimulacionService {
                             j.getEquipo().getNombreEquipo(),
                             mejora);
                 })
-
                 .sorted((a, b) -> b.getMejoraWins()
-                        .compareTo(a.getMejoraWins()))
-
+                .compareTo(a.getMejoraWins()))
                 .limit(5)
-
                 .toList();
     }
 
@@ -628,35 +622,35 @@ public class SimulacionService {
             if (wins >= 60) {
 
                 temporadas.add(
-                        "Año " + ano +
-                                " → Campeón NBA");
+                        "Año " + ano
+                        + " → Campeón NBA");
 
                 titulos++;
 
             } else if (wins >= 55) {
 
                 temporadas.add(
-                        "Año " + ano +
-                                " → Final Conferencia");
+                        "Año " + ano
+                        + " → Final Conferencia");
 
             } else if (wins >= 50) {
 
                 temporadas.add(
-                        "Año " + ano +
-                                " → Semifinal Conferencia");
+                        "Año " + ano
+                        + " → Semifinal Conferencia");
 
             } else {
 
                 temporadas.add(
-                        "Año " + ano +
-                                " → " + wins + "-82");
+                        "Año " + ano
+                        + " → " + wins + "-82");
             }
         }
 
         int dynastyScore = Math.min(
                 100,
-                titulos * 30 +
-                        victorias / 5);
+                titulos * 30
+                + victorias / 5);
 
         return new DynastyResultDTO(
                 equipo.getNombreEquipo(),

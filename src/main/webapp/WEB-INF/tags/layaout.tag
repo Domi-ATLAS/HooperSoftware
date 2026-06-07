@@ -105,10 +105,38 @@ function runNbaScraping() {
     </div>
   </nav>
 
-  <!-- equipos (sin tocar) -->
-  <div class="teams-strip">
-    <!-- lo de equipos lo dejamos igual -->
-  </div>
+   <div class="teams-strip">
+      <button class="icon-btn" onclick="location.href='/equipos/ChicagoBulls'"><img src="/images/CHI.png" alt="ChicagoBulls"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/BostonCeltics'"><img src="/images/BOS.png" alt="BostonCeltics"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/IndianaPacers'"><img src="/images/IND.png" alt="IndianaPacers"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/MilwaukeeBucks'"><img src="/images/MIL.png" alt="MilwaukeeBucks"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/DetroitPistons'"><img src="/images/DET.png" alt="DetroitPistons"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/ClevelandCavaliers'"><img src="/images/CLE.png" alt="ClevelandCavaliers"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/TorontoRaptors'"><img src="/images/TOR.png" alt="TorontoRaptors"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/BrooklynNets'"><img src="/images/BKN.png" alt="BrooklynNets"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/NewYorkKnicks'"><img src="/images/NYK.png" alt="NewYorkKnicks"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/Philadelphia76ers'"><img src="/images/PHI.png" alt="Philadelphia76ers"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/WashingtonWizards'"><img src="/images/WAS.png" alt="WashingtonWizards"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/CharlotteHornets'"><img src="/images/CHA.png" alt="CharlotteHornets"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/AtlantaHawks'"><img src="/images/atl.png" alt="AtlantaHawks"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/OrlandoMagic'"><img src="/images/ORL.png" alt="OrlandoMagic"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/MiamiHeat'"><img src="/images/MIA.png" alt="MiamiHeat"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/SacramentoKings'"><img src="/images/SAC.png" alt="SacramentoKings"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/GoldenStateWarriors'"><img src="/images/GSW.png" alt="GoldenStateWarriors"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/LosAngelesClippers'"><img src="/images/LAC.png" alt="LosAngelesClippers"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/LosAngelesLakers'"><img src="/images/LAL.png" alt="LosAngelesLakers"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/SanAntonioSpurs'"><img src="/images/SAS.png" alt="SanAntonioSpurs"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/DallasMavericks'"><img src="/images/DAL.png" alt="DallasMavericks"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/NewOrleansPelicans'"><img src="/images/NOP.png" alt="NewOrleansPelicans"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/OklahomaCityThunder'"><img src="/images/OKC.png" alt="OklahomaCityThunder"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/PhoenixSuns'"><img src="/images/PHX.png" alt="PhoenixSuns"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/UtahJazz'"><img src="/images/UTA.png" alt="UtahJazz"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/DenverNuggets'"><img src="/images/DEN.png" alt="DenverNuggets"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/PortlandTrailBlazers'"><img src="/images/POR.png" alt="PortlandTrailBlazers"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/MinnesotaTimberwolves'"><img src="/images/MIN.png" alt="MinnesotaTimberwolves"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/HoustonRockets'"><img src="/images/HOU.png" alt="HoustonRockets"></button>
+      <button class="icon-btn" onclick="location.href='/equipos/MemphisGrizzlies'"><img src="/images/MEM.png" alt="MemphisGrizzlies"></button>
+    </div>
 </header>
 
 <main class="site-main">

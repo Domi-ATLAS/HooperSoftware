@@ -1254,3 +1254,108 @@ height:70px;
 
     margin-bottom:20px;
 }
+
+/* NUEVA SIMULACION VISUAL */
+
+.simulation-center{
+    max-width:1200px;
+    margin:auto;
+    padding:40px;
+    text-align:center;
+}
+
+.simulation-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    margin-top:40px;
+}
+
+.sim-card{
+    background:#07152e;
+    border:2px solid #2d4da8;
+    border-radius:15px;
+    padding:30px;
+    text-decoration:none;
+    color:white;
+    transition:.3s;
+}
+
+.sim-card:hover{
+    transform:translateY(-5px);
+    border-color:#4f86ff;
+}
+
+.sim-card h2{
+    color:#4f86ff;
+    margin-bottom:15px;
+}
+
+.sim-card-container{
+    max-width:900px;
+    margin:40px auto;
+    padding:40px;
+
+    background:#07152e;
+
+    border:2px solid #2d4da8;
+    border-radius:20px;
+
+    color:white;
+}
+
+.back-btn{
+    display:inline-block;
+    margin-bottom:20px;
+    color:#4f86ff;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.sim-container select{
+
+    width:100%;
+    max-width:500px;
+
+    padding:12px;
+
+    border-radius:10px;
+    border:2px solid #2d4da8;
+
+    font-size:16px;
+}
+
+.playoff-result{
+
+    text-align:center;
+    margin-top:30px;
+
+}
+
+.team-logo-large{
+
+    width:120px;
+    height:120px;
+
+    object-fit:contain;
+
+}
+
+.playoff-result h3{
+
+    font-size:48px;
+    color:#4f86ff;
+
+}
+
+.playoff-message{
+
+    margin-top:20px;
+
+    background:#10244d;
+
+    padding:20px;
+
+    border-radius:12px;
+
+}

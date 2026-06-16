@@ -3,11 +3,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Todos los Partidos de Playoffs">
+    <%-- Vista frontend: consulta de partidos, temporadas, jornadas o playoffs con navegación y filtros. --%>
     <h1>Todos los Partidos de Playoffs</h1>
 
     <button onClick="window.location.href='/allPlayOffs'">Volver a Playoffs</button>
 
+    <%-- Zona filtrable declarativa: los controles data-filter-control actúan sobre elementos data-filter-item. --%>
     <section data-filter-scope>
+    <%-- Barra de filtros secundarios: búsqueda local, rangos y contador de resultados. --%>
     <div class="data-toolbar">
         <label>
             Buscar partido
@@ -60,7 +63,13 @@
     </div>
     </section>
 
-    <script>
+    <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
+        /**
+         * Alterna la visibilidad de una sección interactiva de la vista.
+         * @param {string} id Identificador del elemento que se va a mostrar u ocultar.
+         * @returns {void}
+         */
         function toggleVisibility(id) {
             var x = document.getElementById(id);
             if (x.style.display === "none") {

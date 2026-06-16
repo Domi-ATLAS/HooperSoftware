@@ -2,6 +2,7 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 
 <Layaout:layaout title="Bienvenido">
+    <%-- Vista frontend: portada y accesos principales de la aplicación. --%>
   <div class="center-page">
     <div class="stack">
       <button class="btn" onclick="location.href='/login'">Iniciar sesión</button>

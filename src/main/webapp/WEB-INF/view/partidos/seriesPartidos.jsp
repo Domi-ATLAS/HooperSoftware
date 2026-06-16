@@ -3,10 +3,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Serie">
+    <%-- Vista frontend: consulta de partidos, temporadas, jornadas o playoffs con navegación y filtros. --%>
     <body>
         <h1>Serie de Partidos</h1>
         <c:if test="${not empty partidos}">
-            <table>
+            <%-- Tabla principal de datos renderizados por JSTL. --%>
+    <table>
                 <tr>
                     <th>Equipo Local</th>
                     <th>Equipo Visitante</th>

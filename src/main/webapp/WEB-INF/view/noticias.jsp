@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Noticias de Baloncesto">
+    <%-- Vista frontend: noticias NBA y contenido externo embebido. --%>
   <div class="container">
     <!-- Columna izquierda: noticias -->
     <div class="noticias">
@@ -26,13 +27,19 @@
         </div>
       </div>
 
-      <script>
+      <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
   (function(){
     const endpoint = '/api/nba/scores';
     const container = document.getElementById('scores-content');
     const lastEl = document.getElementById('scores-last');
     const refreshBtn = document.getElementById('refresh-scores');
 
+    /**
+     * Convierte una fecha ISO en un texto legible para la interfaz.
+     * @param {string} iso Fecha en formato ISO.
+     * @returns {string} Fecha formateada para mostrar en la interfaz.
+     */
     function friendlyDate(iso) {
       try {
         const dt = new Date(iso);
@@ -46,6 +53,11 @@
     }
 
     // Si ambos son 0 -> "vs", si no -> "XX — YY"
+    /**
+     * Formatea el marcador de un partido para mostrarlo en la tarjeta.
+     * @param {*} g Objeto con datos de un partido.
+     * @returns {string} Marcador listo para pintar en la tarjeta.
+     */
     function formatScore(g) {
       var hs = g.home_score || 0;
       var vs = g.visitor_score || 0;
@@ -55,6 +67,11 @@
       return hs + ' — ' + vs;
     }
 
+    /**
+     * Renderiza en pantalla los datos recibidos por JavaScript.
+     * @param {*} games Colección de partidos que se van a pintar en la vista.
+     * @returns {void}
+     */
     function render(games) {
       if (!games || games.length === 0) {
         container.innerHTML = '<p>No hay partidos para hoy / próximas horas.</p>';
@@ -123,6 +140,10 @@
       container.innerHTML = html;
     }
 
+    /**
+     * Solicita datos externos y vuelve a renderizar la zona correspondiente.
+     * @returns {Promise<void>}
+     */
     async function fetchAndRender() {
       try {
         const res = await fetch(endpoint, { cache: 'no-store' });
@@ -193,7 +214,8 @@
   </div>   <!-- /.container -->
 
   <!-- JS visor único (igual que lo tenías) -->
-  <script>
+  <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
     (function () {
       document.addEventListener('DOMContentLoaded', () => {
         const iframe = document.getElementById('single-embed-iframe');
@@ -208,10 +230,18 @@
         const vhRatio = 0.85;
         const reservedPx = 64;
 
+        /**
+         * Calcula una medida responsive en píxeles para el bloque embebido.
+         * @returns {number} Altura calculada en píxeles.
+         */
         function computePx() {
           return Math.max(Math.floor(window.innerHeight * vhRatio) - reservedPx, 260);
         }
 
+        /**
+         * Abre el cuerpo desplegable del bloque embebido.
+         * @returns {void}
+         */
         function openBody() {
           const h = computePx();
           body.style.maxHeight = h + 'px';
@@ -221,6 +251,12 @@
           body.setAttribute('aria-hidden', 'false');
         }
 
+        /**
+         * Muestra una alternativa visual cuando el contenido embebido no carga.
+         * @param {string} msg Mensaje que se mostrará como fallback.
+         * @param {string} src URL del recurso externo que se intenta cargar.
+         * @returns {void}
+         */
         function showFallback(msg, src) {
           const text = msg ?
             msg :
@@ -231,10 +267,19 @@
           fallback.style.display = 'block';
         }
 
+        /**
+         * Oculta el fallback del contenido embebido.
+         * @returns {void}
+         */
         function hideFallback() {
           fallback.style.display = 'none';
         }
 
+        /**
+         * Carga dinámicamente la URL de un iframe o recurso embebido.
+         * @param {string} src URL del recurso externo que se intenta cargar.
+         * @returns {void}
+         */
         function loadSrc(src) {
           openBody();
           openNewTab.href = src;

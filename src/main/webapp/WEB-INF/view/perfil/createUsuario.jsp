@@ -4,10 +4,12 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 
 <Layaout:layaout title="Crear cuenta">
+    <%-- Vista frontend: formularios y paneles de cuenta de usuario. --%>
 
 <div class="profile-container">
 
-    <div class="profile-card">
+    <%-- Panel de perfil: agrupa datos de usuario y acciones de cuenta. --%>
+<div class="profile-card">
 
         <h1>🏀 Crear cuenta HooperSoftware</h1>
 
@@ -22,6 +24,8 @@
                 </c:forEach>
             </div>
         </c:if>
+
+        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
         <form:form
                 modelAttribute="usuario"

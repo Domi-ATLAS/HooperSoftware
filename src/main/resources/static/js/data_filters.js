@@ -1,4 +1,10 @@
 (function () {
+  /**
+   * Normaliza un valor para comparar textos de forma flexible en los filtros.
+   *
+   * @param {*} value Valor original procedente de un control o elemento HTML.
+   * @returns {string} Texto en minúsculas, sin acentos y sin espacios sobrantes.
+   */
   function normalize(value) {
     return (value || "")
       .toString()
@@ -8,6 +14,13 @@
       .trim();
   }
 
+  /**
+   * Obtiene el valor de un elemento que se usará para filtrar.
+   *
+   * @param {Element} item Elemento marcado con data-filter-item.
+   * @param {string|null} field Nombre del campo data-* a consultar.
+   * @returns {string} Valor filtrable del atributo data-* o del texto visible.
+   */
   function valueFor(item, field) {
     if (!field) {
       return item.textContent || "";
@@ -17,6 +30,13 @@
     return dataValue !== null ? dataValue : item.textContent || "";
   }
 
+  /**
+   * Comprueba si un elemento cumple el filtro definido por un control.
+   *
+   * @param {Element} item Elemento del listado que puede mostrarse u ocultarse.
+   * @param {HTMLInputElement|HTMLSelectElement} control Control con data-filter-control.
+   * @returns {boolean} true si el elemento debe mantenerse visible.
+   */
   function matchesControl(item, control) {
     var rawValue = control.value || "";
     if (!rawValue) {
@@ -42,6 +62,12 @@
     return normalize(itemValue).indexOf(normalize(rawValue)) !== -1;
   }
 
+  /**
+   * Aplica todos los controles de una zona filtrable.
+   *
+   * @param {Element} scope Contenedor marcado con data-filter-scope.
+   * @returns {void}
+   */
   function applyScope(scope) {
     var controls = Array.prototype.slice.call(
       scope.querySelectorAll("[data-filter-control]")
@@ -73,6 +99,12 @@
     }
   }
 
+  /**
+   * Reinicia los controles de una zona y vuelve a mostrar sus resultados.
+   *
+   * @param {Element} scope Contenedor marcado con data-filter-scope.
+   * @returns {void}
+   */
   function resetScope(scope) {
     scope.querySelectorAll("[data-filter-control]").forEach(function (control) {
       control.value = "";
@@ -80,6 +112,12 @@
     applyScope(scope);
   }
 
+  /**
+   * Inicializa eventos de búsqueda, cambio y limpieza para una zona filtrable.
+   *
+   * @param {Element} scope Contenedor marcado con data-filter-scope.
+   * @returns {void}
+   */
   function initScope(scope) {
     scope.querySelectorAll("[data-filter-control]").forEach(function (control) {
       control.addEventListener("input", function () {
@@ -99,6 +137,9 @@
     applyScope(scope);
   }
 
+  /**
+   * Punto de entrada del módulo: activa todos los filtros declarativos al cargar.
+   */
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("[data-filter-scope]").forEach(initScope);
   });

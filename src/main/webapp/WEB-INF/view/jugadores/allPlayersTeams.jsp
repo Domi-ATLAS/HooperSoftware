@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Jugadores y Entrenadores">
+    <%-- Vista frontend: jugadores y entrenadores con listados, fichas y datos de perfil. --%>
 <html>
 <head>
     <title>Jugadores y Entrenadores</title>
@@ -11,6 +12,7 @@
     <h1>Jugadores y Entrenadores</h1>
 
     <!-- Formulario de Filtros -->
+    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
     <form class="filter-form" id="filterForm" action="/allPlayers/${selectedTeamId}" method="get">
         <label for="teams">Filtrar por equipo:</label>
         <select id="teams" name="teamId" onchange="updateFilters()">
@@ -53,7 +55,8 @@
                 <input type="text" id="searchTrainer" placeholder="Buscar entrenador...">
                 <button onclick="filterTrainers()">Buscar</button>
             </div>
-            <table>
+            <%-- Tabla principal de datos renderizados por JSTL. --%>
+    <table>
                 <tr><th>Nombre</th><th>Edad</th><th>Detalles</th></tr>
                 <c:forEach var="trainer" items="${trainers}">
                     <tr class="trainer-row">
@@ -66,11 +69,20 @@
         </div>
     </div>
 
-    <script>
+    <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
+        /**
+         * Actualiza los controles dependientes antes de aplicar el filtrado.
+         * @returns {void}
+         */
         function updateFilters() {
             document.getElementById("filterForm").submit();
         }
 
+        /**
+         * Filtra la lista de jugadores según los criterios activos.
+         * @returns {void}
+         */
         function filterPlayers() {
             let input = document.getElementById("searchPlayer").value.toLowerCase();
             let rows = document.querySelectorAll(".player-row");
@@ -80,6 +92,10 @@
             });
         }
 
+        /**
+         * Filtra la lista de entrenadores según los criterios activos.
+         * @returns {void}
+         */
         function filterTrainers() {
             let input = document.getElementById("searchTrainer").value.toLowerCase();
             let rows = document.querySelectorAll(".trainer-row");

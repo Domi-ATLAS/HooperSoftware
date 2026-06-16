@@ -5,6 +5,7 @@
 
 
 <Layaout:layaout title="Philadelphia 76ers">
+    <%-- Vista frontend: ficha de equipo con identidad visual, clasificación y datos relacionados. --%>
 
     <!DOCTYPE html>
     <html>

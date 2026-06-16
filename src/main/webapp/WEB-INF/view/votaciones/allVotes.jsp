@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Todas las Votaciones">
+    <%-- Vista frontend: votaciones con filtros, agrupación por temporada y acciones de participación. --%>
 
 
     <h1>Todas las Votaciones</h1>
@@ -10,7 +11,7 @@
     <button type="button" onclick="location.href='/allVotes/inCourse'">Votaciones en Curso</button>
     <button type="button" onclick="location.href='/allVotes/oficial'">Votaciones Oficiales</button>
 
-    <!-- Formulario de Filtrado -->
+    <%-- Filtros de la vista: agrupan controles antes de renderizar el listado principal. --%>
     <form class="filter-form" onsubmit="applyFilters(event)">
         <div class="filter-field">
             <label for="category">Categoría:</label>
@@ -64,12 +65,22 @@
         </c:forEach>
     </div>
 
-    <script>
+    <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
+        /**
+         * Alterna la visibilidad de una sección interactiva de la vista.
+         * @param {string} id Identificador del elemento que se va a mostrar u ocultar.
+         * @returns {void}
+         */
         function toggleVisibility(id) {
             var section = document.getElementById(id);
             section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
         }
 
+        /**
+         * Limpia los filtros visuales y restaura el listado completo.
+         * @returns {void}
+         */
         function clearFilters() {
             document.getElementById("category").value = "";
             document.getElementById("date").value = "";
@@ -88,6 +99,11 @@
         }
 
 
+        /**
+         * Aplica los filtros seleccionados sobre los elementos visibles de la vista.
+         * @param {Event} event Evento del formulario o control que dispara la acción.
+         * @returns {void}
+         */
         function applyFilters(event) {
             event.preventDefault(); // Evita el envío del formulario
 

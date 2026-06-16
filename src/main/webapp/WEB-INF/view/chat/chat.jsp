@@ -2,10 +2,13 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 
 <Layaout:layaout title="Chat Global NBA">
+    <%-- Vista frontend: pantalla dedicada al chat NBA. --%>
 
 <div class="sim-container">
 
     <h1>💬 Chat Global NBA</h1>
+
+    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form action="/chat/send" method="post">
 
@@ -30,7 +33,8 @@
 
     <c:forEach items="${mensajes}" var="m">
 
-        <div class="result-card">
+        <%-- Resultado de la simulación o consulta: se muestra solo cuando el controlador envía datos. --%>
+            <div class="result-card">
 
             <strong>
                 ${m.username}

@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Mi Perfil">
+    <%-- Vista frontend: formularios y paneles de cuenta de usuario. --%>
 
 <div style="
 max-width:900px;

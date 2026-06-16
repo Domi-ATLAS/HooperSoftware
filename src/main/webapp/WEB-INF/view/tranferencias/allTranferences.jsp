@@ -2,7 +2,13 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
 <script>
+/**
+ * Alterna la visibilidad de una sección interactiva de la vista.
+ * @param {string} id Identificador del elemento que se va a mostrar u ocultar.
+ * @returns {void}
+ */
 function toggleTransferencia(id) {
     var element = document.getElementById(id);
     if (element.style.display === "none") {
@@ -14,9 +20,12 @@ function toggleTransferencia(id) {
 </script>
 
 <Layaout:layaout title="Transferencias">
+    <%-- Vista frontend: transferencias con filtros y tarjetas de detalle. --%>
     <h1>Transferencias</h1>
 
+    <%-- Zona filtrable declarativa: los controles data-filter-control actúan sobre elementos data-filter-item. --%>
     <section data-filter-scope>
+    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
         <select id="teams" name="teams">
@@ -28,6 +37,7 @@ function toggleTransferencia(id) {
         <button type="submit">Filtrar</button>
     </form>
 
+    <%-- Barra de filtros secundarios: búsqueda local, rangos y contador de resultados. --%>
     <div class="data-toolbar">
         <label>
             Buscar transferencia
@@ -68,7 +78,13 @@ function toggleTransferencia(id) {
 </Layaout:layaout>
 
 
+<%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
 <script>
+    /**
+     * Redirige o filtra la vista según el equipo seleccionado.
+     * @param {Event} event Evento del formulario o control que dispara la acción.
+     * @returns {void}
+     */
     function filterByTeam(event) {
         event.preventDefault();
         var teamId = document.getElementById("teams").value;

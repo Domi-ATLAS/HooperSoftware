@@ -3,12 +3,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Playoffs de la NBA">
+    <%-- Vista frontend: consulta de partidos, temporadas, jornadas o playoffs con navegación y filtros. --%>
 
     <h1>Playoffs de la NBA</h1>
 
     <button onClick="window.location.href='/playOffsGames'">Todos los partidos de PlayOff</button>
 
+    <%-- Zona filtrable declarativa: los controles data-filter-control actúan sobre elementos data-filter-item. --%>
     <section data-filter-scope>
+    <%-- Barra de filtros secundarios: búsqueda local, rangos y contador de resultados. --%>
     <div class="data-toolbar">
         <label>
             Buscar playoff

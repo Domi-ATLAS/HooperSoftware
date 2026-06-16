@@ -3,11 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Jugadores">
+    <%-- Vista frontend: jugadores y entrenadores con listados, fichas y datos de perfil. --%>
   <h1>Jugadores y Entrenadores</h1>
 
   <div class="split-2">
     <!-- Columna izquierda: Jugadores -->
     <section class="panel">
+      <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
       <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teamsL">Filtra por equipos:</label>
         <select id="teamsL" name="teams">
@@ -51,6 +53,7 @@
 
     <!-- Columna derecha: Entrenadores -->
     <section class="panel">
+      <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
       <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teamsR">Filtra por equipos:</label>
         <select id="teamsR" name="teams">
@@ -91,7 +94,12 @@
     </section>
   </div>
 
-  <script>
+  <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
+    /**
+     * Filtra la lista de jugadores según los criterios activos.
+     * @returns {void}
+     */
     function filterPlayers() {
       const input = document.getElementById("searchPlayer").value.toLowerCase();
       document.querySelectorAll(".player-row").forEach(row => {
@@ -99,6 +107,10 @@
         row.style.display = nombre.includes(input) ? "" : "none";
       });
     }
+    /**
+     * Filtra la lista de entrenadores según los criterios activos.
+     * @returns {void}
+     */
     function filterTrainers() {
       const input = document.getElementById("searchTrainer").value.toLowerCase();
       document.querySelectorAll(".trainer-row").forEach(row => {
@@ -106,6 +118,11 @@
         row.style.display = nombre.includes(input) ? "" : "none";
       });
     }
+    /**
+     * Redirige o filtra la vista según el equipo seleccionado.
+     * @param {Event} e Evento del formulario o control que dispara la acción.
+     * @returns {void}
+     */
     function filterByTeam(e){ e.preventDefault(); /* aquí podrás enganchar tu lógica */ }
   </script>
 </Layaout:layaout>

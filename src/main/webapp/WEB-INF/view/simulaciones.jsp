@@ -4,6 +4,7 @@
             <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
                 <Layaout:layaout title="Simulador NBA">
+    <%-- Vista frontend: menú de entrada a las simulaciones. --%>
 
                     <div class="sim-container">
 
@@ -14,6 +15,8 @@
                         </c:if>
 
                         <!-- ================= TRADE ================= -->
+
+                        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
                         <form action="/simulaciones" method="post">
 
@@ -161,6 +164,8 @@
 
                         <h2>IA: Mejores traspasos</h2>
 
+                        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
+
                         <form action="/simulaciones/sugerir" method="post">
 
                             <select name="jugadorBaseId">
@@ -205,6 +210,8 @@
 
                         <h2>IA: Qué necesita un equipo</h2>
 
+                        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
+
                         <form action="/simulaciones/equipo" method="post">
 
                             <select name="equipoId">
@@ -227,7 +234,8 @@
 
                             <c:forEach var="s" items="${sugerenciasEquipo}">
 
-                                <div class="result-card">
+                                <%-- Resultado de la simulación o consulta: se muestra solo cuando el controlador envía datos. --%>
+            <div class="result-card">
 
                                     <strong>${s.jugador.nombreJugador}</strong>
 
@@ -244,6 +252,8 @@
                         <hr style="margin:60px 0;">
 
                         <h2>Simulación de Playoffs</h2>
+
+                        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
                         <form action="/simulaciones/playoffs" method="post">
 
@@ -298,6 +308,8 @@
                         <hr style="margin:70px 0;">
 
                         <h2>Simulación completa Playoffs (Bracket)</h2>
+
+                        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
                         <form action="/simulaciones/bracket" method="post">
 
@@ -440,6 +452,8 @@
 
                         <h2>Simulación Temporada NBA</h2>
 
+                        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
+
                         <form action="/simulaciones/temporada" method="post">
 
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -508,6 +522,8 @@
                         <hr style="margin:70px 0;">
 
                         <h2>Simulación LIVE NBA</h2>
+
+                        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
                         <form action="/simulaciones/live" method="post">
 
@@ -631,6 +647,8 @@
 
                         <h2>GM Assistant IA</h2>
 
+                        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
+
                         <form action="/simulaciones/gm" method="post">
 
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -684,6 +702,8 @@
                         <hr style="margin:70px 0;">
 
                         <h2>Dynasty Simulator</h2>
+
+                        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
                         <form action="/simulaciones/dynasty" method="post">
 

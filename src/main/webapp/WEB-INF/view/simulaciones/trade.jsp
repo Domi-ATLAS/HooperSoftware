@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="Trade Simulator">
+    <%-- Vista frontend: simulación NBA con formularios, resultados y paneles interactivos. --%>
 
 <div class="sim-card-container">
 
@@ -21,6 +22,8 @@
     </c:if>
 
     <!-- SIMULADOR -->
+
+    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form action="/simulaciones" method="post">
 
@@ -228,6 +231,8 @@
 
     <h2>🤖 IA: Mejores traspasos</h2>
 
+    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
+
     <form action="/simulaciones/sugerir" method="post">
 
         <select name="jugadorBaseId">
@@ -283,6 +288,8 @@
     <hr>
 
 <h2>🏀 IA: Qué necesita un equipo</h2>
+
+<%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
 <form action="/simulaciones/equipo" method="post">
 

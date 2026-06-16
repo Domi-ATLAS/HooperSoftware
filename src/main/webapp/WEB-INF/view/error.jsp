@@ -3,6 +3,7 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 
 <Layaout:layaout title="Error">
+    <%-- Vista frontend: pantalla de error y mensajes de estado. --%>
   <div class="panel">
     <h1>Ha ocurrido un error</h1>
     <p><strong>Mensaje:</strong> ${error}</p>

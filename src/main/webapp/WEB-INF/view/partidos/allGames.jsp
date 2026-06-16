@@ -3,12 +3,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Partidos">
+    <%-- Vista frontend: consulta de partidos, temporadas, jornadas o playoffs con navegación y filtros. --%>
     <h1>Partidos</h1>
 
     <button onClick="window.location.href='/allGames/allJornadas'">Vista Jornada</button>
     <button onClick="window.location.href='/allSeasons'">Vista Temporada</button>
 
+    <%-- Zona filtrable declarativa: los controles data-filter-control actúan sobre elementos data-filter-item. --%>
     <section data-filter-scope>
+    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
         <select id="teams" name="teams">
@@ -20,6 +23,7 @@
         <button type="submit">Filtrar</button>
     </form>
 
+    <%-- Barra de filtros secundarios: búsqueda local, rangos y contador de resultados. --%>
     <div class="data-toolbar">
         <label>
             Buscar partido
@@ -41,6 +45,7 @@
 
     <div class="filter-empty" data-filter-empty hidden>No hay partidos con esos filtros.</div>
 
+    <%-- Tabla principal de datos renderizados por JSTL. --%>
     <table>
         <tr>
             <th>Equipo local</th>
@@ -62,7 +67,13 @@
     </section>
 </Layaout:layaout>
 
+<%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
 <script>
+/**
+ * Redirige o filtra la vista según el equipo seleccionado.
+ * @param {Event} event Evento del formulario o control que dispara la acción.
+ * @returns {void}
+ */
 function filterByTeam(event) {
     event.preventDefault();
     var teamId = document.getElementById("teams").value;

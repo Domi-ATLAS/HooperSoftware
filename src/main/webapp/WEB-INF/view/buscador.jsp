@@ -4,12 +4,15 @@
             <%@ page contentType="text/html;charset=UTF-8" %>
 
                 <Layaout:layaout title="Buscador NBA">
+    <%-- Vista frontend: buscador global de contenido de la aplicación. --%>
 
                     <div class="search-page">
 
                         <h1>Buscador Global NBA</h1>
 
                         <div class="search-container">
+
+                            <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
                             <form action="/buscador" method="get">
 
@@ -61,7 +64,8 @@
 
                                         <c:forEach var="equipo" items="${equipos}">
 
-                                            <div class="result-card">
+                                            <%-- Resultado de la simulación o consulta: se muestra solo cuando el controlador envía datos. --%>
+            <div class="result-card">
 
                                                 <a href="/equipos/${fn:replace(equipo.nombreEquipo,' ','')}">
                                                     🏀 ${equipo.nombreEquipo}
@@ -88,7 +92,8 @@
 
                                         <c:forEach var="jugador" items="${jugadores}">
 
-                                            <div class="result-card">
+                                            <%-- Resultado de la simulación o consulta: se muestra solo cuando el controlador envía datos. --%>
+            <div class="result-card">
 
                                                 <a href="/player/${jugador.idJugador}">
                                                     ⛹ ${jugador.nombreJugador}
@@ -122,7 +127,8 @@
 
                                         <c:forEach var="entrenador" items="${entrenadores}">
 
-                                            <div class="result-card">
+                                            <%-- Resultado de la simulación o consulta: se muestra solo cuando el controlador envía datos. --%>
+            <div class="result-card">
 
                                                 <a href="/trainer/${entrenador.idEntrenador}">
                                                     🎯 ${entrenador.nombeEntrenador}
@@ -157,7 +163,8 @@
 
                                         <c:forEach var="partido" items="${partidos}" begin="0" end="7">
 
-                                            <div class="result-card">
+                                            <%-- Resultado de la simulación o consulta: se muestra solo cuando el controlador envía datos. --%>
+            <div class="result-card">
 
                                                 <a href="/partido/${partido.idPartido}">
                                                     🏆
@@ -209,7 +216,8 @@ and empty partidos">
                         </c:if>
 
                     </div>
-                    <script>
+                    <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
 
                         const input = document.querySelector(".search-box");
                         const box = document.getElementById("autocomplete-results");
@@ -284,6 +292,11 @@ and empty partidos">
 
                         });
 
+                        /**
+                         * Marca como activo el elemento de autocompletado seleccionado.
+                         * @param {*} items Colección de elementos del autocompletado.
+                         * @returns {void}
+                         */
                         function addActive(items) {
 
                             if (!items.length) return;
@@ -302,6 +315,11 @@ and empty partidos">
 
                         }
 
+                        /**
+                         * Elimina el estado activo de los elementos de autocompletado.
+                         * @param {*} items Colección de elementos del autocompletado.
+                         * @returns {void}
+                         */
                         function removeActive(items) {
 
                             items.forEach(

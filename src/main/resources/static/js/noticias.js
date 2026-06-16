@@ -1,12 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () {
+  /**
+   * Zona de standings embebidos.
+   *
+   * Abre/cierra el iframe y muestra un aviso cuando el proveedor externo
+   * no permite cargarlo dentro de la página.
+   */
   const btn = document.getElementById('toggleStandings');
   const container = document.getElementById('embedContainer');
   const iframe = document.getElementById('standingsIframe');
   const notice = document.getElementById('embedNotice');
   const openInTab = document.getElementById('openInTab');
 
+  /**
+   * Expande el iframe de standings y prepara la detección de bloqueo externo.
+   *
+   * @returns {void}
+   */
   function openEmbed(){
-    // altura responsive: 60vh o 600px máximo
+    // Altura responsive para que el embed no ocupe toda la pantalla.
     const h = Math.min(window.innerHeight * 0.6, 800);
     container.style.height = h + 'px';
     container.classList.add('open');
@@ -16,25 +27,22 @@ document.addEventListener('DOMContentLoaded', function () {
     // Forzar recarga del iframe solo la primera vez para ahorrar recursos
     if (!iframe.dataset.loaded) {
       iframe.dataset.loaded = 'true';
-      // Si el src es externo y está bloqueado por X-Frame-Options, el iframe puede disparar "load" igual;
-      // aquí intentamos detectar bloqueo chequeando acceso a contenido si es same-origin.
+      // Detección defensiva de iframes bloqueados por cabeceras externas.
       iframe.addEventListener('load', function onLoad() {
-        // Si el iframe está same-origin podremos leer su contentDocument; si no, será cross-origin y el acceso lanzará excepción.
+        // Same-origin se puede inspeccionar; cross-origin se resuelve con fallback.
         try {
           const doc = iframe.contentDocument || iframe.contentWindow.document;
-          // si el documento tiene título y contenido, asumimos correcto
+          // Si el documento tiene contenido, el embed se considera cargado.
           if (!doc || !doc.body || doc.body.innerHTML.trim().length === 0) {
             showNotice();
           } else {
-            // todo OK: oculta el aviso
+            // Embed válido: no hace falta mostrar aviso.
             notice.style.display = 'none';
           }
         } catch (e) {
-          // Si llegamos aquí, es muy probablemente cross-origin (embed bloqueado or allowed); no podemos inspeccionar,
-          // así que comprobamos si el iframe está vacío después de un tiempo
+          // Cross-origin no permite leer el contenido; se deja un margen antes
+          // de mostrar el aviso de apertura externa.
           setTimeout(() => {
-            // si el iframe sigue sin mostrar nada visual (imposible medir sin lectura), enseñamos aviso
-            // Nota: esto es heurístico; lo correcto es revisar cabeceras en servidor.
             showNotice();
           }, 1200);
         }
@@ -43,17 +51,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  /**
+   * Contrae el iframe de standings sin descargar el contenido cargado.
+   *
+   * @returns {void}
+   */
   function closeEmbed(){
     container.style.height = '0px';
     container.classList.remove('open');
     container.setAttribute('aria-hidden', 'true');
   }
 
+  /**
+   * Muestra el aviso con alternativa para abrir el contenido fuera del iframe.
+   *
+   * @returns {void}
+   */
   function showNotice(){
     notice.style.display = 'block';
-    // Enlace a abrir en nueva pestaña ya está predefinido en la vista
+    // El enlace para abrir en nueva pestaña ya está definido en la vista.
   }
 
+  /**
+   * Alterna la visibilidad del bloque de standings desde el botón principal.
+   */
   btn.addEventListener('click', function () {
     if (container.classList.contains('open')) {
       closeEmbed();

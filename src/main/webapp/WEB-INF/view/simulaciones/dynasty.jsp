@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="Dynasty Simulator">
+    <%-- Vista frontend: simulación NBA con formularios, resultados y paneles interactivos. --%>
 
 <div class="sim-container">
 
@@ -16,6 +17,8 @@
         Simula una dinastía NBA durante los próximos años y descubre
         cuántos anillos podría ganar tu franquicia.
     </p>
+
+    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form action="/simulaciones/dynasty" method="post">
 

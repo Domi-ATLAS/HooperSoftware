@@ -5,6 +5,7 @@
 
 
 <Layaout:layaout title="Portland Trail Blazers">
+    <%-- Vista frontend: ficha de equipo con identidad visual, clasificación y datos relacionados. --%>
 
     <!DOCTYPE html>
     <html>

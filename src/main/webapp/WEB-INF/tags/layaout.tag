@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <%-- Cabecera compartida: carga estilos globales, JS de filtros y metadatos responsive. --%>
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -22,6 +23,11 @@
 <meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 <script>
+// Acción administrativa global: sincroniza datos NBA para la temporada seleccionada.
+/**
+ * Lanza la sincronización administrativa de datos NBA para la temporada seleccionada.
+ * @returns {void}
+ */
 function runNbaScraping() {
 
   if (!confirm('Actualizar datos NBA por temporada?')) return;
@@ -51,6 +57,7 @@ function runNbaScraping() {
 
 <body>
 <header class="site-header">
+  <%-- Navegación principal: accesos de la aplicación y botones condicionados por seguridad. --%>
   <nav class="nav">
     <div class="nav-left">
       <a class="logo-btn" href="/"><img src="/images/HS.png" alt="HS"></a>
@@ -106,6 +113,7 @@ function runNbaScraping() {
     </div>
   </nav>
 
+   <%-- Carrusel horizontal de equipos: acceso rápido desde cualquier vista. --%>
    <div class="teams-strip">
       <button class="icon-btn" onclick="location.href='/equipos/ChicagoBulls'"><img src="/images/CHI.png" alt="ChicagoBulls"></button>
       <button class="icon-btn" onclick="location.href='/equipos/BostonCeltics'"><img src="/images/BOS.png" alt="BostonCeltics"></button>
@@ -141,6 +149,7 @@ function runNbaScraping() {
 </header>
 
 <main class="site-main">
+  <%-- Punto de inserción del contenido propio de cada JSP. --%>
   <div class="container">
     <jsp:doBody/>
   </div>
@@ -152,6 +161,7 @@ function runNbaScraping() {
 
 <sec:authorize access="isAuthenticated()">
 
+<%-- Chat global flotante: solo se renderiza para usuarios autenticados. --%>
 <div id="chat-toggle">
 
     Chat NBA
@@ -192,6 +202,7 @@ function runNbaScraping() {
 
 <script>
 
+// Abre el panel y carga los mensajes iniciales.
 document
 .getElementById("chat-toggle")
 .addEventListener("click", () => {
@@ -204,6 +215,7 @@ document
 
 });
 
+// Cierra el panel sin perder el estado del resto de la vista.
 document
 .getElementById("chat-close")
 .addEventListener("click", () => {
@@ -214,6 +226,11 @@ document
 
 });
 
+// Recupera mensajes del backend y los pinta en orden cronológico visual.
+/**
+ * Carga los mensajes del chat global y actualiza el panel visible.
+ * @returns {Promise<void>}
+ */
 async function cargarMensajes() {
 
     const response = await fetch("/chat/messages");
@@ -254,6 +271,12 @@ async function cargarMensajes() {
 
 }
 
+// Envía un mensaje usando el token CSRF de la página.
+/**
+ * Envía un mensaje al chat global usando el token CSRF de la página.
+ * @param {string} texto Texto escrito por el usuario.
+ * @returns {Promise<void>}
+ */
 async function enviarMensaje(texto){
 
     const token =
@@ -289,6 +312,7 @@ async function enviarMensaje(texto){
 
 }
 
+// Refresco periódico solo mientras el chat está abierto.
 setInterval(() => {
 
     const abierto =
@@ -304,6 +328,7 @@ setInterval(() => {
 
 },5000);
 
+// Valida el formulario del chat y evita enviar mensajes vacíos.
 document
 .getElementById("chat-form")
 .addEventListener("submit",

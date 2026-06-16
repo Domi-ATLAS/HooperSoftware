@@ -448,6 +448,7 @@ textarea:focus,
   flex: 1 1 260px;
 }
 
+/* Campos de filtro agrupados: mantienen cada label unido a su control. */
 .filter-field {
   display: flex;
   flex: 1 1 260px;
@@ -478,6 +479,7 @@ textarea:focus,
   margin-left: 0;
 }
 
+/* Toolbar reutilizable para listados con filtros declarativos en data-* attributes. */
 .data-toolbar {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
@@ -525,6 +527,7 @@ textarea:focus,
   display: none !important;
 }
 
+/* Tarjetas base para transferencias y listados anidados de temporadas/jornadas. */
 .transfer-item {
   margin-bottom: 16px;
 }
@@ -722,6 +725,7 @@ tr:last-child td {
   margin-bottom: 16px;
 }
 
+/* Tarjetas de playoffs: separación interna para evitar texto pegado al borde. */
 .playoff-container {
   padding: 24px;
   margin-bottom: 18px;

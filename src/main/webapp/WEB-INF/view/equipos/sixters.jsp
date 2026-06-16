@@ -12,7 +12,7 @@
         <title>Philadelphia 76ers</title>
     </head>
     <body>
-        <img src="/images/six.png">
+        <img src="/images/PHI.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

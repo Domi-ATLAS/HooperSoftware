@@ -12,7 +12,7 @@
         <title>Charlotte Hornets</title>
     </head>
     <body>
-        <img src="/images/hornets.png">
+        <img src="/images/CHA.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

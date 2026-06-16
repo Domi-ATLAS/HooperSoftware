@@ -12,7 +12,7 @@
         <title>Cleveland Cavaliers</title>
     </head>
     <body>
-        <img src="/images/cavs.png">
+        <img src="/images/CLE.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

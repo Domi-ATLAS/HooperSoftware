@@ -12,19 +12,25 @@
 
     <!-- Formulario de Filtrado -->
     <form class="filter-form" onsubmit="applyFilters(event)">
-        <label for="category">Categoría:</label>
-        <select id="category" name="category">
-            <option value="">Todas</option>
-            <c:forEach var="categoria" items="${categorias}">
-                <option value="${categoria}">${categoria}</option>
-            </c:forEach>
-        </select>
+        <div class="filter-field">
+            <label for="category">Categoría:</label>
+            <select id="category" name="category">
+                <option value="">Todas</option>
+                <c:forEach var="categoria" items="${categorias}">
+                    <option value="${categoria}">${categoria}</option>
+                </c:forEach>
+            </select>
+        </div>
 
-        <label for="date">Fecha anterior a:</label>
-        <input type="date" id="date" name="date">
+        <div class="filter-field">
+            <label for="date">Fecha anterior a:</label>
+            <input type="date" id="date" name="date">
+        </div>
 
-        <button type="submit">Filtrar</button>
-        <button type="button" onclick="clearFilters()">Limpiar Filtros</button>
+        <div class="filter-actions">
+            <button type="submit">Filtrar</button>
+            <button type="button" onclick="clearFilters()">Limpiar Filtros</button>
+        </div>
     </form>
 
     <div class="container">

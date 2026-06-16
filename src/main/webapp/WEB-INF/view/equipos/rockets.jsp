@@ -12,7 +12,7 @@
         <title>Houston Rockets</title>
     </head>
     <body>
-        <img src="/images/rockets.png">
+        <img src="/images/HOU.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

@@ -6,10 +6,6 @@
     <!-- Columna izquierda: noticias -->
     <div class="noticias">
       <h1>Noticias</h1>
-      <div>
-        <h2>Niveles de los playoffs de la NBA de 2024</h2>
-        <p>Resumen y artículos destacados sobre los equipos que siguen en la carrera por el anillo.</p>
-      </div>
     </div>
 
     <!-- Columna derecha: marcador + chat + visor -->
@@ -157,11 +153,6 @@
 </script>
 
       <!-- ===== FIN MARCADOR ===== -->
-
-      <div class="chat">
-        <h2>Chat</h2>
-        <p>Chat en construcción...</p>
-      </div>
 
       <!-- VISOR ÚNICO (lo dejo como lo tenías) -->
       <div class="embed-card" style="margin-top:18px; padding:12px;">

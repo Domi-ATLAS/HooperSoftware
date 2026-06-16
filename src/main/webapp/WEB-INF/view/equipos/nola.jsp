@@ -12,7 +12,7 @@
         <title>New Orleans Pelicans</title>
     </head>
     <body>
-        <img src="/images/pel.png">
+        <img src="/images/NOP.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

@@ -12,7 +12,7 @@
         <title>Orlando Magic</title>
     </head>
     <body>
-        <img src="/images/orlando.png">
+        <img src="/images/ORL.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

@@ -12,7 +12,7 @@
         <title>Oklahoma City Thunder</title>
     </head>
     <body>
-        <img src="/images/thunder.png">
+        <img src="/images/OKC.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

@@ -12,7 +12,7 @@
         <title>Utah Jazz</title>
     </head>
     <body>
-        <img src="/images/jazz.png">
+        <img src="/images/UTA.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

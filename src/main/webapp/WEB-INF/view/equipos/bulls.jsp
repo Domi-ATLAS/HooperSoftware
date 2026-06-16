@@ -12,7 +12,7 @@
         <title>Chicago Bulls</title>
     </head>
     <body>
-        <img src="/images/bulls.png">
+        <img src="/images/CHI.png">
         <h1>${chicagoBulls.nombreEquipo}</h1>
 
         <div style="float: right;">

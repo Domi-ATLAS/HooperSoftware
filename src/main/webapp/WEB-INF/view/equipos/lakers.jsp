@@ -12,7 +12,7 @@
         <title>Los Angeles Lakers</title>
     </head>
     <body>
-        <img src="/images/lakers.png">
+        <img src="/images/LAL.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

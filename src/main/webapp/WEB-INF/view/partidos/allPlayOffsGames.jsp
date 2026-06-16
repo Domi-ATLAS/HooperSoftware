@@ -7,6 +7,29 @@
 
     <button onClick="window.location.href='/allPlayOffs'">Volver a Playoffs</button>
 
+    <section data-filter-scope>
+    <div class="data-toolbar">
+        <label>
+            Buscar partido
+            <input type="search" data-filter-control placeholder="Equipo, resultado...">
+        </label>
+        <label>
+            Temporada
+            <select data-filter-control data-filter-type="exact" data-filter-field="season">
+                <option value="">Todas</option>
+                <c:forEach var="temporada" items="${temporadas}">
+                    <option value="${temporada.anosTemporada}">${temporada.anosTemporada}</option>
+                </c:forEach>
+            </select>
+        </label>
+        <div class="filter-actions">
+            <button type="button" data-filter-reset>Limpiar</button>
+            <span class="filter-status"><span data-filter-count></span> temporadas</span>
+        </div>
+    </div>
+
+    <div class="filter-empty" data-filter-empty hidden>No hay partidos de playoffs con esos filtros.</div>
+
     <div class="container">
         <c:forEach var="temporada" items="${temporadas}" varStatus="loop">
             <c:set var="hasGames" value="false" />
@@ -16,6 +39,7 @@
                 </c:if>
             </c:forEach>
             <c:if test="${hasGames}">
+                <div data-filter-item data-season="${temporada.anosTemporada}">
                 <h2 onclick="toggleVisibility('season${loop.index}')">Temporada: ${temporada.anosTemporada}</h2>
                 <div id="season${loop.index}" style="display: none;">
                     <c:forEach var="game" items="${playOffsGames}">
@@ -30,9 +54,11 @@
                         </c:if>
                     </c:forEach>
                 </div>
+                </div>
             </c:if>
         </c:forEach>
     </div>
+    </section>
 
     <script>
         function toggleVisibility(id) {

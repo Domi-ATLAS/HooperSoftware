@@ -12,7 +12,7 @@
         <title>Minnesota Timberwolves</title>
     </head>
     <body>
-        <img src="/images/timber.png">
+        <img src="/images/MIN.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

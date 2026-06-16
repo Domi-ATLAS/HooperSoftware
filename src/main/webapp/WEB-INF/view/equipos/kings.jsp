@@ -12,7 +12,7 @@
         <title>Sacramento Kings</title>
     </head>
     <body>
-        <img src="/images/kings.png">
+        <img src="/images/SAC.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

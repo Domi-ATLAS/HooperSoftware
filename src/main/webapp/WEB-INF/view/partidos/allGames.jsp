@@ -8,6 +8,7 @@
     <button onClick="window.location.href='/allGames/allJornadas'">Vista Jornada</button>
     <button onClick="window.location.href='/allSeasons'">Vista Temporada</button>
 
+    <section data-filter-scope>
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
         <select id="teams" name="teams">
@@ -19,6 +20,27 @@
         <button type="submit">Filtrar</button>
     </form>
 
+    <div class="data-toolbar">
+        <label>
+            Buscar partido
+            <input type="search" data-filter-control placeholder="Equipo, resultado...">
+        </label>
+        <label>
+            Desde
+            <input type="date" data-filter-control data-filter-type="date-min" data-filter-field="date">
+        </label>
+        <label>
+            Hasta
+            <input type="date" data-filter-control data-filter-type="date-max" data-filter-field="date">
+        </label>
+        <div class="filter-actions">
+            <button type="button" data-filter-reset>Limpiar</button>
+            <span class="filter-status"><span data-filter-count></span> partidos</span>
+        </div>
+    </div>
+
+    <div class="filter-empty" data-filter-empty hidden>No hay partidos con esos filtros.</div>
+
     <table>
         <tr>
             <th>Equipo local</th>
@@ -28,7 +50,7 @@
             <th></th>
         </tr>
         <c:forEach var="partido" items="${games}">
-            <tr>
+            <tr data-filter-item data-date="${partido.fecha}">
                 <td>${partido.equipoLocal}</td>
                 <td>${partido.equipoVisitante}</td>
                 <td>${partido.resultadoTotal}</td>
@@ -37,6 +59,7 @@
             </tr>
         </c:forEach>
     </table>
+    </section>
 </Layaout:layaout>
 
 <script>

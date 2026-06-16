@@ -12,7 +12,7 @@
         <title>Toronto Raptors</title>
     </head>
     <body>
-        <img src="/images/raps.png">
+        <img src="/images/TOR.png">
         <h1>${team.nombreEquipo}</h1>
         <div style="float: right;">
             <h2>Clasificación:</h2>

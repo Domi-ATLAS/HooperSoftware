@@ -12,7 +12,7 @@
         <title>Memphis Grizzlies</title>
     </head>
     <body>
-        <img src="/images/memphs.png">
+        <img src="/images/MEM.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

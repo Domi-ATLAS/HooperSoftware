@@ -12,7 +12,7 @@
         <title>Indiana Pacers</title>
     </head>
     <body>
-        <img src="/images/pacers.png">
+        <img src="/images/IND.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

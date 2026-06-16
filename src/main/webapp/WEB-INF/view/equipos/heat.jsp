@@ -12,7 +12,7 @@
         <title>Miami Heat</title>
     </head>
     <body>
-        <img src="/images/heat.png">
+        <img src="/images/MIA.png">
         <h1>${team.nombreEquipo}</h1>
 
 

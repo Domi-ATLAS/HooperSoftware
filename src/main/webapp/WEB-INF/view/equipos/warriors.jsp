@@ -12,7 +12,7 @@
         <title>Golden State Warriors</title>
     </head>
     <body>
-        <img src="/images/golden state.png">
+        <img src="/images/GSW.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

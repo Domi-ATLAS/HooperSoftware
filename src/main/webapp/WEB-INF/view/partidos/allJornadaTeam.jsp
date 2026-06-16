@@ -44,6 +44,7 @@
         <button id="viewSeasonsBtn" onClick="window.location.href='/allSeasons'">Vista Temporada</button>
     </div>
 
+    <section data-filter-scope>
     <!-- Formulario de filtro -->
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipo:</label>
@@ -58,9 +59,23 @@
         <button type="button" onclick="clearFilters()">Limpiar Filtros</button>
     </form>
 
+    <div class="data-toolbar">
+        <label>
+            Buscar jornada
+            <input type="search" data-filter-control placeholder="Jornada, temporada, equipo...">
+        </label>
+        <div class="filter-actions">
+            <button type="button" data-filter-reset>Limpiar</button>
+            <span class="filter-status"><span data-filter-count></span> jornadas</span>
+        </div>
+    </div>
+
+    <div class="filter-empty" data-filter-empty hidden>No hay jornadas con esos filtros.</div>
+
     <!-- Contenedor de jornadas -->
     <div class="jornadas-container">
         <c:forEach var="jornada" items="${jornadas}" varStatus="status">
+            <div data-filter-item>
             <div class="jornada">
                 <h2 onclick="togglePartidos('partidos${status.index}', 'arrow${status.index}')">
                     Jornada ${jornada.numJornada}
@@ -80,8 +95,10 @@
                     </div>
                 </c:forEach>
             </div>
+            </div>
         </c:forEach>
     </div>
+    </section>
 
 </Layaout:layaout>
 <script>

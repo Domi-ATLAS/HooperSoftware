@@ -12,7 +12,7 @@
         <title>Phoenix Suns</title>
     </head>
     <body>
-        <img src="/images/suns.png">
+        <img src="/images/PHX.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

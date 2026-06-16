@@ -62,6 +62,7 @@
             <button onClick="window.location.href='/allGames'">Vista Partidos</button>
         </div>
 
+        <section data-filter-scope>
         <!-- Formulario de filtro -->
         <form class="filter-form" onsubmit="filterByTeam(event)">
             <label for="teams">Filtra por equipos:</label>
@@ -75,10 +76,32 @@
             <button type="submit">Filtrar</button>
         </form>
 
+        <div class="data-toolbar">
+            <label>
+                Buscar temporada
+                <input type="search" data-filter-control placeholder="Temporada, campeon, MVP...">
+            </label>
+            <label>
+                Temporada
+                <select data-filter-control data-filter-type="exact" data-filter-field="season">
+                    <option value="">Todas</option>
+                    <c:forEach var="temporada" items="${temporadas}">
+                        <option value="${temporada.anosTemporada}">${temporada.anosTemporada}</option>
+                    </c:forEach>
+                </select>
+            </label>
+            <div class="filter-actions">
+                <button type="button" data-filter-reset>Limpiar</button>
+                <span class="filter-status"><span data-filter-count></span> temporadas</span>
+            </div>
+        </div>
+
+        <div class="filter-empty" data-filter-empty hidden>No hay temporadas con esos filtros.</div>
+
         <!-- Contenedor para las temporadas -->
         <div class="temporadas-container">
             <c:forEach var="temporada" items="${temporadas}" varStatus="status">
-                <div class="temporada">
+                <div class="temporada" data-filter-item data-season="${temporada.anosTemporada}">
                     <div onclick="toggleVisibility('jornadas${status.index}', 'arrow${status.index}')">
                         <h2>Temporada: ${temporada.anosTemporada} 
                             <span id="arrow${status.index}">▼</span> <!-- Flecha hacia abajo -->
@@ -115,6 +138,7 @@
                 </div>
             </c:forEach>
         </div>
+        </section>
     </body>
     </html>
 </Layaout:layaout>

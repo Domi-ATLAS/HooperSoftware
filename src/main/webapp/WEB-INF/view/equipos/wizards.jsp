@@ -12,7 +12,7 @@
         <title>Washington Wizards</title>
     </head>
     <body>
-        <img src="/images/wizz.png">
+        <img src="/images/WAS.png">
         <h1>${team.nombreEquipo}</h1>
 
         <div style="float: right;">

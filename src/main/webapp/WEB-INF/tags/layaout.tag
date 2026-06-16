@@ -1,4 +1,4 @@
-<%@ tag description="Global Layout" %>
+<%@ tag description="Global Layout" pageEncoding="UTF-8" %>
 <%@ attribute name="title" required="true" rtexprvalue="true" %>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -14,6 +14,7 @@
   <title>${title}</title>
 
   <link rel="stylesheet" href="<c:url value='/css/style.css'/>">
+  <script src="<c:url value='/js/data_filters.js'/>" defer></script>
 </head>
 
 <!-- CSRF -->
@@ -30,7 +31,7 @@ function runNbaScraping() {
 
   const season = document.getElementById("seasonSelect").value;
 
-  // ✅ CORREGIDO: /all en lugar de /full
+  // Ruta de sincronizacion global
   fetch('/admin/sync/all?season=' + season, {
     method: 'POST',
     headers: { [header]: token }
@@ -40,10 +41,10 @@ function runNbaScraping() {
     return res.text();
   })
   .then(msg => {
-    alert("✅ " + msg);
+    alert("OK: " + msg);
   })
   .catch(err => {
-    alert("❌ Error: " + err.message);
+    alert("Error: " + err.message);
   });
 }
 </script>
@@ -73,7 +74,7 @@ function runNbaScraping() {
         </button>
       </sec:authorize>
 
-      <!-- 🔥 SELECTOR DE TEMPORADA -->
+      <!-- Selector de temporada -->
       <sec:authorize access="hasAuthority('admin')">
         <select id="seasonSelect" class="btn">
           <option value="2024">2024</option>
@@ -82,7 +83,7 @@ function runNbaScraping() {
         </select>
       </sec:authorize>
 
-      <!-- 🔥 BOTÓN -->
+      <!-- Boton de actualizacion -->
       <sec:authorize access="hasAuthority('admin')">
         <button class="btn btn-admin"
                 onclick="runNbaScraping()"
@@ -153,7 +154,7 @@ function runNbaScraping() {
 
 <div id="chat-toggle">
 
-    💬 Chat NBA
+    Chat NBA
 
 </div>
 
@@ -236,10 +237,7 @@ async function cargarMensajes() {
         div.style.gap = "10px";
 
         div.innerHTML =
-            "<img src='/images/default-user.png' " +
-            "style='width:40px;height:40px;border-radius:50%;'>" +
-
-            "<div>" +
+            "<div class='chat-message-content'>" +
 
             "<b>" + m.username + "</b><br>" +
 

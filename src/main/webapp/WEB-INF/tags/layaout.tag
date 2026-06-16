@@ -148,5 +148,191 @@ function runNbaScraping() {
 <footer class="site-footer">
   <p>Correo: hooperSoftware@gmail.com · Tlf: 623 126 742</p>
 </footer>
+
+<sec:authorize access="isAuthenticated()">
+
+<div id="chat-toggle">
+
+    💬 Chat NBA
+
+</div>
+
+<div id="chat-window">
+
+    <div class="chat-header">
+
+        Chat Global NBA
+
+        <span id="chat-close" style="cursor:pointer;">X</span>
+
+    </div>
+
+    <div id="chat-messages">
+
+        Cargando...
+
+    </div>
+
+    <form id="chat-form">
+
+        <input
+            type="text"
+            id="chat-input"
+            placeholder="Escribe un mensaje..."
+            maxlength="300">
+
+        <button type="submit">
+            Enviar
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+
+document
+.getElementById("chat-toggle")
+.addEventListener("click", () => {
+
+    document
+        .getElementById("chat-window")
+        .style.display = "flex";
+
+    cargarMensajes();
+
+});
+
+document
+.getElementById("chat-close")
+.addEventListener("click", () => {
+
+    document
+        .getElementById("chat-window")
+        .style.display = "none";
+
+});
+
+async function cargarMensajes() {
+
+    const response = await fetch("/chat/messages");
+
+    const mensajes = await response.json();
+
+    const container =
+        document.getElementById("chat-messages");
+
+    container.innerHTML = "";
+
+    mensajes.reverse().forEach(m => {
+
+        const div = document.createElement("div");
+
+        div.style.padding = "10px";
+        div.style.marginBottom = "10px";
+        div.style.borderBottom = "1px solid #ddd";
+        div.style.display = "flex";
+        div.style.alignItems = "flex-start";
+        div.style.gap = "10px";
+
+        div.innerHTML =
+            "<img src='/images/default-user.png' " +
+            "style='width:40px;height:40px;border-radius:50%;'>" +
+
+            "<div>" +
+
+            "<b>" + m.username + "</b><br>" +
+
+            m.mensaje +
+
+            "</div>";
+
+        container.appendChild(div);
+
+    });
+
+    container.scrollTop =
+        container.scrollHeight;
+
+}
+
+async function enviarMensaje(texto){
+
+    const token =
+        document
+            .querySelector('meta[name="_csrf"]')
+            .content;
+
+    const header =
+        document
+            .querySelector('meta[name="_csrf_header"]')
+            .content;
+
+    const params =
+        new URLSearchParams();
+
+    params.append("mensaje", texto);
+
+    await fetch("/chat/send",{
+
+        method:"POST",
+
+        headers:{
+            [header]:token,
+            "Content-Type":
+            "application/x-www-form-urlencoded"
+        },
+
+        body:params
+
+    });
+
+    cargarMensajes();
+
+}
+
+setInterval(() => {
+
+    const abierto =
+        document
+            .getElementById("chat-window")
+            .style.display === "flex";
+
+    if(abierto){
+
+        cargarMensajes();
+
+    }
+
+},5000);
+
+document
+.getElementById("chat-form")
+.addEventListener("submit",
+async function(e){
+
+    e.preventDefault();
+
+    const input =
+        document.getElementById("chat-input");
+
+    const texto =
+        input.value.trim();
+
+    if(texto===""){
+
+        return;
+
+    }
+
+    await enviarMensaje(texto);
+
+    input.value="";
+
+});
+
+</script>
+
+</sec:authorize>
 </body>
 </html>

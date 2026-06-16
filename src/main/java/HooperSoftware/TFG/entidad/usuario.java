@@ -46,9 +46,6 @@ public class Usuario {
 
     LocalDate fechaRegistro;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idVotacion")
-    List<Votacion> votaciones;
-
     public void setFoto(String foto) {
         this.foto = foto;
     }

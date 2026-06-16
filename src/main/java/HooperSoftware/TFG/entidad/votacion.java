@@ -48,8 +48,6 @@ public class Votacion {
 
     Integer totalVotos;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nombreUsuario")
-    List<Usuario> usuarios;
 
     public String getOpcionesVotacion() {
         return opcionesVotacion;

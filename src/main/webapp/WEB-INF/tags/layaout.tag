@@ -60,7 +60,7 @@ function runNbaScraping() {
   <%-- Navegación principal: accesos de la aplicación y botones condicionados por seguridad. --%>
   <nav class="nav">
     <div class="nav-left">
-      <a class="logo-btn" href="/"><img src="/images/HS.png" alt="HS"></a>
+      <a class="logo-btn"  onclick="location.href='/welcome'"><img src="/images/HS.png" alt="HS"></a>
 
       <button class="btn" onclick="location.href='/noticias'">Noticias</button>
       <button class="btn" onclick="location.href='/allTranferences'">Transferencias</button>
@@ -74,6 +74,7 @@ function runNbaScraping() {
 
       <button class="btn" onclick="location.href='/buscador'">Buscador</button>
       <button class="btn" onclick="location.href='/allPlayers'">Jugadores | Entrenadores</button>
+      <button class="btn" onclick="location.href='/about'">Proyecto</button>
 
       <sec:authorize access="hasAuthority('admin')">
         <button class="btn" onclick="location.href='/simulaciones'">

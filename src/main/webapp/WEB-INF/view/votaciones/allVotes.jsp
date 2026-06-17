@@ -35,34 +35,45 @@
     </form>
 
     <div class="container">
-        <c:forEach var="temporada" items="${temporadas}" varStatus="loop">
-            <c:set var="hasVotes" value="false" />
-            <c:forEach var="vote" items="${votes}">
-                <c:if test="${vote.temporada == temporada.anosTemporada}">
-                    <c:set var="hasVotes" value="true" />
-                </c:if>
-            </c:forEach>
-            <c:if test="${hasVotes}">
-                <div class="season-header">
-                    <h2>Temporada: ${temporada.anosTemporada}</h2>
-                    <button class="toggle-button" onclick="toggleVisibility('season${loop.index}')">Mostrar/Ocultar</button>
+        <c:choose>
+            <c:when test="${empty votes}">
+                <div class="empty-state">
+                    <strong>No hay votaciones registradas.</strong>
+                    <p>Cuando existan votaciones aparecerán agrupadas por temporada.</p>
+                    <button type="button" onclick="location.href='/allVotes/inCourse'">Ver votaciones en curso</button>
                 </div>
-                <div id="season${loop.index}" class="season-votes" style="display: none;">
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="temporada" items="${temporadas}" varStatus="loop">
+                    <c:set var="hasVotes" value="false" />
                     <c:forEach var="vote" items="${votes}">
                         <c:if test="${vote.temporada == temporada.anosTemporada}">
-                            <div class="vote"
-                                 data-category="${vote.categotiaVotacion}"
-                                 data-date="${vote.fecha}">
-                                <h3>${vote.categotiaVotacion}</h3>
-                                <p>Jornada: ${vote.jornada}</p>
-                                <p>Fecha: ${vote.fecha}</p>
-                                <p style="color: red;">Ganador: ${vote.ganador}</p>
-                            </div>
+                            <c:set var="hasVotes" value="true" />
                         </c:if>
                     </c:forEach>
-                </div>
-            </c:if>
-        </c:forEach>
+                    <c:if test="${hasVotes}">
+                        <div class="season-header">
+                            <h2>Temporada: ${temporada.anosTemporada}</h2>
+                            <button class="toggle-button" onclick="toggleVisibility('season${loop.index}')">Mostrar/Ocultar</button>
+                        </div>
+                        <div id="season${loop.index}" class="season-votes" style="display: none;">
+                            <c:forEach var="vote" items="${votes}">
+                                <c:if test="${vote.temporada == temporada.anosTemporada}">
+                                    <div class="vote"
+                                         data-category="${vote.categotiaVotacion}"
+                                         data-date="${vote.fecha}">
+                                        <h3>${vote.categotiaVotacion}</h3>
+                                        <p>Jornada: ${vote.jornada}</p>
+                                        <p>Fecha: ${vote.fecha}</p>
+                                        <p style="color: red;">Ganador: ${vote.ganador}</p>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </div>
+                    </c:if>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </div>
 
     <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>

@@ -9,7 +9,7 @@ public class WinsPredictionDTO {
     private String tierAntes;
     private String tierDespues;
 
-    private String mensajeIA;
+    private String mensajeEvaluacion;
 
     public WinsPredictionDTO(
             int winsAntes,
@@ -17,14 +17,14 @@ public class WinsPredictionDTO {
             int diferencia,
             String tierAntes,
             String tierDespues,
-            String mensajeIA) {
+            String mensajeEvaluacion) {
 
         this.winsAntes = winsAntes;
         this.winsDespues = winsDespues;
         this.diferencia = diferencia;
         this.tierAntes = tierAntes;
         this.tierDespues = tierDespues;
-        this.mensajeIA = mensajeIA;
+        this.mensajeEvaluacion = mensajeEvaluacion;
     }
 
     public int getWinsAntes() { return winsAntes; }
@@ -34,5 +34,5 @@ public class WinsPredictionDTO {
     public String getTierAntes() { return tierAntes; }
     public String getTierDespues() { return tierDespues; }
 
-    public String getMensajeIA() { return mensajeIA; }
+    public String getMensajeEvaluacion() { return mensajeEvaluacion; }
 }

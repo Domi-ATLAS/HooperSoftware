@@ -1,6 +1,8 @@
 package HooperSoftware.TFG.controlador;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,6 +89,22 @@ public class SimulacionController {
         model.addAttribute("equipos", equipoService.findAll());
 
         return "simulaciones/dynasty";
+    }
+
+    @GetMapping({"/ai", "/analisis"})
+    public String analisisEquipo(Model model) {
+
+        model.addAttribute("equipos", equipoService.findAll());
+
+        return "simulaciones/ai";
+    }
+
+    @GetMapping("/tablero")
+    public String tablero(Model model) {
+
+        cargarDatosTablero(model);
+
+        return "simulaciones/tablero";
     }
 
     //ANTIGUO TRADE SIMULATOR
@@ -283,5 +301,57 @@ public class SimulacionController {
                 jugadorService.findAll());
 
         return "simulaciones/dynasty";
+    }
+
+    @PostMapping({"/ai", "/analisis"})
+    public String generarInformeEquipo(
+            @RequestParam Integer equipoId,
+            Model model) {
+
+        model.addAttribute("equipos", equipoService.findAll());
+        model.addAttribute("equipoId", equipoId);
+        model.addAttribute("informeAnalisis", simulacionService.generarInformeEquipo(equipoId));
+
+        return "simulaciones/ai";
+    }
+
+    @PostMapping("/tablero")
+    public String analizarTablero(
+            @RequestParam(required = false) Integer jugadorBaseId,
+            @RequestParam(required = false) Integer equipoObjetivoId,
+            @RequestParam(required = false) Integer baseId,
+            @RequestParam(required = false) Integer escoltaId,
+            @RequestParam(required = false) Integer aleroId,
+            @RequestParam(required = false) Integer alaPivotId,
+            @RequestParam(required = false) Integer pivotId,
+            Model model) {
+
+        Map<String, Integer> seleccionSlots = new LinkedHashMap<>();
+        seleccionSlots.put("Base", baseId);
+        seleccionSlots.put("Escolta", escoltaId);
+        seleccionSlots.put("Alero", aleroId);
+        seleccionSlots.put("Ala-pivot", alaPivotId);
+        seleccionSlots.put("Pivot", pivotId);
+
+        cargarDatosTablero(model);
+        model.addAttribute("jugadorBaseId", jugadorBaseId);
+        model.addAttribute("equipoObjetivoId", equipoObjetivoId);
+        model.addAttribute("baseId", baseId);
+        model.addAttribute("escoltaId", escoltaId);
+        model.addAttribute("aleroId", aleroId);
+        model.addAttribute("alaPivotId", alaPivotId);
+        model.addAttribute("pivotId", pivotId);
+        model.addAttribute("analisisTablero",
+                simulacionService.analizarTablero(
+                        seleccionSlots,
+                        jugadorBaseId,
+                        equipoObjetivoId));
+
+        return "simulaciones/tablero";
+    }
+
+    private void cargarDatosTablero(Model model) {
+        model.addAttribute("jugadores", jugadorService.findAll());
+        model.addAttribute("equipos", equipoService.findAll());
     }
 }

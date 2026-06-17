@@ -29,26 +29,37 @@
         <button class="btn" type="button" onclick="filterPlayers()">Buscar</button>
       </div>
 
-      <table id="playersTable" class="table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Posición</th>
-            <th>Edad</th>
-            <th>Detalles</th>
-          </tr>
-        </thead>
-        <tbody>
-          <c:forEach var="player" items="${players}">
-            <tr class="player-row">
-              <td>${player.nombreJugador}</td>
-              <td>${player.posicion}</td>
-              <td>${player.edadJug}</td>
-              <td><button class="btn" onclick="location.href='/player/${player.idJugador}'">Detalles</button></td>
-            </tr>
-          </c:forEach>
-        </tbody>
-      </table>
+      <c:choose>
+        <c:when test="${empty players}">
+          <div class="empty-state">
+            <strong>No hay jugadores para mostrar.</strong>
+            <p>Selecciona otro equipo o vuelve al listado completo.</p>
+            <button class="btn" type="button" onclick="location.href='/allPlayers'">Ver todos</button>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <table id="playersTable" class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Posición</th>
+                <th>Edad</th>
+                <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="player" items="${players}">
+                <tr class="player-row">
+                  <td>${player.nombreJugador}</td>
+                  <td>${player.posicion}</td>
+                  <td>${player.edadJug}</td>
+                  <td><button class="btn" onclick="location.href='/player/${player.idJugador}'">Detalles</button></td>
+                </tr>
+              </c:forEach>
+            </tbody>
+          </table>
+        </c:otherwise>
+      </c:choose>
     </section>
 
     <!-- Columna derecha: Entrenadores -->
@@ -73,24 +84,35 @@
         <button class="btn" type="button" onclick="filterTrainers()">Buscar</button>
       </div>
 
-      <table class="table" id="trainersTable">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Edad</th>
-            <th>Detalles</th>
-          </tr>
-        </thead>
-        <tbody>
-          <c:forEach var="trainer" items="${trainers}">
-            <tr class="trainer-row">
-              <td>${trainer.nombeEntrenador}</td>
-              <td>${trainer.edadEntr}</td>
-              <td><button class="btn" onclick="location.href='/trainer/${trainer.idEntrenador}'">Detalles</button></td>
-            </tr>
-          </c:forEach>
-        </tbody>
-      </table>
+      <c:choose>
+        <c:when test="${empty trainers}">
+          <div class="empty-state">
+            <strong>No hay entrenadores para mostrar.</strong>
+            <p>Selecciona otro equipo o vuelve al listado completo.</p>
+            <button class="btn" type="button" onclick="location.href='/allPlayers'">Ver todos</button>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <table class="table" id="trainersTable">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="trainer" items="${trainers}">
+                <tr class="trainer-row">
+                  <td>${trainer.nombeEntrenador}</td>
+                  <td>${trainer.edadEntr}</td>
+                  <td><button class="btn" onclick="location.href='/trainer/${trainer.idEntrenador}'">Detalles</button></td>
+                </tr>
+              </c:forEach>
+            </tbody>
+          </table>
+        </c:otherwise>
+      </c:choose>
     </section>
   </div>
 

@@ -14,6 +14,11 @@ import jakarta.websocket.server.PathParam;
 @RestController
 public class WelcomeController {
 
+    @GetMapping("/")
+    public ModelAndView root() {
+        return new ModelAndView("redirect:/welcome");
+    }
+
     @GetMapping("/welcome")
     public ModelAndView welcome(Map<String, Object> model) {
         ModelAndView mv = new ModelAndView("home");
@@ -23,6 +28,12 @@ public class WelcomeController {
     @GetMapping("/noticias")
     public ModelAndView noticias(Map<String, Object> model) {
         ModelAndView mv = new ModelAndView("noticias");
+        return mv;
+    }
+
+    @GetMapping("/about")
+    public ModelAndView about(Map<String, Object> model) {
+        ModelAndView mv = new ModelAndView("about");
         return mv;
     }
 }

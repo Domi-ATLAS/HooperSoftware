@@ -59,21 +59,32 @@ function toggleTransferencia(id) {
 
     <div class="filter-empty" data-filter-empty hidden>No hay transferencias con esos filtros.</div>
 
-    <c:forEach var="transferencia" items="${transferences}" varStatus="status">
-        <div class="transfer-item" data-filter-item data-date="${transferencia.fecha}">
-            <div class="group" onClick="toggleTransferencia('transferencia${status.index}')">
-                <p>${transferencia.equipoOrigen.nombreEquipo} &rarr; ${transferencia.equipoDestino.nombreEquipo}</p>
-                <p>Fecha: ${transferencia.fecha}</p>
-                <Button type="submit">Ver Detalles</Button>
+    <c:choose>
+        <c:when test="${empty transferences}">
+            <div class="empty-state">
+                <strong>No hay transferencias registradas.</strong>
+                <p>Cuando existan movimientos entre equipos aparecerán aquí con sus filtros.</p>
+                <button type="button" onclick="location.href='/allTranferences'">Ver todas</button>
             </div>
-            <div id="transferencia${status.index}" style="display: none;">
-                <p>Precio: ${transferencia.precio}</p>
-                <c:if test="${transferencia.rondaDraft}">
-                    <p>Info Draft: ${transferencia.infoRondaDraft}</p>
-                </c:if>
-            </div>
-        </div>
-    </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <c:forEach var="transferencia" items="${transferences}" varStatus="status">
+                <div class="transfer-item" data-filter-item data-date="${transferencia.fecha}">
+                    <div class="group" onClick="toggleTransferencia('transferencia${status.index}')">
+                        <p>${transferencia.equipoOrigen.nombreEquipo} &rarr; ${transferencia.equipoDestino.nombreEquipo}</p>
+                        <p>Fecha: ${transferencia.fecha}</p>
+                        <Button type="submit">Ver Detalles</Button>
+                    </div>
+                    <div id="transferencia${status.index}" style="display: none;">
+                        <p>Precio: ${transferencia.precio}</p>
+                        <c:if test="${transferencia.rondaDraft}">
+                            <p>Info Draft: ${transferencia.infoRondaDraft}</p>
+                        </c:if>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:otherwise>
+    </c:choose>
     </section>
 </Layaout:layaout>
 

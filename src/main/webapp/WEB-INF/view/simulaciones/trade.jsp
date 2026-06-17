@@ -218,18 +218,18 @@
             <hr>
 
             <p style="font-size:20px;">
-                ${wins.mensajeIA}
+                ${wins.mensajeEvaluacion}
             </p>
 
         </div>
 
     </c:if>
 
-    <!-- IA TRADES -->
+    <!-- SUGERENCIAS DE TRADES -->
 
     <hr>
 
-    <h2>🤖 IA: Mejores traspasos</h2>
+    <h2>Mejores traspasos encontrados</h2>
 
     <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
@@ -287,7 +287,7 @@
 
     <hr>
 
-<h2>🏀 IA: Qué necesita un equipo</h2>
+<h2>Qué necesita un equipo</h2>
 
 <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 

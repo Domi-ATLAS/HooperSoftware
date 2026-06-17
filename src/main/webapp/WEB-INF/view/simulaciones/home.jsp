@@ -37,7 +37,17 @@
 
         <a href="/simulaciones/gm" class="sim-card">
             <h2>🤖 GM Assistant</h2>
-            <p>IA para encontrar trades.</p>
+            <p>Sugerencias para encontrar trades.</p>
+        </a>
+
+        <a href="/simulaciones/analisis" class="sim-card">
+            <h2>Análisis de plantilla</h2>
+            <p>Diagnóstico explicable de plantilla.</p>
+        </a>
+
+        <a href="/simulaciones/tablero" class="sim-card">
+            <h2>Tablero de encaje</h2>
+            <p>Pista interactiva con compañeros, rivales y equipos recomendados.</p>
         </a>
 
         <a href="/simulaciones/dynasty" class="sim-card">

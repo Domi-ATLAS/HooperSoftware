@@ -14,7 +14,7 @@
     <h1>🧠 GM Assistant</h1>
 
     <p>
-        Selecciona un jugador y la IA buscará los mejores
+        Selecciona un jugador y se mostrarán los mejores
         traspasos disponibles.
     </p>
 

@@ -45,25 +45,36 @@
 
     <div class="filter-empty" data-filter-empty hidden>No hay partidos con esos filtros.</div>
 
-    <%-- Tabla principal de datos renderizados por JSTL. --%>
-    <table>
-        <tr>
-            <th>Equipo local</th>
-            <th>Equipo visitante</th>
-            <th>Resultado</th>
-            <th>Fecha</th>
-            <th></th>
-        </tr>
-        <c:forEach var="partido" items="${games}">
-            <tr data-filter-item data-date="${partido.fecha}">
-                <td>${partido.equipoLocal}</td>
-                <td>${partido.equipoVisitante}</td>
-                <td>${partido.resultadoTotal}</td>
-                <td>${partido.fecha}</td>
-                <td><button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button></td>
-            </tr>
-        </c:forEach>
-    </table>
+    <c:choose>
+        <c:when test="${empty games}">
+            <div class="empty-state">
+                <strong>No hay partidos disponibles.</strong>
+                <p>Prueba otra temporada, jornada o equipo desde la navegación superior.</p>
+                <button type="button" onclick="location.href='/allSeasons'">Ver temporadas</button>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <%-- Tabla principal de datos renderizados por JSTL. --%>
+            <table>
+                <tr>
+                    <th>Equipo local</th>
+                    <th>Equipo visitante</th>
+                    <th>Resultado</th>
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+                <c:forEach var="partido" items="${games}">
+                    <tr data-filter-item data-date="${partido.fecha}">
+                        <td>${partido.equipoLocal}</td>
+                        <td>${partido.equipoVisitante}</td>
+                        <td>${partido.resultadoTotal}</td>
+                        <td>${partido.fecha}</td>
+                        <td><button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:otherwise>
+    </c:choose>
     </section>
 </Layaout:layaout>
 

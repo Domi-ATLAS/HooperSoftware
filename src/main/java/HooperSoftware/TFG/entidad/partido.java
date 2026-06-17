@@ -10,7 +10,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -74,11 +73,11 @@ public class Partido {
     @JoinColumn(name = "idPlayOff",referencedColumnName = "idPlayOff")
     Playoff playoff;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "equipoLocalTa",referencedColumnName = "idEquipo")
     Equipo equipoLocalTa;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "equipoVisitanteTa",referencedColumnName = "idEquipo")
     Equipo equipoVisitanteTa;
 }

@@ -23,6 +23,9 @@ public interface EquipoRepository extends CrudRepository<Equipo, Integer> {
     @Query("SELECT e FROM Equipo e WHERE lower(e.nombreEquipo) LIKE lower(?1)")
     List<Equipo> findEquipoByNombre(String nombre);
 
+    @Query("SELECT e FROM Equipo e WHERE e.siglas = ?1")
+    Equipo findEquipoBySiglas(String siglas);
+
     @Query("SELECT e FROM Equipo e WHERE e.conferencia = ?1")
     List<Equipo> findEquipoByConferencia(String conferencia);
 

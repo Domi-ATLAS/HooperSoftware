@@ -18,7 +18,7 @@
         </c:if>
         <c:if test="${registered}">
             <div class="success-notification">
-                ✅ Cuenta creada correctamente. Ya puedes iniciar sesión.
+                 Cuenta creada correctamente. Ya puedes iniciar sesión.
             </div>
         </c:if>
         <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
@@ -29,10 +29,12 @@
             <div>
                 <input class="input-large" type="text" id="username" name="username" value="${username}" required>
             </div>
-            <div class="errors" style="color:red">
-                <c:out value="${existsError}"/>
-                <c:out value="${usernameError}"/>
-            </div>
+            <c:if test="${not empty existsError || not empty usernameError}">
+                <div class="errors error-box">
+                    <c:out value="${existsError}"/>
+                    <c:out value="${usernameError}"/>
+                </div>
+            </c:if>
             <br>
             <div>
                 <label for="password">Contraseña:</label>
@@ -41,14 +43,16 @@
             <div>
                 <input type="password" class="input-large" id="password" name="password">
             </div>
-            <div class="errors" style="color:red">
-                <c:out value="${password}"/>
-            </div>
+            <c:if test="${not empty password}">
+                <div class="errors error-box">
+                    <c:out value="${password}"/>
+                </div>
+            </c:if>
             <br>
             <button class="buttom" type="submit">Iniciar Sesión</button>
         </form:form>
         <div>
-            <p class="profile">¿Aún no tienes cuenta? <a href="/new" class="buttom-positive">Registrate</a></p>
+            <p class="profile">¿Aún no tienes cuenta? <a href="/new" class="buttom-positive">Regístrate</a></p>
         </div>
     </div>
 </Layaout:layaout>

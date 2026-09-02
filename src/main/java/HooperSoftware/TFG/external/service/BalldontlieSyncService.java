@@ -36,7 +36,7 @@ public class BalldontlieSyncService {
 
     private HttpEntity<String> getEntity() {
         if (apiKey == null || apiKey.isBlank()) {
-            throw new RuntimeException("❌ API KEY no configurada");
+            throw new RuntimeException(" API KEY no configurada");
         }
 
         HttpHeaders headers = new HttpHeaders();

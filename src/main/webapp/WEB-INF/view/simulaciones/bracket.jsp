@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
@@ -8,10 +9,10 @@
 <div class="sim-container">
 
     <a href="/simulaciones" class="search-btn">
-        ← Volver al menú
+        Volver al menú
     </a>
 
-    <h1>🏆 Simulación completa Playoffs NBA</h1>
+    <h1> Simulación completa Playoffs NBA</h1>
 
     <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
@@ -26,6 +27,19 @@
         </button>
 
     </form>
+
+    <c:choose>
+        <c:when test="${not empty bracket}">
+            <button type="button" class="search-btn simulation-toggle" onclick="toggleSimulationInsight(this)">
+                Ver gráficas y modelo
+            </button>
+        </c:when>
+        <c:otherwise>
+            <button type="button" class="search-btn simulation-toggle" disabled>
+                Ver gráficas y modelo
+            </button>
+        </c:otherwise>
+    </c:choose>
 
     <c:if test="${not empty bracket}">
 
@@ -64,7 +78,7 @@
                         </div>
 
                         <div class="winner">
-                            🏆 ${p.winner}
+                             ${p.winner}
                         </div>
 
                     </div>
@@ -106,7 +120,7 @@
                         </div>
 
                         <div class="winner">
-                            🏆 ${p.winner}
+                             ${p.winner}
                         </div>
 
                     </div>
@@ -148,7 +162,7 @@
                         </div>
 
                         <div class="winner">
-                            🏆 ${p.winner}
+                             ${p.winner}
                         </div>
 
                     </div>
@@ -161,7 +175,7 @@
 
             <div class="round champion">
 
-                <h2>🏆 Campeón NBA</h2>
+                <h2> Campeón NBA</h2>
 
                 <div class="champion-box">
 
@@ -173,7 +187,7 @@
 
                 <p class="mvp">
 
-                    ⭐ MVP Finals
+                     MVP Finals
 
                     <br><br>
 
@@ -185,8 +199,30 @@
 
         </div>
 
+        <section class="simulation-insight bracket-insight" data-simulation-insight hidden>
+            <h2>Comparativa del bracket</h2>
+            <div class="simulation-chart">
+                <div class="chart-row">
+                    <span class="chart-label">Rondas simuladas</span>
+                    <span class="chart-track"><span class="chart-fill is-good" style="--value:100;"></span></span>
+                    <span class="chart-value">3</span>
+                </div>
+                <div class="chart-row">
+                    <span class="chart-label">Series R1</span>
+                    <span class="chart-track"><span class="chart-fill" style="--value:${fn:length(bracket.primeraRonda) * 25};"></span></span>
+                    <span class="chart-value">${fn:length(bracket.primeraRonda)}</span>
+                </div>
+                <div class="chart-row">
+                    <span class="chart-label">Semifinales</span>
+                    <span class="chart-track"><span class="chart-fill is-warning" style="--value:${fn:length(bracket.semifinales) * 50};"></span></span>
+                    <span class="chart-value">${fn:length(bracket.semifinales)}</span>
+                </div>
+            </div>
+        </section>
+
     </c:if>
 
 </div>
 
 </Layaout:layaout>
+

@@ -10,7 +10,12 @@
         <title>Detalles del Partido</title>
     </head>
     <body>
-        <h1>Detalles del Partido</h1>
+        <h1>
+            Detalles del Partido
+            <c:if test="${game.idPartido < 0}">
+                <span class="data-badge is-fake fake-marker">Fake ${game.temporada}</span>
+            </c:if>
+        </h1>
         <p>Temporada: ${game.temporada}</p>
         <p>Resultado 1 cuarto: ${game.resultadoC1}</p>
         <p>Resultado 2 cuarto: ${game.resultadoC2}</p>

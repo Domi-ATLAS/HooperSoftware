@@ -8,7 +8,6 @@
 
 <div class="profile-edit-container">
 
-```
 <div class="profile-edit-card">
 
     <a href="/profile/${usuario.username}" class="back-link">
@@ -157,7 +156,6 @@
     </form:form>
 
 </div>
-```
 
 </div>
 

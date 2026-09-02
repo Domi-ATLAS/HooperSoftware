@@ -9,10 +9,22 @@
     <button onClick="window.location.href='/allPlayers'">Volver a Jugadores y Entrenadores</button>
 
     <div class="container">
-        <h1>Detalles del Jugador</h1>
+        <h1>
+            Detalles del Jugador
+            <c:if test="${player.idJugador < 0}">
+                <span class="data-badge is-fake fake-marker">Fake ${player.temporadaJugador}</span>
+            </c:if>
+        </h1>
         <p>Nombre: ${player.nombreJugador}</p>
         <p>Posición: ${player.posicion}</p>
         <p>Equipo: ${equipo.nombreEquipo}</p>
+        <p>
+            Temporada:
+            <c:choose>
+                <c:when test="${not empty player.temporadaJugador}">${player.temporadaJugador}</c:when>
+                <c:otherwise>Base</c:otherwise>
+            </c:choose>
+        </p>
         <p>Edad: ${player.edadJug}</p>
         <p>Dorsal: ${player.dorsal}</p>
         <p>Año del Draft: ${player.anoDraft}</p>

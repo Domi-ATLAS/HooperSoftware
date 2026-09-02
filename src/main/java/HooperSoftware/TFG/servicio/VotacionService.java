@@ -53,5 +53,13 @@ public class VotacionService {
     public List<Categoria> findAllCategorias(){
         return List.of(Categoria.values()); 
     }
+
+    @Transactional(readOnly = true)
+    public Integer findNextId() {
+        return repository.findAll().stream()
+                .map(Votacion::getIdVotacion)
+                .max(Integer::compareTo)
+                .orElse(0) + 1;
+    }
     
 }

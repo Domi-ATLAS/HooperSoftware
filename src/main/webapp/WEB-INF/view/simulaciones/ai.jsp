@@ -42,6 +42,19 @@
 
         </form>
 
+        <c:choose>
+            <c:when test="${not empty informeAnalisis}">
+                <button type="button" class="search-btn simulation-toggle" onclick="toggleSimulationInsight(this)">
+                    Ver gráficas y modelo
+                </button>
+            </c:when>
+            <c:otherwise>
+                <button type="button" class="search-btn simulation-toggle" disabled>
+                    Ver gráficas y modelo
+                </button>
+            </c:otherwise>
+        </c:choose>
+
         <c:if test="${not empty informeAnalisis}">
 
             <div class="ai-report">
@@ -95,6 +108,27 @@
                     </ul>
                 </div>
 
+                <section class="simulation-insight" data-simulation-insight hidden>
+                    <h2>Comparativa del informe</h2>
+                    <div class="simulation-chart">
+                        <div class="chart-row">
+                            <span class="chart-label">Rating</span>
+                            <span class="chart-track"><span class="chart-fill" style="--value:${informeAnalisis.rating};"></span></span>
+                            <span class="chart-value">${informeAnalisis.rating}</span>
+                        </div>
+                        <div class="chart-row">
+                            <span class="chart-label">Victorias</span>
+                            <span class="chart-track"><span class="chart-fill is-good" style="--value:${informeAnalisis.victoriasEstimadas * 100 / 82};"></span></span>
+                            <span class="chart-value">${informeAnalisis.victoriasEstimadas}</span>
+                        </div>
+                        <div class="chart-row">
+                            <span class="chart-label">Confianza</span>
+                            <span class="chart-track"><span class="chart-fill is-warning" style="--value:${informeAnalisis.confianza};"></span></span>
+                            <span class="chart-value">${informeAnalisis.confianza}%</span>
+                        </div>
+                    </div>
+                </section>
+
             </div>
 
         </c:if>
@@ -104,3 +138,4 @@
 </div>
 
 </Layaout:layaout>
+

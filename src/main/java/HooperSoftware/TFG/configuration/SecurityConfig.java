@@ -23,7 +23,7 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-                // ✅ CSRF
+                //  CSRF
                 .csrf(csrf -> csrf
                 .ignoringRequestMatchers(
                         "/admin/scrape/**",
@@ -31,23 +31,23 @@ public class SecurityConfig {
                         "/h2-console/**" // 👈 CLAVE
                 )
                 )
-                // ✅ AUTORIZACIÓN
+                //  AUTORIZACIÓN
                 .authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/h2-console/**").permitAll() // 👈 CLAVE
                 .anyRequest().permitAll()
                 )
-                // ✅ H2 necesita frames
+                //  H2 necesita frames
                 .headers(headers -> headers
                 .frameOptions(frame -> frame.disable()) // 👈 CLAVE
                 )
-                // ✅ LOGIN
+                //  LOGIN
                 .formLogin(login -> login
                 .loginPage("/login")
                 .defaultSuccessUrl("/welcome")
                 .permitAll()
                 .failureUrl("/login?error=true")
                 )
-                // ✅ LOGOUT
+                //  LOGOUT
                 .logout(logout -> logout
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .invalidateHttpSession(true)

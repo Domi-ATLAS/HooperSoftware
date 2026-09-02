@@ -16,7 +16,7 @@ function normalizeLineupText(value) {
  * Builds a player object from an option in a player selector.
  *
  * @param {HTMLOptionElement} option Option that represents a player.
- * @returns {{id: string, name: string, team: string, logo: string, position: string, label: string}} Player data.
+ * @returns {{id: string, name: string, team: string, logo: string, position: string, season: string, label: string}} Player data.
  */
 function getLineupPlayerFromOption(option) {
   return {
@@ -25,7 +25,8 @@ function getLineupPlayerFromOption(option) {
     team: (option.dataset.team || "Sin equipo").trim(),
     logo: (option.dataset.teamLogo || "HS").trim(),
     position: (option.dataset.position || "").trim(),
-    label: `${(option.dataset.name || option.textContent || "").trim()} (${(option.dataset.team || "Sin equipo").trim()})`,
+    season: (option.dataset.season || "Base").trim(),
+    label: `${(option.dataset.name || option.textContent || "").trim()} (${(option.dataset.team || "Sin equipo").trim()}) - ${(option.dataset.season || "Base").trim()}`,
   };
 }
 
@@ -45,7 +46,10 @@ function filterLineupSelect(select, playerQuery, teamQuery) {
 
     const optionName = normalizeLineupText(option.dataset.name || option.textContent);
     const optionTeam = normalizeLineupText(option.dataset.team);
-    const matchesPlayer = !playerQuery || optionName.includes(playerQuery);
+    const optionSeason = normalizeLineupText(option.dataset.season);
+    const matchesPlayer = !playerQuery
+      || optionName.includes(playerQuery)
+      || optionSeason.includes(playerQuery);
     const matchesTeam = !teamQuery || optionTeam === teamQuery;
 
     option.hidden = !(matchesPlayer && matchesTeam);
@@ -82,8 +86,8 @@ function updateLineupCourtTheme(mainSelect, court, label) {
  * Renders autocomplete matches below the main search input.
  *
  * @param {HTMLElement} box Container for suggestions.
- * @param {Array<{id: string, name: string, team: string, logo: string, position: string, label: string}>} players Matching players.
- * @param {(player: {id: string, name: string, team: string, logo: string, position: string, label: string}) => void} onPick Selection callback.
+ * @param {Array<{id: string, name: string, team: string, logo: string, position: string, season: string, label: string}>} players Matching players.
+ * @param {(player: {id: string, name: string, team: string, logo: string, position: string, season: string, label: string}) => void} onPick Selection callback.
  * @returns {void}
  */
 function renderLineupAutocomplete(box, players, onPick) {
@@ -93,7 +97,7 @@ function renderLineupAutocomplete(box, players, onPick) {
     const item = document.createElement("button");
     item.type = "button";
     item.className = "autocomplete-item";
-    item.innerHTML = `<strong>${player.name}</strong><span>${player.team}</span>`;
+    item.innerHTML = `<strong>${player.name}</strong><span>${player.team} - ${player.season}</span>`;
     item.addEventListener("click", () => onPick(player));
     box.appendChild(item);
   });
@@ -282,8 +286,9 @@ function initLineupBoard() {
 
     const matches = players.filter((player) => {
       const matchesName = normalizeLineupText(player.name).includes(playerQuery);
+      const matchesSeason = normalizeLineupText(player.season).includes(playerQuery);
       const matchesTeam = !teamQuery || normalizeLineupText(player.team) === teamQuery;
-      return matchesName && matchesTeam;
+      return (matchesName || matchesSeason) && matchesTeam;
     });
 
     renderLineupAutocomplete(autocompleteBox, matches, pickPlayer);

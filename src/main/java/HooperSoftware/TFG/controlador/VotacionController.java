@@ -1,8 +1,11 @@
 package HooperSoftware.TFG.controlador;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import HooperSoftware.TFG.entidad.Usuario;
+import HooperSoftware.TFG.entidad.Categoria;
 import HooperSoftware.TFG.entidad.Votacion;
 import HooperSoftware.TFG.entidad.VotoUsuario;
 import HooperSoftware.TFG.servicio.EquipoService;
@@ -153,5 +157,40 @@ public class VotacionController {
 
         return new ModelAndView(
                 "redirect:/vote/" + id);
+    }
+
+    @PreAuthorize("hasAuthority('admin')")
+    @PostMapping("/allVotes/new")
+    public ModelAndView createVote(
+            @RequestParam Categoria categoria,
+            @RequestParam String opcionesVotacion,
+            @RequestParam String temporada,
+            @RequestParam(required = false) String jornada,
+            @RequestParam(required = false) String ganador,
+            @RequestParam(required = false) Integer duracionVotacion,
+            @RequestParam(required = false, defaultValue = "true") Boolean enCurso,
+            @RequestParam(required = false, defaultValue = "false") Boolean oficial,
+            @RequestParam(required = false)
+            @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha) {
+
+        Votacion votacion = new Votacion();
+        votacion.setIdVotacion(votacionService.findNextId());
+        votacion.setCategotiaVotacion(categoria);
+        votacion.setOpcionesVotacion(normalizeOptions(opcionesVotacion));
+        votacion.setTemporada(temporada);
+        votacion.setJornada(jornada);
+        votacion.setGanador(ganador);
+        votacion.setDuracionVotacion(duracionVotacion);
+        votacion.setEnCurso(enCurso);
+        votacion.setOficial(oficial);
+        votacion.setFecha(fecha != null ? fecha : new Date());
+        votacion.setTotalVotos(0);
+
+        votacionService.save(votacion);
+        return new ModelAndView("redirect:/allVotes");
+    }
+
+    private String normalizeOptions(String opciones) {
+        return opciones == null ? "" : opciones.replace("\r\n", ",").replace("\n", ",").trim();
     }
 }

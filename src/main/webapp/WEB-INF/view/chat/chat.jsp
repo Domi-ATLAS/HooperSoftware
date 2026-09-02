@@ -6,7 +6,7 @@
 
 <div class="sim-container">
 
-    <h1>💬 Chat Global NBA</h1>
+    <h1> Chat Global NBA</h1>
 
     <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 

@@ -55,6 +55,8 @@ public class Jugador {
 
     Integer anosOtraLigaJug;
 
+    String temporadaJugador;
+
     String fotoJugador;
 
     @OneToOne(cascade = CascadeType.ALL)

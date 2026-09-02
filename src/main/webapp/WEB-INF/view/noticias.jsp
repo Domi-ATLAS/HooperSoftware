@@ -153,7 +153,7 @@
         lastEl.textContent = new Date().toLocaleTimeString('es-ES');
       } catch (err) {
         container.innerHTML =
-          '<p style="color:crimson">No se pudieron cargar los marcadores: ' +
+          '<p class="error-box">No se pudieron cargar los marcadores: ' +
           err.message + '</p>';
       }
     }

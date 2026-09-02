@@ -44,10 +44,14 @@ public class JugadorController {
     @GetMapping("/allPlayers")
     public ModelAndView showAllPlayersPage() {
         ModelAndView mav = new ModelAndView();
+        List<Jugador> players = jugadorService.findAll();
         mav.setViewName("jugadores/allPlayers");
-        mav.addObject("players", jugadorService.findAll());
+        mav.addObject("players", players);
         mav.addObject("trainers", entrenadorService.findAll());
         mav.addObject("equipos", equipoService.findAll());
+        mav.addObject(
+                "playersWithStats",
+                players.stream().filter(player -> player.getEstadisticasJug() != null).count());
 
         return mav;
     }        
@@ -59,7 +63,7 @@ public class JugadorController {
             @RequestParam(required = false, defaultValue = "true") boolean jugadores,
             @RequestParam(required = false, defaultValue = "true") boolean entrenadores) {
 
-        ModelAndView mav = new ModelAndView("jugadores/allPlayersTeam");
+        ModelAndView mav = new ModelAndView("jugadores/allPlayersTeams");
 
         if (jugadores) {
             mav.addObject("players", jugadorService.findByEquipo(teamId));
@@ -74,6 +78,7 @@ public class JugadorController {
         }
 
         mav.addObject("equipos", equipoService.findAll());
+        mav.addObject("selectedTeamId", teamId);
         
         return mav;
     }

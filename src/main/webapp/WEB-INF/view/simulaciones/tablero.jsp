@@ -48,11 +48,15 @@
                                 data-name="${jugador.nombreJugador}"
                                 data-team="${empty jugador.equipo ? 'Sin equipo' : jugador.equipo.nombreEquipo}"
                                 data-team-logo="${empty jugador.equipo ? 'HS' : jugador.equipo.siglas}"
+                                data-season="${empty jugador.temporadaJugador ? 'Base' : jugador.temporadaJugador}"
                                 data-position="${jugador.posicion}"
                                 <c:if test="${jugador.idJugador == jugadorBaseId}">selected</c:if>>
                             ${jugador.nombreJugador}
                             <c:if test="${not empty jugador.equipo}">
                                 - ${jugador.equipo.nombreEquipo}
+                            </c:if>
+                            <c:if test="${not empty jugador.temporadaJugador}">
+                                - ${jugador.temporadaJugador}
                             </c:if>
                         </option>
                     </c:forEach>
@@ -98,9 +102,13 @@
                                         data-name="${jugador.nombreJugador}"
                                         data-team="${empty jugador.equipo ? 'Sin equipo' : jugador.equipo.nombreEquipo}"
                                         data-team-logo="${empty jugador.equipo ? 'HS' : jugador.equipo.siglas}"
+                                        data-season="${empty jugador.temporadaJugador ? 'Base' : jugador.temporadaJugador}"
                                         data-position="${jugador.posicion}"
                                         <c:if test="${jugador.idJugador == baseId}">selected</c:if>>
                                     ${jugador.nombreJugador}
+                                    <c:if test="${not empty jugador.temporadaJugador}">
+                                        - ${jugador.temporadaJugador}
+                                    </c:if>
                                 </option>
                             </c:forEach>
                         </select>
@@ -115,9 +123,13 @@
                                         data-name="${jugador.nombreJugador}"
                                         data-team="${empty jugador.equipo ? 'Sin equipo' : jugador.equipo.nombreEquipo}"
                                         data-team-logo="${empty jugador.equipo ? 'HS' : jugador.equipo.siglas}"
+                                        data-season="${empty jugador.temporadaJugador ? 'Base' : jugador.temporadaJugador}"
                                         data-position="${jugador.posicion}"
                                         <c:if test="${jugador.idJugador == escoltaId}">selected</c:if>>
                                     ${jugador.nombreJugador}
+                                    <c:if test="${not empty jugador.temporadaJugador}">
+                                        - ${jugador.temporadaJugador}
+                                    </c:if>
                                 </option>
                             </c:forEach>
                         </select>
@@ -132,9 +144,13 @@
                                         data-name="${jugador.nombreJugador}"
                                         data-team="${empty jugador.equipo ? 'Sin equipo' : jugador.equipo.nombreEquipo}"
                                         data-team-logo="${empty jugador.equipo ? 'HS' : jugador.equipo.siglas}"
+                                        data-season="${empty jugador.temporadaJugador ? 'Base' : jugador.temporadaJugador}"
                                         data-position="${jugador.posicion}"
                                         <c:if test="${jugador.idJugador == aleroId}">selected</c:if>>
                                     ${jugador.nombreJugador}
+                                    <c:if test="${not empty jugador.temporadaJugador}">
+                                        - ${jugador.temporadaJugador}
+                                    </c:if>
                                 </option>
                             </c:forEach>
                         </select>
@@ -149,9 +165,13 @@
                                         data-name="${jugador.nombreJugador}"
                                         data-team="${empty jugador.equipo ? 'Sin equipo' : jugador.equipo.nombreEquipo}"
                                         data-team-logo="${empty jugador.equipo ? 'HS' : jugador.equipo.siglas}"
+                                        data-season="${empty jugador.temporadaJugador ? 'Base' : jugador.temporadaJugador}"
                                         data-position="${jugador.posicion}"
                                         <c:if test="${jugador.idJugador == alaPivotId}">selected</c:if>>
                                     ${jugador.nombreJugador}
+                                    <c:if test="${not empty jugador.temporadaJugador}">
+                                        - ${jugador.temporadaJugador}
+                                    </c:if>
                                 </option>
                             </c:forEach>
                         </select>
@@ -166,9 +186,13 @@
                                         data-name="${jugador.nombreJugador}"
                                         data-team="${empty jugador.equipo ? 'Sin equipo' : jugador.equipo.nombreEquipo}"
                                         data-team-logo="${empty jugador.equipo ? 'HS' : jugador.equipo.siglas}"
+                                        data-season="${empty jugador.temporadaJugador ? 'Base' : jugador.temporadaJugador}"
                                         data-position="${jugador.posicion}"
                                         <c:if test="${jugador.idJugador == pivotId}">selected</c:if>>
                                     ${jugador.nombreJugador}
+                                    <c:if test="${not empty jugador.temporadaJugador}">
+                                        - ${jugador.temporadaJugador}
+                                    </c:if>
                                 </option>
                             </c:forEach>
                         </select>
@@ -202,6 +226,36 @@
                                 <strong>${analisisTablero.equilibrio}%</strong>
                             </div>
                         </div>
+
+                        <button type="button" class="search-btn simulation-toggle" onclick="toggleSimulationInsight(this)">
+                            Ver gráficas y modelo
+                        </button>
+
+                        <section class="simulation-insight" data-simulation-insight hidden>
+                            <h2>Comparativa del quinteto</h2>
+                            <div class="simulation-chart">
+                                <div class="chart-row">
+                                    <span class="chart-label">Ataque</span>
+                                    <span class="chart-track"><span class="chart-fill is-good" style="--value:${analisisTablero.ratingOfensivo};"></span></span>
+                                    <span class="chart-value">${analisisTablero.ratingOfensivo}%</span>
+                                </div>
+                                <div class="chart-row">
+                                    <span class="chart-label">Tiro</span>
+                                    <span class="chart-track"><span class="chart-fill" style="--value:${analisisTablero.spacing};"></span></span>
+                                    <span class="chart-value">${analisisTablero.spacing}%</span>
+                                </div>
+                                <div class="chart-row">
+                                    <span class="chart-label">Defensa</span>
+                                    <span class="chart-track"><span class="chart-fill is-muted" style="--value:${analisisTablero.defensa};"></span></span>
+                                    <span class="chart-value">${analisisTablero.defensa}%</span>
+                                </div>
+                                <div class="chart-row">
+                                    <span class="chart-label">Equilibrio</span>
+                                    <span class="chart-track"><span class="chart-fill is-warning" style="--value:${analisisTablero.equilibrio};"></span></span>
+                                    <span class="chart-value">${analisisTablero.equilibrio}%</span>
+                                </div>
+                            </div>
+                        </section>
 
                         <div class="lineup-result-block">
                             <h3>Jugadores colocados</h3>
@@ -240,6 +294,9 @@
                             Selecciona jugadores en la pista y pulsa calcular para ver compañeros,
                             rivales y equipos recomendados.
                         </p>
+                        <button type="button" class="search-btn simulation-toggle" disabled>
+                            Ver gráficas y modelo
+                        </button>
                     </c:otherwise>
                 </c:choose>
             </aside>
@@ -296,3 +353,4 @@
 
     <script src="/js/lineup_board.js"></script>
 </Layaout:layaout>
+

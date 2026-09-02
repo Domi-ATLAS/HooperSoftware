@@ -6,7 +6,7 @@
 
     <div class="sim-container">
 
-        <h1>${votacion.categotiaVotacion}</h1>
+        <h1>${votacion.categotiaVotacion.displayName}</h1>
 
         <p>
             Temporada:

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -11,6 +12,72 @@
     <button type="button" onclick="location.href='/allVotes/inCourse'">Votaciones en Curso</button>
     <button type="button" onclick="location.href='/allVotes/oficial'">Votaciones Oficiales</button>
 
+    <sec:authorize access="hasAuthority('admin')">
+        <section class="admin-create-card">
+            <h2>Crear nueva votación</h2>
+            <form class="filter-form" action="/allVotes/new" method="post">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                <div class="filter-field">
+                    <label for="new-category">Categoría</label>
+                    <select id="new-category" name="categoria" required>
+                        <c:forEach var="categoria" items="${categorias}">
+                            <option value="${categoria}">${categoria.displayName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label for="new-season">Temporada</label>
+                    <select id="new-season" name="temporada" required>
+                        <c:forEach var="temporada" items="${temporadas}">
+                            <option value="${temporada.anosTemporada}">${temporada.anosTemporada}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label for="new-options">Opciones</label>
+                    <input id="new-options" name="opcionesVotacion" type="text" placeholder="Jugador 1, Jugador 2, Jugador 3" required>
+                </div>
+
+                <div class="filter-field">
+                    <label for="new-date">Fecha</label>
+                    <input id="new-date" name="fecha" type="date">
+                </div>
+
+                <div class="filter-field">
+                    <label for="new-round">Jornada</label>
+                    <input id="new-round" name="jornada" type="text" placeholder="Regular season, Playoffs...">
+                </div>
+
+                <div class="filter-field">
+                    <label for="new-winner">Ganador</label>
+                    <input id="new-winner" name="ganador" type="text" placeholder="Opcional">
+                </div>
+
+                <div class="filter-field">
+                    <label for="new-duration">Duración</label>
+                    <input id="new-duration" name="duracionVotacion" type="number" min="1" placeholder="Días">
+                </div>
+
+                <label class="checkbox-line">
+                    <input type="checkbox" name="enCurso" value="true" checked>
+                    En curso
+                </label>
+
+                <label class="checkbox-line">
+                    <input type="checkbox" name="oficial" value="true">
+                    Oficial
+                </label>
+
+                <div class="filter-actions">
+                    <button type="submit">Crear votación</button>
+                </div>
+            </form>
+        </section>
+    </sec:authorize>
+
     <%-- Filtros de la vista: agrupan controles antes de renderizar el listado principal. --%>
     <form class="filter-form" onsubmit="applyFilters(event)">
         <div class="filter-field">
@@ -18,7 +85,7 @@
             <select id="category" name="category">
                 <option value="">Todas</option>
                 <c:forEach var="categoria" items="${categorias}">
-                    <option value="${categoria}">${categoria}</option>
+                    <option value="${categoria}">${categoria.displayName}</option>
                 </c:forEach>
             </select>
         </div>
@@ -62,10 +129,15 @@
                                     <div class="vote"
                                          data-category="${vote.categotiaVotacion}"
                                          data-date="${vote.fecha}">
-                                        <h3>${vote.categotiaVotacion}</h3>
+                                        <h3>
+                                            ${vote.categotiaVotacion.displayName}
+                                            <c:if test="${vote.idVotacion < 0}">
+                                                <span class="data-badge is-fake fake-marker">Fake</span>
+                                            </c:if>
+                                        </h3>
                                         <p>Jornada: ${vote.jornada}</p>
                                         <p>Fecha: ${vote.fecha}</p>
-                                        <p style="color: red;">Ganador: ${vote.ganador}</p>
+                                        <p class="result-note">Ganador: ${vote.ganador}</p>
                                     </div>
                                 </c:if>
                             </c:forEach>

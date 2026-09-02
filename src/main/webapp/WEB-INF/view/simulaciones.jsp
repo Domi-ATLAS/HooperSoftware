@@ -11,7 +11,7 @@
                         <h1>Simulador de Traspasos NBA</h1>
 
                         <c:if test="${not empty error}">
-                            <p style="color:red;font-weight:bold;">${error}</p>
+                            <p class="error-box">${error}</p>
                         </c:if>
 
                         <!-- ================= TRADE ================= -->
@@ -80,15 +80,15 @@
                                 <p>${resultado.evaluacion}</p>
 
                                 <c:if test="${resultado.score >= 70}">
-                                    <p style="color:green;">🔥 Gran trade</p>
+                                    <p class="result-note"> Gran trade</p>
                                 </c:if>
 
                                 <c:if test="${resultado.score >= 40 && resultado.score < 70}">
-                                    <p style="color:orange;">⚖️ Trade equilibrado</p>
+                                    <p class="result-note"> Trade equilibrado</p>
                                 </c:if>
 
                                 <c:if test="${resultado.score < 40}">
-                                    <p style="color:red;">❌ Mala decisión</p>
+                                    <p class="result-note"> Mala decisión</p>
                                 </c:if>
 
                             </div>
@@ -111,7 +111,7 @@
 
                                 <p>
                                     Diferencia:
-                                    <strong style="color:${impacto.diferencia > 0 ? 'green' : 'red'};">
+                                    <strong>
                                         ${impacto.diferencia > 0 ? '+' : ''}${impacto.diferencia}
                                     </strong>
                                 </p>
@@ -142,7 +142,7 @@
 
                                 <p style="font-size:22px;">
                                     Cambio:
-                                    <strong style="color:${wins.diferencia > 0 ? 'green' : 'red'};">
+                                    <strong>
                                         ${wins.diferencia > 0 ? '+' : ''}${wins.diferencia}
                                         wins
                                     </strong>
@@ -195,7 +195,7 @@
                                     <p>Score: ${s.score}</p>
 
                                     <c:if test="${i.index == 0}">
-                                        🔥 Mejor opción
+                                         Mejor opción
                                     </c:if>
 
                                 </div>
@@ -216,7 +216,7 @@
 
                             <select name="equipoId">
                                 <c:forEach var="e" items="${equipos}">
-                                    <option value="${e.idEquipo}">
+                                    <option value="${e.idEquipo}" <c:if test="${e.idEquipo == equipoId}">selected</c:if>>
                                         ${e.nombreEquipo}
                                     </option>
                                 </c:forEach>
@@ -350,7 +350,7 @@
                                             </div>
 
                                             <div class="winner">
-                                                🏆 ${p.winner}
+                                                 ${p.winner}
                                             </div>
 
                                         </div>
@@ -384,7 +384,7 @@
                                             </div>
 
                                             <div class="winner">
-                                                🏆 ${p.winner}
+                                                 ${p.winner}
                                             </div>
 
                                         </div>
@@ -418,7 +418,7 @@
                                             </div>
 
                                             <div class="winner">
-                                                🏆 ${p.winner}
+                                                 ${p.winner}
                                             </div>
 
                                         </div>
@@ -430,7 +430,7 @@
                                 <!-- CAMPEÓN -->
                                 <div class="round champion">
 
-                                    <h3>🏆 Campeón</h3>
+                                    <h3> Campeón</h3>
 
                                     <div class="champion-box">
                                         <img
@@ -473,7 +473,7 @@
                                     <img src="/images/${seasonSimulation.campeonSiglas}.png">
 
                                     <h3>
-                                        🏆 Campeón:
+                                         Campeón:
                                         ${seasonSimulation.campeon}
                                     </h3>
 
@@ -605,12 +605,12 @@
 
                                 <div class="live-result">
 
-                                    🏆 Ganador:
+                                     Ganador:
                                     ${liveGame.ganador}
 
                                     <br><br>
 
-                                    ⭐ MVP:
+                                     MVP:
                                     ${liveGame.mvp}
 
                                 </div>
@@ -740,15 +740,15 @@
                                 <br>
 
                                 <h3>
-                                    🏆 ${dynasty.titulos} títulos
+                                     ${dynasty.titulos} títulos
                                 </h3>
 
                                 <h3>
-                                    📈 ${dynasty.victoriasTotales} victorias
+                                     ${dynasty.victoriasTotales} victorias
                                 </h3>
 
                                 <h3>
-                                    ⭐ Dynasty Score:
+                                     Dynasty Score:
                                     ${dynasty.dynastyScore}/100
                                 </h3>
 

@@ -8,10 +8,10 @@
 <div class="sim-container">
 
     <a href="/simulaciones" class="search-btn">
-        ← Volver al menú
+        Volver al menú
     </a>
 
-    <h1>👑 Dynasty Simulator</h1>
+    <h1> Dynasty Simulator</h1>
 
     <p>
         Simula una dinastía NBA durante los próximos años y descubre
@@ -46,6 +46,19 @@
 
     </form>
 
+    <c:choose>
+        <c:when test="${not empty dynasty}">
+            <button type="button" class="search-btn simulation-toggle" onclick="toggleSimulationInsight(this)">
+                Ver gráficas y modelo
+            </button>
+        </c:when>
+        <c:otherwise>
+            <button type="button" class="search-btn simulation-toggle" disabled>
+                Ver gráficas y modelo
+            </button>
+        </c:otherwise>
+    </c:choose>
+
     <c:if test="${not empty dynasty}">
 
         <hr>
@@ -67,13 +80,13 @@
 
         <div class="impact-box">
 
-            <h3>🏆 Títulos Ganados</h3>
+            <h3> Títulos Ganados</h3>
 
             <p style="font-size:28px;">
                 ${dynasty.titulos}
             </p>
 
-            <h3>📈 Victorias Totales</h3>
+            <h3> Victorias Totales</h3>
 
             <p style="font-size:28px;">
                 ${dynasty.victoriasTotales}
@@ -85,7 +98,7 @@
 
         <div class="impact-box">
 
-            <h3>📅 Evolución de la Dinastía</h3>
+            <h3> Evolución de la Dinastía</h3>
 
             <ul style="text-align:left;max-width:600px;margin:auto;">
 
@@ -108,26 +121,26 @@
             <c:choose>
 
                 <c:when test="${dynasty.dynastyScore >= 90}">
-                    <h2 style="color:gold;">
+                    <h2 class="result-note">
                         🐐 Dinastía Legendaria
                     </h2>
                 </c:when>
 
                 <c:when test="${dynasty.dynastyScore >= 75}">
-                    <h2 style="color:lime;">
-                        🔥 Dinastía Histórica
+                    <h2 class="result-note">
+                         Dinastía Histórica
                     </h2>
                 </c:when>
 
                 <c:when test="${dynasty.dynastyScore >= 50}">
-                    <h2 style="color:deepskyblue;">
-                        👍 Contender Constante
+                    <h2 class="result-note">
+                         Contender Constante
                     </h2>
                 </c:when>
 
                 <c:otherwise>
-                    <h2 style="color:tomato;">
-                        ⚠️ Proyecto Fallido
+                    <h2 class="result-note">
+                         Proyecto Fallido
                     </h2>
                 </c:otherwise>
 
@@ -135,8 +148,30 @@
 
         </div>
 
+        <section class="simulation-insight" data-simulation-insight hidden>
+            <h2>Comparativa de dinastia</h2>
+            <div class="simulation-chart">
+                <div class="chart-row">
+                    <span class="chart-label">Dynasty score</span>
+                    <span class="chart-track"><span class="chart-fill is-good" style="--value:${dynasty.dynastyScore};"></span></span>
+                    <span class="chart-value">${dynasty.dynastyScore}</span>
+                </div>
+                <div class="chart-row">
+                    <span class="chart-label">Titulos</span>
+                    <span class="chart-track"><span class="chart-fill is-warning" style="--value:${dynasty.titulos * 25};"></span></span>
+                    <span class="chart-value">${dynasty.titulos}</span>
+                </div>
+                <div class="chart-row">
+                    <span class="chart-label">Victorias</span>
+                    <span class="chart-track"><span class="chart-fill" style="--value:${dynasty.victoriasTotales / 5};"></span></span>
+                    <span class="chart-value">${dynasty.victoriasTotales}</span>
+                </div>
+            </div>
+        </section>
+
     </c:if>
 
 </div>
 
 </Layaout:layaout>
+

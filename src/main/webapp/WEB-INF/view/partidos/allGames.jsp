@@ -61,6 +61,7 @@
                     <th>Equipo visitante</th>
                     <th>Resultado</th>
                     <th>Fecha</th>
+                    <th>Datos</th>
                     <th></th>
                 </tr>
                 <c:forEach var="partido" items="${games}">
@@ -69,6 +70,11 @@
                         <td>${partido.equipoVisitante}</td>
                         <td>${partido.resultadoTotal}</td>
                         <td>${partido.fecha}</td>
+                        <td>
+                            <c:if test="${partido.idPartido < 0}">
+                                <span class="data-badge is-fake">Fake ${partido.temporada}</span>
+                            </c:if>
+                        </td>
                         <td><button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button></td>
                     </tr>
                 </c:forEach>

@@ -8,10 +8,10 @@
 <div class="sim-container">
 
     <a href="/simulaciones" class="search-btn">
-        ← Volver al menú
+        Volver al menú
     </a>
 
-    <h1>📅 Simulación de Temporada NBA</h1>
+    <h1> Simulación de Temporada NBA</h1>
 
     <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
@@ -27,6 +27,19 @@
 
     </form>
 
+    <c:choose>
+        <c:when test="${not empty seasonSimulation}">
+            <button type="button" class="search-btn simulation-toggle" onclick="toggleSimulationInsight(this)">
+                Ver gráficas y modelo
+            </button>
+        </c:when>
+        <c:otherwise>
+            <button type="button" class="search-btn simulation-toggle" disabled>
+                Ver gráficas y modelo
+            </button>
+        </c:otherwise>
+    </c:choose>
+
     <c:if test="${not empty seasonSimulation}">
 
         <div class="season-sim-container">
@@ -36,7 +49,7 @@
                 <img src="/images/${empty seasonSimulation.campeonSiglas ? 'HS' : seasonSimulation.campeonSiglas}.png">
 
                 <h2>
-                    🏆 Campeón NBA
+                     Campeón NBA
                 </h2>
 
                 <h3>
@@ -44,7 +57,7 @@
                 </h3>
 
                 <p>
-                    ⭐ MVP:
+                     MVP:
                     ${seasonSimulation.mvp}
                 </p>
 
@@ -60,6 +73,8 @@
                         <th>#</th>
                         <th>Equipo</th>
                         <th>Record</th>
+                        <th>Victorias app</th>
+                        <th>Diferencia</th>
                     </tr>
 
                 </thead>
@@ -88,6 +103,14 @@
                                 ${team.victorias}-${team.derrotas}
                             </td>
 
+                            <td>
+                                ${team.victoriasRegistradas}
+                            </td>
+
+                            <td>
+                                ${team.diferenciaVictorias > 0 ? '+' : ''}${team.diferenciaVictorias}
+                            </td>
+
                         </tr>
 
                     </c:forEach>
@@ -96,6 +119,21 @@
 
             </table>
 
+            <section class="simulation-insight" data-simulation-insight hidden>
+                <h2>Comparativa de temporada</h2>
+                <div class="simulation-chart">
+                    <c:forEach var="team" items="${seasonSimulation.standings}" varStatus="loop">
+                        <c:if test="${loop.index < 6}">
+                            <div class="chart-row">
+                                <span class="chart-label">${team.siglas}</span>
+                                <span class="chart-track"><span class="chart-fill" style="--value:${team.victorias * 100 / 82};"></span></span>
+                                <span class="chart-value">${team.victorias}</span>
+                            </div>
+                        </c:if>
+                    </c:forEach>
+                </div>
+            </section>
+
         </div>
 
     </c:if>
@@ -103,3 +141,4 @@
 </div>
 
 </Layaout:layaout>
+

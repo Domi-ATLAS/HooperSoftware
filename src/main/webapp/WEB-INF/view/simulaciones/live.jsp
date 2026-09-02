@@ -8,13 +8,13 @@
 <div class="sim-container">
 
     <a href="/simulaciones" class="search-btn">
-        ← Volver al menú
+        Volver al menú
     </a>
 
-    <h1>🏀 Simulación LIVE NBA</h1>
+    <h1> Simulación LIVE NBA</h1>
 
     <c:if test="${not empty errorLive}">
-        <p style="color:red;font-weight:bold;">
+        <p class="error-box">
             ${errorLive}
         </p>
     </c:if>
@@ -53,11 +53,24 @@
 
         <br><br>
 
-        <button class="search-btn">
-            Simular Partido
-        </button>
+            <button class="search-btn">
+                Simular Partido
+            </button>
 
-    </form>
+        </form>
+
+        <c:choose>
+            <c:when test="${not empty liveGame}">
+                <button type="button" class="search-btn simulation-toggle" onclick="toggleSimulationInsight(this)">
+                    Ver gráficas y modelo
+                </button>
+            </c:when>
+            <c:otherwise>
+                <button type="button" class="search-btn simulation-toggle" disabled>
+                    Ver gráficas y modelo
+                </button>
+            </c:otherwise>
+        </c:choose>
 
     <c:if test="${not empty liveGame}">
 
@@ -158,7 +171,7 @@
             <div class="live-result">
 
                 <h2>
-                    🏆 Ganador
+                     Ganador
                 </h2>
 
                 <h3>
@@ -168,7 +181,7 @@
                 <br>
 
                 <h2>
-                    ⭐ MVP
+                     MVP
                 </h2>
 
                 <h3>
@@ -177,6 +190,32 @@
 
             </div>
 
+            <section class="simulation-insight" data-simulation-insight hidden>
+                <h2>Comparativa del partido</h2>
+                <div class="simulation-chart">
+                    <div class="chart-row">
+                        <span class="chart-label">${liveGame.siglas1} prob.</span>
+                        <span class="chart-track"><span class="chart-fill" style="--value:${liveGame.probabilidadA};"></span></span>
+                        <span class="chart-value">${liveGame.probabilidadA}%</span>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">${liveGame.siglas2} prob.</span>
+                        <span class="chart-track"><span class="chart-fill is-muted" style="--value:${liveGame.probabilidadB};"></span></span>
+                        <span class="chart-value">${liveGame.probabilidadB}%</span>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">${liveGame.siglas1} puntos</span>
+                        <span class="chart-track"><span class="chart-fill is-good" style="--value:${liveGame.finalA * 100 / 140};"></span></span>
+                        <span class="chart-value">${liveGame.finalA}</span>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">${liveGame.siglas2} puntos</span>
+                        <span class="chart-track"><span class="chart-fill is-warning" style="--value:${liveGame.finalB * 100 / 140};"></span></span>
+                        <span class="chart-value">${liveGame.finalB}</span>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
     </c:if>
@@ -184,3 +223,4 @@
 </div>
 
 </Layaout:layaout>
+

@@ -74,7 +74,7 @@ public class NbaSeasonSyncReport {
                 .append(games);
 
         if (usedStaticBackup) {
-            message.append(" | Backup estatico conservado");
+            message.append(" | Datos locales conservados");
         }
 
         if (!warnings.isEmpty()) {

@@ -36,12 +36,33 @@
                 <button onclick="filterPlayers()">Buscar</button>
             </div>
             <table id="playersTable">
-                <tr><th>Nombre</th><th>Posición</th><th>Edad</th><th>Detalles</th></tr>
+                <tr><th>Nombre</th><th>Temporada</th><th>Posición</th><th>Edad</th><th>Datos</th><th>Detalles</th></tr>
                 <c:forEach var="player" items="${players}">
                     <tr class="player-row">
-                        <td>${player.nombreJugador}</td>
+                        <td>
+                            ${player.nombreJugador}
+                            <c:if test="${player.idJugador < 0}">
+                                <span class="data-badge is-fake fake-marker">Fake ${player.temporadaJugador}</span>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${not empty player.temporadaJugador}">${player.temporadaJugador}</c:when>
+                                <c:otherwise>Base</c:otherwise>
+                            </c:choose>
+                        </td>
                         <td>${player.posicion}</td>
                         <td>${player.edadJug}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${player.idJugador < 0}">
+                                    <span class="data-badge is-fake">Fake ${player.temporadaJugador}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="data-badge is-online">Persistido</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                         <td><button onClick="window.location.href='/player/${player.idJugador}'">Detalles</button></td>
                     </tr>
                 </c:forEach>
@@ -57,11 +78,26 @@
             </div>
             <%-- Tabla principal de datos renderizados por JSTL. --%>
     <table>
-                <tr><th>Nombre</th><th>Edad</th><th>Detalles</th></tr>
+                <tr><th>Nombre</th><th>Edad</th><th>Datos</th><th>Detalles</th></tr>
                 <c:forEach var="trainer" items="${trainers}">
                     <tr class="trainer-row">
-                        <td>${trainer.nombeEntrenador}</td>
+                        <td>
+                            ${trainer.nombeEntrenador}
+                            <c:if test="${trainer.idEntrenador < 0}">
+                                <span class="data-badge is-fake fake-marker">Fake</span>
+                            </c:if>
+                        </td>
                         <td>${trainer.edadEntr}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${trainer.idEntrenador < 0}">
+                                    <span class="data-badge is-fake">Fake</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="data-badge is-online">Persistido</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                         <td><button onClick="window.location.href='/trainer/${trainer.idEntrenador}'">Detalles</button></td>
                     </tr>
                 </c:forEach>

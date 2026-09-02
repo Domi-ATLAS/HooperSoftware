@@ -12,6 +12,7 @@ import HooperSoftware.TFG.entidad.Equipo;
 import HooperSoftware.TFG.entidad.Jugador;
 import HooperSoftware.TFG.servicio.EquipoService;
 import HooperSoftware.TFG.servicio.JugadorService;
+import HooperSoftware.TFG.servicio.ComparativaService;
 import HooperSoftware.TFG.servicio.SimulacionService;
 
 @Controller
@@ -21,6 +22,7 @@ public class SimulacionController {
     private final JugadorService jugadorService;
     private final EquipoService equipoService;
     private final SimulacionService simulacionService;
+    private final ComparativaService comparativaService;
 
     @GetMapping("")
     public String homeSimulaciones() {
@@ -31,11 +33,13 @@ public class SimulacionController {
     public SimulacionController(
             JugadorService jugadorService,
             EquipoService equipoService,
-            SimulacionService simulacionService) {
+            SimulacionService simulacionService,
+            ComparativaService comparativaService) {
 
         this.jugadorService = jugadorService;
         this.equipoService = equipoService;
         this.simulacionService = simulacionService;
+        this.comparativaService = comparativaService;
     }
 
     @GetMapping("/trade")
@@ -105,6 +109,14 @@ public class SimulacionController {
         cargarDatosTablero(model);
 
         return "simulaciones/tablero";
+    }
+
+    @GetMapping("/comparativa")
+    public String comparativa(Model model) {
+
+        cargarDatosComparativa(model);
+
+        return "simulaciones/comparativa";
     }
 
     //ANTIGUO TRADE SIMULATOR
@@ -266,10 +278,14 @@ public class SimulacionController {
             @RequestParam Integer jugadorId,
             Model model) {
 
+        Jugador jugador = jugadorService.findJugadorById(jugadorId);
+
         model.addAttribute(
                 "gmTrades",
                 simulacionService.buscarMejoresTrades(
                         jugadorId));
+
+        model.addAttribute("jugadorSeleccionado", jugador);
 
         model.addAttribute(
                 "jugadores",
@@ -350,8 +366,101 @@ public class SimulacionController {
         return "simulaciones/tablero";
     }
 
+    @PostMapping("/comparativa/temporadas")
+    public String compararTemporadas(
+            @RequestParam String temporadaA,
+            @RequestParam String temporadaB,
+            @RequestParam(required = false) List<Integer> equiposIncluidos,
+            @RequestParam(required = false) Boolean incluirJugadores,
+            @RequestParam(required = false) Boolean incluirPartidos,
+            @RequestParam(required = false, defaultValue = "15") int limiteJugadores,
+            Model model) {
+
+        boolean usarJugadores = incluirJugadores != null;
+        boolean usarPartidos = incluirPartidos != null;
+
+        cargarDatosComparativa(model);
+        model.addAttribute("temporadaA", temporadaA);
+        model.addAttribute("temporadaB", temporadaB);
+        model.addAttribute("equiposIncluidos", equiposIncluidos);
+        model.addAttribute("incluirJugadores", usarJugadores);
+        model.addAttribute("incluirPartidos", usarPartidos);
+        model.addAttribute("limiteJugadores", limiteJugadores);
+        model.addAttribute("comparativaTemporadas",
+                comparativaService.compararTemporadas(
+                        temporadaA,
+                        temporadaB,
+                        equiposIncluidos,
+                        usarJugadores,
+                        usarPartidos,
+                        limiteJugadores));
+
+        return "simulaciones/comparativa";
+    }
+
+    @PostMapping("/comparativa/plantilla")
+    public String simularPlantillaComparativa(
+            @RequestParam String temporada,
+            @RequestParam Integer equipoReferenciaId,
+            @RequestParam(required = false) List<Integer> jugadorIds,
+            Model model) {
+
+        cargarDatosComparativa(model);
+        model.addAttribute("plantillaTemporada", temporada);
+        model.addAttribute("plantillaEquipoReferenciaId", equipoReferenciaId);
+        model.addAttribute("plantillaJugadorIds", jugadorIds);
+
+        if (jugadorIds == null || jugadorIds.size() < 8 || jugadorIds.size() > 12) {
+            model.addAttribute("plantillaError", "Selecciona entre 8 y 12 jugadores para simular una plantilla.");
+            return "simulaciones/comparativa";
+        }
+
+        model.addAttribute("plantillaResultado",
+                comparativaService.simularPlantilla(
+                        temporada,
+                        equipoReferenciaId,
+                        jugadorIds));
+
+        return "simulaciones/comparativa";
+    }
+
+    @PostMapping("/comparativa/traspaso")
+    public String simularTraspasoComparativo(
+            @RequestParam String temporada,
+            @RequestParam Integer equipoId,
+            @RequestParam Integer jugadorSaleId,
+            @RequestParam Integer jugadorLlegaId,
+            Model model) {
+
+        cargarDatosComparativa(model);
+        model.addAttribute("traspasoTemporada", temporada);
+        model.addAttribute("traspasoEquipoId", equipoId);
+        model.addAttribute("jugadorSaleId", jugadorSaleId);
+        model.addAttribute("jugadorLlegaId", jugadorLlegaId);
+        model.addAttribute("traspasoResultado",
+                comparativaService.simularTraspaso(
+                        temporada,
+                        equipoId,
+                        jugadorSaleId,
+                        jugadorLlegaId));
+
+        return "simulaciones/comparativa";
+    }
+
     private void cargarDatosTablero(Model model) {
         model.addAttribute("jugadores", jugadorService.findAll());
         model.addAttribute("equipos", equipoService.findAll());
+    }
+
+    private void cargarDatosComparativa(Model model) {
+        List<String> temporadas = comparativaService.findTemporadasDisponibles();
+        model.addAttribute("temporadas", temporadas);
+        model.addAttribute("equipos", equipoService.findAll());
+        model.addAttribute("jugadores", jugadorService.findAll());
+
+        if (!temporadas.isEmpty()) {
+            model.addAttribute("defaultTemporadaA", temporadas.size() > 1 ? temporadas.get(1) : temporadas.get(0));
+            model.addAttribute("defaultTemporadaB", temporadas.get(0));
+        }
     }
 }

@@ -8,11 +8,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -74,7 +73,9 @@ public class UsuarioController {
     }
 
     @PostMapping("/new")
-    public ModelAndView saveNewUsuario(Usuario u) {
+    public ModelAndView saveNewUsuario(
+            Usuario u,
+            @RequestParam(name = "avatar", required = false) MultipartFile avatar) {
 
         u.setEnabled(true);
         u.setPassword(passwordEncoder.encode(u.getPassword()));
@@ -83,6 +84,10 @@ public class UsuarioController {
         u.setVotosEmitidos(0);
 
         u.setMensajesEnviados(0);
+
+        if (avatar != null && !avatar.isEmpty()) {
+            u.setFoto(saveAvatarFile(u.getUsername(), avatar));
+        }
 
         UsuarioService.save(u);
 
@@ -100,23 +105,22 @@ public class UsuarioController {
 
     @GetMapping("/profile")
     public ModelAndView redirectProfile(String username, Principal principal) {
-        ModelAndView result = new ModelAndView("redirect:/profile/" + principal.getName());
         if (principal == null || principal.getName() == null || principal.getName().equals("")) {
-            result = new ModelAndView("redirect:/login");
+            return new ModelAndView("redirect:/login");
         }
-        return result;
+        return new ModelAndView("redirect:/profile/" + principal.getName());
     }
 
     @GetMapping("/profile/{username}")
     public ModelAndView showProfile(@PathVariable("username") String username, @RequestParam(name = "succes", required = false) Boolean succes, Principal principal) {
+        if (principal == null || principal.getName() == null || principal.getName().equals("")) {
+            return new ModelAndView("redirect:/login");
+        }
+
         ModelAndView result = new ModelAndView("perfil/profile");
         String authority = authoritiesService.findByUsername(principal.getName()).getAuthority();
-        if (principal == null || principal.getName() == null || principal.getName().equals("")) {
-            result = new ModelAndView("redirect:/login");
-            return result;
-        } else if (!authority.equals("admin") && !principal.getName().equals(username)) {
-            result = new ModelAndView("redirect:/");
-            return result;
+        if (!authority.equals("admin") && !principal.getName().equals(username)) {
+            return new ModelAndView("redirect:/");
         }
         Usuario u = UsuarioService.findUsuarioByUsernameUsuario(username);
         result.addObject("usuario", u);
@@ -178,39 +182,42 @@ public class UsuarioController {
                 u.getEquipoFavorito());
 
         if (!avatar.isEmpty()) {
-
-            try {
-
-                String extension
-                        = avatar.getOriginalFilename()
-                                .substring(
-                                        avatar.getOriginalFilename()
-                                                .lastIndexOf("."));
-
-                String fileName
-                        = principal.getName() + extension;
-
-                Path path = Paths.get(
-                        "src/main/resources/static/uploads/avatars/"
-                        + fileName);
-
-                Files.copy(
-                        avatar.getInputStream(),
-                        path,
-                        StandardCopyOption.REPLACE_EXISTING);
-
-                usuario.setFoto(fileName);
-
-            } catch (Exception e) {
-
-                e.printStackTrace();
-            }
+            usuario.setFoto(saveAvatarFile(principal.getName(), avatar));
         }
 
         UsuarioService.save(usuario);
 
         return new ModelAndView(
                 "redirect:/profile/" + principal.getName());
+    }
+
+    private String saveAvatarFile(String username, MultipartFile avatar) {
+        try {
+            String originalName = avatar.getOriginalFilename();
+            String extension = originalName != null && originalName.contains(".")
+                    ? originalName.substring(originalName.lastIndexOf(".")).toLowerCase(Locale.ROOT)
+                    : "";
+            Set<String> allowedExtensions = Set.of(".png", ".jpg", ".jpeg", ".webp");
+
+            if (!allowedExtensions.contains(extension)) {
+                throw new IllegalArgumentException("Formato de imagen no permitido");
+            }
+
+            String safeUsername = username.replaceAll("[^a-zA-Z0-9_-]", "_");
+            String fileName = safeUsername + extension;
+            Path sourcePath = Paths.get("src/main/resources/static/uploads/avatars", fileName);
+            Path runtimePath = Paths.get("target/classes/static/uploads/avatars", fileName);
+
+            Files.createDirectories(sourcePath.getParent());
+            Files.copy(avatar.getInputStream(), sourcePath, StandardCopyOption.REPLACE_EXISTING);
+
+            Files.createDirectories(runtimePath.getParent());
+            Files.copy(sourcePath, runtimePath, StandardCopyOption.REPLACE_EXISTING);
+
+            return fileName;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("No se pudo guardar la foto de perfil", e);
+        }
     }
 
     @GetMapping("/changePassword")

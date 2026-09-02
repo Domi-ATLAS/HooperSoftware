@@ -3,189 +3,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Mi Perfil">
-    <%-- Vista frontend: formularios y paneles de cuenta de usuario. --%>
+    <%-- Vista frontend: resumen de cuenta, avatar, datos personales e historial de votos. --%>
 
-<div style="
-max-width:900px;
-margin:40px auto;
-padding:40px;
-background:#001845;
-border:2px solid #3b82f6;
-border-radius:25px;
-color:white;
-">
+    <section class="profile-card profile-page-card">
+        <h1>Perfil de ${usuario.username}</h1>
 
-    <h1 style="
-    text-align:center;
-    margin-bottom:30px;
-    font-size:42px;
-    ">
-        👤 Perfil de ${usuario.username}
-    </h1>
+        <c:if test="${succes}">
+            <div class="success-box">Perfil actualizado correctamente</div>
+        </c:if>
 
-    <c:if test="${succes}">
-        <div style="
-        background:#16a34a;
-        padding:15px;
-        border-radius:10px;
-        text-align:center;
-        margin-bottom:25px;
-        font-weight:bold;
-        ">
-            ✅ Perfil actualizado correctamente
-        </div>
-    </c:if>
-
-    <div style="
-    display:flex;
-    flex-wrap:wrap;
-    gap:40px;
-    align-items:center;
-    justify-content:center;
-    ">
-
-        <!-- FOTO -->
-
-        <div style="text-align:center;">
-
+        <div class="profile-avatar">
             <c:choose>
-
                 <c:when test="${not empty usuario.foto}">
-                    <img
-                        src="/uploads/avatars/${usuario.foto}"
-                        style="
-                        width:220px;
-                        height:220px;
-                        object-fit:cover;
-                        border-radius:50%;
-                        border:4px solid #3b82f6;
-                        ">
+                    <img src="/uploads/avatars/${usuario.foto}" alt="Avatar de ${usuario.username}">
                 </c:when>
-
                 <c:otherwise>
-                    <img
-                        src="/images/default-avatar.png"
-                        style="
-                        width:220px;
-                        height:220px;
-                        object-fit:cover;
-                        border-radius:50%;
-                        border:4px solid #3b82f6;
-                        ">
+                    <img src="/images/default-avatar.png" alt="Avatar por defecto">
                 </c:otherwise>
-
             </c:choose>
-
         </div>
 
-        <!-- DATOS -->
-
-        <div style="flex:1; min-width:300px;">
-
-            <div style="margin-bottom:20px;">
-                <strong style="color:#60a5fa;">Nombre:</strong><br>
-                ${usuario.nombreUsuario}
+        <c:if test="${usuario.username == principal.name}">
+            <div class="profile-actions">
+                <a class="btn" href="/edit">Editar perfil</a>
+                <a class="btn" href="/changePassword">Cambiar contraseña</a>
             </div>
+        </c:if>
 
-            <div style="margin-bottom:20px;">
-                <strong style="color:#60a5fa;">Email:</strong><br>
-                ${usuario.correo}
+        <div class="profile-details">
+            <div>
+                <strong>Nombre</strong>
+                <span>${usuario.nombreUsuario}</span>
             </div>
-
-            <div style="margin-bottom:20px;">
-                <strong style="color:#60a5fa;">Teléfono:</strong><br>
-                ${usuario.numeroTelefono}
+            <div>
+                <strong>Email</strong>
+                <span>${usuario.correo}</span>
             </div>
-
-            <div style="margin-bottom:20px;">
-                <strong style="color:#60a5fa;">Equipo favorito:</strong><br>
-                ${usuario.equipoFavorito}
+            <div>
+                <strong>Teléfono</strong>
+                <span>${usuario.numeroTelefono}</span>
             </div>
+            <div>
+                <strong>Equipo favorito</strong>
+                <span>
+                    <c:choose>
+                        <c:when test="${not empty usuario.equipoFavorito}">${usuario.equipoFavorito}</c:when>
+                        <c:otherwise>No indicado</c:otherwise>
+                    </c:choose>
+                </span>
+            </div>
+            <div>
+                <strong>Rol</strong>
+                <span>${authority}</span>
+            </div>
+            <div>
+                <strong>Miembro desde</strong>
+                <span><c:out value="${usuario.fechaRegistro}"/></span>
+            </div>
+            <div>
+                <strong>Votos emitidos</strong>
+                <span><c:out value="${usuario.votosEmitidos}"/></span>
+            </div>
+            <div>
+                <strong>Mensajes enviados</strong>
+                <span><c:out value="${usuario.mensajesEnviados}"/></span>
+            </div>
+        </div>
 
-            <p class="perfil">
-                📅 Miembro desde:
-                <c:out value="${usuario.fechaRegistro}"/>
-            </p>
-
-            <p class="perfil">
-                🗳️ Votos emitidos:
-                <c:out value="${usuario.votosEmitidos}"/>
-            </p>
-
-            <p class="perfil">
-                💬 Mensajes enviados:
-                <c:out value="${usuario.mensajesEnviados}"/>
-            </p>
-
-            <h3>🗳️ Historial de votos</h3>
-
-            <c:forEach items="${votos}" var="v">
-
-                <div class="profile-vote">
-
-                    <p>
-                        Votación #${v.idVotacion}
-                    </p>
-
-                    <p>
-                        Elegiste:
-                        <strong>${v.opcionElegida}</strong>
-                    </p>
-
+        <h2>Historial de votos</h2>
+        <c:choose>
+            <c:when test="${empty votos}">
+                <div class="empty-state">
+                    <strong>No hay votos registrados.</strong>
+                    <p>Cuando participes en una votación aparecerán aquí.</p>
                 </div>
-
-            </c:forEach>
-            <div style="margin-bottom:20px;">
-                <strong style="color:#60a5fa;">Rol:</strong><br>
-                ${authority}
-            </div>
-
-        </div>
-
-    </div>
-
-    <hr style="
-    margin:40px 0;
-    border:1px solid rgba(255,255,255,0.2);
-    ">
-
-    <div style="
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-    ">
-
-        <c:if test="${usuario.username == principal.name}">
-            <a href="/edit"
-               style="
-               background:#2563eb;
-               color:white;
-               padding:12px 25px;
-               border-radius:10px;
-               text-decoration:none;
-               font-weight:bold;
-               ">
-                ✏️ Editar perfil
-            </a>
-        </c:if>
-
-        <c:if test="${usuario.username == principal.name}">
-            <a href="/changePassword"
-               style="
-               background:#dc2626;
-               color:white;
-               padding:12px 25px;
-               border-radius:10px;
-               text-decoration:none;
-               font-weight:bold;
-               ">
-                🔒 Cambiar contraseña
-            </a>
-        </c:if>
-
-    </div>
-
-</div>
-
+            </c:when>
+            <c:otherwise>
+                <div class="vote-grid">
+                    <c:forEach items="${votos}" var="v">
+                        <div class="profile-vote">
+                            <p>Votación #${v.idVotacion}</p>
+                            <p>Elegiste: <strong>${v.opcionElegida}</strong></p>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:otherwise>
+        </c:choose>
+    </section>
 </Layaout:layaout>

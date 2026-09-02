@@ -9,14 +9,14 @@
 
 
     <a href="/simulaciones" class="back-btn">
-    ← Volver al Simulation Center
+    Volver al Simulation Center
 </a>
 
 
-    <h1>🔄 Trade Simulator</h1>
+    <h1> Trade Simulator</h1>
 
     <c:if test="${not empty error}">
-        <p style="color:red;font-weight:bold;">
+        <p class="error-box">
             ${error}
         </p>
     </c:if>
@@ -43,6 +43,9 @@
                     <c:if test="${not empty sale.equipo}">
                         (${sale.equipo.nombreEquipo})
                     </c:if>
+                    <c:if test="${not empty sale.temporadaJugador}">
+                        - ${sale.temporadaJugador}
+                    </c:if>
 
                 </option>
 
@@ -66,6 +69,9 @@
                     <c:if test="${not empty llega.equipo}">
                         (${llega.equipo.nombreEquipo})
                     </c:if>
+                    <c:if test="${not empty llega.temporadaJugador}">
+                        - ${llega.temporadaJugador}
+                    </c:if>
 
                 </option>
 
@@ -85,6 +91,19 @@
 
     </form>
 
+    <c:choose>
+        <c:when test="${not empty wins || not empty sugerencias || not empty sugerenciasEquipo}">
+            <button type="button" class="search-btn simulation-toggle" onclick="toggleSimulationInsight(this)">
+                Ver gráficas y modelo
+            </button>
+        </c:when>
+        <c:otherwise>
+            <button type="button" class="search-btn simulation-toggle" disabled>
+                Ver gráficas y modelo
+            </button>
+        </c:otherwise>
+    </c:choose>
+
     <!-- RESULTADO -->
 
     <c:if test="${not empty resultado}">
@@ -98,11 +117,17 @@
             <p>
                 Entregas:
                 <strong>${sale.nombreJugador}</strong>
+                <c:if test="${not empty sale.temporadaJugador}">
+                    <span class="data-badge is-online">${sale.temporadaJugador}</span>
+                </c:if>
             </p>
 
             <p>
                 Recibes:
                 <strong>${llega.nombreJugador}</strong>
+                <c:if test="${not empty llega.temporadaJugador}">
+                    <span class="data-badge is-online">${llega.temporadaJugador}</span>
+                </c:if>
             </p>
 
             <div class="score-box ${resultado.color}">
@@ -116,24 +141,74 @@
             <p>${resultado.evaluacion}</p>
 
             <c:if test="${resultado.score >= 70}">
-                <p style="color:green;">
-                    🔥 Gran trade
+                <p class="result-note">
+                     Gran trade
                 </p>
             </c:if>
 
             <c:if test="${resultado.score >= 40 && resultado.score < 70}">
-                <p style="color:orange;">
-                    ⚖️ Trade equilibrado
+                <p class="result-note">
+                     Trade equilibrado
                 </p>
             </c:if>
 
             <c:if test="${resultado.score < 40}">
-                <p style="color:red;">
-                    ❌ Mala decisión
+                <p class="result-note">
+                     Mala decisión
                 </p>
             </c:if>
 
         </div>
+
+        <c:if test="${sale.nombreJugador == llega.nombreJugador && sale.idJugador != llega.idJugador}">
+            <section class="impact-box">
+                <h2>Comparativa por temporada</h2>
+                <p>
+                    Se comparan dos registros del mismo jugador cargados en temporadas distintas.
+                </p>
+                <div class="table-scroll">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Versión</th>
+                                <th>Equipo</th>
+                                <th>Partidos</th>
+                                <th>Puntos</th>
+                                <th>Asistencias</th>
+                                <th>Rebotes</th>
+                                <th>Robos</th>
+                                <th>Tapones</th>
+                                <th>Triples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>${empty sale.temporadaJugador ? 'Base' : sale.temporadaJugador}</td>
+                                <td>${empty sale.equipo ? 'Sin equipo' : sale.equipo.nombreEquipo}</td>
+                                <td>${sale.estadisticasJug.partidosJugadosJug}</td>
+                                <td>${sale.estadisticasJug.puntosTotales}</td>
+                                <td>${sale.estadisticasJug.asistenciasTotales}</td>
+                                <td>${sale.estadisticasJug.rebotesTotales}</td>
+                                <td>${sale.estadisticasJug.robosTotales}</td>
+                                <td>${sale.estadisticasJug.taponesTotales}</td>
+                                <td>${sale.estadisticasJug.triplesAnotados}</td>
+                            </tr>
+                            <tr>
+                                <td>${empty llega.temporadaJugador ? 'Base' : llega.temporadaJugador}</td>
+                                <td>${empty llega.equipo ? 'Sin equipo' : llega.equipo.nombreEquipo}</td>
+                                <td>${llega.estadisticasJug.partidosJugadosJug}</td>
+                                <td>${llega.estadisticasJug.puntosTotales}</td>
+                                <td>${llega.estadisticasJug.asistenciasTotales}</td>
+                                <td>${llega.estadisticasJug.rebotesTotales}</td>
+                                <td>${llega.estadisticasJug.robosTotales}</td>
+                                <td>${llega.estadisticasJug.taponesTotales}</td>
+                                <td>${llega.estadisticasJug.triplesAnotados}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </c:if>
 
     </c:if>
 
@@ -155,8 +230,7 @@
 
                 Diferencia:
 
-                <strong
-                    style="color:${impacto.diferencia > 0 ? 'green' : 'red'};">
+                <strong>
 
                     ${impacto.diferencia > 0 ? '+' : ''}
                     ${impacto.diferencia}
@@ -203,8 +277,7 @@
 
                 Cambio:
 
-                <strong
-                    style="color:${wins.diferencia > 0 ? 'green' : 'red'};">
+                <strong>
 
                     ${wins.diferencia > 0 ? '+' : ''}
                     ${wins.diferencia}
@@ -222,6 +295,27 @@
             </p>
 
         </div>
+
+        <section class="simulation-insight" data-simulation-insight hidden>
+            <h2>Comparativa del traspaso</h2>
+            <div class="simulation-chart">
+                <div class="chart-row">
+                    <span class="chart-label">Victorias antes</span>
+                    <span class="chart-track"><span class="chart-fill is-muted" style="--value:${wins.winsAntes * 100 / 82};"></span></span>
+                    <span class="chart-value">${wins.winsAntes}</span>
+                </div>
+                <div class="chart-row">
+                    <span class="chart-label">Victorias despues</span>
+                    <span class="chart-track"><span class="chart-fill is-good" style="--value:${wins.winsDespues * 100 / 82};"></span></span>
+                    <span class="chart-value">${wins.winsDespues}</span>
+                </div>
+                <div class="chart-row">
+                    <span class="chart-label">Encaje trade</span>
+                    <span class="chart-track"><span class="chart-fill" style="--value:${resultado.score};"></span></span>
+                    <span class="chart-value">${resultado.score}%</span>
+                </div>
+            </div>
+        </section>
 
     </c:if>
 
@@ -241,6 +335,9 @@
 
                 <option value="${j.idJugador}">
                     ${j.nombreJugador}
+                    <c:if test="${not empty j.temporadaJugador}">
+                        - ${j.temporadaJugador}
+                    </c:if>
                 </option>
 
             </c:forEach>
@@ -276,12 +373,16 @@
                 </p>
 
                 <c:if test="${i.index == 0}">
-                    🔥 Mejor opción
+                     Mejor opción
                 </c:if>
 
             </div>
 
         </c:forEach>
+
+        <section class="simulation-insight" data-simulation-insight hidden>
+            <h2>Lectura de sugerencias</h2>
+        </section>
 
     </c:if>
 
@@ -300,7 +401,7 @@
     <select name="equipoId">
 
         <c:forEach var="e" items="${equipos}">
-            <option value="${e.idEquipo}">
+            <option value="${e.idEquipo}" <c:if test="${e.idEquipo == equipoId}">selected</c:if>>
                 ${e.nombreEquipo}
             </option>
         </c:forEach>
@@ -315,20 +416,62 @@
 
 <c:if test="${not empty sugerenciasEquipo}">
 
-    <div class="impact-box">
+    <div class="impact-box team-needs-result">
 
         <h3>
             ${equipoSeleccionado.nombreEquipo}
         </h3>
 
-        <p>
-            ${sugerenciasEquipo}
+        <p class="small-muted">
+            Jugadores que encajan mejor por equilibrio de plantilla, posición y aportación estadística.
         </p>
 
+        <div class="team-needs-grid">
+            <c:forEach var="s" items="${sugerenciasEquipo}">
+                <article class="team-need-card">
+                    <div>
+                        <strong>${s.jugador.nombreJugador}</strong>
+                        <p>
+                            <c:choose>
+                                <c:when test="${not empty s.jugador.equipo}">
+                                    ${s.jugador.equipo.nombreEquipo}
+                                </c:when>
+                                <c:otherwise>Sin equipo</c:otherwise>
+                            </c:choose>
+                            <span> | </span>
+                            <c:choose>
+                                <c:when test="${not empty s.jugador.posicion}">
+                                    ${s.jugador.posicion}
+                                </c:when>
+                                <c:otherwise>Posición no indicada</c:otherwise>
+                            </c:choose>
+                            <c:if test="${not empty s.jugador.temporadaJugador}">
+                                <span> | </span>${s.jugador.temporadaJugador}
+                            </c:if>
+                        </p>
+                    </div>
+                    <div class="team-need-score">
+                        <span>Encaje ${s.score}</span>
+                        <span class="chart-track">
+                            <span class="chart-fill" style="--value:${s.score};"></span>
+                        </span>
+                    </div>
+                    <button class="btn" type="button" onclick="location.href='/player/${s.jugador.idJugador}'">
+                        Ver jugador
+                    </button>
+                </article>
+            </c:forEach>
+        </div>
+
     </div>
+
+    <section class="simulation-insight" data-simulation-insight hidden>
+        <h2>Comparativa de necesidad</h2>
+    </section>
 
 </c:if>
 
 </div>
 
 </Layaout:layaout>
+

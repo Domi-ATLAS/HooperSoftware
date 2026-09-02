@@ -11,7 +11,7 @@
     <%-- Panel de perfil: agrupa datos de usuario y acciones de cuenta. --%>
 <div class="profile-card">
 
-        <h1>🏀 Crear cuenta HooperSoftware</h1>
+        <h1> Crear cuenta HooperSoftware</h1>
 
         <p class="profile-subtitle">
             Regístrate para participar en votaciones, usar el chat global y personalizar tu experiencia NBA.

@@ -8,10 +8,10 @@
 <div class="sim-container">
 
     <a href="/simulaciones" class="search-btn">
-        ← Volver al menú
+        Volver al menú
     </a>
 
-    <h1>🧠 GM Assistant</h1>
+    <h1> GM Assistant</h1>
 
     <p>
         Selecciona un jugador y se mostrarán los mejores
@@ -36,6 +36,9 @@
                     <c:if test="${not empty j.equipo}">
                         (${j.equipo.nombreEquipo})
                     </c:if>
+                    <c:if test="${not empty j.temporadaJugador}">
+                        - ${j.temporadaJugador}
+                    </c:if>
 
                 </option>
 
@@ -51,11 +54,24 @@
 
     </form>
 
+    <c:choose>
+        <c:when test="${not empty gmTrades}">
+            <button type="button" class="search-btn simulation-toggle" onclick="toggleSimulationInsight(this)">
+                Ver gráficas y modelo
+            </button>
+        </c:when>
+        <c:otherwise>
+            <button type="button" class="search-btn simulation-toggle" disabled>
+                Ver gráficas y modelo
+            </button>
+        </c:otherwise>
+    </c:choose>
+
     <c:if test="${not empty gmTrades}">
 
         <hr>
 
-        <h2>🔥 Mejores Trades Encontrados</h2>
+        <h2>Mejores traspasos encontrados</h2>
 
         <c:forEach var="trade" items="${gmTrades}" varStatus="loop">
 
@@ -64,7 +80,7 @@
                 <h3>
 
                     <c:if test="${loop.index == 0}">
-                        🏆 Mejor Opción
+                        Mejor opcion
                     </c:if>
 
                     <c:if test="${loop.index > 0}">
@@ -76,29 +92,41 @@
                 <p>
 
                     <strong>
-                        ${trade.jugador.nombreJugador}
+                        ${trade.jugador}
                     </strong>
 
                 </p>
 
-                <c:if test="${not empty trade.jugador.equipo}">
-                    <p>
-                        Equipo:
-                        ${trade.jugador.equipo.nombreEquipo}
-                    </p>
-                </c:if>
+                <p>
+                    Equipo:
+                    ${trade.equipo}
+                </p>
 
                 <p>
-                    Score:
-                    <strong>${trade.score}</strong>
+                    Mejora estimada:
+                    <strong>+${trade.mejoraWins} victorias</strong>
                 </p>
 
             </div>
 
         </c:forEach>
 
+        <section class="simulation-insight" data-simulation-insight hidden>
+            <h2>Comparativa de candidatos</h2>
+            <div class="simulation-chart">
+                <c:forEach var="trade" items="${gmTrades}">
+                    <div class="chart-row">
+                        <span class="chart-label">${trade.jugador}</span>
+                        <span class="chart-track"><span class="chart-fill is-good" style="--value:${trade.mejoraWins * 10};"></span></span>
+                        <span class="chart-value">+${trade.mejoraWins}</span>
+                    </div>
+                </c:forEach>
+            </div>
+        </section>
+
     </c:if>
 
 </div>
 
 </Layaout:layaout>  
+

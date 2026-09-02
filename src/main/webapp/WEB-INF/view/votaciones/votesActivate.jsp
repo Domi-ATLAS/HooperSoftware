@@ -17,7 +17,7 @@
             <select id="category" name="category">
                 <option value="">Todas</option>
                 <c:forEach var="categoria" items="${categorias}">
-                    <option value="${categoria}">${categoria}</option>
+                    <option value="${categoria}">${categoria.displayName}</option>
                 </c:forEach>
             </select>
         </div>
@@ -52,7 +52,12 @@
                             <div class="vote"
                                  data-category="${vote.categotiaVotacion}"
                                  data-date="${vote.fecha}">
-                                <h3>${vote.categotiaVotacion}</h3>
+                                <h3>
+                                    ${vote.categotiaVotacion.displayName}
+                                    <c:if test="${vote.idVotacion < 0}">
+                                        <span class="data-badge is-fake fake-marker">Fake</span>
+                                    </c:if>
+                                </h3>
                                 <p>Jornada: ${vote.jornada}</p>
                                 <p>Fecha: ${vote.fecha}</p>
                                 <ul>

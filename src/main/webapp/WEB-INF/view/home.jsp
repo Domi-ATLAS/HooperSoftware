@@ -24,38 +24,32 @@
 
     <div class="dashboard-grid">
       <a class="dashboard-card" href="/allGames">
-        <span class="dashboard-icon">🏀</span>
         <strong>Partidos</strong>
         <p>Resultados, jornadas, temporadas y detalle de encuentros.</p>
       </a>
 
       <a class="dashboard-card" href="/allTranferences">
-        <span class="dashboard-icon">🔁</span>
         <strong>Transferencias</strong>
         <p>Movimientos entre equipos con filtros por fecha y franquicia.</p>
       </a>
 
       <a class="dashboard-card" href="/allVotes">
-        <span class="dashboard-icon">🗳️</span>
         <strong>Votaciones</strong>
         <p>Votaciones activas, oficiales e historial por temporada.</p>
       </a>
 
       <a class="dashboard-card" href="/allPlayers">
-        <span class="dashboard-icon">👤</span>
         <strong>Plantillas</strong>
         <p>Jugadores, entrenadores y fichas individuales de consulta.</p>
       </a>
 
       <a class="dashboard-card" href="/buscador">
-        <span class="dashboard-icon">🔎</span>
         <strong>Buscador</strong>
         <p>Acceso rápido a equipos, jugadores, entrenadores y partidos.</p>
       </a>
 
       <sec:authorize access="hasAuthority('admin')">
         <a class="dashboard-card" href="/simulaciones">
-          <span class="dashboard-icon">📊</span>
           <strong>Simulaciones</strong>
           <p>Trade machine, predicciones, bracket y escenarios de temporada.</p>
         </a>

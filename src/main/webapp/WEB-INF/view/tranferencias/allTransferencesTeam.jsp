@@ -69,7 +69,12 @@ function toggleTransferencia(id) {
     <c:forEach var="transferencia" items="${transferencesOfTheTeam}" varStatus="status">
         <div class="transfer-item" data-filter-item data-date="${transferencia.fecha}">
             <div class="group" onClick="toggleTransferencia('transferencia${status.index}')">
-                <p>${transferencia.equipoOrigen.nombreEquipo} &rarr; ${transferencia.equipoDestino.nombreEquipo}</p>
+                <p>
+                    ${transferencia.equipoOrigen.nombreEquipo} &rarr; ${transferencia.equipoDestino.nombreEquipo}
+                    <c:if test="${transferencia.idTransferencia < 0}">
+                        <span class="data-badge is-fake fake-marker">Fake</span>
+                    </c:if>
+                </p>
                 <p>Fecha: ${transferencia.fecha}</p>
                 <Button type="submit">Ver Detalles</Button>
             </div>

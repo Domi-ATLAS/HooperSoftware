@@ -3,13 +3,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Jugadores">
-    <%-- Vista frontend: jugadores y entrenadores con listados, fichas y datos de perfil. --%>
+  <%-- Vista frontend: jugadores y entrenadores con listados, fichas y datos de perfil. --%>
+  <div class="players-page">
   <h1>Jugadores y Entrenadores</h1>
 
-  <div class="split-2">
-    <!-- Columna izquierda: Jugadores -->
-    <section class="panel">
-      <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
+  <div class="data-toolbar">
+    <span class="filter-status">${playersWithStats} jugadores con estadísticas asociadas</span>
+    <span class="filter-status">${players.size()} jugadores en base de datos</span>
+  </div>
+
+  <div class="players-layout">
+    <section class="panel players-panel">
+      <%-- Filtro por equipo: navega al endpoint de equipo para mostrar datos persistidos. --%>
       <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teamsL">Filtra por equipos:</label>
         <select id="teamsL" name="teams">
@@ -38,33 +43,71 @@
           </div>
         </c:when>
         <c:otherwise>
-          <table id="playersTable" class="table">
+          <div class="table-scroll">
+          <table id="playersTable" class="table players-table">
             <thead>
               <tr>
                 <th>Nombre</th>
+                <th>Equipo</th>
+                <th>Temporada</th>
                 <th>Posición</th>
                 <th>Edad</th>
+                <th>Datos</th>
                 <th>Detalles</th>
               </tr>
             </thead>
             <tbody>
               <c:forEach var="player" items="${players}">
                 <tr class="player-row">
-                  <td>${player.nombreJugador}</td>
+                  <td>
+                    ${player.nombreJugador}
+                    <c:if test="${player.idJugador < 0}">
+                      <span class="data-badge is-fake fake-marker">Fake ${player.temporadaJugador}</span>
+                    </c:if>
+                  </td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${not empty player.equipo}">${player.equipo.nombreEquipo}</c:when>
+                      <c:otherwise>Sin equipo</c:otherwise>
+                    </c:choose>
+                  </td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${not empty player.temporadaJugador}">${player.temporadaJugador}</c:when>
+                      <c:otherwise>Base</c:otherwise>
+                    </c:choose>
+                  </td>
                   <td>${player.posicion}</td>
                   <td>${player.edadJug}</td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${not empty player.estadisticasJug}">
+                        <c:choose>
+                          <c:when test="${player.idJugador < 0}">
+                            <span class="data-badge is-fake">Fake ${player.temporadaJugador}</span>
+                          </c:when>
+                          <c:otherwise>
+                            <span class="data-badge is-online">Con estadísticas</span>
+                          </c:otherwise>
+                        </c:choose>
+                      </c:when>
+                      <c:otherwise>
+                        <span class="data-badge">Backup</span>
+                      </c:otherwise>
+                    </c:choose>
+                  </td>
                   <td><button class="btn" onclick="location.href='/player/${player.idJugador}'">Detalles</button></td>
                 </tr>
               </c:forEach>
             </tbody>
           </table>
+          </div>
         </c:otherwise>
       </c:choose>
     </section>
 
-    <!-- Columna derecha: Entrenadores -->
-    <section class="panel">
-      <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
+    <section class="panel trainers-panel">
+      <%-- Filtro compartido: mantiene la misma seleccion para jugadores y entrenadores. --%>
       <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teamsR">Filtra por equipos:</label>
         <select id="teamsR" name="teams">
@@ -93,33 +136,50 @@
           </div>
         </c:when>
         <c:otherwise>
-          <table class="table" id="trainersTable">
+          <div class="table-scroll">
+          <table class="table trainers-table" id="trainersTable">
             <thead>
               <tr>
                 <th>Nombre</th>
                 <th>Edad</th>
+                <th>Datos</th>
                 <th>Detalles</th>
               </tr>
             </thead>
             <tbody>
               <c:forEach var="trainer" items="${trainers}">
                 <tr class="trainer-row">
-                  <td>${trainer.nombeEntrenador}</td>
+                  <td>
+                    ${trainer.nombeEntrenador}
+                    <c:if test="${trainer.idEntrenador < 0}">
+                      <span class="data-badge is-fake fake-marker">Fake</span>
+                    </c:if>
+                  </td>
                   <td>${trainer.edadEntr}</td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${trainer.idEntrenador < 0}">
+                        <span class="data-badge is-fake">Fake</span>
+                      </c:when>
+                      <c:otherwise>
+                        <span class="data-badge is-online">Persistido</span>
+                      </c:otherwise>
+                    </c:choose>
+                  </td>
                   <td><button class="btn" onclick="location.href='/trainer/${trainer.idEntrenador}'">Detalles</button></td>
                 </tr>
               </c:forEach>
             </tbody>
           </table>
+          </div>
         </c:otherwise>
       </c:choose>
     </section>
   </div>
 
-  <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
-<script>
+  <script>
     /**
-     * Filtra la lista de jugadores según los criterios activos.
+     * Filtra la lista de jugadores por nombre dentro de la tabla visible.
      * @returns {void}
      */
     function filterPlayers() {
@@ -129,8 +189,9 @@
         row.style.display = nombre.includes(input) ? "" : "none";
       });
     }
+
     /**
-     * Filtra la lista de entrenadores según los criterios activos.
+     * Filtra la lista de entrenadores por nombre dentro de la tabla visible.
      * @returns {void}
      */
     function filterTrainers() {
@@ -140,11 +201,21 @@
         row.style.display = nombre.includes(input) ? "" : "none";
       });
     }
+
     /**
-     * Redirige o filtra la vista según el equipo seleccionado.
-     * @param {Event} e Evento del formulario o control que dispara la acción.
+     * Redirige al listado persistido por equipo.
+     * @param {Event} event Evento de envio del formulario.
      * @returns {void}
      */
-    function filterByTeam(e){ e.preventDefault(); /* aquí podrás enganchar tu lógica */ }
+    function filterByTeam(event) {
+      event.preventDefault();
+      const select = event.target.querySelector("select");
+      if (!select || !select.value) {
+        location.href = "/allPlayers";
+        return;
+      }
+      location.href = "/allPlayers/" + select.value;
+    }
   </script>
+  </div>
 </Layaout:layaout>

@@ -73,7 +73,8 @@ public class PartidoService {
         return repository.findLast10MatchesByTeam(nombreEquipo);
     }
 
-    public Object findPlayOffGamesByTemporada(String temporada) {
+    @Transactional(readOnly = true)
+    public List<Partido> findPlayOffGamesByTemporada(String temporada) {
         return repository.findPlayOffGamesByTemporada(temporada);
     }
 

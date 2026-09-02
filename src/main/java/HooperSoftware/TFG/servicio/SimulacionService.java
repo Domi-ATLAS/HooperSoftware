@@ -64,13 +64,13 @@ public class SimulacionService {
         String color;
 
         if (score >= 70) {
-            evaluacion = "🔥 GRAN TRADE";
+            evaluacion = "Gran trade";
             color = "green";
         } else if (score >= 50) {
-            evaluacion = "👌 Trade equilibrado";
+            evaluacion = "Trade equilibrado";
             color = "orange";
         } else {
-            evaluacion = "❌ Mala decisión";
+            evaluacion = "Mala decisión";
             color = "red";
         }
 
@@ -121,15 +121,15 @@ public class SimulacionService {
 
         if (diferencia >= 20) {
 
-            momentum = "🔥 Dominio absoluto";
+            momentum = "Dominio absoluto";
 
         } else if (diferencia >= 10) {
 
-            momentum = "📈 Equipo en gran momento";
+            momentum = "Equipo en gran momento";
 
         } else {
 
-            momentum = "⚖ Partido muy igualado";
+            momentum = "Partido muy igualado";
         }
 
         return new TeamImpactDTO(
@@ -181,35 +181,35 @@ public class SimulacionService {
     private String generarMensajeEvaluacion(int diff, String antes, String despues) {
 
         if (diff >= 8) {
-            return "🚀 Trade élite: cambia completamente el equipo";
+            return "Trade élite: cambia completamente el equipo";
         }
         if (diff >= 4) {
-            return "📈 Mejora clara: el equipo sube de nivel";
+            return "Mejora clara: el equipo sube de nivel";
         }
         if (diff >= 1) {
-            return "👍 Ligera mejora";
+            return "Ligera mejora";
         }
         if (diff == 0) {
-            return "⚖️ No cambia el rendimiento";
+            return "No cambia el rendimiento";
         }
         if (diff >= -3) {
-            return "⚠️ Riesgo leve";
+            return "Riesgo leve";
         }
-        return "❌ Empeora claramente el equipo";
+        return "Empeora claramente el equipo";
     }
 
     private String calcularTier(int wins) {
 
         if (wins >= 55) {
-            return "🏆 Contender";
+            return "Contender";
         }
         if (wins >= 45) {
-            return "🔥 Playoff";
+            return "Playoff";
         }
         if (wins >= 35) {
-            return "⚖️ Medio";
+            return "Medio";
         }
-        return "❌ Tanking";
+        return "Tanking";
     }
 
     private int convertirRatingAWins(double rating) {
@@ -318,16 +318,16 @@ public class SimulacionService {
         String mensaje;
 
         if (rating >= 85) {
-            tier = "Contender 🏆";
+            tier = "Contender";
             mensaje = "Equipo candidato serio al anillo.";
         } else if (rating >= 70) {
-            tier = "Playoff fuerte 🔥";
+            tier = "Playoff fuerte";
             mensaje = "Equipo competitivo, peligro en playoffs.";
         } else if (rating >= 55) {
-            tier = "Play-in ⚖️";
+            tier = "Play-in";
             mensaje = "Puede entrar en playoffs pero sin garantías.";
         } else {
-            tier = "Lotería ❌";
+            tier = "Lotería";
             mensaje = "Equipo en reconstrucción.";
         }
 
@@ -387,7 +387,7 @@ public class SimulacionService {
         for (int i = 0; i < ganadoresR1.size(); i += 2) {
 
             if (i + 1 >= ganadoresR1.size()) {
-                break; // ✅ FIX
+                break; //  FIX
             }
             Equipo g1 = ganadoresR1.get(i);
             Equipo g2 = ganadoresR1.get(i + 1);
@@ -500,7 +500,8 @@ public class SimulacionService {
                     equipo.getNombreEquipo(),
                     equipo.getSiglas(),
                     victorias,
-                    derrotas));
+                    derrotas,
+                    valorSeguro(equipo.getPartidosGanados())));
 
             if (rating > mejorRating) {
                 mejorRating = rating;
@@ -561,11 +562,11 @@ public class SimulacionService {
         String momentum;
 
         if (diferenciaMarcador >= 20) {
-            momentum = "🔥 Dominio absoluto";
+            momentum = "Dominio absoluto";
         } else if (diferenciaMarcador >= 10) {
-            momentum = "💪 Partido controlado";
+            momentum = "Partido controlado";
         } else {
-            momentum = "⚡ Final ajustado";
+            momentum = "Final ajustado";
         }
         return new LiveGameSimulationDTO(
                 a.getNombreEquipo(),

@@ -11,11 +11,16 @@ import HooperSoftware.TFG.repositorio.JugadorRepository;
 import HooperSoftware.TFG.repositorio.PartidoRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -51,6 +56,21 @@ public class NbaInternetSyncService {
     private static final String NBA_ELO_GAMES_URL =
             "https://raw.githubusercontent.com/fivethirtyeight/data/master/nba-elo/nbaallelo.csv";
 
+    private static final String BALLDONTLIE_STATS_URL =
+            "https://api.balldontlie.io/v1/stats?seasons[]=%d&per_page=100%s";
+
+    private static final String[] GITHUB_PLAYER_BOX_SCORE_URLS = {
+            "https://raw.githubusercontent.com/NocturneBear/NBA-Data-2010-2024/main/regular_season_box_scores_2010_2024_part_1.csv",
+            "https://raw.githubusercontent.com/NocturneBear/NBA-Data-2010-2024/main/regular_season_box_scores_2010_2024_part_2.csv",
+            "https://raw.githubusercontent.com/NocturneBear/NBA-Data-2010-2024/main/regular_season_box_scores_2010_2024_part_3.csv"
+    };
+
+    private static final String BASKETBALL_REFERENCE_TOTALS_URL =
+            "https://www.basketball-reference.com/leagues/NBA_%d_totals.html";
+
+    @Value("${balldontlie.api-key:}")
+    private String balldontlieApiKey;
+
     private final RestTemplate restTemplate;
     private final EquipoRepository equipoRepository;
     private final JugadorRepository jugadorRepository;
@@ -70,6 +90,7 @@ public class NbaInternetSyncService {
         this.partidoRepository = partidoRepository;
     }
 
+    @Transactional
     public NbaSeasonSyncReport syncSeason(int season) {
         NbaSeasonSyncReport report = new NbaSeasonSyncReport(season);
         String nbaSeason = toNbaSeason(season);
@@ -81,9 +102,33 @@ public class NbaInternetSyncService {
         }
 
         try {
-            report.setPlayers(syncPlayers(nbaSeason));
+            int players = syncPlayers(season, nbaSeason);
+            if (players == 0) {
+                throw new RuntimeException("NBA Stats no devolvio jugadores para la temporada");
+            }
+            report.setPlayers(players);
         } catch (RuntimeException exception) {
-            report.addWarning("jugadores online no disponibles");
+            try {
+                report.setPlayers(syncPlayersFromBalldontlie(season));
+                report.addWarning("jugadores cargados desde balldontlie por fallo de NBA Stats");
+            } catch (RuntimeException fallbackException) {
+                try {
+                    report.setPlayers(syncPlayersFromGithubCsv(season));
+                    report.addWarning("jugadores cargados desde CSV publico por fallo de NBA Stats y balldontlie");
+                } catch (RuntimeException csvException) {
+                    try {
+                        report.setPlayers(syncPlayersFromBasketballReference(season));
+                        report.addWarning("jugadores cargados desde Basketball Reference por fallo de NBA Stats, balldontlie y CSV publico");
+                    } catch (RuntimeException basketballReferenceException) {
+                        report.addWarning("jugadores online no disponibles: "
+                                + fallbackException.getMessage()
+                                + " / CSV: "
+                                + csvException.getMessage()
+                                + " / Basketball Reference: "
+                                + basketballReferenceException.getMessage());
+                    }
+                }
+            }
         }
 
         try {
@@ -122,15 +167,15 @@ public class NbaInternetSyncService {
         return saved;
     }
 
-    private int syncPlayers(String nbaSeason) {
+    private int syncPlayers(int season, String nbaSeason) {
         Map<String, Object> body = requestJson(String.format(NBA_PLAYER_STATS_URL, nbaSeason));
         NbaStatsTable table = NbaStatsTable.from(body);
         int saved = 0;
 
         for (java.util.List<?> row : table.rows()) {
-            Integer playerId = table.integer(row, "PLAYER_ID");
+            Integer playerId = seasonalPlayerId(season, table.integer(row, "PLAYER_ID"));
             String teamAbbreviation = table.string(row, "TEAM_ABBREVIATION");
-            Equipo equipo = findOrCreateTeam(table.integer(row, "TEAM_ID"), teamAbbreviation);
+            Equipo equipo = equipoRepository.save(findOrCreateTeam(table.integer(row, "TEAM_ID"), teamAbbreviation));
 
             EstadisticasJugador stats = new EstadisticasJugador();
             stats.setIdEstJugador(playerId);
@@ -146,6 +191,7 @@ public class NbaInternetSyncService {
             stats.setTirosLibresAnotados(table.integer(row, "FTM"));
             stats.setTirosDeCampoAnotados(table.integer(row, "FGM"));
             stats.setMinutosTotales(table.integer(row, "MIN"));
+            applyEmptyStatsDefaults(stats);
             estadisticasJugadorRepository.save(stats);
 
             Jugador jugador = jugadorRepository.findJugadorById(playerId);
@@ -155,16 +201,276 @@ public class NbaInternetSyncService {
             }
 
             jugador.setNombreJugador(table.string(row, "PLAYER_NAME"));
-            jugador.setPosicion(normalizePosition(table.string(row, "PLAYER_POSITION")));
+            String normalizedPosition = normalizePosition(table.string(row, "PLAYER_POSITION"));
+            if (!normalizedPosition.isBlank()) {
+                jugador.setPosicion(normalizedPosition);
+            }
             jugador.setEdadJug(table.integer(row, "AGE"));
-            jugador.setRetirado(false);
-            jugador.setHallOfFame(false);
-            jugador.setFotoJugador("default-avatar.png");
+            applyPlayerDefaults(jugador);
+            jugador.setTemporadaJugador(toAppSeason(season));
             jugador.setEquipo(equipo);
             jugador.setEstadisticasJug(stats);
 
             jugadorRepository.save(jugador);
             saved++;
+        }
+
+        return saved;
+    }
+
+    private int syncPlayersFromBalldontlie(int season) {
+        if (balldontlieApiKey == null || balldontlieApiKey.isBlank()) {
+            throw new RuntimeException("API key balldontlie no configurada");
+        }
+
+        Map<Integer, PlayerImport> imports = new java.util.LinkedHashMap<>();
+        String cursor = "";
+        boolean hasNext = true;
+
+        while (hasNext) {
+            ResponseEntity<Map> response = restTemplate.exchange(
+                    String.format(BALLDONTLIE_STATS_URL, season, cursor.isBlank() ? "" : "&cursor=" + cursor),
+                    HttpMethod.GET,
+                    balldontlieEntity(),
+                    Map.class);
+            Map<?, ?> body = response.getBody();
+
+            if (body == null) {
+                throw new RuntimeException("respuesta vacia de balldontlie");
+            }
+
+            java.util.List<?> data = (java.util.List<?>) body.get("data");
+            Map<?, ?> meta = (Map<?, ?>) body.get("meta");
+
+            if (data == null || data.isEmpty()) {
+                break;
+            }
+
+            for (Object item : data) {
+                Map<?, ?> statData = (Map<?, ?>) item;
+                Map<?, ?> playerData = (Map<?, ?>) statData.get("player");
+                Map<?, ?> teamData = (Map<?, ?>) statData.get("team");
+
+                if (playerData == null || teamData == null) {
+                    continue;
+                }
+
+                Integer playerId = seasonalPlayerId(season, integerValue(playerData.get("id")));
+                PlayerImport playerImport = imports.computeIfAbsent(playerId, PlayerImport::new);
+
+                playerImport.name = (stringValue(playerData.get("first_name")) + " "
+                        + stringValue(playerData.get("last_name"))).trim();
+                playerImport.position = normalizePosition(stringValue(playerData.get("position")));
+                playerImport.teamId = integerValue(teamData.get("id"));
+                playerImport.teamAbbreviation = stringValue(teamData.get("abbreviation"));
+                playerImport.teamName = stringValue(teamData.get("full_name"));
+                if (playerImport.teamName.isBlank()) {
+                    playerImport.teamName = (stringValue(teamData.get("city")) + " "
+                            + stringValue(teamData.get("name"))).trim();
+                }
+                playerImport.addStats(statData);
+            }
+
+            Object nextCursor = meta == null ? null : meta.get("next_cursor");
+            hasNext = nextCursor != null && !String.valueOf(nextCursor).isBlank();
+            cursor = hasNext ? String.valueOf(nextCursor) : "";
+        }
+
+        int saved = 0;
+        for (PlayerImport playerImport : imports.values()) {
+            Equipo equipo = equipoRepository.save(findOrCreateTeam(playerImport.teamId, playerImport.teamAbbreviation));
+            if (equipo.getNombreEquipo() == null
+                    || equipo.getNombreEquipo().isBlank()
+                    || equipo.getNombreEquipo().equals(playerImport.teamAbbreviation)) {
+                equipo.setNombreEquipo(playerImport.teamName);
+                equipoRepository.save(equipo);
+            }
+
+            EstadisticasJugador stats = estadisticasJugadorRepository
+                    .findById(playerImport.id)
+                    .orElseGet(EstadisticasJugador::new);
+            stats.setIdEstJugador(playerImport.id);
+            playerImport.copyStatsTo(stats);
+            estadisticasJugadorRepository.save(stats);
+
+            Jugador jugador = jugadorRepository.findJugadorById(playerImport.id);
+            if (jugador == null) {
+                jugador = new Jugador();
+                jugador.setIdJugador(playerImport.id);
+            }
+            jugador.setNombreJugador(playerImport.name);
+            if (!playerImport.position.isBlank()) {
+                jugador.setPosicion(playerImport.position);
+            }
+            applyPlayerDefaults(jugador);
+            jugador.setTemporadaJugador(toAppSeason(season));
+            jugador.setEquipo(equipo);
+            jugador.setEstadisticasJug(stats);
+            jugadorRepository.save(jugador);
+            saved++;
+        }
+
+        return saved;
+    }
+
+    private int syncPlayersFromGithubCsv(int season) {
+        Map<Integer, PlayerImport> imports = new java.util.LinkedHashMap<>();
+        String seasonLabel = toNbaSeason(season);
+
+        for (String url : GITHUB_PLAYER_BOX_SCORE_URLS) {
+            String csv = restTemplate.getForObject(url, String.class);
+
+            try (CSVReader reader = new CSVReader(new StringReader(Objects.requireNonNull(csv)))) {
+                String[] header = reader.readNext();
+                Map<String, Integer> index = indexHeader(header);
+                String[] row;
+
+                while ((row = reader.readNext()) != null) {
+                    if (!seasonLabel.equals(csvString(row, index, "season_year"))) {
+                        continue;
+                    }
+
+                    Integer playerId = seasonalPlayerId(season, csvInteger(row, index, "personId"));
+                    PlayerImport playerImport = imports.computeIfAbsent(playerId, PlayerImport::new);
+                    playerImport.name = csvString(row, index, "personName");
+                    playerImport.position = normalizePosition(csvString(row, index, "position"));
+                    playerImport.teamId = csvInteger(row, index, "teamId");
+                    playerImport.teamAbbreviation = csvString(row, index, "teamTricode");
+                    playerImport.teamCity = csvString(row, index, "teamCity");
+                    playerImport.teamName = (playerImport.teamCity + " " + csvString(row, index, "teamName")).trim();
+                    playerImport.jerseyNumber = csvInteger(row, index, "jerseyNum");
+                    playerImport.addGithubStats(row, index);
+                }
+            } catch (IOException | CsvValidationException exception) {
+                throw new RuntimeException("No se pudo leer el CSV publico de jugadores", exception);
+            }
+        }
+
+        int saved = 0;
+        for (PlayerImport playerImport : imports.values()) {
+            Equipo equipo = equipoRepository.save(findOrCreateTeam(playerImport.teamId, playerImport.teamAbbreviation));
+            if (!playerImport.teamName.isBlank()) {
+                equipo.setNombreEquipo(playerImport.teamName);
+            }
+            if (!playerImport.teamCity.isBlank()) {
+                equipo.setCiudad(playerImport.teamCity);
+            }
+            equipo.setSiglas(playerImport.teamAbbreviation);
+            equipoRepository.save(equipo);
+
+            EstadisticasJugador stats = estadisticasJugadorRepository
+                    .findById(playerImport.id)
+                    .orElseGet(EstadisticasJugador::new);
+            stats.setIdEstJugador(playerImport.id);
+            playerImport.copyStatsTo(stats);
+            estadisticasJugadorRepository.save(stats);
+
+            Jugador jugador = jugadorRepository.findJugadorById(playerImport.id);
+            if (jugador == null) {
+                jugador = new Jugador();
+                jugador.setIdJugador(playerImport.id);
+            }
+            jugador.setNombreJugador(playerImport.name);
+            if (!playerImport.position.isBlank()) {
+                jugador.setPosicion(playerImport.position);
+            }
+            applyPlayerDefaults(jugador);
+            jugador.setTemporadaJugador(toAppSeason(season));
+            if (playerImport.jerseyNumber > 0) {
+                jugador.setDorsal(playerImport.jerseyNumber);
+                jugador.setDorsales(String.valueOf(playerImport.jerseyNumber));
+            }
+            jugador.setEquipo(equipo);
+            jugador.setEstadisticasJug(stats);
+            jugadorRepository.save(jugador);
+            saved++;
+        }
+
+        if (saved == 0) {
+            throw new RuntimeException("CSV publico sin jugadores para la temporada " + seasonLabel);
+        }
+
+        return saved;
+    }
+
+    private int syncPlayersFromBasketballReference(int season) {
+        String url = String.format(BASKETBALL_REFERENCE_TOTALS_URL, season);
+        Map<Integer, PlayerImport> imports = new java.util.LinkedHashMap<>();
+
+        try {
+            Document document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/125 Safari/537.36")
+                    .timeout(15000)
+                    .get();
+
+            for (Element row : document.select("#totals_stats tbody tr")) {
+                if (row.hasClass("thead")) {
+                    continue;
+                }
+
+                String playerKey = row.selectFirst("[data-stat=name_display]") == null
+                        ? ""
+                        : row.selectFirst("[data-stat=name_display]").attr("data-append-csv");
+                String playerName = text(row, "name_display");
+                String teamAbbreviation = text(row, "team_name_abbr");
+
+                if (playerName.isBlank()
+                        || "League Average".equalsIgnoreCase(playerName)
+                        || teamAbbreviation.isBlank()
+                        || "TOT".equals(teamAbbreviation)) {
+                    continue;
+                }
+
+            Integer playerId = stablePositiveId(season + "-" + (playerKey.isBlank() ? playerName : playerKey));
+                PlayerImport playerImport = imports.computeIfAbsent(playerId, PlayerImport::new);
+                playerImport.name = playerName;
+                playerImport.position = normalizePosition(text(row, "pos"));
+                playerImport.teamId = stablePositiveId("team-" + teamAbbreviation);
+                playerImport.teamAbbreviation = teamAbbreviation;
+                playerImport.teamName = teamAbbreviation;
+                playerImport.addBasketballReferenceStats(row);
+                Integer age = integerText(row, "age");
+                if (age > 0) {
+                    playerImport.age = age;
+                }
+            }
+        } catch (IOException exception) {
+            throw new RuntimeException("No se pudo leer Basketball Reference", exception);
+        }
+
+        int saved = 0;
+        for (PlayerImport playerImport : imports.values()) {
+            Equipo equipo = equipoRepository.save(findOrCreateTeam(playerImport.teamId, playerImport.teamAbbreviation));
+
+            EstadisticasJugador stats = estadisticasJugadorRepository
+                    .findById(playerImport.id)
+                    .orElseGet(EstadisticasJugador::new);
+            stats.setIdEstJugador(playerImport.id);
+            playerImport.copyStatsTo(stats);
+            estadisticasJugadorRepository.save(stats);
+
+            Jugador jugador = jugadorRepository.findJugadorById(playerImport.id);
+            if (jugador == null) {
+                jugador = new Jugador();
+                jugador.setIdJugador(playerImport.id);
+            }
+            jugador.setNombreJugador(playerImport.name);
+            if (!playerImport.position.isBlank()) {
+                jugador.setPosicion(playerImport.position);
+            }
+            if (playerImport.age > 0) {
+                jugador.setEdadJug(playerImport.age);
+            }
+            applyPlayerDefaults(jugador);
+            jugador.setTemporadaJugador(toAppSeason(season));
+            jugador.setEquipo(equipo);
+            jugador.setEstadisticasJug(stats);
+            jugadorRepository.save(jugador);
+            saved++;
+        }
+
+        if (saved == 0) {
+            throw new RuntimeException("sin jugadores encontrados para " + season);
         }
 
         return saved;
@@ -247,6 +553,196 @@ public class NbaInternetSyncService {
         return response.getBody();
     }
 
+    private HttpEntity<String> balldontlieEntity() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", balldontlieApiKey);
+        headers.set("Accept", "application/json");
+        return new HttpEntity<>(headers);
+    }
+
+    private void applyPlayerDefaults(Jugador jugador) {
+        if (jugador.getRetirado() == null) {
+            jugador.setRetirado(false);
+        }
+        if (jugador.getHallOfFame() == null) {
+            jugador.setHallOfFame(false);
+        }
+        if (jugador.getFotoJugador() == null || jugador.getFotoJugador().isBlank()) {
+            jugador.setFotoJugador("default-avatar.png");
+        }
+        if (jugador.getDorsal() == null) {
+            jugador.setDorsal(0);
+        }
+        if (jugador.getDorsales() == null) {
+            jugador.setDorsales("");
+        }
+        if (jugador.getUniversidad() == null) {
+            jugador.setUniversidad("");
+        }
+        if (jugador.getPaisNacimiento() == null) {
+            jugador.setPaisNacimiento("");
+        }
+        if (jugador.getCiudadNacimiento() == null) {
+            jugador.setCiudadNacimiento("");
+        }
+        if (jugador.getAlturaJug() == null) {
+            jugador.setAlturaJug("");
+        }
+        if (jugador.getPesoJug() == null) {
+            jugador.setPesoJug("");
+        }
+        if (jugador.getTrayectoriaJug() == null) {
+            jugador.setTrayectoriaJug("");
+        }
+        if (jugador.getAnoDraft() == null) {
+            jugador.setAnoDraft(0);
+        }
+        if (jugador.getEdadJug() == null) {
+            jugador.setEdadJug(0);
+        }
+        if (jugador.getAnosAllStarJug() == null) {
+            jugador.setAnosAllStarJug(0);
+        }
+        if (jugador.getAnosNbaJug() == null) {
+            jugador.setAnosNbaJug(0);
+        }
+        if (jugador.getAnosOtraLigaJug() == null) {
+            jugador.setAnosOtraLigaJug(0);
+        }
+        if (jugador.getPosicion() == null) {
+            jugador.setPosicion("");
+        }
+    }
+
+    private void applyEmptyStatsDefaults(EstadisticasJugador stats) {
+        if (stats.getPuntosTotales() == null) {
+            stats.setPuntosTotales(0);
+        }
+        if (stats.getAsistenciasTotales() == null) {
+            stats.setAsistenciasTotales(0);
+        }
+        if (stats.getRebotesTotales() == null) {
+            stats.setRebotesTotales(0);
+        }
+        if (stats.getTaponesTotales() == null) {
+            stats.setTaponesTotales(0);
+        }
+        if (stats.getRobosTotales() == null) {
+            stats.setRobosTotales(0);
+        }
+        if (stats.getPartidosJugadosJug() == null) {
+            stats.setPartidosJugadosJug(0);
+        }
+        if (stats.getPartidosGanadosJug() == null) {
+            stats.setPartidosGanadosJug(0);
+        }
+        if (stats.getPartidosPerdidosJug() == null) {
+            stats.setPartidosPerdidosJug(0);
+        }
+        if (stats.getTriplesAnotados() == null) {
+            stats.setTriplesAnotados(0);
+        }
+        if (stats.getTirosLibresAnotados() == null) {
+            stats.setTirosLibresAnotados(0);
+        }
+        if (stats.getTirosDeCampoAnotados() == null) {
+            stats.setTirosDeCampoAnotados(0);
+        }
+        if (stats.getMinutosTotales() == null) {
+            stats.setMinutosTotales(0);
+        }
+        if (stats.getTitulosGanadoNbaJug() == null) {
+            stats.setTitulosGanadoNbaJug(0);
+        }
+        if (stats.getTitulosPerdidosNbaJug() == null) {
+            stats.setTitulosPerdidosNbaJug(0);
+        }
+        if (stats.getTitulosGanadoConferenciaJug() == null) {
+            stats.setTitulosGanadoConferenciaJug(0);
+        }
+        if (stats.getTitulosPerdidosConferenciaJug() == null) {
+            stats.setTitulosPerdidosConferenciaJug(0);
+        }
+    }
+
+    private Integer integerValue(Object value) {
+        if (value == null || String.valueOf(value).isBlank()) {
+            return 0;
+        }
+        if (value instanceof Number number) {
+            return number.intValue();
+        }
+        return (int) Math.round(Double.parseDouble(String.valueOf(value)));
+    }
+
+    private Integer minutesValue(Object value) {
+        if (value == null || String.valueOf(value).isBlank()) {
+            return 0;
+        }
+        if (value instanceof Number number) {
+            return number.intValue();
+        }
+
+        String text = String.valueOf(value);
+        if (text.contains(":")) {
+            return integerValue(text.substring(0, text.indexOf(":")));
+        }
+
+        return integerValue(text);
+    }
+
+    private String csvString(String[] row, Map<String, Integer> index, String column) {
+        Integer position = index.get(column);
+        if (position == null || position >= row.length) {
+            return "";
+        }
+        return row[position] == null ? "" : row[position].trim();
+    }
+
+    private Integer csvInteger(String[] row, Map<String, Integer> index, String column) {
+        String value = csvString(row, index, column);
+        if (value.isBlank()) {
+            return 0;
+        }
+        try {
+            return (int) Math.round(Double.parseDouble(value));
+        } catch (NumberFormatException exception) {
+            return 0;
+        }
+    }
+
+    private Integer csvMinutes(String[] row, Map<String, Integer> index, String column) {
+        String value = csvString(row, index, column);
+        if (value.isBlank()) {
+            return 0;
+        }
+        if (value.contains(":")) {
+            return integerValue(value.substring(0, value.indexOf(":")));
+        }
+        return csvInteger(row, index, column);
+    }
+
+    private String text(Element row, String dataStat) {
+        Element cell = row.selectFirst("[data-stat=" + dataStat + "]");
+        return cell == null ? "" : cell.text().trim();
+    }
+
+    private Integer integerText(Element row, String dataStat) {
+        String value = text(row, dataStat);
+        if (value.isBlank()) {
+            return 0;
+        }
+        try {
+            return (int) Math.round(Double.parseDouble(value));
+        } catch (NumberFormatException exception) {
+            return 0;
+        }
+    }
+
+    private String stringValue(Object value) {
+        return value == null ? "" : String.valueOf(value);
+    }
+
     private Equipo findOrCreateTeam(Integer nbaTeamId, String abbreviation) {
         Equipo equipo = equipoRepository.findEquipoBySiglas(abbreviation);
 
@@ -296,7 +792,11 @@ public class NbaInternetSyncService {
     }
 
     private int stablePositiveId(String value) {
-        return Math.abs(value.hashCode());
+        return Math.floorMod(value.hashCode(), Integer.MAX_VALUE);
+    }
+
+    private int seasonalPlayerId(int season, Integer sourcePlayerId) {
+        return stablePositiveId("player-" + season + "-" + sourcePlayerId);
     }
 
     private Equipo saveTeamSeasonRecord(TeamSeasonRecord record) {
@@ -320,6 +820,10 @@ public class NbaInternetSyncService {
         }
 
         return switch (position) {
+            case "PG" -> "Base";
+            case "SG" -> "Escolta";
+            case "SF" -> "Alero";
+            case "PF" -> "Ala-pivot";
             case "G" -> "Base";
             case "F" -> "Alero";
             case "C" -> "Pivot";
@@ -330,6 +834,116 @@ public class NbaInternetSyncService {
     }
 
     private record GameSyncResult(int games, int teams) {
+    }
+
+    private class PlayerImport {
+
+        private final Integer id;
+        private String name = "";
+        private String position = "";
+        private Integer teamId = 0;
+        private String teamAbbreviation = "";
+        private String teamCity = "";
+        private String teamName = "";
+        private int jerseyNumber;
+        private int age;
+        private int points;
+        private int assists;
+        private int rebounds;
+        private int blocks;
+        private int steals;
+        private int games;
+        private int wins;
+        private int losses;
+        private int threes;
+        private int freeThrows;
+        private int fieldGoals;
+        private int minutes;
+
+        PlayerImport(Integer id) {
+            this.id = id;
+        }
+
+        void addStats(Map<?, ?> statData) {
+            points += integerValue(statData.get("pts"));
+            assists += integerValue(statData.get("ast"));
+            rebounds += integerValue(statData.get("reb"));
+            blocks += integerValue(statData.get("blk"));
+            steals += integerValue(statData.get("stl"));
+            threes += integerValue(statData.get("fg3m"));
+            freeThrows += integerValue(statData.get("ftm"));
+            fieldGoals += integerValue(statData.get("fgm"));
+            minutes += minutesValue(statData.get("min"));
+            games++;
+            registerResult(statData);
+        }
+
+        void addGithubStats(String[] row, Map<String, Integer> index) {
+            points += csvInteger(row, index, "points");
+            assists += csvInteger(row, index, "assists");
+            rebounds += csvInteger(row, index, "reboundsTotal");
+            blocks += csvInteger(row, index, "blocks");
+            steals += csvInteger(row, index, "steals");
+            threes += csvInteger(row, index, "threePointersMade");
+            freeThrows += csvInteger(row, index, "freeThrowsMade");
+            fieldGoals += csvInteger(row, index, "fieldGoalsMade");
+            minutes += csvMinutes(row, index, "minutes");
+            games++;
+        }
+
+        void addBasketballReferenceStats(Element row) {
+            points += integerText(row, "pts");
+            assists += integerText(row, "ast");
+            rebounds += integerText(row, "trb");
+            blocks += integerText(row, "blk");
+            steals += integerText(row, "stl");
+            games = Math.max(games, integerText(row, "games"));
+            threes += integerText(row, "fg3");
+            freeThrows += integerText(row, "ft");
+            fieldGoals += integerText(row, "fg");
+            minutes += integerText(row, "mp");
+        }
+
+        void copyStatsTo(EstadisticasJugador stats) {
+            stats.setPuntosTotales(points);
+            stats.setAsistenciasTotales(assists);
+            stats.setRebotesTotales(rebounds);
+            stats.setTaponesTotales(blocks);
+            stats.setRobosTotales(steals);
+            stats.setPartidosJugadosJug(games);
+            stats.setPartidosGanadosJug(wins);
+            stats.setPartidosPerdidosJug(losses);
+            stats.setTriplesAnotados(threes);
+            stats.setTirosLibresAnotados(freeThrows);
+            stats.setTirosDeCampoAnotados(fieldGoals);
+            stats.setMinutosTotales(minutes);
+            applyEmptyStatsDefaults(stats);
+        }
+
+        private void registerResult(Map<?, ?> statData) {
+            Map<?, ?> gameData = (Map<?, ?>) statData.get("game");
+            if (gameData == null || teamId == null) {
+                return;
+            }
+
+            Integer homeTeamId = integerValue(gameData.get("home_team_id"));
+            Integer visitorTeamId = integerValue(gameData.get("visitor_team_id"));
+            Integer homeScore = integerValue(gameData.get("home_team_score"));
+            Integer visitorScore = integerValue(gameData.get("visitor_team_score"));
+
+            if (homeScore.equals(visitorScore)) {
+                return;
+            }
+
+            boolean isHome = teamId.equals(homeTeamId);
+            boolean isVisitor = teamId.equals(visitorTeamId);
+
+            if ((isHome && homeScore > visitorScore) || (isVisitor && visitorScore > homeScore)) {
+                wins++;
+            } else if (isHome || isVisitor) {
+                losses++;
+            }
+        }
     }
 
     private static class TeamSeasonRecord {

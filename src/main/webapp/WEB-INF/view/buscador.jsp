@@ -68,7 +68,7 @@
             <div class="result-card">
 
                                                 <a href="/equipos/${fn:replace(equipo.nombreEquipo,' ','')}">
-                                                    🏀 ${equipo.nombreEquipo}
+                                                     ${equipo.nombreEquipo}
                                                 </a>
 
                                             </div>
@@ -96,13 +96,16 @@
             <div class="result-card">
 
                                                 <a href="/player/${jugador.idJugador}">
-                                                    ⛹ ${jugador.nombreJugador}
+                                                     ${jugador.nombreJugador}
                                                 </a>
 
                                                 <c:if test="${not empty jugador.equipo}">
                                                     <span class="meta">
                                                         - ${jugador.equipo.nombreEquipo}
                                                     </span>
+                                                </c:if>
+                                                <c:if test="${not empty jugador.temporadaJugador}">
+                                                    <span class="data-badge is-online">${jugador.temporadaJugador}</span>
                                                 </c:if>
 
                                             </div>
@@ -131,7 +134,7 @@
             <div class="result-card">
 
                                                 <a href="/trainer/${entrenador.idEntrenador}">
-                                                    🎯 ${entrenador.nombeEntrenador}
+                                                     ${entrenador.nombeEntrenador}
                                                 </a>
 
                                                 <c:if test="${not empty entrenador.equipo}">
@@ -167,7 +170,7 @@
             <div class="result-card">
 
                                                 <a href="/partido/${partido.idPartido}">
-                                                    🏆
+                                                    
                                                     ${partido.equipoLocal}
                                                     vs
                                                     ${partido.equipoVisitante}

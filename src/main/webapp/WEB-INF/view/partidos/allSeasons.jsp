@@ -8,131 +8,16 @@
     <head>
         <meta charset="UTF-8">
         <title>Todas las Temporadas</title>
-        <style>
-            /* Estilos generales */
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f7fa; /* Fondo claro */
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start; /* Alineación a la izquierda */
-                padding-top: 350px; /* Padding para evitar que el header se lo coma */
-                padding-bottom: 350px;
-            }
 
-            h1 {
-                font-size: 2rem;
-                color: #1D428A;
-                margin-top: 30px;
-                margin-left: 20px; /* Alineación a la izquierda */
-            }
-
-            /* Contenedor de las temporadas */
-            .temporadas-container {
-                display: flex;
-                flex-wrap: wrap; /* Para que se salten a la siguiente fila cada 3 elementos */
-                justify-content: flex-start;
-                margin-left: 20px; /* Alineación a la izquierda */
-                width: 100%; /* Asegurarse de que ocupe todo el ancho */
-            }
-
-            .temporada {
-                background-color: #fff;
-                border-radius: 8px;
-                margin: 15px;
-                padding: 15px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                width: 30%; /* Ocupa el 30% del contenedor, por lo que 3 caben por fila */
-                transition: transform 0.3s ease-in-out;
-                margin-left: 20px; /* Alineación a la izquierda */
-            }
-
-            .temporada:hover {
-                transform: scale(1.03);
-            }
-
-            /* Estilo específico para los botones de la vista de temporadas */
-            #seasonButtons button {
-                background-color: #1D428A;
-                color: white;
-                border: none;
-                padding: 10px 15px;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 14px;
-                margin-right: 10px;
-                transition: background-color 0.3s;
-            }
-
-            #seasonButtons button:hover {
-                background-color: #5276be;
-            }
-
-            .hidden {
-                display: none;
-            }
-
-            /* Estilo para los títulos y subtítulos */
-            .temporada h2 {
-                color: white;
-                background-color: #1D428A;
-                padding: 10px;
-                border-radius: 5px;
-                font-size: 1.2rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                cursor: pointer;
-            }
-
-            /* Estilo para la flecha */
-            .temporada h2 span {
-                font-size: 20px;
-                transition: transform 0.3s ease; /* Animación de rotación */
-            }
-
-            /* Rotación de la flecha */
-            .rotated {
-                transform: rotate(180deg);
-            }
-
-            /* Estilo para la sección de la jornada */
-            .jornada {
-                margin: 10px 0;
-                padding: 10px;
-                border-left: 3px solid #1D428A;
-                background-color: #f9f9f9;
-                border-radius: 5px;
-                margin-left: 20px; /* Alineación a la izquierda */
-            }
-
-            .jornada p {
-                margin: 5px 0;
-                cursor: pointer;
-            }
-
-            /* Partidos */
-            .partido {
-                margin-left: 20px;
-                padding: 8px;
-                background-color: #eef2f9;
-                border-radius: 5px;
-                margin-bottom: 10px;
-            }
-
-            /* Estilo para el contenedor de partidos */
-            .partido p {
-                margin: 0;
-                font-size: 14px;
-            }
-
-        </style>
-
-        <script>
+        <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
             // Función para alternar la visibilidad de las temporadas y jornadas
+            /**
+             * Alterna la visibilidad de una sección interactiva de la vista.
+             * @param {string} id Identificador del elemento que se va a mostrar u ocultar.
+             * @param {string} arrowId Identificador del icono usado para reflejar el estado visual.
+             * @returns {void}
+             */
             function toggleVisibility(id, arrowId) {
                 // Buscar todos los contenedores de temporadas y flechas
                 var allTemporadas = document.querySelectorAll('.temporada');
@@ -161,6 +46,12 @@
             }
 
             // Función para alternar la visibilidad de los partidos dentro de cada jornada
+            /**
+             * Alterna la visibilidad de una sección interactiva de la vista.
+             * @param {string} id Identificador del elemento que se va a mostrar u ocultar.
+             * @param {string} arrowId Identificador del icono usado para reflejar el estado visual.
+             * @returns {void}
+             */
             function togglePartidos(id, arrowId) {
                 var element = document.getElementById(id);
                 var arrowElement = document.getElementById(arrowId);
@@ -184,6 +75,8 @@
             <button onClick="window.location.href='/allGames'">Vista Partidos</button>
         </div>
 
+        <%-- Zona filtrable declarativa: los controles data-filter-control actúan sobre elementos data-filter-item. --%>
+    <section data-filter-scope>
         <!-- Formulario de filtro -->
         <form class="filter-form" onsubmit="filterByTeam(event)">
             <label for="teams">Filtra por equipos:</label>
@@ -197,10 +90,33 @@
             <button type="submit">Filtrar</button>
         </form>
 
+        <%-- Barra de filtros secundarios: búsqueda local, rangos y contador de resultados. --%>
+    <div class="data-toolbar">
+            <label>
+                Buscar temporada
+                <input type="search" data-filter-control placeholder="Temporada, campeon, MVP...">
+            </label>
+            <label>
+                Temporada
+                <select data-filter-control data-filter-type="exact" data-filter-field="season">
+                    <option value="">Todas</option>
+                    <c:forEach var="temporada" items="${temporadas}">
+                        <option value="${temporada.anosTemporada}">${temporada.anosTemporada}</option>
+                    </c:forEach>
+                </select>
+            </label>
+            <div class="filter-actions">
+                <button type="button" data-filter-reset>Limpiar</button>
+                <span class="filter-status"><span data-filter-count></span> temporadas</span>
+            </div>
+        </div>
+
+        <div class="filter-empty" data-filter-empty hidden>No hay temporadas con esos filtros.</div>
+
         <!-- Contenedor para las temporadas -->
         <div class="temporadas-container">
             <c:forEach var="temporada" items="${temporadas}" varStatus="status">
-                <div class="temporada">
+                <div class="temporada" data-filter-item data-season="${temporada.anosTemporada}">
                     <div onclick="toggleVisibility('jornadas${status.index}', 'arrow${status.index}')">
                         <h2>Temporada: ${temporada.anosTemporada} 
                             <span id="arrow${status.index}">▼</span> <!-- Flecha hacia abajo -->
@@ -237,10 +153,17 @@
                 </div>
             </c:forEach>
         </div>
+        </section>
     </body>
     </html>
 </Layaout:layaout>
+<%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
 <script>
+    /**
+     * Redirige o filtra la vista según el equipo seleccionado.
+     * @param {Event} event Evento del formulario o control que dispara la acción.
+     * @returns {void}
+     */
     function filterByTeam(event) {
         event.preventDefault();
         var teamId = document.getElementById("teams").value;

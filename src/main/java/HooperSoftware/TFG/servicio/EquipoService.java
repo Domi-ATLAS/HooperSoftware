@@ -15,53 +15,52 @@ public class EquipoService {
 
     EquipoRepository repository;
 
-    EquipoService(EquipoRepository repo){
+    EquipoService(EquipoRepository repo) {
         this.repository = repo;
     }
 
     @Transactional(readOnly = true)
-    public List<Equipo> findAll(){
+    public List<Equipo> findAll() {
         return repository.findAll();
     }
 
     @Transactional(readOnly = true)
-    public Equipo findEquipoById(Integer idEquipo){
+    public Equipo findEquipoById(Integer idEquipo) {
         return repository.findEquipoById(idEquipo);
     }
-    
+
     @Transactional(readOnly = true)
-    public Equipo save (Equipo equipo){
+    public Equipo save(Equipo equipo) {
         return repository.save(equipo);
     }
 
     @Transactional
-    public void deleteEquipo(Integer id){
+    public void deleteEquipo(Integer id) {
         repository.deleteById(id);
     }
 
     @Transactional
-    public List<Jugador> findJugadoresPorEquipo(Integer idEquipo){
+    public List<Jugador> findJugadoresPorEquipo(Integer idEquipo) {
         return repository.findJugadoresByEquipoId(idEquipo);
     }
 
     @Transactional
-    public List<Entrenador> findEntrenadoresPorEquipo(Integer idEquipo){
+    public List<Entrenador> findEntrenadoresPorEquipo(Integer idEquipo) {
         return repository.findEntrenadoresByEquipoId(idEquipo);
     }
 
-
     @Transactional(readOnly = true)
-    public List<Equipo> findClasificacionEste(){
+    public List<Equipo> findClasificacionEste() {
         return repository.findEquiposConferenciaEsteOrdenadosPorBalance();
     }
 
     @Transactional(readOnly = true)
-    public List<Equipo> findClasificacionOeste(){
+    public List<Equipo> findClasificacionOeste() {
         return repository.findEquiposConferenciaOesteOrdenadosPorBalance();
     }
 
     @Transactional(readOnly = true)
-    public List<Equipo> findEquipoByNombre(String nombre){
+    public List<Equipo> findEquipoByNombre(String nombre) {
         return repository.findEquipoByNombre(nombre);
     }
 

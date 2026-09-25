@@ -3,154 +3,218 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Jugadores">
-    <html>
-    <head>
-        <title>Jugadores y Entrenadores</title>
-        <style>
-            .container {
-                display: flex;
-            }
-            .left, .right {
-                width: 50%;
-                padding: 10px;
-            }
-            .left {
-                border-right: 1px solid #ccc;
-            }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-            th, td {
-                border: 1px solid #ccc;
-                padding: 8px;
-                text-align: left;
-            }
-            th {
-                background-color: #f2f2f2;
-            }
+  <div class="players-page">
+  <h1>Jugadores y Entrenadores</h1>
 
-            /* Estilos para los buscadores */
-            .search-container {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 10px;
-            }
-            .search-container input {
-                flex: 1;
-                padding: 8px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                margin-right: 8px;
-            }
-            .search-container button {
-                padding: 8px 12px;
-                background-color: #1D428A;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-            .search-container button:hover {
-                background-color: #5276be;
-            }
-        </style>
-    </head>
-    <body>
-    <h1>Jugadores y Entrenadores</h1>
-    <div class="container">
-        <div class="left">
-            <form class="filter-form" onsubmit="filterByTeam(event)">
-                <label for="teams">Filtra por equipos:</label>
-                <select id="teams" name="teams">
-                    <option value="">Todos los equipos</option>
-                    <c:forEach var="equipo" items="${equipos}">
-                        <option value="${equipo.idEquipo}" 
-                                <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>${equipo.nombreEquipo}</option>
-                    </c:forEach>
-                </select>
-                <button type="submit">Filtrar</button>
-            </form>
-            
-            <h2>Todos los jugadores</h2>
-            <div class="search-container">
-                <input type="text" id="searchPlayer" placeholder="Buscar jugador...">
-                <button onclick="filterPlayers()">Buscar Jugador</button>
-            </div>
-            <table id="playersTable">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Posición</th>
-                    <th>Edad</th>
-                    <th>Detalles</th>
+  <div class="data-toolbar">
+    <span class="filter-status">${playersWithStats} jugadores con estadísticas asociadas</span>
+    <span class="filter-status">${players.size()} jugadores en base de datos</span>
+  </div>
+
+  <div class="players-layout">
+    <section class="panel players-panel">
+      <%-- Filtro por equipo: navega al endpoint de equipo para mostrar datos persistidos. --%>
+      <form class="filter-form" onsubmit="filterByTeam(event)">
+        <label for="teamsL">Filtra por equipos:</label>
+        <select id="teamsL" name="teams">
+          <option value="">Todos los equipos</option>
+          <c:forEach var="equipo" items="${equipos}">
+            <option value="${equipo.idEquipo}" <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>
+              ${equipo.nombreEquipo}
+            </option>
+          </c:forEach>
+        </select>
+        <button type="submit" class="btn">Filtrar</button>
+      </form>
+
+      <h2>Todos los jugadores</h2>
+      <div class="search-bar">
+        <input type="text" id="searchPlayer" placeholder="Buscar jugador...">
+        <button class="btn" type="button" onclick="filterPlayers()">Buscar</button>
+      </div>
+
+      <c:choose>
+        <c:when test="${empty players}">
+          <div class="empty-state">
+            <strong>No hay jugadores para mostrar.</strong>
+            <p>Selecciona otro equipo o vuelve al listado completo.</p>
+            <button class="btn" type="button" onclick="location.href='/allPlayers'">Ver todos</button>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <div class="table-scroll">
+          <table id="playersTable" class="table players-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Equipo</th>
+                <th>Temporada</th>
+                <th>Posición</th>
+                <th>Edad</th>
+                <th>Datos</th>
+                <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="player" items="${players}">
+                <tr class="player-row">
+                  <td>
+                    ${player.nombreJugador}
+                    <c:if test="${player.idJugador < 0}">
+                      <span class="data-badge is-fake fake-marker">Fake ${player.temporadaJugador}</span>
+                    </c:if>
+                  </td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${not empty player.equipo}">${player.equipo.nombreEquipo}</c:when>
+                      <c:otherwise>Sin equipo</c:otherwise>
+                    </c:choose>
+                  </td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${not empty player.temporadaJugador}">${player.temporadaJugador}</c:when>
+                      <c:otherwise>Base</c:otherwise>
+                    </c:choose>
+                  </td>
+                  <td>${player.posicion}</td>
+                  <td>${player.edadJug}</td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${not empty player.estadisticasJug}">
+                        <c:choose>
+                          <c:when test="${player.idJugador < 0}">
+                            <span class="data-badge is-fake">Fake ${player.temporadaJugador}</span>
+                          </c:when>
+                          <c:otherwise>
+                            <span class="data-badge is-online">Con estadísticas</span>
+                          </c:otherwise>
+                        </c:choose>
+                      </c:when>
+                      <c:otherwise>
+                        <span class="data-badge">Backup</span>
+                      </c:otherwise>
+                    </c:choose>
+                  </td>
+                  <td><button class="btn" onclick="location.href='/player/${player.idJugador}'">Detalles</button></td>
                 </tr>
-                <c:forEach var="player" items="${players}">
-                    <tr class="player-row">
-                        <td>${player.nombreJugador}</td>
-                        <td>${player.posicion}</td>
-                        <td>${player.edadJug}</td>
-                        <td><button onClick="window.location.href='/player/${player.idJugador}'">Detalles</button></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
+              </c:forEach>
+            </tbody>
+          </table>
+          </div>
+        </c:otherwise>
+      </c:choose>
+    </section>
 
-        
-        <div class="right">
-            <form class="filter-form" onsubmit="filterByTeam(event)">
-                <label for="teams">Filtra por equipos:</label>
-                <select id="teams" name="teams">
-                    <option value="">Todos los equipos</option>
-                    <c:forEach var="equipo" items="${equipos}">
-                        <option value="${equipo.idEquipo}" 
-                                <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>${equipo.nombreEquipo}</option>
-                    </c:forEach>
-                </select>
-                <button type="submit">Filtrar</button>
-            </form>
-            <h2>Todos los Entrenadores</h2>
+    <section class="panel trainers-panel">
+      <%-- Filtro compartido: mantiene la misma seleccion para jugadores y entrenadores. --%>
+      <form class="filter-form" onsubmit="filterByTeam(event)">
+        <label for="teamsR">Filtra por equipos:</label>
+        <select id="teamsR" name="teams">
+          <option value="">Todos los equipos</option>
+          <c:forEach var="equipo" items="${equipos}">
+            <option value="${equipo.idEquipo}" <c:if test="${equipo.idEquipo == selectedTeamId}">selected</c:if>>
+              ${equipo.nombreEquipo}
+            </option>
+          </c:forEach>
+        </select>
+        <button type="submit" class="btn">Filtrar</button>
+      </form>
 
-            <div class="search-container">
-                <input type="text" id="searchTrainer" placeholder="Buscar entrenador...">
-                <button onclick="filterTrainers()" type="button">Buscar Entrenador</button>
-            </div>
+      <h2>Todos los entrenadores</h2>
+      <div class="search-bar">
+        <input type="text" id="searchTrainer" placeholder="Buscar entrenador...">
+        <button class="btn" type="button" onclick="filterTrainers()">Buscar</button>
+      </div>
 
-            <table>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Edad</th>
-                    <th>Detalles</th>
+      <c:choose>
+        <c:when test="${empty trainers}">
+          <div class="empty-state">
+            <strong>No hay entrenadores para mostrar.</strong>
+            <p>Selecciona otro equipo o vuelve al listado completo.</p>
+            <button class="btn" type="button" onclick="location.href='/allPlayers'">Ver todos</button>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <div class="table-scroll">
+          <table class="table trainers-table" id="trainersTable">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Datos</th>
+                <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="trainer" items="${trainers}">
+                <tr class="trainer-row">
+                  <td>
+                    ${trainer.nombeEntrenador}
+                    <c:if test="${trainer.idEntrenador < 0}">
+                      <span class="data-badge is-fake fake-marker">Fake</span>
+                    </c:if>
+                  </td>
+                  <td>${trainer.edadEntr}</td>
+                  <td>
+                    <c:choose>
+                      <c:when test="${trainer.idEntrenador < 0}">
+                        <span class="data-badge is-fake">Fake</span>
+                      </c:when>
+                      <c:otherwise>
+                        <span class="data-badge is-online">Persistido</span>
+                      </c:otherwise>
+                    </c:choose>
+                  </td>
+                  <td><button class="btn" onclick="location.href='/trainer/${trainer.idEntrenador}'">Detalles</button></td>
                 </tr>
-                <c:forEach var="trainer" items="${trainers}">
-                    <tr class="trainer-row">
-                        <td>${trainer.nombeEntrenador}</td>
-                        <td>${trainer.edadEntr}</td>
-                        <td><button onClick="window.location.href='/trainer/${trainer.idEntrenador}'">Detalles</button></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-    </div>
-    </body>
-    </html>
-    <script>
-        function filterPlayers() {
-            let input = document.getElementById("searchPlayer").value.toLowerCase();
-            let rows = document.querySelectorAll(".player-row");
-        
-            rows.forEach(row => {
-                let nombre = row.cells[0].textContent.toLowerCase();
-                row.style.display = nombre.includes(input) ? "" : "none";
-            });
-        }
-        function filterTrainers() {
-            let input = document.getElementById("searchTrainer").value.toLowerCase();
-            let rows = document.querySelectorAll(".trainer-row");
-        
-            rows.forEach(row => {
-                let nombre = row.cells[0].textContent.toLowerCase();
-                row.style.display = nombre.includes(input) ? "" : "none";
-            });
-        }
-    </script>
+              </c:forEach>
+            </tbody>
+          </table>
+          </div>
+        </c:otherwise>
+      </c:choose>
+    </section>
+  </div>
+
+  <script>
+    /**
+     * Filtra la lista de jugadores por nombre dentro de la tabla visible.
+     * @returns {void}
+     */
+    function filterPlayers() {
+      const input = document.getElementById("searchPlayer").value.toLowerCase();
+      document.querySelectorAll(".player-row").forEach(row => {
+        const nombre = row.cells[0].textContent.toLowerCase();
+        row.style.display = nombre.includes(input) ? "" : "none";
+      });
+    }
+
+    /**
+     * Filtra la lista de entrenadores por nombre dentro de la tabla visible.
+     * @returns {void}
+     */
+    function filterTrainers() {
+      const input = document.getElementById("searchTrainer").value.toLowerCase();
+      document.querySelectorAll(".trainer-row").forEach(row => {
+        const nombre = row.cells[0].textContent.toLowerCase();
+        row.style.display = nombre.includes(input) ? "" : "none";
+      });
+    }
+
+    /**
+     * Redirige al listado persistido por equipo.
+     * @param {Event} event Evento de envio del formulario.
+     * @returns {void}
+     */
+    function filterByTeam(event) {
+      event.preventDefault();
+      const select = event.target.querySelector("select");
+      if (!select || !select.value) {
+        location.href = "/allPlayers";
+        return;
+      }
+      location.href = "/allPlayers/" + select.value;
+    }
+  </script>
+  </div>
 </Layaout:layaout>

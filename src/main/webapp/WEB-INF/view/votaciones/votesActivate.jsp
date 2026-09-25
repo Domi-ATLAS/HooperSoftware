@@ -3,75 +3,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Votaciones en Curso">
-    <style>
-        .container {
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        .vote {
-            background-color: white;
-            color: black;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 10px;
-            border: 2px solid black;
-            text-align: left;
-        }
-
-        .season-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #1D428A;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-
-        .toggle-button {
-            background-color: #ffcc00;
-            color: black;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .toggle-button:hover {
-            background-color: #e6b800;
-        }
-
-       
-
-        .filter-form {
-            margin-top: 20px;
-        }
-    </style>
 
     <h1>Votaciones en Curso</h1>
 
-    <!-- Contenedor de los botones alineados -->
+    <%-- Acciones de navegación entre vistas relacionadas. --%>
     <button type="button" onclick="location.href='/allVotes'">Todas las Votaciones</button>
     <button type="button" onclick="location.href='/allVotes/oficial'">Votaciones Oficiales</button>
-    <!-- Formulario de Filtrado -->
+    <%-- Filtros de la vista: agrupan controles antes de renderizar el listado principal. --%>
     <form class="filter-form" onsubmit="applyFilters(event)">
-        <label for="category">Categoría:</label>
-        <select id="category" name="category">
-            <option value="">Todas</option>
-            <c:forEach var="categoria" items="${categorias}">
-                <option value="${categoria}">${categoria}</option>
-            </c:forEach>
-        </select>
+        <div class="filter-field">
+            <label for="category">Categoría:</label>
+            <select id="category" name="category">
+                <option value="">Todas</option>
+                <c:forEach var="categoria" items="${categorias}">
+                    <option value="${categoria}">${categoria.displayName}</option>
+                </c:forEach>
+            </select>
+        </div>
 
-        <label for="date">Fecha anterior a:</label>
-        <input type="date" id="date" name="date">
+        <div class="filter-field">
+            <label for="date">Fecha anterior a:</label>
+            <input type="date" id="date" name="date">
+        </div>
 
-        <button type="submit">Filtrar</button>
-        <button type="button" onclick="clearFilters()">Limpiar Filtros</button>
+        <div class="filter-actions">
+            <button type="submit">Filtrar</button>
+            <button type="button" onclick="clearFilters()">Limpiar Filtros</button>
+        </div>
     </form>
 
     <div class="container">
@@ -93,7 +51,12 @@
                             <div class="vote"
                                  data-category="${vote.categotiaVotacion}"
                                  data-date="${vote.fecha}">
-                                <h3>${vote.categotiaVotacion}</h3>
+                                <h3>
+                                    ${vote.categotiaVotacion.displayName}
+                                    <c:if test="${vote.idVotacion < 0}">
+                                        <span class="data-badge is-fake fake-marker">Fake</span>
+                                    </c:if>
+                                </h3>
                                 <p>Jornada: ${vote.jornada}</p>
                                 <p>Fecha: ${vote.fecha}</p>
                                 <ul>
@@ -101,7 +64,13 @@
                                         <li>${voto}</li>
                                     </c:forEach>
                                 </ul>
-                                <button type="button" onclick="location.href='rutaVotar'">Votar</button>
+                                <button
+                                    type="button"
+                                    onclick="location.href='/vote/${vote.idVotacion}'">
+
+                                    Votar
+
+                                </button>
                             </div>
                         </c:if>
                     </c:forEach>
@@ -110,12 +79,22 @@
         </c:forEach>
     </div>
 
-    <script>
+    <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
+        /**
+         * Alterna la visibilidad de una sección interactiva de la vista.
+         * @param {string} id Identificador del elemento que se va a mostrar u ocultar.
+         * @returns {void}
+         */
         function toggleVisibility(id) {
             var section = document.getElementById(id);
             section.style.display = (section.style.display === "none" || section.style.display === "") ? "block" : "none";
         }
 
+        /**
+         * Limpia los filtros visuales y restaura el listado completo.
+         * @returns {void}
+         */
         function clearFilters() {
             document.getElementById("category").value = "";
             document.getElementById("date").value = "";
@@ -133,6 +112,11 @@
             });
         }
 
+        /**
+         * Aplica los filtros seleccionados sobre los elementos visibles de la vista.
+         * @param {Event} event Evento del formulario o control que dispara la acción.
+         * @returns {void}
+         */
         function applyFilters(event) {
             event.preventDefault();
 

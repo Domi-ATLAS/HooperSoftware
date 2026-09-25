@@ -10,7 +10,7 @@
 <body>
     <h1>Detalles del Jugador</h1>
     <c:if test="${not empty error}">
-        <div style="color:red;">${error}</div>
+        <div class="result-note">${error}</div>
     </c:if>
     <c:if test="${not empty jugador}">
         <p>ID: ${jugador.id}</p>

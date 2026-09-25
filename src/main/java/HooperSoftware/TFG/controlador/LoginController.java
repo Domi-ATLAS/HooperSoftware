@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import HooperSoftware.TFG.entidad.Usuario;
 import HooperSoftware.TFG.servicio.UsuarioService;
@@ -15,16 +16,24 @@ import java.util.List;
 
 @Controller
 public class LoginController {
-    
+
     @Autowired
     private UsuarioService usuarioService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
     @GetMapping("/login")
-    public String loginForm(Model model) {
+    public String loginForm(
+            @RequestParam(required = false) String username,
+            @RequestParam(required = false) Boolean registered,
+            Model model) {
+
         model.addAttribute("usuario", new Usuario());
+
+        model.addAttribute("username", username);
+        model.addAttribute("registered", registered);
+
         return "login";
     }
 

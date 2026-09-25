@@ -1,14 +1,24 @@
 package HooperSoftware.TFG.components;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class ChangePasswordForm {
 
-    String oldPassword;
+    private String oldPassword;
 
-    String newPassword;
-    
+    private String newPassword;
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
 }

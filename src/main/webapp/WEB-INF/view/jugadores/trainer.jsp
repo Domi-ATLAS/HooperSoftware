@@ -8,7 +8,12 @@
     <button onClick="window.location.href='/allPlayers'">Volver a Jugadores y Entrenadores</button>
 
     <div class="container">
-        <h1>Detalles del Entrenador</h1>
+        <h1>
+            Detalles del Entrenador
+            <c:if test="${trainer.idEntrenador < 0}">
+                <span class="data-badge is-fake fake-marker">Fake</span>
+            </c:if>
+        </h1>
         <p>Nombre: ${trainer.nombeEntrenador}</p>
         <p>Equipo: ${trainer.equipoEntr}</p>
         <p>Edad: ${trainer.edadEntr}</p>

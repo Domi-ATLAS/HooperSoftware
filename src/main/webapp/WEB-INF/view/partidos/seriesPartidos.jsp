@@ -3,18 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Serie">
-    <style>
-        body {
-            background-color: #ffffff; /* Color de fondo azulado */
-            display: flex;
-            height: 100vh;
-            margin: 0;
-        }
-    </style>
     <body>
         <h1>Serie de Partidos</h1>
         <c:if test="${not empty partidos}">
-            <table>
+            <%-- Tabla principal de datos renderizados por JSTL. --%>
+    <table>
                 <tr>
                     <th>Equipo Local</th>
                     <th>Equipo Visitante</th>

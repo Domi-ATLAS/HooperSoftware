@@ -3,72 +3,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Partidos">
-    <style>
-        body {
-            background-color: #ffffff; /* Color de fondo azulado */
-            display: flex;
-            height: 100vh;
-            margin: 0;
-        }
-        button {
-            display: inline-block;
-            padding: 2px 2px;
-            font-size: 24px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            outline: none;
-            color: #000000;
-            background-color: #1D428A;
-            border: 4px;
-            border-style: outset;
-            border-color: black;
-            font-family: fantasy;
-            font: Copperplate, Papyrus, fantasy;
-        }
-        button:hover {background-color: #5276be}
-    
-        button:active {
-            background-color: #5276be;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-        .filter-form {
-            margin-bottom: 20px;
-        }
-        .row-container {
-            border: 4px solid black; /* Ajustado: borde claro */
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #ffffff;
-        }
-
-        /* Aplicar borde y espaciado a las celdas */
-        td {
-            border: 1px solid #000000; /* Borde a las celdas */
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            border: 1px solid #000000; /* Borde a las cabeceras */
-            padding: 8px;
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(odd) {
-            background-color: #f2f2f2; /* Color de fondo para las filas impares */
-        }
-
-        /* Filas pares */
-        tr:nth-child(even) {
-            background-color: #ffffff; /* Color de fondo para las filas pares */
-        }
-    </style>
     <h1>Partidos</h1>
 
     <button onClick="window.location.href='/allGames/allJornadas'">Vista Jornada</button>
     <button onClick="window.location.href='/allSeasons'">Vista Temporada</button>
 
+    <%-- Zona filtrable declarativa: los controles data-filter-control actúan sobre elementos data-filter-item. --%>
+    <section data-filter-scope>
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
         <select id="teams" name="teams">
@@ -80,27 +21,74 @@
         <button type="submit">Filtrar</button>
     </form>
 
-    <table>
-        <tr>
-            <th>Equipo local</th>
-            <th>Equipo visitante</th>
-            <th>Resultado</th>
-            <th>Fecha</th>
-            <th></th>
-        </tr>
-        <c:forEach var="partido" items="${games}">
-            <tr>
-                <td>${partido.equipoLocal}</td>
-                <td>${partido.equipoVisitante}</td>
-                <td>${partido.resultadoTotal}</td>
-                <td>${partido.fecha}</td>
-                <td><button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button></td>
-            </tr>
-        </c:forEach>
-    </table>
+    <%-- Barra de filtros secundarios: búsqueda local, rangos y contador de resultados. --%>
+    <div class="data-toolbar">
+        <label>
+            Buscar partido
+            <input type="search" data-filter-control placeholder="Equipo, resultado...">
+        </label>
+        <label>
+            Desde
+            <input type="date" data-filter-control data-filter-type="date-min" data-filter-field="date">
+        </label>
+        <label>
+            Hasta
+            <input type="date" data-filter-control data-filter-type="date-max" data-filter-field="date">
+        </label>
+        <div class="filter-actions">
+            <button type="button" data-filter-reset>Limpiar</button>
+            <span class="filter-status"><span data-filter-count></span> partidos</span>
+        </div>
+    </div>
+
+    <div class="filter-empty" data-filter-empty hidden>No hay partidos con esos filtros.</div>
+
+    <c:choose>
+        <c:when test="${empty games}">
+            <div class="empty-state">
+                <strong>No hay partidos disponibles.</strong>
+                <p>Prueba otra temporada, jornada o equipo desde la navegación superior.</p>
+                <button type="button" onclick="location.href='/allSeasons'">Ver temporadas</button>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <%-- Tabla principal de datos renderizados por JSTL. --%>
+            <table>
+                <tr>
+                    <th>Equipo local</th>
+                    <th>Equipo visitante</th>
+                    <th>Resultado</th>
+                    <th>Fecha</th>
+                    <th>Datos</th>
+                    <th></th>
+                </tr>
+                <c:forEach var="partido" items="${games}">
+                    <tr data-filter-item data-date="${partido.fecha}">
+                        <td>${partido.equipoLocal}</td>
+                        <td>${partido.equipoVisitante}</td>
+                        <td>${partido.resultadoTotal}</td>
+                        <td>${partido.fecha}</td>
+                        <td>
+                            <c:if test="${partido.idPartido < 0}">
+                                <span class="data-badge is-fake">Fake ${partido.temporada}</span>
+                            </c:if>
+                        </td>
+                        <td><button onClick="window.location.href='/partido/${partido.idPartido}'">Detalles</button></td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:otherwise>
+    </c:choose>
+    </section>
 </Layaout:layaout>
 
+<%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
 <script>
+/**
+ * Redirige o filtra la vista según el equipo seleccionado.
+ * @param {Event} event Evento del formulario o control que dispara la acción.
+ * @returns {void}
+ */
 function filterByTeam(event) {
     event.preventDefault();
     var teamId = document.getElementById("teams").value;

@@ -2,14 +2,6 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <Layaout:layaout title="Detalles Partido">
-    <style>
-        body {
-            background-color: #ffffff; /* Color de fondo azulado */
-            display: flex;
-            height: 100vh;
-            margin: 0;
-        }
-    </style>
     <!DOCTYPE html>
     <html>
     <head>
@@ -17,7 +9,12 @@
         <title>Detalles del Partido</title>
     </head>
     <body>
-        <h1>Detalles del Partido</h1>
+        <h1>
+            Detalles del Partido
+            <c:if test="${game.idPartido < 0}">
+                <span class="data-badge is-fake fake-marker">Fake ${game.temporada}</span>
+            </c:if>
+        </h1>
         <p>Temporada: ${game.temporada}</p>
         <p>Resultado 1 cuarto: ${game.resultadoC1}</p>
         <p>Resultado 2 cuarto: ${game.resultadoC2}</p>

@@ -3,155 +3,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Partidos">
-    <style>
-        /* Estilos generales */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7fa; /* Fondo claro */
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Alineación a la izquierda */
-            padding-top: 350px; /* Padding superior aumentado */
-            padding-bottom: 350px; /* Padding inferior aumentado */
-        }
 
-        h1 {
-            font-size: 2rem;
-            color: #1D428A;
-            margin-top: 30px;
-            margin-left: 20px; /* Alineación a la izquierda */
-        }
-
-        /* Contenedor de los botones */
-        #seasonButtons button {
-            background-color: #1D428A;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-right: 10px;
-            transition: background-color 0.3s;
-        }
-
-        #seasonButtons button:hover {
-            background-color: #5276be;
-        }
-
-        /* Estilos para el filtro */
-        .filter-form {
-            margin-left: 20px;
-            margin-top: 20px;
-        }
-
-        .filter-form label {
-            margin-right: 10px;
-        }
-
-        /* Contenedor de las jornadas */
-        .jornadas-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            margin-left: 20px;
-            width: 100%;
-        }
-
-        .jornada {
-            background-color: #fff;
-            border-radius: 8px;
-            margin: 15px;
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 30%;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .jornada:hover {
-            transform: scale(1.03);
-        }
-
-        /* Estilo de los títulos y detalles de cada jornada */
-        .jornada h2 {
-            color: white;
-            background-color: #1D428A;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 1.2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        /* Estilo de la flecha para desplegar */
-        .arrow-icon {
-            font-size: 20px;
-            transition: transform 0.3s;
-        }
-
-        .arrow-down {
-            transform: rotate(0deg);
-        }
-
-        .arrow-up {
-            transform: rotate(180deg);
-        }
-
-        /* Partidos dentro de la jornada (ahora debajo) */
-        .partidos-container {
-            margin-top: 10px;
-            padding-left: 20px;
-            display: none; /* Inicialmente oculto */
-        }
-
-        .partido {
-            background-color: #eef2f9;
-            border-radius: 5px;
-            padding: 8px;
-            margin-bottom: 10px;
-        }
-
-        .partido p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        /* Botón de detalles */
-        .details-button {
-            background-color: #1D428A;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .details-button:hover {
-            background-color: #5276be;
-        }
-
-        .details-button:active {
-            background-color: #5276be;
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-
-        /* Botón oculto */
-        .hidden {
-            display: none;
-        }
-
-    </style>
-
-    <script>
+    <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
+        /**
+         * Alterna la visibilidad de una sección interactiva de la vista.
+         * @param {string} id Identificador del elemento que se va a mostrar u ocultar.
+         * @param {string} arrowId Identificador del icono usado para reflejar el estado visual.
+         * @returns {void}
+         */
         function togglePartidos(id, arrowId) {
             // Buscar todos los contenedores de partidos y flechas
             var allPartidos = document.querySelectorAll('.partidos-container');
@@ -191,6 +51,8 @@
         <button id="viewSeasonsBtn" onClick="window.location.href='/allSeasons'">Vista Temporada</button>
     </div>
 
+    <%-- Zona filtrable declarativa: los controles data-filter-control actúan sobre elementos data-filter-item. --%>
+    <section data-filter-scope>
     <!-- Formulario de filtro -->
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
@@ -204,9 +66,24 @@
         <button type="submit">Filtrar</button>
     </form>
 
+    <%-- Barra de filtros secundarios: búsqueda local, rangos y contador de resultados. --%>
+    <div class="data-toolbar">
+        <label>
+            Buscar jornada
+            <input type="search" data-filter-control placeholder="Jornada, temporada, equipo...">
+        </label>
+        <div class="filter-actions">
+            <button type="button" data-filter-reset>Limpiar</button>
+            <span class="filter-status"><span data-filter-count></span> jornadas</span>
+        </div>
+    </div>
+
+    <div class="filter-empty" data-filter-empty hidden>No hay jornadas con esos filtros.</div>
+
     <!-- Contenedor de jornadas -->
     <div class="jornadas-container">
         <c:forEach var="jornada" items="${jornadas}" varStatus="status">
+            <div data-filter-item>
             <div class="jornada">
                 <h2 onclick="togglePartidos('partidos${status.index}', 'arrow${status.index}')">
                     Jornada ${jornada.numJornada}
@@ -226,11 +103,19 @@
                     </div>
                 </c:forEach>
             </div>
+            </div>
         </c:forEach>
     </div>
+    </section>
 
 </Layaout:layaout>
+<%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
 <script>
+    /**
+     * Redirige o filtra la vista según el equipo seleccionado.
+     * @param {Event} event Evento del formulario o control que dispara la acción.
+     * @returns {void}
+     */
     function filterByTeam(event) {
         event.preventDefault();
         var teamId = document.getElementById("teams").value;
@@ -241,4 +126,3 @@
         }
     }
 </script>
-    

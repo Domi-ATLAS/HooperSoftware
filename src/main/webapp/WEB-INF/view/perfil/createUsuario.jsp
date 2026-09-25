@@ -2,118 +2,182 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
-<style>
-    .button-group {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-    button {
-        display: inline-block;
-        padding: 2px 2px;
-        font-size: 24px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        outline: none;
-        color: #000000;
-        background-color: #1D428A;
-        border: 4px;
-        border-style: outset;
-        border-color: black;
-        font-family: fantasy;
-        font: Copperplate, Papyrus, fantasy;
-    }
-    button:hover {background-color: #5276be}
 
-    button:active {
-    background-color: #5276be;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-    }
-    a{
-        display: inline-block;
-        padding: 2px 2px;
-        font-size: 24px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        outline: none;
-        color: #000000;
-        background-color: #1D428A;
-        border: 4px;
-        border-style: outset;
-        border-color: black;
-        font-family: fantasy;
-        font: Copperplate, Papyrus, fantasy;
-    }
-    a:active{
-        background-color: #5276be;
-        box-shadow: 0 5px #666;
-        transform: translateY(4px);
-    }
-    a:hover{
-        background-color: #5276be;
-    }
-</style>
-<Layaout:layaout title="Registrarse">
-            <div class="register">
-                <h1 class="title">Registrarse</h1>
-                <c:if test="${not empty errors}">
-                    <div id="error-notifications">
-                        <c:forEach items="${errors}" var="error">
-                            <div class="error-notification">
-                                <span><c:out value="${error}"/></span>
-                                <button class="close-button">×</button>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </c:if>
-                <form:form modelAttribute="usuario" method="post">
-                    <div>
-                        <label for="username">Usuario:</label>
-                    </div>
-                    <div>
-                        <input class="input-large"type="text" id="username" name="username" required>
-                    </div>
-                    <div>
-                        <label for="password">Contraseña:</label>
-                        <i id="iconoMostrar" class="fas fa-eye"></i>
-                    </div>
-                    <div>
-                        
-                        <input type="password" class ="input-large" id="password" name="password" required>
-                    </div>
-                    <div class="errors" style="color:red">
-                        <c:out value="${passwordError}"/>
-                    </div>
+<Layaout:layaout title="Crear cuenta">
 
-                    <div>
-                        <label for="nombreUsuario">Nombre:</label>
-                    </div>
-                    <div>
-                        <input class="input-large"type="text" id="nombreUsuario" name="nombreUsuario" required>
-                    </div>
+<div class="profile-container">
 
-                    <div>
-                        <label for="correo">Email:</label>
-                    </div>
-                    <div>
-                        <input class="input-large"type="text" id="correo" name="correo" required>
-                    </div>
+    <%-- Panel de perfil: agrupa datos de usuario y acciones de cuenta. --%>
+<div class="profile-card">
 
-                    <button class="buttom" type="submit">Registrarme</button>
-                </form:form>
-                <div class="registerInfo">
-                    <p class="register">Regístrate por si quieres guardar informacion personal y poder conversar con otras personas</p>
-                    <p class="register">Tambien puedes no hacerlo :|, y aunque no nos gustaria puedes tener acceso a toda la información de la web</p>
-                    <a class="buttom" href="/noticias">Acceso a la web</a>
-                </div>
-                <p class="register">¿Ya tienes una cuenta?<a href="/login" class="buttom-positive">Iniciar sesión</a> </p>
+        <h1> Crear cuenta HooperSoftware</h1>
+
+        <p class="profile-subtitle">
+            Regístrate para participar en votaciones, usar el chat global y personalizar tu experiencia NBA.
+        </p>
+
+        <c:if test="${not empty errors}">
+            <div class="error-box">
+                <c:forEach items="${errors}" var="error">
+                    <p>${error}</p>
+                </c:forEach>
+            </div>
+        </c:if>
+
+
+        <form:form
+                modelAttribute="usuario"
+                method="post"
+                enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label>Usuario</label>
+                <input
+                        type="text"
+                        name="username"
+                        class="input-large"
+                        required>
             </div>
 
-        <script src="/js/error_script.js"></script>
-        <script src="/js/show_password.js"></script>
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input
+                        type="password"
+                        name="password"
+                        class="input-large"
+                        required>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre visible</label>
+                <input
+                        type="text"
+                        name="nombreUsuario"
+                        class="input-large"
+                        required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input
+                        type="email"
+                        name="correo"
+                        class="input-large"
+                        required>
+            </div>
+
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input
+                        type="number"
+                        name="numeroTelefono"
+                        class="input-large">
+            </div>
+
+            <div class="form-group">
+                <label>Equipo favorito</label>
+                <select
+                    name="equipoFavorito"
+                    class="input-large">
+
+                    <option value="">
+                        Selecciona tu equipo favorito
+                    </option>
+
+                    <c:forEach var="e" items="${equipos}">
+
+                        <option value="${e.nombreEquipo}">
+                            ${e.nombreEquipo}
+                        </option>
+
+                    </c:forEach>
+
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Foto de perfil (opcional)</label>
+
+                <input
+                        type="file"
+                        name="avatar"
+                        accept="image/png,image/jpeg,image/webp">
+            </div>
+
+            <button type="submit" class="search-btn">
+                Crear cuenta
+            </button>
+
+        </form:form>
+
+        <hr>
+
+        <div style="text-align:center;">
+
+            <p>
+                ¿Ya tienes cuenta?
+            </p>
+
+            <a href="/login" class="search-btn">
+                Iniciar sesión
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+.profile-container{
+    display:flex;
+    justify-content:center;
+    margin:50px auto;
+}
+
+.profile-card{
+    background:#001a4d;
+    color:white;
+    padding:40px;
+    border-radius:20px;
+    width:700px;
+    border:2px solid #2454ff;
+}
+
+.profile-card h1{
+    margin-bottom:20px;
+}
+
+.profile-subtitle{
+    margin-bottom:30px;
+    color:#d7d7d7;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.input-large{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+}
+
+.error-box{
+    background:#8b0000;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+</style>
 
 </Layaout:layaout>

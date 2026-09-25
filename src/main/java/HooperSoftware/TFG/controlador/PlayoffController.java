@@ -93,12 +93,12 @@ public class PlayoffController {
         mav.setViewName("partidos/cuadrantePlayOffs");
         List<Equipo> equipos = playoffService.findEquiposByPlayOffs(temporada);
         List<Equipo> equiposOeste = equipos.stream()
-                                            .filter(e -> e.getConferencia().equals("Este"))
-                                            .sorted(Comparator.comparing(Equipo::getBalanceTemporada))
+                                            .filter(e -> "Oeste".equals(e.getConferencia()))
+                                            .sorted(Comparator.comparing(Equipo::getBalanceTemporada, Comparator.nullsFirst(Double::compareTo)).reversed())
                                             .collect(Collectors.toList());
         List<Equipo> equiposEste = equipos.stream()
-                                            .filter(e -> e.getConferencia().equals("Oeste"))
-                                            .sorted(Comparator.comparing(Equipo::getBalanceTemporada))
+                                            .filter(e -> "Este".equals(e.getConferencia()))
+                                            .sorted(Comparator.comparing(Equipo::getBalanceTemporada, Comparator.nullsFirst(Double::compareTo)).reversed())
                                             .collect(Collectors.toList());
         mav.addObject("playOffsGames", partidoService.findPlayOffGamesByTemporada(temporada));
         mav.addObject("temporada", temporada);  

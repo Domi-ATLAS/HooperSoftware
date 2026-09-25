@@ -17,7 +17,7 @@ public class EntrenadorController {
     @GetMapping("/allCoaches")
     public ModelAndView showAllCoachesPage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("allTrainers");
+        mav.setViewName("entrenadores/allTrainers");
         mav.addObject("coaches", entrenadorService.findAll());
         return mav;
     }

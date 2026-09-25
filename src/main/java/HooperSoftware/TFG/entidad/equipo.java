@@ -12,12 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
-
-
-
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -65,11 +59,27 @@ public class Equipo {
 
     @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL)
     List<Entrenador> entrenadores;
-    
+
     @OneToMany(mappedBy = "equipoOrigen", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Transferencia> transferenciasOrigen;
 
     @OneToMany(mappedBy = "equipoDestino", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<Transferencia> transferenciasDestino;
+
+    public String getNombreEquipo() {
+        return nombreEquipo;
+    }
+
+    public String getSiglas() {
+        return siglas;
+    }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public Integer getIdEquipo() {
+        return idEquipo;
+    }
 
 }

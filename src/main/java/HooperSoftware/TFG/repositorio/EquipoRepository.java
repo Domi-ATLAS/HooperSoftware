@@ -12,16 +12,19 @@ import HooperSoftware.TFG.entidad.Equipo;
 import HooperSoftware.TFG.entidad.Jugador;
 
 @Repository
-public interface EquipoRepository extends CrudRepository<Equipo,Integer>{
-    
+public interface EquipoRepository extends CrudRepository<Equipo, Integer> {
+
     @Query("SELECT e FROM Equipo e")
     List<Equipo> findAll();
 
     @Query("SELECT e FROM Equipo e WHERE e.idEquipo = ?1")
     Equipo findEquipoById(Integer idEquipo);
 
-    @Query("SELECT e FROM Equipo e WHERE e.nombreEquipo LIKE ?1")
+    @Query("SELECT e FROM Equipo e WHERE lower(e.nombreEquipo) LIKE lower(?1)")
     List<Equipo> findEquipoByNombre(String nombre);
+
+    @Query("SELECT e FROM Equipo e WHERE e.siglas = ?1")
+    Equipo findEquipoBySiglas(String siglas);
 
     @Query("SELECT e FROM Equipo e WHERE e.conferencia = ?1")
     List<Equipo> findEquipoByConferencia(String conferencia);
@@ -50,10 +53,10 @@ public interface EquipoRepository extends CrudRepository<Equipo,Integer>{
     @Query("SELECT e FROM Equipo e WHERE e.balanceTemporada > ?1")
     List<Equipo> findEquipoByBalanceTemporada(Integer balanceTemporada);
 
-    @Query("SELECT e.jugadores FROM Equipo e WHERE e.id = ?1")
+    @Query("SELECT e.jugadores FROM Equipo e WHERE e.idEquipo = ?1")
     List<Jugador> findJugadoresByEquipoId(Integer equipoId);
 
-    @Query("SELECT e.entrenadores FROM Equipo e WHERE e.id = ?1")
+    @Query("SELECT e.entrenadores FROM Equipo e WHERE e.idEquipo = ?1")
     List<Entrenador> findEntrenadoresByEquipoId(Integer equipoId);
 
     @Query("SELECT e FROM Equipo e WHERE e.conferencia = 'Este' ORDER BY e.balanceTemporada")

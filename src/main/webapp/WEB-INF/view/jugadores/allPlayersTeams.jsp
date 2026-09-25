@@ -6,18 +6,6 @@
 <html>
 <head>
     <title>Jugadores y Entrenadores</title>
-    <style>
-        .container { display: flex; }
-        .left, .right { width: 50%; padding: 10px; }
-        .left { border-right: 1px solid #ccc; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        .search-container { display: flex; margin-bottom: 10px; }
-        .search-container input { flex: 1; padding: 8px; border: 1px solid #ccc; margin-right: 8px; }
-        .search-container button { padding: 8px; background-color: #1D428A; color: white; border: none; cursor: pointer; }
-        .search-container button:hover { background-color: #5276be; }
-    </style>
 </head>
 <body>
     <h1>Jugadores y Entrenadores</h1>
@@ -46,12 +34,33 @@
                 <button onclick="filterPlayers()">Buscar</button>
             </div>
             <table id="playersTable">
-                <tr><th>Nombre</th><th>Posición</th><th>Edad</th><th>Detalles</th></tr>
+                <tr><th>Nombre</th><th>Temporada</th><th>Posición</th><th>Edad</th><th>Datos</th><th>Detalles</th></tr>
                 <c:forEach var="player" items="${players}">
                     <tr class="player-row">
-                        <td>${player.nombreJugador}</td>
+                        <td>
+                            ${player.nombreJugador}
+                            <c:if test="${player.idJugador < 0}">
+                                <span class="data-badge is-fake fake-marker">Fake ${player.temporadaJugador}</span>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${not empty player.temporadaJugador}">${player.temporadaJugador}</c:when>
+                                <c:otherwise>Base</c:otherwise>
+                            </c:choose>
+                        </td>
                         <td>${player.posicion}</td>
                         <td>${player.edadJug}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${player.idJugador < 0}">
+                                    <span class="data-badge is-fake">Fake ${player.temporadaJugador}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="data-badge is-online">Persistido</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                         <td><button onClick="window.location.href='/player/${player.idJugador}'">Detalles</button></td>
                     </tr>
                 </c:forEach>
@@ -65,12 +74,28 @@
                 <input type="text" id="searchTrainer" placeholder="Buscar entrenador...">
                 <button onclick="filterTrainers()">Buscar</button>
             </div>
-            <table>
-                <tr><th>Nombre</th><th>Edad</th><th>Detalles</th></tr>
+            <%-- Tabla principal de datos renderizados por JSTL. --%>
+    <table>
+                <tr><th>Nombre</th><th>Edad</th><th>Datos</th><th>Detalles</th></tr>
                 <c:forEach var="trainer" items="${trainers}">
                     <tr class="trainer-row">
-                        <td>${trainer.nombeEntrenador}</td>
+                        <td>
+                            ${trainer.nombeEntrenador}
+                            <c:if test="${trainer.idEntrenador < 0}">
+                                <span class="data-badge is-fake fake-marker">Fake</span>
+                            </c:if>
+                        </td>
                         <td>${trainer.edadEntr}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${trainer.idEntrenador < 0}">
+                                    <span class="data-badge is-fake">Fake</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="data-badge is-online">Persistido</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                         <td><button onClick="window.location.href='/trainer/${trainer.idEntrenador}'">Detalles</button></td>
                     </tr>
                 </c:forEach>
@@ -78,11 +103,20 @@
         </div>
     </div>
 
-    <script>
+    <%-- Scripts propios de esta vista: interacción local sin cambiar la lógica del servidor. --%>
+<script>
+        /**
+         * Actualiza los controles dependientes antes de aplicar el filtrado.
+         * @returns {void}
+         */
         function updateFilters() {
             document.getElementById("filterForm").submit();
         }
 
+        /**
+         * Filtra la lista de jugadores según los criterios activos.
+         * @returns {void}
+         */
         function filterPlayers() {
             let input = document.getElementById("searchPlayer").value.toLowerCase();
             let rows = document.querySelectorAll(".player-row");
@@ -92,6 +126,10 @@
             });
         }
 
+        /**
+         * Filtra la lista de entrenadores según los criterios activos.
+         * @returns {void}
+         */
         function filterTrainers() {
             let input = document.getElementById("searchTrainer").value.toLowerCase();
             let rows = document.querySelectorAll(".trainer-row");

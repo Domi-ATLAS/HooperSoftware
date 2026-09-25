@@ -10,21 +10,25 @@ import HooperSoftware.TFG.entidad.Jugador;
 import HooperSoftware.TFG.entidad.Partido;
 
 @Repository
-public interface PartidoRepository extends CrudRepository<Partido,Integer> {
+public interface PartidoRepository extends CrudRepository<Partido, Integer> {
 
     @Query("SELECT p FROM Partido p")
     List<Partido> findAll();
 
     @Query("SELECT p FROM Partido p WHERE p.idPartido = ?1")
     Partido findPartidoById(Integer idPartido);
-    
+
     @Query("SELECT p FROM Partido p WHERE p.playoff.idPlayOff = ?1")
     List<Partido> findPartidoByIdPlayOff(Integer idPlayOff);
 
     @Query("SELECT p FROM Partido p WHERE p.equipoLocal = ?1 AND p.equipoVisitante = ?2")
     List<Partido> findPartidoByEquipoLocalAndEquipoVisitante(String equipoLocal, String equipoVisitante);
 
-    @Query("SELECT p FROM Partido p WHERE p.equipoLocal = ?1 OR p.equipoVisitante = ?1")
+    @Query("""
+    SELECT p FROM Partido p
+    WHERE lower(p.equipoLocal) LIKE lower(?1)
+    OR lower(p.equipoVisitante) LIKE lower(?1)
+    """)
     List<Partido> findPartidoByTeam(String equipo);
 
     @Query("SELECT p FROM Partido p WHERE p.equipoLocal = ?1")
@@ -44,7 +48,7 @@ public interface PartidoRepository extends CrudRepository<Partido,Integer> {
 
     @Query("SELECT p FROM Partido p WHERE p.equipoLocal = ?1 AND p.equipoVisitante = ?2 AND p.playOffSiONo = True ")
     List<Partido> findPartidoByVictoriaSerieAndEquipoLocalAndEquipoVisitante(String equipoLocal, String equipoVisitante);
-    
+
     @Query("SELECT p FROM Partido p WHERE p.playOffSiONo = true AND p.playoff.temporada = '2023-2024'")
     List<Partido> findPartidosPlayOff2024();
 
@@ -59,7 +63,7 @@ public interface PartidoRepository extends CrudRepository<Partido,Integer> {
 
     @Query("SELECT e.jugadores FROM Partido p JOIN Equipo e ON p.equipoLocal = e.nombreEquipo WHERE p.id = ?1")
     List<Jugador> findLocalTeamPlayersByPartidoId(Integer id);
-    
+
     @Query("SELECT e.jugadores FROM Partido p JOIN Equipo e ON p.equipoVisitante = e.nombreEquipo WHERE p.id = ?1")
     List<Jugador> findVisitTeamPlayersByPartidoId(Integer id);
 
@@ -71,5 +75,11 @@ public interface PartidoRepository extends CrudRepository<Partido,Integer> {
 
     @Query("SELECT p FROM Partido p WHERE p.equipoLocalTa.idEquipo = ?1 OR p.equipoVisitanteTa.idEquipo = ?1 ORDER BY p.fecha DESC")
     List<Partido> findAllGamesByTeamById(Integer id);
+
+    @Query("SELECT DISTINCT p.temporada FROM Partido p WHERE p.temporada IS NOT NULL AND p.temporada <> '' ORDER BY p.temporada")
+    List<String> findTemporadasPartidos();
+
+    @Query("SELECT p FROM Partido p WHERE p.temporada = ?1")
+    List<Partido> findByTemporada(String temporada);
 
 }

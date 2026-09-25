@@ -10,7 +10,7 @@
 <body>
     <h1>Lista de Jugadores</h1>
     <c:if test="${not empty error}">
-        <div style="color:red;">${error}</div>
+        <div class="result-note">${error}</div>
     </c:if>
     <table border="1">
         <thead>

@@ -3,60 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Equipos Playoffs 23">
-    <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-            border: 4px;
-            border-style: outset;
-            border-color: black;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #ffffff;
-        }
-        .section {
-            width: 19%;
-        }
-        .group {
-            border: 4px;
-            border-style: outset;
-            border-color: black;
-            padding: 20px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #5276be;
-            font-family: fantasy;
-            font: Copperplate, Papyrus, fantasy;
-        }
-        .team-info {
-            width: 40%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .vs {
-            text-shadow: 2px 2px 5px #000000;
-            color: #1D428A;
-            width: 80%;
-            text-align: left;
-        }
-        .details {
-            width: 40%;
-            text-align: right;
-        }
-        .section {
-            width: 19%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .group p:nth-child(2) {
-            text-align: right;
-        }
-    </style>
 
     <h1>Equipos Playoffs 23</h1>
     <div class="container">

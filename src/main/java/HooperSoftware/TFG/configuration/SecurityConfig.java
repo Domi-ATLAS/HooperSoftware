@@ -14,46 +14,65 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
-		.authorizeHttpRequests((authorize) -> authorize
-                // .requestMatchers("/welcome").permitAll() 
-                // .requestMatchers("/login").permitAll() 
-                // .requestMatchers("/register").permitAll()
-                .anyRequest().permitAll() 
-            )
-		.formLogin(login -> login
+                //  CSRF
+                .csrf(csrf -> csrf
+                .ignoringRequestMatchers(
+                        "/admin/scrape/**",
+                        "/admin/sync/**",
+                        "/h2-console/**"
+                )
+                )
+                //  AUTORIZACIÓN
+                .authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/h2-console/**").permitAll()
+                .anyRequest().permitAll()
+                )
+                //  H2 necesita frames
+                .headers(headers -> headers
+                .frameOptions(frame -> frame.disable())
+                )
+                //  LOGIN
+                .formLogin(login -> login
                 .loginPage("/login")
-				.defaultSuccessUrl("/welcome")
-				.permitAll()
-                .failureUrl("/login?error=true"))
-		.logout(logout -> logout
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) 
-            .invalidateHttpSession(true) 
-            .deleteCookies("JSESSIONID") 
-            .logoutSuccessUrl("/welcome")
-            .permitAll()); 
+                .defaultSuccessUrl("/welcome")
+                .permitAll()
+                .failureUrl("/login?error=true")
+                )
+                //  LOGOUT
+                .logout(logout -> logout
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/welcome")
+                .permitAll()
+                );
+
         return http.build();
     }
 
     @Bean
-	PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-	}
-	
+    }
+
     @Bean
     UserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
-        userDetailsManager.setUsersByUsernameQuery("select username, password, enabled from usuario where username = ?");
-        userDetailsManager.setAuthoritiesByUsernameQuery("select username, authority from authorities where username = ?");
+        userDetailsManager.setUsersByUsernameQuery(
+                "select username, password, enabled from usuario where username = ?"
+        );
+        userDetailsManager.setAuthoritiesByUsernameQuery(
+                "select username, authority from authorities where username = ?"
+        );
         return userDetailsManager;
     }
-    
 }

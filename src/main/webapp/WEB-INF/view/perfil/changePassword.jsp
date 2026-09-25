@@ -4,18 +4,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Cambiar Contraseña">
-    <%-- Vista frontend: formularios y paneles de cuenta de usuario. --%>
 
 <div class="password-container">
 
-```
 <div class="password-card">
 
     <a href="/profile/${usuario.username}" class="back-link">
         ← Volver al perfil
     </a>
 
-    <h1>🔒 Cambiar Contraseña</h1>
+    <h1>Cambiar Contraseña</h1>
 
     <c:if test="${not empty errors}">
 
@@ -33,7 +31,6 @@
 
     </c:if>
 
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form:form modelAttribute="changePasswordForm">
 
@@ -65,14 +62,13 @@
                 type="submit"
                 class="save-btn">
 
-            🔒 Cambiar contraseña
+            Cambiar contraseña
 
         </button>
 
     </form:form>
 
 </div>
-```
 
 </div>
 

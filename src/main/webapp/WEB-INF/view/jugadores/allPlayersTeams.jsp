@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Jugadores y Entrenadores">
-    <%-- Vista frontend: jugadores y entrenadores con listados, fichas y datos de perfil. --%>
 <html>
 <head>
     <title>Jugadores y Entrenadores</title>
@@ -12,7 +11,6 @@
     <h1>Jugadores y Entrenadores</h1>
 
     <!-- Formulario de Filtros -->
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
     <form class="filter-form" id="filterForm" action="/allPlayers/${selectedTeamId}" method="get">
         <label for="teams">Filtrar por equipo:</label>
         <select id="teams" name="teamId" onchange="updateFilters()">

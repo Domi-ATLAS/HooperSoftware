@@ -142,7 +142,7 @@ public class SimulacionController {
         var wins = simulacionService.calcularWins(sale, llega);
         model.addAttribute("wins", wins);
 
-        // 🚨 evitar mismo jugador
+        // Evita seleccionar al mismo jugador en ambos equipos.
         if (sale.getIdJugador().equals(llega.getIdJugador())) {
             model.addAttribute("error", "No puedes tradear el mismo jugador");
             model.addAttribute("jugadores", jugadores);

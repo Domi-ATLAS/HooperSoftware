@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Todas las Votaciones">
-    <%-- Vista frontend: votaciones con filtros, agrupación por temporada y acciones de participación. --%>
 
 
     <h1>Todas las Votaciones</h1>

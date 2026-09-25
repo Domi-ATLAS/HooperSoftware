@@ -2,7 +2,6 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 
 <Layaout:layaout title="Acerca del proyecto">
-  <%-- Vista frontend: explicación del alcance técnico y funcional del TFG. --%>
 
   <section class="about-page">
     <div class="about-hero">

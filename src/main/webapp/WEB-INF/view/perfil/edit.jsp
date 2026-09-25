@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Editar Perfil">
-    <%-- Vista frontend: formularios y paneles de cuenta de usuario. --%>
 
 <div class="profile-edit-container">
 
@@ -14,7 +13,7 @@
         ← Volver al perfil
     </a>
 
-    <h1>⚙️ Editar Perfil</h1>
+    <h1>Editar Perfil</h1>
 
     <c:if test="${not empty errors}">
         <div class="error-box">
@@ -28,7 +27,6 @@
         </div>
     </c:if>
 
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form:form
             modelAttribute="usuario"
@@ -149,7 +147,7 @@
                 type="submit"
                 class="save-btn">
 
-            💾 Guardar cambios
+            Guardar cambios
 
         </button>
 

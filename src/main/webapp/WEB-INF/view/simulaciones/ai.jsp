@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="Análisis de equipo NBA">
-    <%-- Vista frontend: análisis explicable basado en datos de plantilla. --%>
 
 <div class="sim-page">
 

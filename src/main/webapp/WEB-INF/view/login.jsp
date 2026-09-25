@@ -3,7 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 <Layaout:layaout title="Iniciar sesión">
-    <%-- Vista frontend: formulario de inicio de sesión. --%>
     <div class="register">
         <h1 class="title">Iniciar sesión</h1>
         <c:if test="${not empty errors}">
@@ -21,7 +20,6 @@
                  Cuenta creada correctamente. Ya puedes iniciar sesión.
             </div>
         </c:if>
-        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
         <form:form modelAttribute="usuario" method="post">
             <div>
                 <label for="username">Usuario:</label>

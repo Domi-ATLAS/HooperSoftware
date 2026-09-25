@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Votaciones Oficiales">
-    <%-- Vista frontend: votaciones con filtros, agrupación por temporada y acciones de participación. --%>
 
 
     <h1>Votaciones Oficiales</h1>

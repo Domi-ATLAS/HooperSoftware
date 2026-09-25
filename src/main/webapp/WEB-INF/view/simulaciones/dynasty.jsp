@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="Dynasty Simulator">
-    <%-- Vista frontend: simulación NBA con formularios, resultados y paneles interactivos. --%>
 
 <div class="sim-container">
 
@@ -18,7 +17,6 @@
         cuántos anillos podría ganar tu franquicia.
     </p>
 
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form action="/simulaciones/dynasty" method="post">
 
@@ -122,7 +120,7 @@
 
                 <c:when test="${dynasty.dynastyScore >= 90}">
                     <h2 class="result-note">
-                        🐐 Dinastía Legendaria
+                        Dinastía Legendaria
                     </h2>
                 </c:when>
 

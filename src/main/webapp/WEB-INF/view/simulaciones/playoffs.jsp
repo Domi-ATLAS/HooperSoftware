@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="Predicción Playoffs">
-    <%-- Vista frontend: simulación NBA con formularios, resultados y paneles interactivos. --%>
 
 <div class="sim-page">
 
@@ -15,7 +14,6 @@
 
         <h1> Predicción de Playoffs NBA</h1>
 
-        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
         <form action="/simulaciones/playoffs" method="post">
 

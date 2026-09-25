@@ -4,7 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="Comparativa">
-  <%-- Vista frontend: comparación histórica entre temporadas, plantillas y traspasos. --%>
 
   <section class="comparison-page">
     <a href="/simulaciones" class="back-btn">Volver a Simulaciones</a>

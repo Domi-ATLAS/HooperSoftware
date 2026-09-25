@@ -3,7 +3,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <Layaout:layaout title="Bienvenido">
-    <%-- Vista frontend: portada y accesos principales de la aplicación. --%>
   <section class="home-dashboard">
     <div class="home-hero">
       <p class="eyebrow">HooperSoftware</p>

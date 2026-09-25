@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Playoffs de la NBA">
-    <%-- Vista frontend: resumen de playoffs con filtros declarativos y tarjetas visuales. --%>
 
     <div class="page-heading">
         <h1>Playoffs de la NBA</h1>

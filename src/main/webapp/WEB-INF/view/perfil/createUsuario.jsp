@@ -4,7 +4,6 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 
 <Layaout:layaout title="Crear cuenta">
-    <%-- Vista frontend: formularios y paneles de cuenta de usuario. --%>
 
 <div class="profile-container">
 
@@ -25,7 +24,6 @@
             </div>
         </c:if>
 
-        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
         <form:form
                 modelAttribute="usuario"

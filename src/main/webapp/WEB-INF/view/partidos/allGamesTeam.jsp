@@ -3,14 +3,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Partidos del Equipo">
-    <%-- Vista frontend: consulta de partidos, temporadas, jornadas o playoffs con navegación y filtros. --%>
 
     <h1>Partidos del Equipo</h1>
 
     <%-- Zona filtrable declarativa: los controles data-filter-control actúan sobre elementos data-filter-item. --%>
     <section data-filter-scope>
     <!-- Formulario de filtro -->
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
         <select id="teams" name="teams">

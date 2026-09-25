@@ -4,7 +4,6 @@
             <%@ page contentType="text/html;charset=UTF-8" %>
 
                 <Layaout:layaout title="Buscador NBA">
-    <%-- Vista frontend: buscador global de contenido de la aplicación. --%>
 
                     <div class="search-page">
 
@@ -12,7 +11,6 @@
 
                         <div class="search-container">
 
-                            <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
                             <form action="/buscador" method="get">
 

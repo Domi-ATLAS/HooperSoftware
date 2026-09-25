@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Todos los Partidos de Playoffs">
-    <%-- Vista frontend: consulta de partidos de playoffs con filtros y grupos por temporada. --%>
     <div class="page-heading">
         <h1>Todos los Partidos de Playoffs</h1>
         <button class="btn" type="button" onclick="window.location.href='/allPlayOffs'">Volver a Playoffs</button>

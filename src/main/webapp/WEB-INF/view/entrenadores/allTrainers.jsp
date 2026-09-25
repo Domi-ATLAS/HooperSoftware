@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Entrenadores">
-  <%-- Vista frontend: listado independiente de entrenadores con busqueda local. --%>
   <div class="players-page">
     <div class="page-heading">
       <h1>Entrenadores</h1>

@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="Tablero de encaje NBA">
-    <%-- Vista frontend: tablero de pista para comparar quintetos, encaje por equipo y recomendaciones. --%>
 
     <section class="lineup-page">
         <a href="/simulaciones" class="back-btn">Volver a Simulaciones</a>

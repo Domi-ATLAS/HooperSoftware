@@ -28,17 +28,17 @@ public class SecurityConfig {
                 .ignoringRequestMatchers(
                         "/admin/scrape/**",
                         "/admin/sync/**",
-                        "/h2-console/**" // 👈 CLAVE
+                        "/h2-console/**"
                 )
                 )
                 //  AUTORIZACIÓN
                 .authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/h2-console/**").permitAll() // 👈 CLAVE
+                .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().permitAll()
                 )
                 //  H2 necesita frames
                 .headers(headers -> headers
-                .frameOptions(frame -> frame.disable()) // 👈 CLAVE
+                .frameOptions(frame -> frame.disable())
                 )
                 //  LOGIN
                 .formLogin(login -> login

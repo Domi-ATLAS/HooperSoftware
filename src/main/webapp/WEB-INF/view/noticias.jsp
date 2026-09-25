@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Noticias de Baloncesto">
-    <%-- Vista frontend: noticias NBA y contenido externo embebido. --%>
   <div class="container">
     <!-- Columna izquierda: noticias -->
     <div class="noticias">

@@ -4,7 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="NBA Playoff Bracket">
-    <%-- Vista frontend: simulación NBA con formularios, resultados y paneles interactivos. --%>
 
 <div class="sim-container">
 
@@ -14,7 +13,6 @@
 
     <h1> Simulación completa Playoffs NBA</h1>
 
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form action="/simulaciones/bracket" method="post">
 

@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="Live Game Simulator">
-    <%-- Vista frontend: simulación NBA con formularios, resultados y paneles interactivos. --%>
 
 <div class="sim-container">
 
@@ -19,7 +18,6 @@
         </p>
     </c:if>
 
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form action="/simulaciones/live" method="post">
 

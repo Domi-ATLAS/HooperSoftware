@@ -49,7 +49,7 @@ public class TradeEngine {
         return score;
     }
 
-    // 💰 SALARIO SIMULADO
+    // Salario simulado.
     public static int estimarSalario(Jugador j){
 
         int salario = 5;

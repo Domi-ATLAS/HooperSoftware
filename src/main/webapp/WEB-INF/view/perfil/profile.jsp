@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Mi Perfil">
-    <%-- Vista frontend: resumen de cuenta, avatar, datos personales e historial de votos. --%>
 
     <section class="profile-card profile-page-card">
         <h1>Perfil de ${usuario.username}</h1>

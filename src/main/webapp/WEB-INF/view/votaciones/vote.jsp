@@ -2,7 +2,6 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 
 <Layaout:layaout title="Votación">
-    <%-- Vista frontend: votaciones con filtros, agrupación por temporada y acciones de participación. --%>
 
     <div class="sim-container">
 
@@ -27,7 +26,6 @@
 
         <h3>Opciones</h3>
 
-        <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
         <form action="/vote/${votacion.idVotacion}" method="post">
 

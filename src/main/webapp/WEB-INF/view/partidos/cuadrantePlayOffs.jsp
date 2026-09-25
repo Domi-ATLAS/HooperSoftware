@@ -3,7 +3,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <Layaout:layaout title="Detalle Playoffs">
-    <%-- Vista frontend: detalle de una eliminatoria de playoffs con resumen, equipos participantes y partidos disponibles. --%>
 
     <div class="page-heading">
         <div>

@@ -45,7 +45,7 @@ public class BalldontlieSyncService {
     }
 
     // =========================
-    // 🔵 TEAMS
+    // Equipos.
     // =========================
     public int syncTeams() {
 
@@ -86,7 +86,7 @@ public class BalldontlieSyncService {
     }
 
     // =========================
-    // 🟢 PLAYERS (PAGINADO)
+    // Jugadores: consulta paginada.
     // =========================
     public int syncPlayersBySeason(int season) throws InterruptedException {
 
@@ -96,7 +96,7 @@ public class BalldontlieSyncService {
 
         while (hasNext) {
 
-            System.out.println("🟢 PLAYERS página " + page);
+            System.out.println("PLAYERS página " + page);
 
             String url = "https://api.balldontlie.io/v1/players?seasons[]="
                     + season + "&per_page=100&page=" + page;
@@ -156,7 +156,7 @@ public class BalldontlieSyncService {
     }
 
     // =========================
-    // 🔴 GAMES (PAGINADO)
+    // Partidos: consulta paginada.
     // =========================
     public int syncGamesBySeason(int season) throws InterruptedException {
 
@@ -166,7 +166,7 @@ public class BalldontlieSyncService {
 
         while (hasNext) {
 
-            System.out.println("🔴 GAMES página " + page);
+            System.out.println("GAMES página " + page);
 
             String url = "https://api.balldontlie.io/v1/games?seasons[]="
                     + season + "&per_page=100&page=" + page;

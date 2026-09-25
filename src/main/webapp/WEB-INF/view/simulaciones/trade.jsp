@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <Layaout:layaout title="Trade Simulator">
-    <%-- Vista frontend: simulación NBA con formularios, resultados y paneles interactivos. --%>
 
 <div class="sim-card-container">
 
@@ -23,7 +22,6 @@
 
     <!-- SIMULADOR -->
 
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form action="/simulaciones" method="post">
 
@@ -325,7 +323,6 @@
 
     <h2>Mejores traspasos encontrados</h2>
 
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form action="/simulaciones/sugerir" method="post">
 
@@ -390,7 +387,6 @@
 
 <h2>Qué necesita un equipo</h2>
 
-<%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
 <form action="/simulaciones/equipo" method="post">
 

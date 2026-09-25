@@ -20,14 +20,12 @@ function toggleTransferencia(id) {
 </script>
 
 <Layaout:layaout title="Transferencias">
-    <%-- Vista frontend: transferencias con filtros y tarjetas de detalle. --%>
 
     <h1>Transferencias</h1>
 
     <%-- Zona filtrable declarativa: los controles data-filter-control actúan sobre elementos data-filter-item. --%>
     <section data-filter-scope>
     <!-- Formulario de filtro -->
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
     <form class="filter-form" onsubmit="filterByTeam(event)">
         <label for="teams">Filtra por equipos:</label>
         <select id="teams" name="teams">

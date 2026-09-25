@@ -2,13 +2,11 @@
 <%@ taglib prefix="Layaout" tagdir="/WEB-INF/tags" %>
 
 <Layaout:layaout title="Chat Global NBA">
-    <%-- Vista frontend: pantalla dedicada al chat NBA. --%>
 
 <div class="sim-container">
 
     <h1> Chat Global NBA</h1>
 
-    <%-- Formulario principal de la vista: recoge la acción del usuario y mantiene los campos enviados al backend. --%>
 
     <form action="/chat/send" method="post">
 

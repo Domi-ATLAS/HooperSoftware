@@ -5,7 +5,6 @@
 
 
 <Layaout:layaout title="Sacramento Kings">
-    <%-- Vista frontend: ficha de equipo con identidad visual, clasificación y datos relacionados. --%>
 
     <!DOCTYPE html>
     <html>
